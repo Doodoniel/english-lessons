@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>English Lessons — Interactive Workspaces</title>
+<style>
+:root{--bg:#eef2f7;--card:#fff;--ink:#16202e;--muted:#61708a;--line:#dbe3ef;--blue:#1d7fd6;--purple:#7c5cff;--red:#e63946}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1420;--card:#161f30;--ink:#e8eefb;--muted:#93a3bd;--line:#243149}}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,sans-serif;color:var(--ink);line-height:1.6;
+  background:radial-gradient(1200px 600px at 10% -10%,rgba(29,127,214,.18),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(230,57,70,.14),transparent 55%),var(--bg);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.wrap{max-width:720px;width:100%}
+h1{font-size:30px;margin:0 0 6px;letter-spacing:.3px}
+.sub{color:var(--muted);margin:0 0 28px;font-size:14.5px}
+a.lesson{display:flex;gap:16px;align-items:center;text-decoration:none;color:inherit;
+  background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin-bottom:14px;
+  box-shadow:0 10px 30px rgba(22,38,66,.10);transition:.18s}
+a.lesson:hover{transform:translateY(-3px);border-color:var(--blue)}
+.num{width:46px;height:46px;flex:none;border-radius:14px;display:grid;place-items:center;color:#fff;
+  font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--red),#ff7a45)}
+.lesson b{display:block;font-size:17px}
+.lesson span{font-size:13px;color:var(--muted)}
+.tags{margin-top:5px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+footer{margin-top:26px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>English Lessons</h1>
+  <p class="sub">Interactive workspaces built around the coursebook pages.</p>
+
+  <a class="lesson" href="unit1-all-about-me/">
+    <div class="num">1</div>
+    <div>
+      <b>All About Me</b>
+      <span>Describing people · adverbs · reading: birth order</span>
+      <div class="tags"><span class="tag">A2+/B1</span><span class="tag">6 tasks</span>
+        <span class="tag">Listening</span><span class="tag">Homework</span></div>
+    </div>
+  </a>
+
+  <footer>
+    Coursebook pages and audio belong to their publisher and are included here for classroom use only.
+    This site is not indexed by search engines.
+  </footer>
+</div>
+</body>
+</html>

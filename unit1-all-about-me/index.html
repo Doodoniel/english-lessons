@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Unit 1 · All About Me — Interactive Workspace</title>
+<style>
+:root{
+  --red:#e63946; --blue:#1d7fd6; --teal:#12b5a5; --yellow:#ffc233; --purple:#7c5cff;
+  --bg:#eef2f7; --bg2:#e2e8f2; --card:#ffffff; --ink:#16202e; --muted:#61708a;
+  --line:#dbe3ef; --ok:#16a34a; --no:#e11d48; --shadow:0 10px 30px rgba(22,38,66,.10);
+  --r:18px;
+}
+html[data-theme="dark"]{
+  --bg:#0e1420; --bg2:#111a29; --card:#161f30; --ink:#e8eefb; --muted:#93a3bd;
+  --line:#243149; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  background:radial-gradient(1200px 600px at 10% -10%,rgba(29,127,214,.18),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(230,57,70,.14),transparent 55%),
+             var(--bg);
+  color:var(--ink); line-height:1.55;
+}
+a{color:var(--blue)}
+
+/* ---------- header ---------- */
+header{
+  position:sticky; top:0; z-index:50; backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--card) 82%,transparent);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{max-width:1700px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+.unitbadge{
+  width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:22px;
+  background:linear-gradient(135deg,var(--red),#ff7a45); box-shadow:0 6px 16px rgba(230,57,70,.35);
+}
+.brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.xpbox{flex:1;min-width:220px;max-width:420px}
+.xpbar{height:12px;border-radius:99px;background:var(--bg2);overflow:hidden;border:1px solid var(--line)}
+.xpfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple));transition:width .5s cubic-bezier(.2,.9,.2,1)}
+.xpmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.btn{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  padding:8px 14px;border-radius:12px;font-weight:700;font-size:13px;transition:.15s;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent}
+.medals{display:flex;gap:6px}
+.medal{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--bg2);filter:grayscale(1);opacity:.4;font-size:16px;transition:.4s;border:1px solid var(--line)}
+.medal.on{filter:none;opacity:1;transform:scale(1.08);box-shadow:0 0 0 3px rgba(255,194,51,.25)}
+
+/* ---------- layout ---------- */
+main{max-width:1700px;margin:0 auto;padding:20px 18px 80px;display:grid;gap:20px;
+     grid-template-columns:minmax(280px,1fr) minmax(420px,1.35fr) minmax(300px,1.05fr)}
+@media(max-width:1250px){main{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.center{position:relative}
+@media(min-width:1251px){.center .stickypages{position:sticky;top:78px}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card>h3{
+  margin:0;padding:13px 16px;font-size:14px;letter-spacing:.4px;text-transform:uppercase;
+  display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line);
+}
+.card>h3 .dot{width:9px;height:9px;border-radius:99px;background:var(--blue)}
+.card .body{padding:14px 16px}
+.t-red>h3 .dot{background:var(--red)} .t-teal>h3 .dot{background:var(--teal)}
+.t-yellow>h3 .dot{background:var(--yellow)} .t-purple>h3 .dot{background:var(--purple)}
+.hint{font-size:12.5px;color:var(--muted)}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+     padding:3px 8px;border-radius:99px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+
+/* ---------- pages ---------- */
+.tabs{display:flex;gap:8px;padding:12px 14px 0;flex-wrap:wrap}
+.tab{padding:8px 14px;border-radius:12px 12px 0 0;border:1px solid var(--line);border-bottom:none;
+     background:var(--bg2);cursor:pointer;font-weight:700;font-size:13px;color:var(--muted)}
+.tab.on{background:var(--card);color:var(--ink);box-shadow:0 -4px 12px rgba(0,0,0,.05)}
+.pagewrap{padding:12px 14px 16px;border-top:1px solid var(--line)}
+.pageframe{
+  position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);
+  background:repeating-linear-gradient(45deg,var(--bg2),var(--bg2) 12px,transparent 12px,transparent 24px);
+  min-height:420px;display:grid;place-items:center;cursor:zoom-in;
+}
+.pageframe img{width:100%;display:block}
+.pageframe.textmode{cursor:default;background:var(--card);display:block;padding:0}
+.ph{padding:34px 22px;text-align:center;color:var(--muted);font-size:13px}
+.ph b{display:block;font-size:15px;color:var(--ink);margin-bottom:6px}
+.ph code{background:var(--card);padding:2px 7px;border-radius:6px;border:1px solid var(--line);font-size:12px}
+.zoombar{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.lightbox{position:fixed;inset:0;background:rgba(8,12,20,.92);z-index:200;display:none;place-items:center;padding:20px;overflow:auto;cursor:zoom-out}
+.lightbox.on{display:grid}
+.lightbox img{max-width:min(1100px,96vw);border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+
+/* ---------- writing layer ---------- */
+.pagestage{position:relative;width:100%;line-height:0}
+.wlayer{position:absolute;inset:0;pointer-events:none}
+.writeon .wlayer{pointer-events:auto;cursor:crosshair}
+.writeon .pageframe{cursor:crosshair}
+.writeon .wlayer::after{
+  content:"✍️ click anywhere on the page to type";
+  position:absolute;left:50%;top:8px;transform:translateX(-50%);
+  background:var(--blue);color:#fff;font:700 11px/1.4 "Segoe UI",sans-serif;
+  padding:4px 12px;border-radius:99px;opacity:.85;white-space:nowrap;pointer-events:none;
+}
+/* ---------- drawing layer ---------- */
+.dlayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;touch-action:none;overflow:visible}
+.drawon .dlayer{pointer-events:auto;cursor:crosshair}
+.eraseon .dlayer{pointer-events:auto}
+.eraseon .dlayer polyline{pointer-events:stroke;cursor:pointer}
+.eraseon .dlayer polyline:hover{opacity:.35}
+.drawon .note,.eraseon .note{pointer-events:none}
+.drawon .wlayer::after{display:none}
+.dtools{display:none;gap:6px;align-items:center;padding:4px 10px;border:1px solid var(--line);
+        border-radius:99px;background:var(--bg2)}
+body.drawon .dtools,body.eraseon .dtools{display:flex}
+.swatch{width:20px;height:20px;border-radius:99px;border:2px solid rgba(255,255,255,.7);cursor:pointer;
+        padding:0;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:.15s}
+.swatch.on{transform:scale(1.25);box-shadow:0 0 0 3px rgba(29,127,214,.35)}
+.wsize{width:78px;accent-color:var(--blue)}
+
+.note{position:absolute;line-height:1.2;pointer-events:auto;transform:translateY(-50%)}
+.note input{
+  border:none;border-bottom:1.5px solid rgba(29,127,214,.45);background:rgba(255,255,255,.55);
+  font-family:"Comic Sans MS","Segoe Print",cursive; font-size:var(--nfs,15px); font-weight:700;
+  color:#1652c8; padding:0 3px; outline:none; border-radius:3px 3px 0 0; min-width:26px;
+}
+.note input:focus{background:rgba(255,235,150,.75);border-bottom-color:var(--blue)}
+.note .del,.note .grip{
+  position:absolute;top:-11px;width:18px;height:18px;border-radius:99px;border:none;
+  color:#fff;font-size:11px;line-height:18px;padding:0;display:none;
+  box-shadow:0 2px 6px rgba(0,0,0,.3)
+}
+.note .del{right:-11px;background:var(--no);cursor:pointer}
+.note .grip{left:-11px;background:var(--blue);cursor:grab;font-size:10px;touch-action:none}
+.note .grip:active{cursor:grabbing}
+.note:hover .del,.note:hover .grip,.note:focus-within .del,.note:focus-within .grip{display:block}
+.note.dragging{z-index:9;opacity:.85}
+.note.dragging input{background:rgba(255,235,150,.9)}
+.wcount{font-size:11.5px;color:var(--muted);font-weight:700}
+
+@media print{
+  header,footer,.tabs,.zoombar,.col:not(.center),.card.t-teal{display:none!important}
+  main{display:block;padding:0}
+  .card{border:none;box-shadow:none}
+  .pagewrap{padding:0;border:none}
+  .pageframe{border:none;min-height:0}
+  .note input{background:transparent;border-bottom-color:#999;color:#000}
+  .note .del{display:none!important}
+}
+
+/* ---------- transcript ---------- */
+.tr{padding:18px 20px}
+.trhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 4px}
+.trhead h4{margin:0;font-size:15px;letter-spacing:.3px}
+.trbody{position:relative;margin-top:10px}
+.trbody.hidden .lines{filter:blur(6px);user-select:none;pointer-events:none;opacity:.55}
+.veil{position:absolute;inset:0;display:grid;place-items:center;z-index:2}
+.trbody:not(.hidden) .veil{display:none}
+.lines p{margin:0 0 9px;padding-left:96px;text-indent:-96px;font-size:13.5px}
+.lines p b{color:var(--blue);display:inline-block;min-width:90px}
+.trnote{font-size:12.5px;color:var(--muted);border-left:4px solid var(--yellow);background:var(--bg2);
+        padding:9px 12px;border-radius:0 10px 10px 0;margin-top:14px}
+.trdiv{height:1px;background:var(--line);margin:20px 0}
+
+/* ---------- audio ---------- */
+.audio{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--line);
+       border-radius:14px;padding:9px 12px;margin:8px 0}
+.playbtn{width:38px;height:38px;flex:none;border-radius:99px;border:none;cursor:pointer;color:#fff;font-size:14px;
+         background:linear-gradient(135deg,var(--teal),var(--blue));display:grid;place-items:center}
+.playbtn:active{transform:scale(.94)}
+.audio .meta{flex:1;min-width:0}
+.audio .meta b{display:block;font-size:12.5px}
+.audio .meta span{font-size:11px;color:var(--muted)}
+.seek{width:100%;height:5px;border-radius:99px;background:var(--line);margin-top:5px;overflow:hidden}
+.seek i{display:block;height:100%;width:0;background:var(--blue)}
+.miss{font-size:11px;color:var(--no);font-weight:700}
+
+/* ---------- tasks ---------- */
+.q{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:var(--bg2)}
+.q p{margin:0 0 8px;font-size:13.5px;font-weight:600}
+.q .num{color:var(--muted);font-weight:800;margin-right:6px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;cursor:pointer;
+     font-size:13px;font-weight:600;transition:.15s}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.opt.good{background:rgba(22,163,74,.14);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:rgba(225,29,72,.12);border-color:var(--no);color:var(--no);text-decoration:line-through}
+.fb{font-size:12px;margin-top:7px;display:none}
+.fb.on{display:block}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--no)}
+
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 13px;cursor:pointer;
+      font-size:13px;font-weight:700;transition:.15s}
+.chip:hover{transform:translateY(-2px)}
+.chip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.chip.used{opacity:.25;pointer-events:none;text-decoration:line-through}
+.chip.gone{animation:pop .35s forwards}
+@keyframes pop{to{transform:scale(0);opacity:0;width:0;padding:0;margin:0;border:0}}
+
+.gap{display:inline-block;min-width:110px;border-bottom:2px dashed var(--blue);text-align:center;
+     cursor:pointer;font-weight:800;color:var(--blue);padding:0 6px}
+.gap.filled{border-bottom-style:solid}
+.gap.good{color:var(--ok);border-color:var(--ok)}
+.gap.bad{color:var(--no);border-color:var(--no)}
+.sent{font-size:13.5px;margin:0 0 9px;padding-left:22px;text-indent:-22px}
+.sent .num{color:var(--muted);font-weight:800;margin-right:6px}
+
+input.txt{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+          padding:7px 10px;font-size:13px;width:150px;font-weight:700}
+input.txt.good{border-color:var(--ok);color:var(--ok)}
+input.txt.bad{border-color:var(--no);color:var(--no)}
+.anag{display:flex;align-items:center;gap:9px;margin-bottom:8px;flex-wrap:wrap}
+.anag b{font-family:ui-monospace,Consolas,monospace;letter-spacing:2px;font-size:14px;min-width:105px}
+
+table.wb{width:100%;border-collapse:collapse;font-size:13px}
+table.wb th,table.wb td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+table.wb th{background:var(--bg2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);width:78px}
+.w{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:2px 8px;margin:2px 3px 2px 0;font-size:12.5px;cursor:help}
+.w b{color:var(--blue)}
+
+ul.tight{margin:6px 0;padding-left:18px;font-size:13px}
+ul.tight li{margin-bottom:5px}
+.callout{border-left:4px solid var(--yellow);background:var(--bg2);padding:9px 12px;border-radius:0 10px 10px 0;font-size:13px;margin:9px 0}
+.cando{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin-bottom:7px}
+.cando i{font-style:normal;color:var(--teal);font-weight:900}
+
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;width:9px;height:14px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:400;
+  background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:99px;font-weight:800;font-size:13.5px;
+  transition:transform .4s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <div class="unitbadge">1</div>
+      <div>ALL ABOUT ME<small>Student's Book p.10–11 · Interactive</small></div>
+    </div>
+    <div class="xpbox">
+      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+      <div class="xpmeta"><span id="xplabel">0 XP</span><span id="xpright">Level 1 · Beginner Describer</span></div>
+    </div>
+    <div class="medals" id="medals">
+      <div class="medal" data-need="60" title="60 XP — Word Collector">📚</div>
+      <div class="medal" data-need="140" title="140 XP — Sharp Ears">👂</div>
+      <div class="medal" data-need="220" title="220 XP — Adverb Master">⚡</div>
+      <div class="medal" data-need="300" title="300 XP — Unit 1 Champion">🏆</div>
+    </div>
+    <button class="btn" id="themebtn">🌙 Theme</button>
+    <button class="btn" id="resetbtn">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+
+<!-- =============== LEFT: INFO =============== -->
+<div class="col">
+
+  <div class="card t-red">
+    <h3><span class="dot"></span>Word Bank · Describing people</h3>
+    <div class="body">
+      <p class="hint">Hover over a word to see what it means. These are the answers to <b>Ex. 2, p.10</b>.</p>
+      <table class="wb">
+        <tr><th>Age</th><td>
+          <span class="w" title="quite old — a polite word for an old person">elderly</span>
+          <span class="w" title="between about 40 and 60">middle-aged</span>
+          <span class="w" title="between 13 and 19 years old">teenage</span>
+          <span class="w" title="21–23 = early twenties · 27–29 = late twenties">in his/her (early/late) twenties/thirties</span>
+        </td></tr>
+        <tr><th>Looks</th><td>
+          <span class="w" title="pleasant to look at — works for anyone"><b>attractive</b></span>
+          <span class="w" title="attractive — normally used about men">handsome</span>
+          <span class="w" title="attractive — normally used about girls and women">pretty</span>
+          <span class="w" title="attractive — works for anyone, very common in speech">good-looking</span>
+        </td></tr>
+        <tr><th>Hair</th><td>
+          <span class="w" title="with no hair on the head">bald</span>
+          <span class="w" title="very light, yellow hair (blonde = female, blond = male)">blonde</span>
+          <span class="w" title="full of curls, not straight">curly</span>
+          <span class="w" title="brown or black">dark</span>
+          <span class="w" title="light in colour, but not necessarily blonde">fair</span>
+          <span class="w" title="with no curls or waves">straight</span>
+        </td></tr>
+      </table>
+      <div class="callout"><b>Watch out!</b> <i>fair hair</i> is light hair in general; <i>blonde</i> is very light hair.
+      And we don't say <s>he is beautiful</s> — use <b>handsome</b> or <b>good-looking</b>.</div>
+    </div>
+  </div>
+
+  <div class="card t-blue">
+    <h3><span class="dot"></span>Grammar spotlight</h3>
+    <div class="body">
+      <p style="margin:0 0 6px;font-weight:700;font-size:13.5px">1 · Appearance: <span style="color:var(--blue)">have got</span></p>
+      <ul class="tight">
+        <li>She's got straight hair. = She <b>has got</b> straight hair.</li>
+        <li>He's got dark curly hair. → ❌ <s>He has dark <u>hairs</u></s> — <b>hair</b> is uncountable!</li>
+        <li>Question: <b>Has</b> she <b>got</b> fair hair? — Yes, she has. / No, she hasn't.</li>
+      </ul>
+      <p style="margin:10px 0 6px;font-weight:700;font-size:13.5px">2 · Personality: <span style="color:var(--blue)">be</span></p>
+      <ul class="tight"><li>He <b>is</b> confident. She <b>is</b> never miserable.</li></ul>
+      <p style="margin:10px 0 6px;font-weight:700;font-size:13.5px">3 · Order of adjectives</p>
+      <div class="callout" style="border-color:var(--blue)">
+        <b>Opinion → Size → Age → Colour + NOUN</b><br>
+        a <i>nice</i> <i>tall</i> <i>teenage</i> boy · <i>long</i> <i>dark</i> curly hair
+      </div>
+      <p style="margin:10px 0 6px;font-weight:700;font-size:13.5px">4 · Adverbs of frequency</p>
+      <ul class="tight">
+        <li>She <b>always</b> says hello. → before the main verb</li>
+        <li>He's <b>sometimes</b> a bit careless. → after the verb <i>be</i></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Adverbs · how they work</h3>
+    <div class="body">
+      <ul class="tight">
+        <li><b>+ ly</b>: careful → careful<b>ly</b>, bad → bad<b>ly</b></li>
+        <li><b>y → ily</b>: heavy → heav<b>ily</b>, healthy → health<b>ily</b>, easy → eas<b>ily</b></li>
+        <li><b>No change</b>: fast → fast, hard → hard, early → early, late → late, yearly → yearly</li>
+        <li><b>Irregular</b>: good → <b>well</b></li>
+      </ul>
+      <div class="callout"><b>Careful:</b> <i>hardly</i> does <u>not</u> mean "with a lot of effort".
+      <i>He works <b>hard</b></i> = he makes a big effort. <i>He <b>hardly</b> works</i> = he almost never works 😅</div>
+      <div class="callout" style="border-color:var(--teal)"><b>look + adjective:</b> in "Georgina looks really <b>well</b>",
+      <i>well</i> is an adjective meaning "healthy", not an adverb. That's the trap in Ex. 5 on p.11.</div>
+    </div>
+  </div>
+
+  <div class="card t-yellow">
+    <h3><span class="dot"></span>Culture corner · PROM</h3>
+    <div class="body">
+      <ul class="tight">
+        <li>🇺🇸 A <b>prom</b> (from <i>promenade</i>) is a formal dance for students at the end of high school in the USA.</li>
+        <li>🇬🇧 In Britain people traditionally say <b>school leavers' ball</b> or <b>end-of-year party</b>, but the American word <i>prom</i> is now common too — that's exactly what Rob and Lara argue about.</li>
+        <li>👔 Dress code: a <b>tuxedo</b> (or <b>tux</b>) with a <b>bow tie</b> for boys; a <b>prom dress</b> and a <b>corsage</b> (a small flower worn on the wrist) for girls.</li>
+        <li>👑 Students vote for a <b>prom king</b> and <b>prom queen</b>, and some arrive in a <b>limo</b>.</li>
+        <li>💸 An American family often spends hundreds of dollars on prom — that's why Rob asks if a dress is worth so much money.</li>
+      </ul>
+      <div class="callout"><b>Useful:</b> to <b>ask someone to the prom</b> · a <b>promposal</b> (a creative way of inviting someone) · the <b>afterparty</b></div>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Homework · type on the page</h3>
+    <div class="body">
+      <ul class="tight">
+        <li>Open the tab <b>✏️ Homework p.4</b> or <b>p.5</b>.</li>
+        <li>Press <b>✍️ Write on page</b>, then click on any line and just type.</li>
+        <li><b>Enter</b> finishes a word · <b>Esc</b> or <b>✕</b> deletes it · <b>A− / A+</b> change the size.</li>
+        <li>Press <b>🖊 Draw</b> to circle words, underline and tick. Choose a colour, or the
+          <b>highlighter</b> for marking text. <b>Ctrl+Z</b> or <b>↶ Undo</b> removes the last line,
+          <b>🧹 Eraser</b> deletes the line you click on.</li>
+        <li>Everything is saved in your browser — close the page and your answers will still be there.</li>
+        <li><b>🖨 Print</b> gives you the page with your answers and drawings on it.</li>
+      </ul>
+      <div class="callout"><b>Homework p.5 — Birth order.</b> Read fast first (Ex. 1: which heading fits A–D?),
+      then read again for the gaps. Ex. 2 needs <i>one word only</i> in each gap — usually a small grammar word
+      like <i>to</i>, <i>at</i>, <i>the</i>, <i>than</i>, <i>with</i>.</div>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="dot"></span>CEFR · Can-do statements (A2+/B1)</h3>
+    <div class="body">
+      <div class="cando"><i>✓</i><span>I can describe someone's appearance and personality in a few connected sentences. <span class="tag">Spoken production</span></span></div>
+      <div class="cando"><i>✓</i><span>I can understand short dialogues on familiar topics and find specific information. <span class="tag">Listening</span></span></div>
+      <div class="cando"><i>✓</i><span>I can use adverbs of manner and frequency correctly. <span class="tag">Grammar range</span></span></div>
+      <div class="cando"><i>✓</i><span>I can politely disagree and give my opinion about a tradition. <span class="tag">Interaction</span></span></div>
+      <p class="hint" style="margin-top:10px">The tasks on the right check exactly these descriptors — you can use them for formative assessment.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- =============== CENTER: PAGES =============== -->
+<div class="col center">
+  <div class="stickypages">
+    <div class="card">
+      <div class="tabs" id="tabs">
+        <div class="tab on" data-i="0">📕 Page 10 · Vocabulary</div>
+        <div class="tab" data-i="1">📘 Page 11 · Adverbs &amp; Listening</div>
+        <div class="tab" data-i="2">✏️ Homework p.4</div>
+        <div class="tab" data-i="3">✏️ Homework p.5</div>
+        <div class="tab" data-i="4">📄 Audioscript</div>
+      </div>
+      <div class="pagewrap">
+        <div class="pageframe" id="frame"></div>
+        <div class="zoombar">
+          <button class="btn" id="prevbtn">← Back</button>
+          <button class="btn" id="nextbtn">Next →</button>
+          <button class="btn" id="writebtn">✍️ Write on page</button>
+          <button class="btn" id="smallbtn" title="Smaller text">A−</button>
+          <button class="btn" id="bigbtn" title="Bigger text">A+</button>
+          <button class="btn" id="drawbtn">🖊 Draw</button>
+          <span class="dtools" id="dtools">
+            <button class="swatch on" data-c="#e11d48" style="background:#e11d48" title="Red pen"></button>
+            <button class="swatch" data-c="#1d7fd6" style="background:#1d7fd6" title="Blue pen"></button>
+            <button class="swatch" data-c="#16a34a" style="background:#16a34a" title="Green pen"></button>
+            <button class="swatch" data-c="rgba(255,214,0,.45)" data-hl="1" style="background:#ffd600" title="Highlighter"></button>
+            <input type="range" class="wsize" id="wsize" min="1" max="14" step="1" value="3" title="Line thickness">
+            <button class="btn" id="undobtn" title="Ctrl+Z">↶ Undo</button>
+            <button class="btn" id="erasebtn" title="Click a line to remove it">🧹 Eraser</button>
+          </span>
+          <button class="btn" id="clearbtn">🧽 Clear page</button>
+          <button class="btn" id="printbtn">🖨 Print</button>
+          <button class="btn primary" id="zoombtn">🔍 Full screen</button>
+          <span class="wcount" id="wcount"></span>
+          <span class="hint" id="pagehint"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card t-teal" style="margin-top:16px">
+      <h3><span class="dot"></span>Audio · press play and listen</h3>
+      <div class="body" id="audios">
+        <div class="audio" data-src="audio/track01.mp3">
+          <button class="playbtn">▶</button>
+          <div class="meta"><b>Track 01 · SB p.10, Ex. 1</b><span>Lucas, Alfie and Grace describe their family</span>
+            <div class="seek"><i></i></div></div>
+        </div>
+        <div class="audio" data-src="audio/track02.mp3">
+          <button class="playbtn">▶</button>
+          <div class="meta"><b>Track 02 · SB p.10, Ex. 4</b><span>Six people talk about Lucas, Alfie and Grace</span>
+            <div class="seek"><i></i></div></div>
+        </div>
+        <p class="hint">Full transcripts are on the <b>Audioscript</b> tab above — open them only after you listen!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============== RIGHT: TASKS =============== -->
+<div class="col">
+
+  <div class="card t-blue">
+    <h3><span class="dot"></span>Task 1 · Guess Who? <span class="tag" style="margin-left:auto">Ex.1 · +40 XP</span></h3>
+    <div class="body">
+      <p class="hint">Listen to Track 01 and decide who each speaker is describing.</p>
+      <div id="t1"></div>
+      <button class="btn primary" data-check="t1">Check</button>
+      <span class="fb" id="t1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-red">
+    <h3><span class="dot"></span>Task 2 · Choose the adjective <span class="tag" style="margin-left:auto">Ex.4 · +60 XP</span></h3>
+    <div class="body">
+      <p class="hint">Read, choose the correct adjective, then check with Track 02.</p>
+      <div id="t2"></div>
+      <button class="btn primary" data-check="t2">Check</button>
+      <span class="fb" id="t2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Task 3 · Opposites match <span class="tag" style="margin-left:auto">Ex.5 · +50 XP</span></h3>
+    <div class="body">
+      <p class="hint">Click a word on the left, then its opposite on the right. The pair disappears 💥</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><div class="tag" style="margin-bottom:6px">Ex.&nbsp;4</div><div class="chips" id="mLeft"></div></div>
+        <div><div class="tag" style="margin-bottom:6px">Ex.&nbsp;5</div><div class="chips" id="mRight"></div></div>
+      </div>
+      <span class="fb" id="t3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-yellow">
+    <h3><span class="dot"></span>Task 4 · Adverb anagrams <span class="tag" style="margin-left:auto">p.11 Ex.1 · +60 XP</span></h3>
+    <div class="body">
+      <p class="hint">Put the letters in the correct order to make adverbs. Press Enter to check one line.</p>
+      <div id="t4"></div>
+      <button class="btn primary" data-check="t4">Check all</button>
+      <button class="btn" id="t4hint">💡 Hint</button>
+      <span class="fb" id="t4fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="dot"></span>Task 5 · Fill the gaps <span class="tag" style="margin-left:auto">p.11 Ex.2 · +60 XP</span></h3>
+    <div class="body">
+      <p class="hint">Choose a word, then click a gap. Click a full gap to empty it again.</p>
+      <div class="chips" id="t5bank"></div>
+      <div id="t5"></div>
+      <button class="btn primary" data-check="t5">Check</button>
+      <span class="fb" id="t5fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-blue">
+    <h3><span class="dot"></span>Task 6 · Prom culture quiz <span class="tag" style="margin-left:auto">+40 XP</span></h3>
+    <div class="body">
+      <p class="hint">Do this before the Listening on p.11 — it gives you the background.</p>
+      <div id="t6"></div>
+      <button class="btn primary" data-check="t6">Check</button>
+      <span class="fb" id="t6fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Extra challenge · Writing</h3>
+    <div class="body">
+      <ul class="tight">
+        <li><b>Bronze:</b> write 4 sentences about someone in your family (looks + personality + an example of their behaviour).</li>
+        <li><b>Silver:</b> add two adverbs from p.11 and one <i>always</i> or <i>never</i>.</li>
+        <li><b>Gold:</b> describe two people and compare them: <i>My brother is more confident than my sister, but she's friendlier.</i></li>
+        <li><b>Platinum 😈:</b> describe someone without using a single appearance adjective — only through what they do.</li>
+      </ul>
+      <div class="callout"><b>Self-check:</b> did you use <i>has got</i>? Is the adjective order right? Is the adverb of frequency in the right place?</div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>Unit 1 · All About Me — interactive companion to the Student's Book. Pages and audio are the publisher's material, used for teaching purposes.</footer>
+
+<div class="lightbox" id="lightbox"></div>
+<div class="confetti" id="confetti"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- state ---------------- */
+const KEY='unit1_allaboutme_v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{"xp":0,"done":{}}');
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+const LEVELS=[[0,'Level 1 · Beginner Describer'],[60,'Level 2 · Word Collector'],[140,'Level 3 · Sharp Ears'],
+              [220,'Level 4 · Adverb Master'],[300,'Level 5 · Unit 1 Champion 🏆']];
+function renderXP(){
+  const max=310, pct=Math.min(100,S.xp/max*100);
+  $('#xpfill').style.width=pct+'%';
+  $('#xplabel').textContent=S.xp+' XP';
+  let lv=LEVELS[0][1]; LEVELS.forEach(l=>{if(S.xp>=l[0])lv=l[1]});
+  $('#xpright').textContent=lv;
+  $$('#medals .medal').forEach(m=>m.classList.toggle('on',S.xp>=+m.dataset.need));
+}
+function addXP(n,label){
+  if(n<=0)return; S.xp+=n; save(); renderXP(); toast('+'+n+' XP · '+label); if(n>=10)boom();
+}
+let tt;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2200)}
+function boom(){
+  const c=$('#confetti'),cols=['#e63946','#1d7fd6','#12b5a5','#ffc233','#7c5cff'];
+  for(let i=0;i<40;i++){const s=document.createElement('i');
+    s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.3)+'s';
+    c.appendChild(s);setTimeout(()=>s.remove(),3400);}
+}
+
+/* ---------------- theme ---------------- */
+document.documentElement.dataset.theme=localStorage.getItem('u1theme')||'light';
+$('#themebtn').onclick=()=>{
+  const n=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=n; localStorage.setItem('u1theme',n);
+};
+$('#resetbtn').onclick=()=>{ if(confirm('Reset everything — XP and all the answers you typed on the pages?')){localStorage.removeItem(KEY);location.reload();} };
+
+/* ---------------- audioscript (text) ---------------- */
+const SCRIPT01=[
+ ['Lucas',"This person is younger than me. He's got dark hair – and it's really curly. He's playing a game on his tablet in this photo."],
+ ['Alfie',"This person is a teenage girl. She's got straight, fair hair – almost blonde – and she's two years younger than me. I guess she's quite attractive – well, she certainly thinks so!"],
+ ['Grace',"The person that I want to describe has dark hair, but now he's in his forties he's going bald."]
+];
+const SCRIPT02=[
+ ['1 Woman',"I think Lucas is really polite. For instance, when he wants to borrow something, he always says please."],
+ ['2 Boy',"My brother's called Alfie. He takes my things without asking. He thinks he's funny, but he doesn't make me laugh!"],
+ ['3 Man',"Grace is very friendly. I see her every morning on my way to school. She always says hello."],
+ ["4 Alfie's dad","Alfie talks a lot – like his mum! He's sometimes a bit careless with homework. I try to encourage him to check it, but he doesn't always do it."],
+ ['5 Lucas',"Grace is a great friend. She's always smiling, and she's never miserable. She really makes me laugh."],
+ ["6 Lucas's mum","Lucas knows what he's good at, so he's quite a confident boy. He can also be quite a lazy person though. His room is always really untidy."]
+];
+let revealed=false;
+function scriptBlock(n,title,sub,lines){
+  return `<div class="trhead"><h4>🔊 ${n} — ${title}</h4><span class="tag">${sub}</span></div>
+    <div class="trbody ${revealed?'':'hidden'}">
+      <div class="veil"><button class="btn primary revealbtn">👀 Show the transcript</button></div>
+      <div class="lines">${lines.map(l=>`<p><b>${l[0]}:</b> ${l[1]}</p>`).join('')}</div>
+    </div>`;
+}
+function drawScript(f){
+  f.className='pageframe textmode';
+  f.innerHTML=`<div class="tr">
+    <p class="hint" style="margin:0 0 12px">Listen first, then read. Try not to peek 🙈</p>
+    ${scriptBlock('Track 01','Unit 1, Student\'s Book page 10','Exercise 1',SCRIPT01)}
+    <div class="trdiv"></div>
+    ${scriptBlock('Track 02','Unit 1, Student\'s Book page 10','Exercise 4',SCRIPT02)}
+    <div class="trnote"><b>Study tip:</b> play a track again with the transcript in front of you and read out loud
+    at the same time as the speaker — same speed, same intonation. It's called <i>shadowing</i>, and two minutes
+    a day does more for your pronunciation than an hour of rules.</div>
+  </div>`;
+  f.querySelectorAll('.revealbtn').forEach(b=>b.onclick=e=>{
+    e.stopPropagation();
+    revealed=true; f.querySelectorAll('.trbody').forEach(x=>x.classList.remove('hidden'));
+  });
+}
+
+/* ---------------- pages ---------------- */
+const PAGES=[
+ {id:'sb10',src:'pages/page10.jpg',name:'page10.jpg',cap:"Student's Book, p.10 — Vocabulary: describing people"},
+ {id:'sb11',src:'pages/page11.jpg',name:'page11.jpg',cap:'p.11 — Adverbs + Listening (prom)'},
+ {id:'hw4', src:'pages/hw4.jpg', name:'hw4.jpg', cap:'Workbook p.4 — Homework: describing people'},
+ {id:'hw5', src:'pages/hw5.jpg', name:'hw5.jpg', cap:'Workbook p.5 — Homework: Birth order (reading)'},
+ {type:'text',cap:'Audioscript, Unit 1 — text version'}
+];
+let cur=0;
+
+/* ---- writing layer ---- */
+S.notes=S.notes||{}; S.nfs=S.nfs||15;
+let writeMode=false;
+function setFS(){ document.documentElement.style.setProperty('--nfs',S.nfs+'px'); }
+function updCount(){
+  const p=PAGES[cur], n=(p.id&&S.notes[p.id]||[]).length, d=(p.id&&S.draws&&S.draws[p.id]||[]).length;
+  const bits=[]; if(n)bits.push(n+(n===1?' note':' notes')); if(d)bits.push(d+(d===1?' line':' lines'));
+  $('#wcount').textContent=bits.join(' · ');
+}
+function saveNotes(){
+  const p=PAGES[cur]; if(!p.id)return;
+  S.notes[p.id]=$$('#frame .note').map(el=>({
+    x:parseFloat(el.dataset.x), y:parseFloat(el.dataset.y), t:el.querySelector('input').value }));
+  save(); updCount();
+}
+
+/* ---- drawing layer ---- */
+const NS='http://www.w3.org/2000/svg';
+S.draws=S.draws||{};
+let drawMode=false, eraseMode=false, penColor='#e11d48', penHL=false, penW=3;
+function strokeEl(st){
+  const pl=document.createElementNS(NS,'polyline');
+  pl.setAttribute('points',st.p); pl.setAttribute('fill','none');
+  pl.setAttribute('stroke',st.c); pl.setAttribute('stroke-width',st.w);
+  pl.setAttribute('stroke-linecap','round'); pl.setAttribute('stroke-linejoin','round');
+  pl.setAttribute('vector-effect','non-scaling-stroke');
+  pl.onclick=e=>{ if(!eraseMode)return; e.stopPropagation(); pl.remove(); saveDraws(); };
+  return pl;
+}
+function saveDraws(){
+  const p=PAGES[cur]; if(!p.id)return;
+  S.draws[p.id]=[...$$('#frame .dlayer polyline')].map(pl=>({
+    p:pl.getAttribute('points'), c:pl.getAttribute('stroke'), w:+pl.getAttribute('stroke-width') }));
+  save(); updCount();
+}
+function initDraw(svg){
+  let live=null, pts=[];
+  const pos=e=>{const r=svg.getBoundingClientRect();
+    return [((e.clientX-r.left)/r.width*100).toFixed(2),((e.clientY-r.top)/r.height*100).toFixed(2)];};
+  svg.addEventListener('pointerdown',e=>{
+    if(!drawMode||eraseMode)return;
+    svg.setPointerCapture(e.pointerId);
+    pts=[pos(e).join(',')];
+    live=strokeEl({p:pts[0],c:penColor,w:penHL?penW*4:penW}); svg.appendChild(live);
+  });
+  svg.addEventListener('pointermove',e=>{
+    if(!live)return;
+    pts.push(pos(e).join(',')); live.setAttribute('points',pts.join(' '));
+  });
+  const end=()=>{ if(!live)return; if(pts.length<2)live.remove(); live=null; saveDraws(); };
+  svg.addEventListener('pointerup',end); svg.addEventListener('pointercancel',end);
+}
+function makeNote(layer,x,y,text){
+  const el=document.createElement('span'); el.className='note';
+  el.style.left=x+'%'; el.style.top=y+'%'; el.dataset.x=x; el.dataset.y=y;
+  const inp=document.createElement('input'); inp.value=text||'';
+  const fit=()=>{inp.size=Math.max(3,inp.value.length+1)}; fit();
+  inp.oninput=()=>{fit();saveNotes()};
+  inp.onkeydown=e=>{
+    if(e.key==='Enter'){e.preventDefault();inp.blur();}
+    if(e.key==='Escape'){inp.value='';el.remove();saveNotes();}
+  };
+  inp.onblur=()=>{ if(!inp.value.trim()){el.remove();} saveNotes(); };
+  inp.onclick=e=>e.stopPropagation();
+  const del=document.createElement('button'); del.className='del'; del.textContent='✕';
+  del.onclick=e=>{e.stopPropagation();el.remove();saveNotes()};
+  const grip=document.createElement('button'); grip.className='grip'; grip.textContent='✥';
+  grip.title='Drag to move';
+  grip.onclick=e=>e.stopPropagation();
+  grip.onpointerdown=e=>{
+    e.preventDefault(); e.stopPropagation();
+    grip.setPointerCapture(e.pointerId); el.classList.add('dragging');
+    const r=layer.getBoundingClientRect();
+    const move=ev=>{
+      const nx=Math.min(99.5,Math.max(0,(ev.clientX-r.left)/r.width*100));
+      const ny=Math.min(99.5,Math.max(0,(ev.clientY-r.top)/r.height*100));
+      el.style.left=nx+'%'; el.style.top=ny+'%'; el.dataset.x=nx; el.dataset.y=ny;
+    };
+    const up=()=>{
+      grip.removeEventListener('pointermove',move); grip.removeEventListener('pointerup',up);
+      el.classList.remove('dragging'); saveNotes();
+    };
+    grip.addEventListener('pointermove',move); grip.addEventListener('pointerup',up);
+  };
+  el.appendChild(inp); el.appendChild(del); el.appendChild(grip); layer.appendChild(el);
+  return inp;
+}
+function drawPage(){
+  const p=PAGES[cur], f=$('#frame');
+  $('#pagehint').textContent=p.cap;
+  $$('#tabs .tab').forEach((t,i)=>t.classList.toggle('on',i===cur));
+  const isImg=p.type!=='text';
+  ['zoombtn','writebtn','clearbtn','printbtn','smallbtn','bigbtn','drawbtn'].forEach(id=>
+    $('#'+id).style.display=isImg?'':'none');
+  if(!isImg)setModes(false,false);
+  updCount();
+  if(!isImg){ drawScript(f); return; }
+  f.className='pageframe';
+  f.innerHTML='<div class="ph">Loading…</div>';
+  const img=new Image();
+  img.onload=()=>{
+    f.innerHTML='';
+    const stage=document.createElement('div'); stage.className='pagestage';
+    const svg=document.createElementNS(NS,'svg'); svg.setAttribute('class','dlayer');
+    svg.setAttribute('viewBox','0 0 100 100'); svg.setAttribute('preserveAspectRatio','none');
+    (S.draws[p.id]||[]).forEach(st=>svg.appendChild(strokeEl(st)));
+    initDraw(svg);
+    const layer=document.createElement('div'); layer.className='wlayer';
+    layer.onclick=e=>{
+      if(e.target!==layer)return;
+      const r=layer.getBoundingClientRect();
+      makeNote(layer,(e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100,'').focus();
+    };
+    stage.appendChild(img); stage.appendChild(svg); stage.appendChild(layer); f.appendChild(stage);
+    (S.notes[p.id]||[]).forEach(nt=>makeNote(layer,nt.x,nt.y,nt.t));
+    updCount();
+  };
+  img.onerror=()=>{f.innerHTML=`<div class="ph"><b>The Student's Book page goes here</b>
+     Put the file <code>${p.name}</code> into the <code>pages/</code> folder</div>`};
+  img.src=p.src; img.alt=p.cap;
+}
+setFS();
+function setModes(w,d,er){
+  writeMode=!!w; drawMode=!!d; eraseMode=!!er;
+  document.body.classList.toggle('writeon',writeMode);
+  document.body.classList.toggle('drawon',drawMode&&!eraseMode);
+  document.body.classList.toggle('eraseon',eraseMode);
+  $('#writebtn').classList.toggle('primary',writeMode);
+  $('#writebtn').textContent=writeMode?'✅ Writing on':'✍️ Write on page';
+  $('#drawbtn').classList.toggle('primary',drawMode||eraseMode);
+  $('#drawbtn').textContent=(drawMode||eraseMode)?'✅ Drawing on':'🖊 Draw';
+  $('#erasebtn').classList.toggle('primary',eraseMode);
+}
+$('#writebtn').onclick=()=>{
+  const on=!writeMode; setModes(on,false,false);
+  toast(on?'Click anywhere on the page and start typing':'Writing mode off');
+};
+$('#drawbtn').onclick=()=>{
+  const on=!(drawMode||eraseMode); setModes(false,on,false);
+  toast(on?'Draw with the mouse — circle words, underline, tick':'Drawing mode off');
+};
+$('#erasebtn').onclick=()=>{
+  const on=!eraseMode; setModes(false,true,on);
+  toast(on?'Click a line to delete it':'Back to the pen');
+};
+$$('#dtools .swatch').forEach(sw=>sw.onclick=()=>{
+  $$('#dtools .swatch').forEach(o=>o.classList.remove('on')); sw.classList.add('on');
+  penColor=sw.dataset.c; penHL=!!sw.dataset.hl;
+  if(eraseMode)setModes(false,true,false);
+});
+$('#wsize').oninput=e=>{penW=+e.target.value};
+$('#undobtn').onclick=()=>{
+  const all=$$('#frame .dlayer polyline');
+  if(!all.length){toast('Nothing to undo');return}
+  all[all.length-1].remove(); saveDraws();
+};
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!/input/i.test(e.target.tagName)){
+    e.preventDefault(); $('#undobtn').click();
+  }
+});
+$('#clearbtn').onclick=()=>{
+  const n=$$('#frame .note').length, d=$$('#frame .dlayer polyline').length;
+  if(!n&&!d){toast('Nothing to clear on this page');return}
+  if(confirm('Delete everything on this page — both the text and the drawings?')){
+    $$('#frame .note').forEach(x=>x.remove()); $$('#frame .dlayer polyline').forEach(x=>x.remove());
+    saveNotes(); saveDraws();
+  }
+};
+$('#printbtn').onclick=()=>window.print();
+$('#bigbtn').onclick=()=>{S.nfs=Math.min(28,S.nfs+2);save();setFS()};
+$('#smallbtn').onclick=()=>{S.nfs=Math.max(9,S.nfs-2);save();setFS()};
+$$('#tabs .tab').forEach(t=>t.onclick=()=>{cur=+t.dataset.i;drawPage()});
+$('#prevbtn').onclick=()=>{cur=(cur+PAGES.length-1)%PAGES.length;drawPage()};
+$('#nextbtn').onclick=()=>{cur=(cur+1)%PAGES.length;drawPage()};
+function openLB(){
+  if(PAGES[cur].type==='text')return;
+  const lb=$('#lightbox'); lb.innerHTML='';
+  const i=new Image(); i.src=PAGES[cur].src;
+  i.onerror=()=>lb.innerHTML='<div style="color:#fff;font-weight:700">'+PAGES[cur].name+' is not in the pages/ folder yet</div>';
+  lb.appendChild(i); lb.classList.add('on');
+}
+$('#zoombtn').onclick=openLB;
+$('#frame').onclick=e=>{
+  if(writeMode||drawMode||eraseMode||e.target.closest('.note'))return; openLB(); };
+$('#lightbox').onclick=()=>$('#lightbox').classList.remove('on');
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')$('#lightbox').classList.remove('on');
+  if(e.key==='ArrowRight'&&!/input/i.test(e.target.tagName))$('#nextbtn').click();
+  if(e.key==='ArrowLeft'&&!/input/i.test(e.target.tagName))$('#prevbtn').click();
+});
+drawPage();
+
+/* ---------------- audio ---------------- */
+$$('#audios .audio').forEach(box=>{
+  const a=new Audio(box.dataset.src), btn=box.querySelector('.playbtn'), bar=box.querySelector('.seek i');
+  a.addEventListener('timeupdate',()=>{if(a.duration)bar.style.width=(a.currentTime/a.duration*100)+'%'});
+  a.addEventListener('ended',()=>{btn.textContent='▶';bar.style.width='0'});
+  a.addEventListener('error',()=>{
+    if(!box.querySelector('.miss')){const s=document.createElement('span');s.className='miss';s.textContent='no file';box.appendChild(s);}
+  });
+  btn.onclick=()=>{
+    $$('#audios .audio').forEach(o=>{if(o!==box){o._a&&o._a.pause();o.querySelector('.playbtn').textContent='▶'}});
+    if(a.paused){a.play().then(()=>btn.textContent='❚❚').catch(()=>toast('Add the file '+box.dataset.src));}
+    else{a.pause();btn.textContent='▶';}
+  };
+  box._a=a;
+});
+
+/* ---------------- generic MCQ builder ---------------- */
+function buildMCQ(host,items){
+  const box=$('#'+host); box.innerHTML='';
+  items.forEach((it,i)=>{
+    const q=document.createElement('div'); q.className='q';
+    q.innerHTML=`<p><span class="num">${i+1}</span>${it.q}</p>`;
+    const o=document.createElement('div'); o.className='opts';
+    it.a.forEach(txt=>{
+      const b=document.createElement('div'); b.className='opt'; b.textContent=txt;
+      b.onclick=()=>{ if(q.classList.contains('locked'))return;
+        [...o.children].forEach(c=>c.classList.remove('sel')); b.classList.add('sel'); };
+      o.appendChild(b);
+    });
+    q.appendChild(o);
+    if(it.why){const f=document.createElement('div');f.className='fb';f.dataset.why=it.why;q.appendChild(f);}
+    box.appendChild(q);
+  });
+  box._items=items;
+}
+function checkMCQ(host,xp,label){
+  const box=$('#'+host), items=box._items; let ok=0,ans=0;
+  [...box.children].forEach((q,i)=>{
+    const opts=[...q.querySelector('.opts').children];
+    const sel=opts.find(o=>o.classList.contains('sel')); if(!sel)return; ans++;
+    q.classList.add('locked');
+    opts.forEach(o=>{ if(o.textContent===items[i].k)o.classList.add('good');
+                      else if(o===sel)o.classList.add('bad'); });
+    const good=sel.textContent===items[i].k; if(good)ok++;
+    const f=q.querySelector('.fb');
+    if(f){f.className='fb on '+(good?'good':'bad'); f.innerHTML=(good?'✔ ':'✘ ')+f.dataset.why;}
+  });
+  const fb=$('#'+host+'fb'); fb.className='fb on '+(ok===items.length?'good':'bad');
+  fb.textContent=ans<items.length? `${ans} of ${items.length} answered. Score: ${ok}/${items.length}`
+                                 : `Score: ${ok} out of ${items.length}${ok===items.length?' 🎉 perfect!':''}`;
+  if(!S.done[host]){ S.done[host]=1; addXP(Math.round(xp*ok/items.length),label); }
+}
+
+/* ---------------- Task 1 ---------------- */
+buildMCQ('t1',[
+ {q:'Lucas is describing his …',a:['brother','dad','sister','mum'],k:'brother',
+  why:'"younger than me… he\'s got dark curly hair… playing a game" — a younger boy.'},
+ {q:'Alfie is describing his …',a:['brother','dad','sister','mum'],k:'sister',
+  why:'"a teenage girl… straight, fair hair… two years younger than me".'},
+ {q:'Grace is describing her …',a:['brother','dad','sister','mum'],k:'dad',
+  why:'"dark hair, but now he\'s in his forties he\'s going bald" — a man over 40.'}
+]);
+
+/* ---------------- Task 2 ---------------- */
+buildMCQ('t2',[
+ {q:'I think Lucas is really … For instance, he always says please.',a:['polite','careless'],k:'polite',
+  why:'saying please → polite.'},
+ {q:'Alfie takes my things without asking. He thinks he\'s …, but he doesn\'t make me laugh!',a:['funny','polite'],k:'funny',
+  why:'"make me laugh" → funny.'},
+ {q:'Grace is very … She always says hello.',a:['miserable','friendly'],k:'friendly',
+  why:'saying hello every morning → friendly.'},
+ {q:'Alfie is sometimes a bit … with homework — he doesn\'t check it.',a:['confident','careless'],k:'careless',
+  why:'not checking his work → careless.'},
+ {q:'Grace is always smiling and she\'s never … She makes me laugh.',a:['miserable','polite'],k:'miserable',
+  why:'always smiling → never miserable (never sad and unhappy).'},
+ {q:'Lucas knows what he\'s good at, so he\'s quite a … boy.',a:['careless','confident'],k:'confident',
+  why:'he knows what he is good at → confident.'}
+]);
+
+/* ---------------- Task 3 matching ---------------- */
+const PAIRS=[['careless','careful'],['funny','serious'],['polite','rude'],
+             ['confident','shy'],['friendly','unfriendly'],['miserable','cheerful']];
+let sel3=null, left3=PAIRS.length;
+function chip(w,side){
+  const c=document.createElement('div'); c.className='chip'; c.textContent=w;
+  c.onclick=()=>{
+    if(side==='L'){ $$('#mLeft .chip').forEach(x=>x.classList.remove('sel')); c.classList.add('sel'); sel3=c; return; }
+    if(!sel3){toast('Choose a word on the left first');return;}
+    const good=PAIRS.some(p=>p[0]===sel3.textContent&&p[1]===c.textContent);
+    if(good){
+      sel3.classList.add('gone'); c.classList.add('gone');
+      const a=sel3,b=c; setTimeout(()=>{a.remove();b.remove()},350); sel3=null;
+      left3--; addXP(5,'pair found');
+      if(left3===0){ const f=$('#t3fb'); f.className='fb on good'; f.textContent='🎉 All the opposites are matched!';
+        if(!S.done.t3){S.done.t3=1;addXP(20,'Task 3 complete');} }
+    }else{
+      c.animate([{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],220);
+      const f=$('#t3fb'); f.className='fb on bad'; f.textContent='Not a pair — try again.';
+      setTimeout(()=>f.classList.remove('on'),1400);
+    }
+  };
+  return c;
+}
+(function(){
+  const L=$('#mLeft'),R=$('#mRight'), shuf=a=>a.map(v=>[Math.random(),v]).sort().map(v=>v[1]);
+  shuf(PAIRS.map(p=>p[0])).forEach(w=>L.appendChild(chip(w,'L')));
+  shuf(PAIRS.map(p=>p[1])).forEach(w=>R.appendChild(chip(w,'R')));
+})();
+
+/* ---------------- Task 4 anagrams ---------------- */
+const ANAG=[['dalby','badly'],['larecfuly','carefully'],['yarley','yearly'],['saft','fast'],
+            ['ellw','well'],['halihtley','healthily'],['vaheyli','heavily'],['lraey','early']];
+(function(){
+  const box=$('#t4');
+  ANAG.forEach((p,i)=>{
+    const row=document.createElement('div'); row.className='anag';
+    row.innerHTML=`<span style="color:var(--muted);font-weight:800">${i+1}</span><b>${p[0]}</b>`;
+    const inp=document.createElement('input'); inp.className='txt'; inp.placeholder='adverb…';
+    inp.onkeydown=e=>{if(e.key==='Enter')mark(inp,p[1])};
+    row.appendChild(inp); box.appendChild(row);
+  });
+})();
+function mark(inp,key){
+  const ok=inp.value.trim().toLowerCase()===key;
+  inp.classList.remove('good','bad'); inp.classList.add(ok?'good':'bad');
+  return ok;
+}
+$('#t4hint').onclick=()=>{
+  const inps=$$('#t4 input'); const i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('Everything is already correct 😎');return}
+  inps[i].value=ANAG[i][1].slice(0,2); inps[i].focus(); toast('First two letters: '+inps[i].value);
+};
+
+/* ---------------- Task 5 gapfill ---------------- */
+const T5=[
+ ['I always go to bed ',' before an exam.','early'],
+ ['Eating ',' makes me feel better.','healthily'],
+ ['It\'s raining ',', so I\'ll stay at home today.','heavily'],
+ ['You\'re driving too ','! Slow down!','fast'],
+ ['Georgina looks really ',' after going to the gym.','well'],
+ ['Paul visits his family in South Africa ',', usually in August.','yearly'],
+ ['My team played ',' this year.','badly'],
+ ['Jamie thinks ',' before he speaks.','carefully']
+];
+let sel5=null;
+(function(){
+  const bank=$('#t5bank'), box=$('#t5');
+  T5.map(x=>x[2]).sort(()=>Math.random()-.5).forEach(w=>{
+    const c=document.createElement('div'); c.className='chip'; c.textContent=w;
+    c.onclick=()=>{ $$('#t5bank .chip').forEach(x=>x.classList.remove('sel')); c.classList.add('sel'); sel5=c; };
+    bank.appendChild(c);
+  });
+  T5.forEach((s,i)=>{
+    const p=document.createElement('p'); p.className='sent';
+    p.innerHTML=`<span class="num">${i+1}</span>${s[0]}<span class="gap">________</span>${s[1]}`;
+    const g=p.querySelector('.gap');
+    g.onclick=()=>{
+      if(g.classList.contains('filled')){
+        const w=g.textContent; g.textContent='________'; g.className='gap';
+        const c=[...$('#t5bank').children].find(x=>x.textContent===w&&x.classList.contains('used'));
+        if(c)c.classList.remove('used'); return;
+      }
+      if(!sel5){toast('Choose a word above first');return}
+      g.textContent=sel5.textContent; g.className='gap filled';
+      sel5.classList.add('used'); sel5.classList.remove('sel'); sel5=null;
+    };
+    box.appendChild(p);
+  });
+})();
+
+/* ---------------- Task 6 ---------------- */
+buildMCQ('t6',[
+ {q:'What is a "prom"?',a:["a school-leavers' dance",'a school exam','a summer camp'],k:"a school-leavers' dance",
+  why:'A prom is a formal school dance at the end of the year.'},
+ {q:'The word "prom" comes from …',a:['promenade','promise','promotion'],k:'promenade',
+  why:'From <i>promenade</i> — the formal walk of the couples that opens the dance.'},
+ {q:'A boy usually wears a bow tie with a …',a:['tuxedo','tracksuit','uniform'],k:'tuxedo',
+  why:'A tuxedo (tux) with a bow tie is the classic prom dress code.'},
+ {q:'In the UK this event is traditionally called …',a:["a leavers' ball",'a prom night','a graduation exam'],k:"a leavers' ball",
+  why:'That\'s why Rob says: "I think the prom comes from American school. I don\'t like it."'}
+]);
+
+/* ---------------- check buttons ---------------- */
+$$('[data-check]').forEach(b=>b.onclick=()=>{
+  const h=b.dataset.check;
+  if(h==='t4'){
+    let ok=0; $$('#t4 input').forEach((inp,i)=>{ if(mark(inp,ANAG[i][1]))ok++; });
+    const f=$('#t4fb'); f.className='fb on '+(ok===ANAG.length?'good':'bad');
+    f.textContent=`${ok} out of ${ANAG.length} correct`+(ok===ANAG.length?' ⚡ Adverb Master!':'');
+    if(!S.done.t4){S.done.t4=1;addXP(Math.round(60*ok/ANAG.length),'Task 4');}
+    return;
+  }
+  if(h==='t5'){
+    let ok=0; $$('#t5 .gap').forEach((g,i)=>{
+      g.classList.remove('good','bad');
+      if(g.classList.contains('filled')){ const good=g.textContent===T5[i][2]; g.classList.add(good?'good':'bad'); if(good)ok++; }
+    });
+    const f=$('#t5fb'); f.className='fb on '+(ok===T5.length?'good':'bad');
+    f.textContent=`${ok} out of ${T5.length} correct`+(ok===T5.length?' 🎉':' · clue: "looks well" is about health!');
+    if(!S.done.t5){S.done.t5=1;addXP(Math.round(60*ok/T5.length),'Task 5');}
+    return;
+  }
+  checkMCQ(h,{t1:40,t2:60,t6:40}[h],'Task '+h[1]);
+});
+
+renderXP();
+</script>
+</body>
+</html>
