@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Unit 2 · In Fashion — Interactive Workspace</title>
+<style>
+:root{
+  --red:#e63946; --blue:#1d7fd6; --teal:#12b5a5; --yellow:#ffc233; --purple:#7c5cff; --orange:#f4732a;
+  --bg:#eef2f7; --bg2:#e2e8f2; --card:#ffffff; --ink:#16202e; --muted:#61708a;
+  --line:#dbe3ef; --ok:#16a34a; --no:#e11d48; --shadow:0 10px 30px rgba(22,38,66,.10); --r:18px;
+}
+html[data-theme="dark"]{
+  --bg:#0e1420; --bg2:#111a29; --card:#161f30; --ink:#e8eefb; --muted:#93a3bd;
+  --line:#243149; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  background:radial-gradient(1200px 600px at 10% -10%,rgba(244,115,42,.18),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(124,92,255,.16),transparent 55%),var(--bg);
+  color:var(--ink); line-height:1.55;
+}
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--card) 82%,transparent);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1700px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+.unitbadge{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:22px;
+  background:linear-gradient(135deg,var(--orange),var(--red));box-shadow:0 6px 16px rgba(244,115,42,.35)}
+.brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.xpbox{flex:1;min-width:220px;max-width:420px}
+.xpbar{height:12px;border-radius:99px;background:var(--bg2);overflow:hidden;border:1px solid var(--line)}
+.xpfill{height:100%;width:0;border-radius:99px;transition:width .5s cubic-bezier(.2,.9,.2,1);
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
+.xpmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  padding:8px 14px;border-radius:12px;font-weight:700;font-size:13px;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent}
+.btn.go{background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;border-color:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.medals{display:flex;gap:6px}
+.medal{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--bg2);
+  filter:grayscale(1);opacity:.4;font-size:16px;transition:.4s;border:1px solid var(--line)}
+.medal.on{filter:none;opacity:1;transform:scale(1.08);box-shadow:0 0 0 3px rgba(255,194,51,.25)}
+
+/* ---------- layout ---------- */
+main{max-width:1700px;margin:0 auto;padding:20px 18px 80px;display:grid;gap:20px;
+  grid-template-columns:minmax(270px,.95fr) minmax(420px,1.3fr) minmax(320px,1.15fr)}
+@media(max-width:1250px){main{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(min-width:1251px){.center .stickypages{position:sticky;top:78px}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card>h3{margin:0;padding:13px 16px;font-size:14px;letter-spacing:.4px;text-transform:uppercase;
+  display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line)}
+.card>h3 .dot{width:9px;height:9px;border-radius:99px;background:var(--blue);flex:none}
+.card .body{padding:14px 16px}
+.t-red>h3 .dot{background:var(--red)} .t-teal>h3 .dot{background:var(--teal)}
+.t-yellow>h3 .dot{background:var(--yellow)} .t-purple>h3 .dot{background:var(--purple)}
+.t-orange>h3 .dot{background:var(--orange)}
+.hint{font-size:12.5px;color:var(--muted)}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 8px;border-radius:99px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+.exno{width:26px;height:26px;flex:none;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:14px;font-weight:800}
+.t-orange .exno{background:linear-gradient(135deg,var(--orange),var(--red))}
+.showpage{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;border:1px solid var(--blue);color:var(--blue);
+  background:transparent;cursor:pointer;white-space:nowrap}
+.showpage:hover{background:var(--blue);color:#fff}
+.secthead{display:flex;align-items:center;gap:10px;margin:6px 2px -4px;font-size:12px;font-weight:800;
+  letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.secthead::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ---------- pages ---------- */
+.tabs{display:flex;gap:6px;padding:12px 12px 0;flex-wrap:wrap}
+.tab{padding:7px 12px;border-radius:12px 12px 0 0;border:1px solid var(--line);border-bottom:none;
+  background:var(--bg2);cursor:pointer;font-weight:700;font-size:12.5px;color:var(--muted)}
+.tab.on{background:var(--card);color:var(--ink)}
+.pagewrap{padding:12px 14px 16px;border-top:1px solid var(--line)}
+.scroller{max-height:74vh;overflow:auto;border-radius:14px;border:1px solid var(--line);scroll-behavior:smooth}
+.pageframe{position:relative;min-height:300px;display:block;
+  background:repeating-linear-gradient(45deg,var(--bg2),var(--bg2) 12px,transparent 12px,transparent 24px)}
+.pageframe img{width:100%;display:block}
+.pageframe.textmode{background:var(--card)}
+.pagestage{position:relative;width:calc(100% * var(--pz,1));line-height:0;transition:width .35s cubic-bezier(.2,.9,.2,1)}
+.ph{padding:34px 22px;text-align:center;color:var(--muted);font-size:13px}
+.ph b{display:block;font-size:15px;color:var(--ink);margin-bottom:6px}
+.ph code{background:var(--card);padding:2px 7px;border-radius:6px;border:1px solid var(--line);font-size:12px}
+.zoombar{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.hl{position:absolute;border:3px solid var(--orange);border-radius:10px;pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(10,16,28,.42);opacity:0;transition:opacity .35s;z-index:3}
+.hl.on{opacity:1;animation:hlpulse 1.1s ease-in-out 2}
+@keyframes hlpulse{0%,100%{border-color:var(--orange)}50%{border-color:var(--yellow)}}
+.lightbox{position:fixed;inset:0;background:rgba(8,12,20,.92);z-index:200;display:none;place-items:center;
+  padding:20px;overflow:auto;cursor:zoom-out}
+.lightbox.on{display:grid}
+.lightbox img{max-width:min(1100px,96vw);border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+
+/* ---------- write + draw ---------- */
+.wlayer{position:absolute;inset:0;pointer-events:none}
+.writeon .wlayer{pointer-events:auto;cursor:crosshair}
+.writeon .wlayer::after{content:"✍️ click anywhere on the page to type";position:absolute;left:50%;top:8px;
+  transform:translateX(-50%);background:var(--blue);color:#fff;font:700 11px/1.4 "Segoe UI",sans-serif;
+  padding:4px 12px;border-radius:99px;opacity:.85;white-space:nowrap;pointer-events:none;z-index:4}
+.dlayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;touch-action:none;overflow:visible}
+.drawon .dlayer{pointer-events:auto;cursor:crosshair}
+.eraseon .dlayer{pointer-events:auto}
+.eraseon .dlayer polyline{pointer-events:stroke;cursor:pointer}
+.eraseon .dlayer polyline:hover{opacity:.35}
+.drawon .note,.eraseon .note{pointer-events:none}
+.drawon .wlayer::after{display:none}
+.note{position:absolute;line-height:1.2;pointer-events:auto;transform:translateY(-50%)}
+.note input{border:none;border-bottom:1.5px solid rgba(29,127,214,.45);background:rgba(255,255,255,.55);
+  font-family:"Comic Sans MS","Segoe Print",cursive;font-size:var(--nfs,15px);font-weight:700;
+  color:#1652c8;padding:0 3px;outline:none;border-radius:3px 3px 0 0;min-width:26px}
+.note input:focus{background:rgba(255,235,150,.75);border-bottom-color:var(--blue)}
+.note .del,.note .grip{position:absolute;top:-11px;width:18px;height:18px;border-radius:99px;border:none;
+  color:#fff;font-size:11px;line-height:18px;padding:0;display:none;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.note .del{right:-11px;background:var(--no);cursor:pointer}
+.note .grip{left:-11px;background:var(--blue);cursor:grab;font-size:10px;touch-action:none}
+.note:hover .del,.note:hover .grip,.note:focus-within .del,.note:focus-within .grip{display:block}
+.note.dragging{z-index:9;opacity:.85}
+.dtools{display:none;gap:6px;align-items:center;padding:4px 10px;border:1px solid var(--line);
+  border-radius:99px;background:var(--bg2)}
+body.drawon .dtools,body.eraseon .dtools{display:flex}
+.swatch{width:20px;height:20px;border-radius:99px;border:2px solid rgba(255,255,255,.7);cursor:pointer;
+  padding:0;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:.15s}
+.swatch.on{transform:scale(1.25);box-shadow:0 0 0 3px rgba(29,127,214,.35)}
+.wsize{width:70px;accent-color:var(--blue)}
+.wcount{font-size:11.5px;color:var(--muted);font-weight:700}
+.hwbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;padding:12px 14px;
+  border-radius:14px;border:1px dashed var(--orange);background:var(--bg2)}
+.hwbar input.name{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  padding:7px 11px;font-size:13px;font-weight:700;width:190px}
+
+/* ---------- tasks ---------- */
+.q{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:var(--bg2)}
+.q p{margin:0 0 8px;font-size:13.5px;font-weight:600}
+.q .num{color:var(--muted);font-weight:800;margin-right:6px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;cursor:pointer;
+  font-size:13px;font-weight:600;transition:.15s}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.opt.good{background:rgba(22,163,74,.14);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:rgba(225,29,72,.12);border-color:var(--no);color:var(--no);text-decoration:line-through}
+.fb{font-size:12px;margin-top:7px;display:none}
+.fb.on{display:block}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--no)}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 13px;cursor:pointer;
+  font-size:13px;font-weight:700;transition:.15s}
+.chip:hover{transform:translateY(-2px)}
+.chip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.chip.gone{animation:pop .35s forwards}
+@keyframes pop{to{transform:scale(0);opacity:0;width:0;padding:0;margin:0;border:0}}
+.ticks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tick{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 10px;cursor:pointer;
+  font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:7px;transition:.15s}
+.tick::before{content:"";width:15px;height:15px;border-radius:5px;border:1.5px solid var(--muted);flex:none}
+.tick.on::before{content:"✓";background:var(--blue);border-color:var(--blue);color:#fff;font-size:11px;
+  display:grid;place-items:center;line-height:1}
+.tick.good{border-color:var(--ok);background:rgba(22,163,74,.12)}
+.tick.bad{border-color:var(--no);background:rgba(225,29,72,.10)}
+input.txt{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  padding:7px 10px;font-size:13px;width:160px;font-weight:700}
+input.txt.good{border-color:var(--ok);color:var(--ok)}
+input.txt.bad{border-color:var(--no);color:var(--no)}
+.spell{display:flex;align-items:center;gap:9px;margin-bottom:9px;flex-wrap:wrap}
+.spell b{font-family:ui-monospace,Consolas,monospace;letter-spacing:2px;font-size:14px;min-width:118px}
+.spell span.def{font-size:12px;color:var(--muted);flex:1;min-width:150px}
+textarea.write{width:100%;min-height:130px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  background:var(--card);color:var(--ink);font-family:inherit;font-size:13.5px;resize:vertical;outline:none}
+textarea.write:focus{border-color:var(--blue)}
+.wcbar{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:6px}
+ul.tight{margin:6px 0;padding-left:18px;font-size:13px}
+ul.tight li{margin-bottom:5px}
+.callout{border-left:4px solid var(--yellow);background:var(--bg2);padding:9px 12px;
+  border-radius:0 10px 10px 0;font-size:13px;margin:9px 0}
+.cando{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin-bottom:7px}
+.cando i{font-style:normal;color:var(--teal);font-weight:900}
+table.wb{width:100%;border-collapse:collapse;font-size:13px}
+table.wb th,table.wb td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+table.wb th{background:var(--bg2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);width:96px}
+.w{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:8px;
+  padding:2px 8px;margin:2px 3px 2px 0;font-size:12.5px;cursor:help}
+/* ---------- transcript ---------- */
+.tr{padding:18px 20px}
+.trhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 4px}
+.trhead h4{margin:0;font-size:15px}
+.trbody{position:relative;margin-top:10px}
+.trbody.hidden .lines{filter:blur(6px);user-select:none;pointer-events:none;opacity:.55}
+.veil{position:absolute;inset:0;display:grid;place-items:center;z-index:2}
+.trbody:not(.hidden) .veil{display:none}
+.lines p{margin:0 0 9px;padding-left:88px;text-indent:-88px;font-size:13.5px}
+.lines p b{color:var(--blue);display:inline-block;min-width:82px}
+.trnote{font-size:12.5px;color:var(--muted);border-left:4px solid var(--yellow);background:var(--bg2);
+  padding:9px 12px;border-radius:0 10px 10px 0;margin-top:14px}
+.trdiv{height:1px;background:var(--line);margin:20px 0}
+/* ---------- fx ---------- */
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;width:9px;height:14px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:400;background:var(--ink);
+  color:var(--bg);padding:11px 20px;border-radius:99px;font-weight:800;font-size:13.5px;
+  transition:transform .4s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
+/* ---------- print ---------- */
+#printroot{display:none}
+#printroot .sheet{page-break-after:always;padding:0 0 10px}
+#printroot .phead{font:700 15px/1.5 "Segoe UI",sans-serif;margin:0 0 8px;color:#000;
+  border-bottom:2px solid #000;padding-bottom:5px}
+@media print{
+  body>header,body>main,body>footer,.lightbox,.toast,.confetti{display:none!important}
+  #printroot{display:block!important}
+  #printroot .note input{background:transparent;border-bottom:1px solid #999;color:#00308f;font-weight:700}
+  #printroot .note .del,#printroot .note .grip{display:none!important}
+  @page{margin:10mm}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <div class="unitbadge">2</div>
+      <div>IN FASHION<small>Student's Book p.14–15 · Workbook p.8–9</small></div>
+    </div>
+    <div class="xpbox">
+      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+      <div class="xpmeta"><span id="xplabel">0 XP</span><span id="xpright">Level 1 · Getting Dressed</span></div>
+    </div>
+    <div class="medals" id="medals">
+      <div class="medal" data-need="100" title="100 XP — Wardrobe Starter">👕</div>
+      <div class="medal" data-need="220" title="220 XP — Sharp Ears">👂</div>
+      <div class="medal" data-need="350" title="350 XP — Fashion Historian">🎸</div>
+      <div class="medal" data-need="470" title="470 XP — Unit 2 Champion">🏆</div>
+    </div>
+    <button class="btn" id="themebtn">🌙 Theme</button>
+    <button class="btn" id="resetbtn">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+
+<!-- =============== LEFT: REFERENCE =============== -->
+<div class="col">
+
+  <div class="card t-orange">
+    <h3><span class="dot"></span>Word Bank · Clothes adjectives</h3>
+    <div class="body">
+      <p class="hint">Hover over a word to see what it means.</p>
+      <table class="wb">
+        <tr><th>Fit</th><td>
+          <span class="w" title="narrow and fitting closely to the body">skinny</span>
+          <span class="w" title="large and comfortable to wear">loose-fitting</span>
+          <span class="w" title="gives a pleasant feeling">comfortable</span>
+          <span class="w" title="not pleasant to wear">uncomfortable</span>
+        </td></tr>
+        <tr><th>Style</th><td>
+          <span class="w" title="clean, tidy and stylish in appearance">smart</span>
+          <span class="w" title="relaxed and informal — jeans, T-shirts">casual</span>
+          <span class="w" title="popular at a particular time">trendy</span>
+          <span class="w" title="not popular at the moment">unfashionable</span>
+        </td></tr>
+        <tr><th>Age</th><td>
+          <span class="w" title="completely new, never used">brand new</span>
+          <span class="w" title="owned by someone else before you">second-hand</span>
+        </td></tr>
+        <tr><th>Overall</th><td>
+          <span class="w" title="wearing attractive, good-quality clothes">well-dressed</span>
+          <span class="w" title="wearing clothes that don't look good">badly-dressed</span>
+        </td></tr>
+        <tr><th>Items</th><td>
+          <span class="w" title="soft sports shoes">trainers</span>
+          <span class="w" title="soft top and trousers for sport">tracksuit</span>
+          <span class="w" title="a warm cotton top, usually with no buttons">sweatshirt</span>
+          <span class="w" title="rings, necklaces, earrings">jewellery</span>
+          <span class="w" title="a thin piece of cloth worn around the neck with a shirt">tie</span>
+          <span class="w" title="a bag carried by hand, usually by women">handbag</span>
+        </td></tr>
+      </table>
+      <div class="callout"><b>Careful with hyphens:</b> <i>well-dressed</i>, <i>badly-dressed</i>,
+      <i>loose-fitting</i>, <i>second-hand</i> take one. <i>brand new</i> normally does not.</div>
+    </div>
+  </div>
+
+  <div class="card t-blue">
+    <h3><span class="dot"></span>Grammar spotlight</h3>
+    <div class="body">
+      <p style="margin:0 0 6px;font-weight:700;font-size:13.5px">1 · <span style="color:var(--blue)">wear · wearing · in</span></p>
+      <ul class="tight">
+        <li>She <b>is wearing</b> a black shirt. → right now</li>
+        <li>She <b>wears</b> black a lot. → generally, a habit</li>
+        <li>The girl <b>in</b> the red jacket is my sister. → identifying someone</li>
+        <li>❌ <s>She is wearing a black</s> → an adjective needs its noun: <b>a black shirt</b></li>
+      </ul>
+      <p style="margin:10px 0 6px;font-weight:700;font-size:13.5px">2 · Order of adjectives</p>
+      <div class="callout" style="border-color:var(--blue)">
+        <b>Opinion → Size → Age → Colour → Material + NOUN</b><br>
+        a <i>lovely</i> <i>skinny</i> <i>brand-new</i> <i>black</i> <i>leather</i> jacket
+      </div>
+      <p style="margin:10px 0 6px;font-weight:700;font-size:13.5px">3 · Plural-only clothes</p>
+      <ul class="tight">
+        <li><b>trousers, jeans, shorts, trainers, sunglasses</b> are always plural:
+          <i>These jeans <b>are</b> too skinny.</i> ❌ <s>This jeans is</s></li>
+        <li>To count them: <b>a pair of</b> jeans, two <b>pairs of</b> trainers.</li>
+      </ul>
+      <p style="margin:10px 0 6px;font-weight:700;font-size:13.5px">4 · <span style="color:var(--blue)">look</span> + adjective</p>
+      <ul class="tight"><li>He <b>looks</b> smart. · The suit <b>looks</b> brand new. · You <b>look like</b> a rock star. (+ noun)</li></ul>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Fashion timeline · from the article</h3>
+    <div class="body">
+      <ul class="tight">
+        <li><b>Before mid-1950s</b> — no youth culture; teens dressed and listened like their parents.</li>
+        <li><b>1954</b> — <i>Rock Around the Clock</i>, Bill Haley and the Comets. Smart suits, skinny ties (Buddy Holly, Elvis). Loose-fitting skirts for dancing.</li>
+        <li><b>1960s</b> — The Rolling Stones; very short mini skirts shock the older generation.</li>
+        <li><b>Mid 60s–mid 70s</b> — the hippie era: long hair, flowery clothing, sandals; The Beatles, Joni Mitchell.</li>
+        <li><b>Late 70s</b> — punk: second-hand clothes, often torn; colourful, messy hair. The Clash, Debbie Harry, Patti Smith.</li>
+        <li><b>1980s</b> — long curly hair, bright colours; Michael Jackson, Madonna, U2.</li>
+        <li><b>1990s</b> — boy bands and girl bands; hip hop tracksuits, gold rings and necklaces.</li>
+        <li><b>Today</b> — YouTubers, superstar DJs; fashions "here today and gone tomorrow".</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="dot"></span>Useful language · for speaking</h3>
+    <div class="body">
+      <p style="margin:0 0 5px;font-weight:700;font-size:13px">Describing what you see</p>
+      <ul class="tight">
+        <li>He's wearing… / She's got… on. · It looks like…</li>
+        <li>In this photo she seems quite… · The trousers look a bit…</li>
+      </ul>
+      <p style="margin:9px 0 5px;font-weight:700;font-size:13px">Giving an opinion</p>
+      <ul class="tight">
+        <li>Personally, I'd never wear… · I quite like… but I prefer…</li>
+        <li>It's just not my style. · That really suits him.</li>
+      </ul>
+      <p style="margin:9px 0 5px;font-weight:700;font-size:13px">Agreeing &amp; disagreeing politely</p>
+      <ul class="tight">
+        <li>You've got a point, but… · I see what you mean, though…</li>
+        <li>Exactly! That's what I think too.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="dot"></span>CEFR · Can-do statements (A2+/B1)</h3>
+    <div class="body">
+      <div class="cando"><i>✓</i><span>I can describe what people are wearing and say what I think of it. <span class="tag">Spoken production</span></span></div>
+      <div class="cando"><i>✓</i><span>I can identify who says what in a short interview. <span class="tag">Listening</span></span></div>
+      <div class="cando"><i>✓</i><span>I can scan an article for names and dates, and read it again for detail. <span class="tag">Reading</span></span></div>
+      <div class="cando"><i>✓</i><span>I can write a short opinion comment on a familiar topic. <span class="tag">Writing</span></span></div>
+      <div class="cando"><i>✓</i><span>I can spell the unit's key adjectives correctly. <span class="tag">Orthography</span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- =============== CENTER: PAGES =============== -->
+<div class="col center">
+  <div class="stickypages">
+    <div class="card">
+      <div class="tabs" id="tabs">
+        <div class="tab on" data-i="0">📕 SB p.14</div>
+        <div class="tab" data-i="1">📗 SB p.15</div>
+        <div class="tab" data-i="2">✏️ Homework p.8</div>
+        <div class="tab" data-i="3">✏️ Homework p.9</div>
+        <div class="tab" data-i="4">📄 Audioscript</div>
+      </div>
+      <div class="pagewrap">
+        <div class="scroller" id="scroller"><div class="pageframe" id="frame"></div></div>
+        <div class="zoombar">
+          <button class="btn" id="prevbtn">← Back</button>
+          <button class="btn" id="nextbtn">Next →</button>
+          <button class="btn" id="zoutbtn" title="Zoom out">🔍−</button>
+          <button class="btn" id="zinbtn" title="Zoom in">🔍+</button>
+          <button class="btn" id="zfitbtn" title="Fit the whole page">⤢ Fit</button>
+          <button class="btn" id="writebtn">✍️ Write on page</button>
+          <button class="btn" id="smallbtn" title="Smaller text">A−</button>
+          <button class="btn" id="bigbtn" title="Bigger text">A+</button>
+          <button class="btn" id="drawbtn">🖊 Draw</button>
+          <span class="dtools" id="dtools">
+            <button class="swatch on" data-c="#e11d48" style="background:#e11d48" title="Red pen"></button>
+            <button class="swatch" data-c="#1d7fd6" style="background:#1d7fd6" title="Blue pen"></button>
+            <button class="swatch" data-c="#16a34a" style="background:#16a34a" title="Green pen"></button>
+            <button class="swatch" data-c="rgba(255,214,0,.45)" data-hl="1" style="background:#ffd600" title="Highlighter"></button>
+            <input type="range" class="wsize" id="wsize" min="1" max="14" step="1" value="3" title="Line thickness">
+            <button class="btn" id="undobtn" title="Ctrl+Z">↶ Undo</button>
+            <button class="btn" id="erasebtn" title="Click a line to remove it">🧹 Eraser</button>
+          </span>
+          <button class="btn" id="clearbtn">🧽 Clear page</button>
+          <button class="btn primary" id="zoombtn">🔍 Full screen</button>
+          <span class="wcount" id="wcount"></span>
+        </div>
+        <div class="hwbar" id="hwbar" style="display:none">
+          <b style="font-size:13px">📨 Hand in your homework</b>
+          <input class="name" id="hwname" placeholder="Your name" autocomplete="name">
+          <button class="btn go" id="sendbtn">Save as PDF &amp; send</button>
+          <span class="hint" id="hwstatus">Do both pages first — p.8 and p.9 go into one PDF.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============== RIGHT: TASKS =============== -->
+<div class="col">
+
+  <div class="secthead">Student's Book · page 14</div>
+
+  <div class="card t-blue">
+    <h3><span class="exno">1</span>Who are they? <button class="showpage" data-page="0" data-ex="1">Show on page</button></h3>
+    <div class="body">
+      <p class="hint">Look at the photos. Who are the people? Listen to <b>Track 04</b> and check.</p>
+      <div id="e1"></div>
+      <button class="btn primary" data-check="e1">Check</button>
+      <span class="fb" id="e1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-blue">
+    <h3><span class="exno">2</span>What are they talking about? <button class="showpage" data-page="0" data-ex="2">Show on page</button></h3>
+    <div class="body">
+      <p class="hint">Listen to the interview with three teenagers (<b>Track 05</b>).</p>
+      <div id="e2"></div>
+      <button class="btn primary" data-check="e2">Check</button>
+      <span class="fb" id="e2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-blue">
+    <h3><span class="exno">3</span>Ashley, Molly or Luke? <button class="showpage" data-page="0" data-ex="3">Show on page</button></h3>
+    <div class="body">
+      <p class="hint">Read the questions. Then listen again and choose <b>A</b> (Ashley), <b>M</b> (Molly) or <b>L</b> (Luke).</p>
+      <div id="e3"></div>
+      <button class="btn primary" data-check="e3">Check</button>
+      <span class="fb" id="e3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-blue">
+    <h3><span class="exno">4</span>Opposites <button class="showpage" data-page="0" data-ex="4">Show on page</button></h3>
+    <div class="body">
+      <p class="hint">Match the adjectives from Exercise 3 to their opposites. Click left, then right 💥</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><div class="tag" style="margin-bottom:6px">Exercise&nbsp;3</div><div class="chips" id="mLeft"></div></div>
+        <div><div class="tag" style="margin-bottom:6px">Opposites</div><div class="chips" id="mRight"></div></div>
+      </div>
+      <span class="fb" id="e4fb"></span>
+      <div class="callout" style="margin-bottom:0"><b>Example:</b> badly-dressed – well-dressed</div>
+    </div>
+  </div>
+
+  <div class="card t-blue">
+    <h3><span class="exno">5</span>Discuss <button class="showpage" data-page="0" data-ex="5">Show on page</button></h3>
+    <div class="body">
+      <p class="hint">Speaking — no checking here. Use the <b>Useful language</b> box on the left.</p>
+      <ul class="tight">
+        <li>What do you like wearing? What types of clothing do you never wear? Why?</li>
+        <li>Do you generally prefer smart or casual clothes? Why?</li>
+        <li>How important is it for you to wear trendy clothes?</li>
+      </ul>
+      <div class="callout">🎯 <b>Challenge:</b> answer each question with <b>at least two sentences</b> — one for the
+      opinion, one for the reason. Reasons start with <i>because</i>, <i>since</i> or <i>the thing is…</i></div>
+      <button class="btn primary" data-done="e5" data-xp="20">✓ We discussed all three</button>
+      <span class="fb" id="e5fb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">Student's Book · page 15 · Reading</div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">1</span>Read quickly <button class="showpage" data-page="1" data-ex="1">Show on page</button></h3>
+    <div class="body">
+      <p class="hint">Read the article <b>fast</b> — 90 seconds. Tick only the names that really appear in it.</p>
+      <div class="ticks" id="r1"></div>
+      <button class="btn primary" data-check="r1" style="margin-top:10px">Check</button>
+      <span class="fb" id="r1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">2</span>Choose the correct answers <button class="showpage" data-page="1" data-ex="2">Show on page</button></h3>
+    <div class="body">
+      <p class="hint">Now read the article again, slowly.</p>
+      <div id="r2"></div>
+      <button class="btn primary" data-check="r2">Check</button>
+      <span class="fb" id="r2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">3</span>Highlighted words <button class="showpage" data-page="1" data-ex="3">Show on page</button></h3>
+    <div class="body">
+      <p class="hint">Match the highlighted words in the article to their meanings.</p>
+      <div id="r3"></div>
+      <button class="btn primary" data-check="r3">Check</button>
+      <span class="fb" id="r3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Talking points <button class="showpage" data-page="1" data-ex="talk">Show on page</button></h3>
+    <div class="body">
+      <ul class="tight">
+        <li>Why do young people like to dress differently from their parents and grandparents?</li>
+        <li>Why do you think people choose to dress like music stars?</li>
+      </ul>
+      <button class="btn primary" data-done="talk" data-xp="20">✓ We discussed both</button>
+      <span class="fb" id="talkfb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">Extra practice · beyond the book</div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">A</span>Spelling challenge <span class="tag" style="margin-left:auto">+40 XP</span></h3>
+    <div class="body">
+      <p class="hint">These are the words students spell wrong most often. Fill in the missing letters.</p>
+      <div id="x1"></div>
+      <button class="btn primary" data-check="x1">Check all</button>
+      <button class="btn" id="x1hint">💡 Hint</button>
+      <span class="fb" id="x1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">B</span>Decade detective <span class="tag" style="margin-left:auto">+40 XP</span></h3>
+    <div class="body">
+      <p class="hint">Which decade is it? Everything here is in the article on p.15.</p>
+      <div id="x2"></div>
+      <button class="btn primary" data-check="x2">Check</button>
+      <span class="fb" id="x2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">C</span>Odd one out <span class="tag" style="margin-left:auto">+30 XP</span></h3>
+    <div class="body">
+      <p class="hint">Three words belong together. Click the one that doesn't.</p>
+      <div id="x3"></div>
+      <button class="btn primary" data-check="x3">Check</button>
+      <span class="fb" id="x3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">D</span>Writing · your comment <span class="tag" style="margin-left:auto">+30 XP</span></h3>
+    <div class="body">
+      <p class="hint">The magazine asks: <b>"What do you think about school uniform?"</b>
+      Write a comment for the survey, like Raffi and Zehra on Workbook p.9.</p>
+      <textarea class="write" id="wtext" placeholder="At my school we…"></textarea>
+      <div class="wcbar"><span class="hint" id="wcnt">0 words</span><span class="hint">target: 60–80 words</span></div>
+      <div class="callout" style="margin-top:10px"><b>Before you finish, check:</b>
+        <ul class="tight" style="margin-bottom:0">
+          <li>Two clothes adjectives from this unit?</li>
+          <li>One opinion phrase (<i>I think…, In my opinion…, Personally…</i>)?</li>
+          <li>One reason with <i>because</i>?</li>
+          <li>Your name at the end, like the comments in the book?</li>
+        </ul>
+      </div>
+      <button class="btn primary" id="wsubmit" style="margin-top:10px">✓ Done — count my words</button>
+      <span class="fb" id="wfb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">E</span>Speaking · fashion police 👮 <span class="tag" style="margin-left:auto">+20 XP</span></h3>
+    <div class="body">
+      <p class="hint">In pairs. One of you is the <b>Fashion Police</b>, the other <b>defends</b> the outfit.</p>
+      <ul class="tight">
+        <li>Choose any photo on page 14 (Jaden, Taylor, Ed or Rihanna).</li>
+        <li><b>Police:</b> give three criticisms — <i>Those trousers are far too loose-fitting because…</i></li>
+        <li><b>Defence:</b> answer every one — <i>You've got a point, but that's exactly the style…</i></li>
+        <li>Swap roles and choose a different photo.</li>
+      </ul>
+      <div class="callout">😈 <b>Hard mode:</b> you are not allowed to use the words <i>nice</i>, <i>good</i> or
+      <i>bad</i>. Use the adjectives from Exercise 4 instead.</div>
+      <button class="btn primary" data-done="x5" data-xp="20">✓ We did both roles</button>
+      <span class="fb" id="x5fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-red">
+    <h3><span class="dot"></span>Homework · Workbook p.8–9</h3>
+    <div class="body">
+      <ul class="tight">
+        <li>Open the tab <b>✏️ Homework p.8</b> or <b>p.9</b> in the middle.</li>
+        <li>Press <b>✍️ Write on page</b> and type your answers straight onto the page. Drag a field by the
+          blue <b>✥</b> corner if it lands in the wrong place.</li>
+        <li>Press <b>🖊 Draw</b> to circle, underline or tick — that's how you do the matching exercises.</li>
+        <li>When both pages are finished, type your name and press
+          <b>Save as PDF &amp; send</b>.</li>
+      </ul>
+      <div class="callout"><b>No interactive checking here on purpose</b> — homework is for writing and
+      drawing by hand, exactly like in the paper workbook.</div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>Unit 2 · In Fashion — interactive companion to the Student's Book. Pages and audio are the publisher's material, used for teaching purposes.</footer>
+
+<div class="lightbox" id="lightbox"></div>
+<div class="confetti" id="confetti"></div>
+<div class="toast" id="toast"></div>
+<div id="printroot"></div>
+
+<script>
+/* ============ CONFIG ============ */
+/* Teacher's address, assembled at runtime so simple scrapers don't pick it up.
+   To change it, edit the two parts below. */
+const TEACHER_MAIL=['kazankodaniel','gmail.com'].join('@');
+
+/* ============ state ============ */
+const KEY='unit2_infashion_v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+S.xp=S.xp||0; S.done=S.done||{}; S.notes=S.notes||{}; S.draws=S.draws||{}; S.nfs=S.nfs||15;
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const MAXXP=510;
+const LEVELS=[[0,'Level 1 · Getting Dressed'],[100,'Level 2 · Wardrobe Starter'],[220,'Level 3 · Sharp Ears'],
+              [350,'Level 4 · Fashion Historian'],[470,'Level 5 · Unit 2 Champion 🏆']];
+function renderXP(){
+  $('#xpfill').style.width=Math.min(100,S.xp/MAXXP*100)+'%';
+  $('#xplabel').textContent=S.xp+' XP';
+  let lv=LEVELS[0][1]; LEVELS.forEach(l=>{if(S.xp>=l[0])lv=l[1]});
+  $('#xpright').textContent=lv;
+  $$('#medals .medal').forEach(m=>m.classList.toggle('on',S.xp>=+m.dataset.need));
+}
+function addXP(n,label){ if(n<=0)return; S.xp+=n; save(); renderXP(); toast('+'+n+' XP · '+label); if(n>=10)boom(); }
+let tt;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2400)}
+function boom(){
+  const c=$('#confetti'),cols=['#e63946','#1d7fd6','#12b5a5','#ffc233','#7c5cff','#f4732a'];
+  for(let i=0;i<40;i++){const s=document.createElement('i');
+    s.style.left=Math.random()*100+'%';s.style.background=cols[i%6];
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.3)+'s';
+    c.appendChild(s);setTimeout(()=>s.remove(),3400);}
+}
+document.documentElement.dataset.theme=localStorage.getItem('u2theme')||'light';
+$('#themebtn').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=n;localStorage.setItem('u2theme',n)};
+$('#resetbtn').onclick=()=>{if(confirm('Reset everything — XP, your answers and everything you wrote on the pages?')){
+  localStorage.removeItem(KEY);location.reload();}};
+
+/* ============ audioscripts ============ */
+const SCRIPT04=[
+ ['A Boy',"This is Jaden Smith. I like him a lot. His dad's Will Smith. Jaden Smith's a singer and he's been in a few films too. He's wearing a denim jacket, a white T-shirt and skinny white trousers. He's got a black cap and a small red bag. He's got some gold necklaces as well."],
+ ['B Girl',"This is Taylor Swift. She always looks really trendy. Here, she's walking along a city street. She's wearing a smart black shirt and black trousers. It looks like she has a handbag as well."],
+ ['C Girl',"Ed Sheeran isn't normally this well-dressed! He usually wears casual clothes, but here he's wearing a black suit, a white shirt and a black tie. The suit looks brand new. He looks very smart!"],
+ ['D Boy',"Rihanna is one of my favourite singers. She's wearing trainers, loose-fitting trousers, and a black-and-white blouse with very long sleeves."]
+];
+const SCRIPT05=[
+ ['Presenter',"This morning we're at Charlbury High School to find out what's in fashion at the moment."],
+ ['Presenter',"What clothes do you like wearing, Ashley?"],
+ ['Ashley',"Mmm, I love sports clothes. I never wear anything very smart. I just wear trainers and tracksuits, that kind of thing."],
+ ['Presenter',"Why?"],
+ ['Ashley',"Tracksuits are soft on your skin, they're comfortable and easy to wear and you can wear them anywhere. I love this one. It's a great colour!"],
+ ['Presenter',"You look very well dressed today, Molly. Can you tell me about your clothes?"],
+ ['Molly',"I really like this top. I saw it in a trendy market stall and I fell in love with it straight away."],
+ ['Presenter',"It's lovely. Very smart."],
+ ['Molly',"Thank you. It's brand new. I bought it yesterday."],
+ ['Presenter',"Luke, can you tell me what fashions and clothes you like?"],
+ ['Luke',"Sure. I like clothes that are quite simple and not too colourful. I'm not interested in what's trendy. My boots are old but I love them. I don't like wearing stuff that's brand new. I love these skinny jeans too – I don't find loose-fitting jeans comfortable. And this is my favourite sweatshirt. It's from a music festival."],
+ ['Presenter',"Did you buy your clothes second-hand?"],
+ ['Luke',"No, I bought them new … but quite a long time ago!"]
+];
+let revealed=false;
+function scriptBlock(n,sub,lines){
+  return `<div class="trhead"><h4>🔊 ${n}</h4><span class="tag">${sub}</span></div>
+    <div class="trbody ${revealed?'':'hidden'}">
+      <div class="veil"><button class="btn primary revealbtn">👀 Show the transcript</button></div>
+      <div class="lines">${lines.map(l=>`<p><b>${l[0]}:</b> ${l[1]}</p>`).join('')}</div>
+    </div>`;
+}
+function drawScript(f){
+  f.className='pageframe textmode';
+  f.innerHTML=`<div class="tr">
+    <p class="hint" style="margin:0 0 12px">Listen first, then read. Try not to peek 🙈</p>
+    ${scriptBlock('Track 04 — Student\'s Book page 14','Exercise 1',SCRIPT04)}
+    <div class="trdiv"></div>
+    ${scriptBlock('Track 05 — Student\'s Book page 14','Exercises 2 &amp; 3',SCRIPT05)}
+    <div class="trnote"><b>No sound files yet.</b> Your teacher can read these aloud, or ask for the mp3s to be
+    added to the <code>audio/</code> folder. <b>Study tip:</b> once you have the audio, play it again with the
+    transcript in front of you and read out loud at the same speed as the speaker — that's called
+    <i>shadowing</i>, and it does more for your pronunciation than any rule.</div>
+  </div>`;
+  f.querySelectorAll('.revealbtn').forEach(b=>b.onclick=e=>{
+    e.stopPropagation(); revealed=true;
+    f.querySelectorAll('.trbody').forEach(x=>x.classList.remove('hidden'));
+  });
+}
+
+/* ============ pages ============ */
+const PAGES=[
+ {id:'sb14',src:'pages/page14.jpg',name:'page14.jpg',cap:"Student's Book p.14",
+  ex:{'1':{x:3,y:36,w:46,h:6},'2':{x:3,y:42,w:46,h:8},'3':{x:3,y:49.5,w:46,h:13.5},
+      '4':{x:3,y:63,w:46,h:13},'5':{x:3,y:80.5,w:46,h:9.5}}},
+ {id:'sb15',src:'pages/page15.jpg',name:'page15.jpg',cap:"Student's Book p.15",
+  ex:{'1':{x:3,y:60.5,w:46,h:5.5},'2':{x:3,y:66.5,w:46,h:29},'3':{x:51,y:66.5,w:46,h:14},
+      'talk':{x:51,y:80.5,w:46,h:11},'article':{x:3,y:2,w:94,h:56}}},
+ {id:'hw8', src:'pages/hw8.jpg', name:'hw8.jpg', cap:'Workbook p.8 — homework', hw:1},
+ {id:'hw9', src:'pages/hw9.jpg', name:'hw9.jpg', cap:'Workbook p.9 — homework', hw:1},
+ {type:'text',cap:'Audioscript — tracks 04 and 05'}
+];
+let cur=0, writeMode=false, drawMode=false, eraseMode=false;
+const NS='http://www.w3.org/2000/svg';
+let penColor='#e11d48', penHL=false, penW=3;
+
+function setFS(){document.documentElement.style.setProperty('--nfs',S.nfs+'px')}
+function updCount(){
+  const p=PAGES[cur], n=(p.id&&S.notes[p.id]||[]).length, d=(p.id&&S.draws[p.id]||[]).length;
+  const b=[]; if(n)b.push(n+(n===1?' note':' notes')); if(d)b.push(d+(d===1?' line':' lines'));
+  $('#wcount').textContent=b.join(' · ');
+}
+function saveNotes(){
+  const p=PAGES[cur]; if(!p.id)return;
+  S.notes[p.id]=$$('#frame .note').map(el=>({x:parseFloat(el.dataset.x),y:parseFloat(el.dataset.y),
+    t:el.querySelector('input').value})); save(); updCount();
+}
+function saveDraws(){
+  const p=PAGES[cur]; if(!p.id)return;
+  S.draws[p.id]=$$('#frame .dlayer polyline').map(pl=>({p:pl.getAttribute('points'),
+    c:pl.getAttribute('stroke'),w:+pl.getAttribute('stroke-width')})); save(); updCount();
+}
+function strokeEl(st,live){
+  const pl=document.createElementNS(NS,'polyline');
+  pl.setAttribute('points',st.p); pl.setAttribute('fill','none');
+  pl.setAttribute('stroke',st.c); pl.setAttribute('stroke-width',st.w);
+  pl.setAttribute('stroke-linecap','round'); pl.setAttribute('stroke-linejoin','round');
+  pl.setAttribute('vector-effect','non-scaling-stroke');
+  if(live)pl.onclick=e=>{if(!eraseMode)return;e.stopPropagation();pl.remove();saveDraws()};
+  return pl;
+}
+function makeNote(layer,x,y,text,live){
+  const el=document.createElement('span'); el.className='note';
+  el.style.left=x+'%'; el.style.top=y+'%'; el.dataset.x=x; el.dataset.y=y;
+  const inp=document.createElement('input'); inp.value=text||'';
+  const fit=()=>{inp.size=Math.max(3,inp.value.length+1)}; fit();
+  if(!live){el.appendChild(inp);layer.appendChild(el);return inp;}
+  inp.oninput=()=>{fit();saveNotes()};
+  inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();inp.blur()}
+                    if(e.key==='Escape'){inp.value='';el.remove();saveNotes()}};
+  inp.onblur=()=>{if(!inp.value.trim())el.remove(); saveNotes()};
+  inp.onclick=e=>e.stopPropagation();
+  const del=document.createElement('button'); del.className='del'; del.textContent='✕';
+  del.onclick=e=>{e.stopPropagation();el.remove();saveNotes()};
+  const grip=document.createElement('button'); grip.className='grip'; grip.textContent='✥';
+  grip.title='Drag to move'; grip.onclick=e=>e.stopPropagation();
+  grip.onpointerdown=e=>{
+    e.preventDefault(); e.stopPropagation();
+    grip.setPointerCapture(e.pointerId); el.classList.add('dragging');
+    const r=layer.getBoundingClientRect();
+    const move=ev=>{
+      const nx=Math.min(99.5,Math.max(0,(ev.clientX-r.left)/r.width*100));
+      const ny=Math.min(99.5,Math.max(0,(ev.clientY-r.top)/r.height*100));
+      el.style.left=nx+'%'; el.style.top=ny+'%'; el.dataset.x=nx; el.dataset.y=ny;
+    };
+    const up=()=>{grip.removeEventListener('pointermove',move);grip.removeEventListener('pointerup',up);
+      el.classList.remove('dragging');saveNotes()};
+    grip.addEventListener('pointermove',move); grip.addEventListener('pointerup',up);
+  };
+  el.appendChild(inp); el.appendChild(del); el.appendChild(grip); layer.appendChild(el);
+  return inp;
+}
+function initDraw(svg){
+  let live=null,pts=[];
+  const pos=e=>{const r=svg.getBoundingClientRect();
+    return ((e.clientX-r.left)/r.width*100).toFixed(2)+','+((e.clientY-r.top)/r.height*100).toFixed(2)};
+  svg.addEventListener('pointerdown',e=>{
+    if(!drawMode||eraseMode)return;
+    svg.setPointerCapture(e.pointerId); pts=[pos(e)];
+    live=strokeEl({p:pts[0],c:penColor,w:penHL?penW*4:penW},true); svg.appendChild(live);
+  });
+  svg.addEventListener('pointermove',e=>{if(!live)return;pts.push(pos(e));live.setAttribute('points',pts.join(' '))});
+  const end=()=>{if(!live)return; if(pts.length<2)live.remove(); live=null; saveDraws()};
+  svg.addEventListener('pointerup',end); svg.addEventListener('pointercancel',end);
+}
+function drawPage(){
+  const p=PAGES[cur], f=$('#frame');
+  $$('#tabs .tab').forEach((t,i)=>t.classList.toggle('on',i===cur));
+  const isImg=p.type!=='text';
+  ['zoombtn','writebtn','clearbtn','smallbtn','bigbtn','drawbtn'].forEach(id=>$('#'+id).style.display=isImg?'':'none');
+  $('#hwbar').style.display=p.hw?'flex':'none';
+  if(!isImg){setModes(false,false,false); drawScript(f); updCount(); return;}
+  f.className='pageframe'; f.innerHTML='<div class="ph">Loading…</div>';
+  const img=new Image();
+  img.onload=()=>{
+    f.innerHTML='';
+    const stage=document.createElement('div'); stage.className='pagestage';
+    const svg=document.createElementNS(NS,'svg'); svg.setAttribute('class','dlayer');
+    svg.setAttribute('viewBox','0 0 100 100'); svg.setAttribute('preserveAspectRatio','none');
+    (S.draws[p.id]||[]).forEach(st=>svg.appendChild(strokeEl(st,true)));
+    initDraw(svg);
+    const layer=document.createElement('div'); layer.className='wlayer';
+    layer.onclick=e=>{
+      if(e.target!==layer)return;
+      const r=layer.getBoundingClientRect();
+      makeNote(layer,(e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100,'',true).focus();
+    };
+    const hl=document.createElement('div'); hl.className='hl'; hl.id='hlbox';
+    stage.appendChild(img); stage.appendChild(svg); stage.appendChild(layer); stage.appendChild(hl);
+    f.appendChild(stage);
+    (S.notes[p.id]||[]).forEach(n=>makeNote(layer,n.x,n.y,n.t,true));
+    updCount();
+  };
+  img.onerror=()=>{f.innerHTML=`<div class="ph"><b>Page image missing</b>
+    Put <code>${p.name}</code> into the <code>pages/</code> folder</div>`};
+  img.src=p.src; img.alt=p.cap;
+}
+$$('#tabs .tab').forEach(t=>t.onclick=()=>{cur=+t.dataset.i;drawPage();$('#scroller').scrollTop=0});
+$('#prevbtn').onclick=()=>{cur=(cur+PAGES.length-1)%PAGES.length;drawPage()};
+$('#nextbtn').onclick=()=>{cur=(cur+1)%PAGES.length;drawPage()};
+
+/* ---- page zoom ---- */
+let pz=S.pz||1;
+function setPZ(v,quiet){
+  pz=Math.round(Math.min(3,Math.max(1,v))*100)/100; S.pz=pz; save();
+  document.documentElement.style.setProperty('--pz',pz);
+  if(!quiet)toast('Zoom '+Math.round(pz*100)+'%');
+}
+setPZ(pz,true);
+$('#zinbtn').onclick=()=>setPZ(pz+.25);
+$('#zoutbtn').onclick=()=>setPZ(pz-.25);
+$('#zfitbtn').onclick=()=>{setPZ(1);$('#scroller').scrollTo({top:0,left:0,behavior:'smooth'})};
+
+/* ---- show exercise on the page ---- */
+function showEx(pageIdx,exKey){
+  const go=()=>{
+    const p=PAGES[pageIdx], r=p.ex&&p.ex[exKey]; if(!r)return;
+    const hl=$('#hlbox'), stage=$('#frame .pagestage');
+    if(!hl||!stage)return setTimeout(go,250);
+    hl.style.left=r.x+'%'; hl.style.top=r.y+'%'; hl.style.width=r.w+'%'; hl.style.height=r.h+'%';
+    hl.classList.remove('on'); void hl.offsetWidth; hl.classList.add('on');
+    if(pz<1.7)setPZ(1.7,true);                       // zoom in so the exercise is readable
+    const sc=$('#scroller');
+    const settle=()=>{
+      const sw=stage.offsetWidth, sh=stage.offsetHeight;
+      const top=sh*r.y/100-Math.max(24,(sc.clientHeight-sh*r.h/100)/2);
+      const left=sw*r.x/100-Math.max(12,(sc.clientWidth-sw*r.w/100)/2);
+      sc.scrollTo({top:Math.max(0,top),left:Math.max(0,left),behavior:'smooth'});
+      if(window.innerWidth<=1250)sc.scrollIntoView({behavior:'smooth',block:'center'});
+    };
+    setTimeout(settle,380);                          // wait for the zoom transition
+    clearTimeout(showEx._t); showEx._t=setTimeout(()=>hl.classList.remove('on'),4200);
+  };
+  if(cur!==pageIdx){cur=pageIdx;drawPage();setTimeout(go,320);} else go();
+}
+$$('.showpage').forEach(b=>b.onclick=()=>showEx(+b.dataset.page,b.dataset.ex));
+
+/* ---- modes ---- */
+function setModes(w,d,er){
+  writeMode=!!w; drawMode=!!d; eraseMode=!!er;
+  document.body.classList.toggle('writeon',writeMode);
+  document.body.classList.toggle('drawon',drawMode&&!eraseMode);
+  document.body.classList.toggle('eraseon',eraseMode);
+  $('#writebtn').classList.toggle('primary',writeMode);
+  $('#writebtn').textContent=writeMode?'✅ Writing on':'✍️ Write on page';
+  $('#drawbtn').classList.toggle('primary',drawMode||eraseMode);
+  $('#drawbtn').textContent=(drawMode||eraseMode)?'✅ Drawing on':'🖊 Draw';
+  $('#erasebtn').classList.toggle('primary',eraseMode);
+}
+$('#writebtn').onclick=()=>{const on=!writeMode;setModes(on,false,false);
+  toast(on?'Click anywhere on the page and start typing':'Writing mode off')};
+$('#drawbtn').onclick=()=>{const on=!(drawMode||eraseMode);setModes(false,on,false);
+  toast(on?'Draw with the mouse — circle, underline, tick':'Drawing mode off')};
+$('#erasebtn').onclick=()=>{const on=!eraseMode;setModes(false,true,on);
+  toast(on?'Click a line to delete it':'Back to the pen')};
+$$('#dtools .swatch').forEach(sw=>sw.onclick=()=>{
+  $$('#dtools .swatch').forEach(o=>o.classList.remove('on')); sw.classList.add('on');
+  penColor=sw.dataset.c; penHL=!!sw.dataset.hl; if(eraseMode)setModes(false,true,false)});
+$('#wsize').oninput=e=>{penW=+e.target.value};
+$('#undobtn').onclick=()=>{const a=$$('#frame .dlayer polyline');
+  if(!a.length){toast('Nothing to undo');return} a[a.length-1].remove(); saveDraws()};
+$('#bigbtn').onclick=()=>{S.nfs=Math.min(28,S.nfs+2);save();setFS()};
+$('#smallbtn').onclick=()=>{S.nfs=Math.max(9,S.nfs-2);save();setFS()};
+$('#clearbtn').onclick=()=>{
+  const n=$$('#frame .note').length,d=$$('#frame .dlayer polyline').length;
+  if(!n&&!d){toast('Nothing to clear on this page');return}
+  if(confirm('Delete everything on this page — both the text and the drawings?')){
+    $$('#frame .note').forEach(x=>x.remove()); $$('#frame .dlayer polyline').forEach(x=>x.remove());
+    saveNotes(); saveDraws();}};
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')$('#lightbox').classList.remove('on');
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!/input|textarea/i.test(e.target.tagName)){
+    e.preventDefault();$('#undobtn').click();}
+});
+function openLB(){
+  if(PAGES[cur].type==='text')return;
+  const lb=$('#lightbox'); lb.innerHTML='';
+  const i=new Image(); i.src=PAGES[cur].src;
+  i.onerror=()=>lb.innerHTML='<div style="color:#fff;font-weight:700">'+PAGES[cur].name+' is missing</div>';
+  lb.appendChild(i); lb.classList.add('on');
+}
+$('#zoombtn').onclick=openLB;
+$('#frame').onclick=e=>{if(writeMode||drawMode||eraseMode||e.target.closest('.note'))return;openLB()};
+$('#lightbox').onclick=()=>$('#lightbox').classList.remove('on');
+setFS(); drawPage();
+
+/* ============ homework → PDF ============ */
+$('#hwname').value=S.name||'';
+$('#hwname').oninput=e=>{S.name=e.target.value;save()};
+$('#sendbtn').onclick=()=>{
+  const name=($('#hwname').value||'').trim();
+  if(!name){toast('Type your name first');$('#hwname').focus();return}
+  const hwPages=PAGES.filter(p=>p.hw);
+  const filled=hwPages.filter(p=>(S.notes[p.id]||[]).length||(S.draws[p.id]||[]).length);
+  if(!filled.length){toast('Do some of the homework first 🙂');return}
+  const root=$('#printroot'); root.innerHTML='';
+  hwPages.forEach(p=>{
+    const sheet=document.createElement('div'); sheet.className='sheet';
+    const h=document.createElement('div'); h.className='phead';
+    h.textContent=`Unit 2 · In Fashion — ${p.cap} — ${name} — ${new Date().toLocaleDateString('en-GB')}`;
+    const stage=document.createElement('div'); stage.className='pagestage';
+    const img=new Image(); img.src=p.src; img.style.width='100%';
+    const svg=document.createElementNS(NS,'svg'); svg.setAttribute('class','dlayer');
+    svg.setAttribute('viewBox','0 0 100 100'); svg.setAttribute('preserveAspectRatio','none');
+    (S.draws[p.id]||[]).forEach(st=>svg.appendChild(strokeEl(st,false)));
+    const layer=document.createElement('div'); layer.className='wlayer';
+    (S.notes[p.id]||[]).forEach(n=>makeNote(layer,n.x,n.y,n.t,false));
+    stage.appendChild(img); stage.appendChild(svg); stage.appendChild(layer);
+    sheet.appendChild(h); sheet.appendChild(stage); root.appendChild(sheet);
+  });
+  $('#hwstatus').innerHTML='In the print window choose <b>Save as PDF</b> → then attach the file to the email.';
+  setTimeout(()=>{
+    window.print();
+    const subj=encodeURIComponent(`Unit 2 homework — ${name}`);
+    const body=encodeURIComponent(`Hello!\n\nHere is my Unit 2 homework (Workbook pages 8 and 9).\nPlease find the PDF attached.\n\n${name}`);
+    setTimeout(()=>{location.href=`mailto:${TEACHER_MAIL}?subject=${subj}&body=${body}`;},900);
+    if(!S.done.hw){S.done.hw=1;addXP(0,'homework');}
+  },400);
+};
+
+/* ============ task engine ============ */
+function buildMCQ(host,items){
+  const box=$('#'+host); box.innerHTML='';
+  items.forEach((it,i)=>{
+    const q=document.createElement('div'); q.className='q';
+    q.innerHTML=`<p><span class="num">${i+1}</span>${it.q}</p>`;
+    const o=document.createElement('div'); o.className='opts';
+    it.a.forEach(txt=>{
+      const b=document.createElement('div'); b.className='opt'; b.textContent=txt;
+      b.onclick=()=>{if(q.classList.contains('locked'))return;
+        [...o.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};
+      o.appendChild(b);
+    });
+    q.appendChild(o);
+    if(it.why){const fb=document.createElement('div');fb.className='fb';fb.dataset.why=it.why;q.appendChild(fb)}
+    box.appendChild(q);
+  });
+  box._items=items;
+}
+function checkMCQ(host,xp,label){
+  const box=$('#'+host), items=box._items; let ok=0,ans=0;
+  [...box.children].forEach((q,i)=>{
+    const opts=[...q.querySelector('.opts').children];
+    const sel=opts.find(o=>o.classList.contains('sel')); if(!sel)return; ans++;
+    q.classList.add('locked');
+    opts.forEach(o=>{if(o.textContent===items[i].k)o.classList.add('good');
+                     else if(o===sel)o.classList.add('bad')});
+    const good=sel.textContent===items[i].k; if(good)ok++;
+    const fb=q.querySelector('.fb');
+    if(fb){fb.className='fb on '+(good?'good':'bad');fb.innerHTML=(good?'✔ ':'✘ ')+fb.dataset.why}
+  });
+  const fb=$('#'+host+'fb'); fb.className='fb on '+(ok===items.length?'good':'bad');
+  fb.textContent=ans<items.length?`${ans} of ${items.length} answered. Score: ${ok}/${items.length}`
+                                 :`Score: ${ok} out of ${items.length}${ok===items.length?' 🎉 perfect!':''}`;
+  if(!S.done[host]){S.done[host]=1;addXP(Math.round(xp*ok/items.length),label)}
+}
+
+/* ---- SB p.14 Ex.1 ---- */
+buildMCQ('e1',[
+ {q:'Photo <b>A</b> — a denim jacket, a white T-shirt, skinny white trousers, a black cap and gold necklaces.',
+  a:['Jaden Smith','Taylor Swift','Ed Sheeran','Rihanna'],k:'Jaden Smith',
+  why:'"His dad\'s Will Smith… a denim jacket… skinny white trousers… some gold necklaces as well."'},
+ {q:'Photo <b>B</b> — a smart black shirt, black trousers and a handbag.',
+  a:['Jaden Smith','Taylor Swift','Ed Sheeran','Rihanna'],k:'Taylor Swift',
+  why:'"She always looks really trendy… walking along a city street… a handbag as well."'},
+ {q:'Photo <b>C</b> — a black suit, a white shirt and a black tie. The suit looks brand new.',
+  a:['Jaden Smith','Taylor Swift','Ed Sheeran','Rihanna'],k:'Ed Sheeran',
+  why:'"…isn\'t normally this well-dressed! He usually wears casual clothes."'},
+ {q:'Photo <b>D</b> — trainers, loose-fitting trousers and a blouse with very long sleeves.',
+  a:['Jaden Smith','Taylor Swift','Ed Sheeran','Rihanna'],k:'Rihanna',
+  why:'"…trainers, loose-fitting trousers, and a black-and-white blouse with very long sleeves."'}
+]);
+/* ---- SB p.14 Ex.2 ---- */
+buildMCQ('e2',[
+ {q:'Are the three teenagers talking about…',
+  a:["what's fashionable at the moment",'what clothes they might buy',"what they're wearing"],
+  k:"what they're wearing",
+  why:'Each one describes the clothes they have on: "I love <i>this one</i>", "I really like <i>this top</i>", "I love <i>these</i> skinny jeans". Nobody talks about future shopping.'}
+]);
+/* ---- SB p.14 Ex.3 ---- */
+buildMCQ('e3',[
+ {q:'Whose clothes are comfortable?',a:['A · Ashley','M · Molly','L · Luke'],k:'A · Ashley',
+  why:'"Tracksuits are soft on your skin, they\'re comfortable and easy to wear."'},
+ {q:'Whose jeans are skinny?',a:['A · Ashley','M · Molly','L · Luke'],k:'L · Luke',
+  why:'"I love these skinny jeans too."'},
+ {q:'Who is wearing something brand new?',a:['A · Ashley','M · Molly','L · Luke'],k:'M · Molly',
+  why:'"It\'s brand new. I bought it yesterday."'},
+ {q:"Who doesn't wear smart clothes?",a:['A · Ashley','M · Molly','L · Luke'],k:'A · Ashley',
+  why:'"I never wear anything very smart."'},
+ {q:"Who isn't interested in trendy clothes?",a:['A · Ashley','M · Molly','L · Luke'],k:'L · Luke',
+  why:'"I\'m not interested in what\'s trendy."'},
+ {q:'Who is very well-dressed today?',a:['A · Ashley','M · Molly','L · Luke'],k:'M · Molly',
+  why:'The presenter says: "You look very well dressed today, Molly."'}
+]);
+/* ---- SB p.14 Ex.4 · matching ---- */
+const PAIRS=[['comfortable','uncomfortable'],['skinny','loose-fitting'],['brand new','second-hand'],
+             ['smart','casual'],['trendy','unfashionable'],['well-dressed','badly-dressed']];
+let sel4=null,left4=PAIRS.length;
+function chip(w,side){
+  const c=document.createElement('div'); c.className='chip'; c.textContent=w;
+  c.onclick=()=>{
+    if(side==='L'){$$('#mLeft .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');sel4=c;return}
+    if(!sel4){toast('Choose a word on the left first');return}
+    if(PAIRS.some(p=>p[0]===sel4.textContent&&p[1]===c.textContent)){
+      const a=sel4,b=c; a.classList.add('gone');b.classList.add('gone');
+      setTimeout(()=>{a.remove();b.remove()},350); sel4=null; left4--; addXP(5,'pair found');
+      if(!left4){const f=$('#e4fb');f.className='fb on good';f.textContent='🎉 All six pairs matched!';
+        if(!S.done.e4){S.done.e4=1;addXP(20,'Exercise 4 complete')}}
+    }else{
+      c.animate([{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],220);
+      const f=$('#e4fb'); f.className='fb on bad'; f.textContent='Not opposites — try again.';
+      setTimeout(()=>f.classList.remove('on'),1400);
+    }
+  };
+  return c;
+}
+(function(){
+  const L=$('#mLeft'),R=$('#mRight'),sh=a=>a.map(v=>[Math.random(),v]).sort().map(v=>v[1]);
+  sh(PAIRS.map(p=>p[0])).forEach(w=>L.appendChild(chip(w,'L')));
+  sh(PAIRS.map(p=>p[1])).forEach(w=>R.appendChild(chip(w,'R')));
+})();
+
+/* ---- SB p.15 Ex.1 · scan for names ---- */
+const NAMES=[['Elvis Presley',1],['Queen',0],['The Rolling Stones',1],['ABBA',0],['The Beatles',1],
+  ['Nirvana',0],['Madonna',1],['Beyoncé',0],['The Spice Girls',1],['Adele',0],
+  ['Calvin Harris',1],['Ed Sheeran',1]];
+(function(){
+  const box=$('#r1');
+  NAMES.map(n=>n).sort(()=>Math.random()-.5).forEach(([n,inArt])=>{
+    const d=document.createElement('div'); d.className='tick'; d.textContent=n; d.dataset.in=inArt;
+    d.onclick=()=>{if(!d.classList.contains('locked'))d.classList.toggle('on')};
+    box.appendChild(d);
+  });
+})();
+/* ---- SB p.15 Ex.2 ---- */
+buildMCQ('r2',[
+ {q:'Before the 1950s, teenagers…',a:["didn't listen to music very much",'listened to the same music as adults'],
+  k:'listened to the same music as adults',
+  why:'"Most young people wore the same fashions as their parents, and they listened to the same kind of music."'},
+ {q:'In the 1950s, teenage boys…',a:["joined rock'n'roll bands",'wore clothes similar to the pop stars'],
+  k:'wore clothes similar to the pop stars',
+  why:'"Young men wore smart suits with skinny ties, like the popular stars Buddy Holly and Elvis Presley."'},
+ {q:'In the 1960s…',a:['fashions shocked some people','hippies wore mini skirts'],
+  k:'fashions shocked some people',
+  why:'"Young women wore very short \'mini skirts\' – the older generation was shocked!" The hippies wore flowery clothing and sandals, not mini skirts.'},
+ {q:'Punks in the late 70s…',a:['wore colourful clothing',"didn't wear brand new clothes"],
+  k:"didn't wear brand new clothes",
+  why:'"They dressed in second-hand clothes." It was their <i>hairstyles</i> that were colourful, not the clothes.'},
+ {q:'Hip hop singers of the 1990s liked…',a:['wearing jewellery','wearing smart suits'],
+  k:'wearing jewellery',
+  why:'"Hip hop stars wore tracksuits, gold rings and necklaces."'},
+ {q:'Nowadays, people…',a:['get their fashion ideas from YouTubers','wear similar clothing to Taylor Swift and Ed Sheeran'],
+  k:'get their fashion ideas from YouTubers',
+  why:'"Teens are interested in the styles of their favourite YouTubers." Taylor Swift and Ed Sheeran are called popular — the article never says people copy their clothes.'}
+]);
+/* ---- SB p.15 Ex.3 ---- */
+buildMCQ('r3',[
+ {q:'fashions or styles',a:['trends','tore','messy','youth','look','clothing'],k:'trends',
+  why:'"…the <b>trends</b> matched the music."'},
+ {q:'pulled something in order to break it',a:['trends','tore','messy','youth','look','clothing'],k:'tore',
+  why:'"second-hand clothes, which they often <b>tore</b> to look more individual" — tear / tore / torn.'},
+ {q:'untidy or dirty',a:['trends','tore','messy','youth','look','clothing'],k:'messy',
+  why:'"their hairstyles were colourful and <b>messy</b>."'},
+ {q:'young people in general',a:['trends','tore','messy','youth','look','clothing'],k:'youth',
+  why:'"there was no such thing as \'<b>youth</b> culture\'."'},
+ {q:"someone's appearance",a:['trends','tore','messy','youth','look','clothing'],k:'look',
+  why:'"teens were in love with the <b>look</b> and sound of singers like Britney Spears."'},
+ {q:'what people wear in general',a:['trends','tore','messy','youth','look','clothing'],k:'clothing',
+  why:'"with it came new fashions in <b>clothing</b>."'}
+]);
+/* ---- Extra A · spelling ---- */
+const SPELL=[
+ ['c_mf_rt_bl_','comfortable','it feels pleasant to wear'],
+ ['unc_mf_rt_bl_','uncomfortable','the opposite of the word above'],
+ ['unf_sh__n_bl_','unfashionable','not popular at the moment'],
+ ['j_w_ll_ry','jewellery','rings and necklaces — British spelling'],
+ ['tr__n_rs','trainers','soft sports shoes'],
+ ['sw__tsh_rt','sweatshirt',"Luke's favourite item, from a music festival"],
+ ['s_c_nd-h_nd','second-hand','owned by someone else before you'],
+ ['w_ll-dr_ss_d','well-dressed','how the presenter describes Molly']
+];
+(function(){
+  const box=$('#x1');
+  SPELL.forEach((s,i)=>{
+    const row=document.createElement('div'); row.className='spell';
+    row.innerHTML=`<span style="color:var(--muted);font-weight:800">${i+1}</span><b>${s[0]}</b>`;
+    const inp=document.createElement('input'); inp.className='txt'; inp.placeholder='full word…';
+    inp.onkeydown=e=>{if(e.key==='Enter')markSpell(inp,s[1])};
+    const def=document.createElement('span'); def.className='def'; def.textContent=s[2];
+    row.appendChild(inp); row.appendChild(def); box.appendChild(row);
+  });
+})();
+function markSpell(inp,key){
+  const ok=inp.value.trim().toLowerCase()===key;
+  inp.classList.remove('good','bad'); inp.classList.add(ok?'good':'bad'); return ok;
+}
+$('#x1hint').onclick=()=>{
+  const inps=$$('#x1 input'), i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  inps[i].value=SPELL[i][1].slice(0,3); inps[i].focus(); toast('Starts with: '+inps[i].value);
+};
+/* ---- Extra B · decades ---- */
+buildMCQ('x2',[
+ {q:'Smart suits with skinny ties, and skirts that looked great when you danced.',
+  a:['the 1950s','the 1960s','the late 1970s','the 1990s'],k:'the 1950s',
+  why:'The era of Bill Haley, Buddy Holly and Elvis Presley.'},
+ {q:'Very short mini skirts shocked the older generation.',
+  a:['the 1950s','the 1960s','the late 1970s','the 1990s'],k:'the 1960s',
+  why:'The decade of The Rolling Stones and the growing youth culture.'},
+ {q:'Long hair, flowery clothing and sandals; peace and love.',
+  a:['the 1950s','the hippie era','the late 1970s','the 1990s'],k:'the hippie era',
+  why:'The mid-1960s to the mid-70s — The Beatles, Dusty Springfield, Joni Mitchell.'},
+ {q:'Second-hand clothes, often torn, with colourful messy hair.',
+  a:['the 1950s','the 1960s','the late 1970s','the 1990s'],k:'the late 1970s',
+  why:'Punk — loud and angry music, and the trends matched it.'},
+ {q:'Tracksuits, gold rings and necklaces; songs about money and expensive cars.',
+  a:['the 1950s','the 1960s','the late 1970s','the 1990s'],k:'the 1990s',
+  why:'Hip hop became popular internationally, alongside boy bands and girl bands.'}
+]);
+/* ---- Extra C · odd one out ---- */
+const ODD=[
+ {w:['trainers','boots','sandals','tracksuit'],k:'tracksuit',why:'The other three are all footwear.'},
+ {w:['smart','well-dressed','elegant','messy'],k:'messy',why:'The other three are positive; messy means untidy.'},
+ {w:['skinny','loose-fitting','tight','narrow'],k:'loose-fitting',why:'The other three all mean close to the body.'},
+ {w:['brand new','second-hand','used','old'],k:'brand new',why:'Only brand new has never been owned before.'},
+ {w:['necklace','ring','earrings','sleeve'],k:'sleeve',why:'The other three are jewellery; a sleeve is part of a shirt.'}
+];
+(function(){
+  const box=$('#x3');
+  ODD.forEach((o,i)=>{
+    const q=document.createElement('div'); q.className='q';
+    q.innerHTML=`<p><span class="num">${i+1}</span>Which word doesn't belong?</p>`;
+    const row=document.createElement('div'); row.className='opts';
+    o.w.forEach(w=>{const b=document.createElement('div');b.className='opt';b.textContent=w;
+      b.onclick=()=>{if(q.classList.contains('locked'))return;
+        [...row.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};
+      row.appendChild(b)});
+    const fb=document.createElement('div'); fb.className='fb'; fb.dataset.why=o.why;
+    q.appendChild(row); q.appendChild(fb); box.appendChild(q);
+  });
+  box._items=ODD.map(o=>({k:o.k,why:o.why}));
+})();
+/* ---- Extra D · writing ---- */
+const countWords=t=>(t.trim().match(/\S+/g)||[]).length;
+$('#wtext').value=S.wtext||'';
+function updWords(){const n=countWords($('#wtext').value);
+  $('#wcnt').textContent=n+(n===1?' word':' words');
+  $('#wcnt').style.color=(n>=60&&n<=80)?'var(--ok)':'var(--muted)'; return n}
+$('#wtext').oninput=()=>{S.wtext=$('#wtext').value;save();updWords()};
+updWords();
+$('#wsubmit').onclick=()=>{
+  const n=updWords(), f=$('#wfb');
+  if(n<40){f.className='fb on bad';f.textContent=`Only ${n} words — that's too short for a survey comment. Keep going!`;return}
+  f.className='fb on good';
+  f.textContent=n>=60&&n<=80?`${n} words — right on target 🎯 Now read it out loud once and check the list above.`
+                            :`${n} words. Good effort! The target was 60–80 — read it again and adjust.`;
+  if(!S.done.wtext){S.done.wtext=1;addXP(30,'Writing')}
+};
+/* ---- self-declared speaking tasks ---- */
+$$('[data-done]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.done, f=$('#'+k+'fb');
+  if(S.done[k]){toast('Already counted 🙂');return}
+  S.done[k]=1; addXP(+b.dataset.xp,'Speaking');
+  f.className='fb on good'; f.textContent='✔ Well done — speaking counted.';
+  b.disabled=true;
+});
+$$('[data-done]').forEach(b=>{if(S.done[b.dataset.done])b.disabled=true});
+
+/* ---- check buttons ---- */
+$$('[data-check]').forEach(b=>b.onclick=()=>{
+  const h=b.dataset.check;
+  if(h==='r1'){
+    let ok=0; const ticks=$$('#r1 .tick');
+    ticks.forEach(t=>{
+      t.classList.add('locked');
+      const should=t.dataset.in==='1', got=t.classList.contains('on');
+      t.classList.add(should===got?'good':'bad'); if(should===got)ok++;
+      if(should)t.textContent='✓ '+t.textContent;
+    });
+    const f=$('#r1fb'); f.className='fb on '+(ok===ticks.length?'good':'bad');
+    f.textContent=`${ok} out of ${ticks.length} correct`+(ok===ticks.length?' 🎉':' — green rows show the right answer.');
+    if(!S.done.r1){S.done.r1=1;addXP(Math.round(40*ok/ticks.length),'Reading Ex.1')}
+    return;
+  }
+  if(h==='x1'){
+    let ok=0; $$('#x1 input').forEach((inp,i)=>{if(markSpell(inp,SPELL[i][1]))ok++});
+    const f=$('#x1fb'); f.className='fb on '+(ok===SPELL.length?'good':'bad');
+    f.textContent=`${ok} out of ${SPELL.length} correct`+(ok===SPELL.length?' ⚡ Spelling star!':'');
+    if(!S.done.x1){S.done.x1=1;addXP(Math.round(40*ok/SPELL.length),'Spelling')}
+    return;
+  }
+  checkMCQ(h,{e1:40,e2:10,e3:60,r2:60,r3:50,x2:40,x3:30}[h],
+    {e1:'Exercise 1',e2:'Exercise 2',e3:'Exercise 3',r2:'Reading Ex.2',r3:'Reading Ex.3',
+     x2:'Decade detective',x3:'Odd one out'}[h]);
+});
+
+renderXP();
+</script>
+</body>
+</html>
