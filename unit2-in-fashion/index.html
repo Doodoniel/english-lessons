@@ -187,6 +187,29 @@ table.wb th,table.wb td{border:1px solid var(--line);padding:7px 9px;text-align:
 table.wb th{background:var(--bg2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);width:96px}
 .w{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:8px;
   padding:2px 8px;margin:2px 3px 2px 0;font-size:12.5px;cursor:help}
+/* ---------- audio ---------- */
+.audio{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:9px 12px;margin:8px 0}
+.audio.playing{border-color:var(--teal);box-shadow:0 0 0 3px rgba(18,181,165,.15)}
+.playbtn{width:38px;height:38px;flex:none;border-radius:99px;border:none;cursor:pointer;color:#fff;
+  font-size:14px;background:linear-gradient(135deg,var(--teal),var(--blue));display:grid;place-items:center}
+.playbtn:active{transform:scale(.94)}
+.audio .meta{flex:1;min-width:0}
+.audio .meta b{display:block;font-size:12.5px}
+.audio .meta span.sub{font-size:11px;color:var(--muted)}
+.seek{width:100%;height:6px;border-radius:99px;background:var(--line);margin-top:6px;overflow:hidden;cursor:pointer}
+.seek i{display:block;height:100%;width:0;background:var(--blue);border-radius:99px}
+.atools{display:flex;gap:5px;align-items:center;flex:none}
+.abtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;
+  padding:4px 8px;font-size:11px;font-weight:800;cursor:pointer}
+.abtn.on{background:var(--blue);color:#fff;border-color:transparent}
+.atime{font-size:11px;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;flex:none;min-width:74px;text-align:right}
+.miss{font-size:11px;color:var(--no);font-weight:700}
+.playmini{margin-left:6px;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;
+  padding:4px 9px;border-radius:99px;border:1px solid var(--teal);color:var(--teal);background:transparent;
+  cursor:pointer;white-space:nowrap}
+.playmini:hover{background:var(--teal);color:#fff}
+.playmini.on{background:var(--teal);color:#fff}
 /* ---------- transcript ---------- */
 .tr{padding:18px 20px}
 .trhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 4px}
@@ -402,6 +425,36 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
           <button class="btn primary" id="zoombtn">🔍 Full screen</button>
           <span class="wcount" id="wcount"></span>
         </div>
+        <div class="audios" id="audios" style="margin-top:12px">
+          <div class="audio" data-track="04" data-src="audio/track04.mp3">
+            <button class="playbtn">▶</button>
+            <div class="meta"><b>Track 04 · SB p.14, Ex. 1</b>
+              <span class="sub">Four people describe the photos A–D</span>
+              <div class="seek"><i></i></div></div>
+            <span class="atime">0:00 / 0:00</span>
+            <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+          </div>
+          <div class="audio" data-track="05" data-src="audio/track05.mp3">
+            <button class="playbtn">▶</button>
+            <div class="meta"><b>Track 05 · SB p.14, Ex. 2 &amp; 3</b>
+              <span class="sub">Interview: Ashley, Molly and Luke</span>
+              <div class="seek"><i></i></div></div>
+            <span class="atime">0:00 / 0:00</span>
+            <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+          </div>
+          <div class="audio" data-track="06" data-src="audio/track06.mp3">
+            <button class="playbtn">▶</button>
+            <div class="meta"><b>Track 06 · SB p.15</b>
+              <span class="sub">The article: Fashion and Music — read along</span>
+              <div class="seek"><i></i></div></div>
+            <span class="atime">0:00 / 0:00</span>
+            <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+          </div>
+          <p class="hint" style="margin:6px 0 0">Put <code>track04.mp3</code>, <code>track05.mp3</code> and
+            <code>track06.mp3</code> into the <b>audio/</b> folder. Tap <b>1×</b> to slow the speaker down to
+            0.75× — the words are the same, you just get more time to catch them.</p>
+        </div>
+
         <div class="hwbar" id="hwbar" style="display:none">
           <b style="font-size:13px">📨 Hand in your homework</b>
           <input class="name" id="hwname" placeholder="Your name" autocomplete="name">
@@ -419,7 +472,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
   <div class="secthead">Student's Book · page 14</div>
 
   <div class="card t-blue">
-    <h3><span class="exno">1</span>Who are they? <button class="showpage" data-page="0" data-ex="1">Show on page</button></h3>
+    <h3><span class="exno">1</span>Who are they?
+      <button class="playmini" data-track="04">▶ Track 04</button>
+      <button class="showpage" data-page="0" data-ex="1">Show on page</button></h3>
     <div class="body">
       <p class="hint">Look at the photos. Who are the people? Listen to <b>Track 04</b> and check.</p>
       <div id="e1"></div>
@@ -429,7 +484,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
   </div>
 
   <div class="card t-blue">
-    <h3><span class="exno">2</span>What are they talking about? <button class="showpage" data-page="0" data-ex="2">Show on page</button></h3>
+    <h3><span class="exno">2</span>What are they talking about?
+      <button class="playmini" data-track="05">▶ Track 05</button>
+      <button class="showpage" data-page="0" data-ex="2">Show on page</button></h3>
     <div class="body">
       <p class="hint">Listen to the interview with three teenagers (<b>Track 05</b>).</p>
       <div id="e2"></div>
@@ -439,7 +496,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
   </div>
 
   <div class="card t-blue">
-    <h3><span class="exno">3</span>Ashley, Molly or Luke? <button class="showpage" data-page="0" data-ex="3">Show on page</button></h3>
+    <h3><span class="exno">3</span>Ashley, Molly or Luke?
+      <button class="playmini" data-track="05">▶ Track 05</button>
+      <button class="showpage" data-page="0" data-ex="3">Show on page</button></h3>
     <div class="body">
       <p class="hint">Read the questions. Then listen again and choose <b>A</b> (Ashley), <b>M</b> (Molly) or <b>L</b> (Luke).</p>
       <div id="e3"></div>
@@ -480,7 +539,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
   <div class="secthead">Student's Book · page 15 · Reading</div>
 
   <div class="card t-purple">
-    <h3><span class="exno">1</span>Read quickly <button class="showpage" data-page="1" data-ex="1">Show on page</button></h3>
+    <h3><span class="exno">1</span>Read quickly
+      <button class="playmini" data-track="06">▶ Track 06</button>
+      <button class="showpage" data-page="1" data-ex="1">Show on page</button></h3>
     <div class="body">
       <p class="hint">Read the article <b>fast</b> — 90 seconds. Tick only the names that really appear in it.</p>
       <div class="ticks" id="r1"></div>
@@ -692,10 +753,9 @@ function drawScript(f){
     ${scriptBlock('Track 04 — Student\'s Book page 14','Exercise 1',SCRIPT04)}
     <div class="trdiv"></div>
     ${scriptBlock('Track 05 — Student\'s Book page 14','Exercises 2 &amp; 3',SCRIPT05)}
-    <div class="trnote"><b>No sound files yet.</b> Your teacher can read these aloud, or ask for the mp3s to be
-    added to the <code>audio/</code> folder. <b>Study tip:</b> once you have the audio, play it again with the
-    transcript in front of you and read out loud at the same speed as the speaker — that's called
-    <i>shadowing</i>, and it does more for your pronunciation than any rule.</div>
+    <div class="trnote"><b>Study tip — shadowing.</b> Play the track again with the transcript in front of you
+    and read out loud at the same time as the speaker: same speed, same intonation. Start at <b>0.75×</b> if it
+    feels fast. Two minutes a day does more for your pronunciation than an hour of rules.</div>
   </div>`;
   f.querySelectorAll('.revealbtn').forEach(b=>b.onclick=e=>{
     e.stopPropagation(); revealed=true;
@@ -942,6 +1002,64 @@ $('#sendbtn').onclick=()=>{
     if(!S.done.hw){S.done.hw=1;addXP(0,'homework');}
   },400);
 };
+
+/* ============ audio players ============ */
+const TRACKS={};
+const fmt=s=>isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'0:00';
+$$('#audios .audio').forEach(box=>{
+  const a=new Audio(box.dataset.src); a.preload='metadata';
+  const btn=box.querySelector('.playbtn'), bar=box.querySelector('.seek i'),
+        seek=box.querySelector('.seek'), time=box.querySelector('.atime'),
+        rate=box.querySelector('.rate'), back=box.querySelector('.back');
+  TRACKS[box.dataset.track]={a,box,btn};
+  const paint=()=>{
+    if(a.duration)bar.style.width=(a.currentTime/a.duration*100)+'%';
+    time.textContent=fmt(a.currentTime)+' / '+fmt(a.duration);
+  };
+  a.addEventListener('loadedmetadata',paint);
+  a.addEventListener('timeupdate',paint);
+  a.addEventListener('ended',()=>{btn.textContent='▶';box.classList.remove('playing');
+    bar.style.width='0';syncMinis()});
+  a.addEventListener('error',()=>{
+    if(!box.querySelector('.miss')){const s=document.createElement('span');
+      s.className='miss';s.textContent='no file';box.appendChild(s)}
+  });
+  seek.onclick=e=>{
+    if(!a.duration)return;
+    const r=seek.getBoundingClientRect(); a.currentTime=(e.clientX-r.left)/r.width*a.duration; paint();
+  };
+  back.onclick=()=>{a.currentTime=Math.max(0,a.currentTime-5);paint()};
+  rate.onclick=()=>{
+    a.playbackRate=a.playbackRate===1?0.75:1;
+    rate.textContent=a.playbackRate===1?'1×':'0.75×';
+    rate.classList.toggle('on',a.playbackRate!==1);
+  };
+  btn.onclick=()=>toggleTrack(box.dataset.track);
+});
+function toggleTrack(id){
+  const t=TRACKS[id]; if(!t)return;
+  Object.entries(TRACKS).forEach(([k,o])=>{
+    if(k!==id&&!o.a.paused){o.a.pause();o.btn.textContent='▶';o.box.classList.remove('playing')}
+  });
+  if(t.a.paused){
+    t.a.play().then(()=>{t.btn.textContent='❚❚';t.box.classList.add('playing');syncMinis()})
+      .catch(()=>toast('Add the file '+t.a.getAttribute('src')||'audio file missing'));
+  }else{ t.a.pause(); t.btn.textContent='▶'; t.box.classList.remove('playing'); }
+  syncMinis();
+}
+function syncMinis(){
+  $$('.playmini').forEach(m=>{
+    const t=TRACKS[m.dataset.track];
+    const on=t&&!t.a.paused;
+    m.classList.toggle('on',!!on);
+    m.textContent=(on?'❚❚ ':'▶ ')+'Track '+m.dataset.track;
+  });
+}
+$$('.playmini').forEach(m=>m.onclick=e=>{
+  e.stopPropagation(); toggleTrack(m.dataset.track);
+  document.querySelector('#audios').scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+syncMinis();
 
 /* ============ task engine ============ */
 function buildMCQ(host,items){
