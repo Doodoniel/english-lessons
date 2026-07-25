@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Unit 3 · People &amp; Style — Interactive Workspace</title>
+<style>
+:root{
+  --red:#e63946; --blue:#1d7fd6; --teal:#12b5a5; --yellow:#ffc233; --purple:#7c5cff; --green:#16a34a;
+  --bg:#eef2f7; --bg2:#e2e8f2; --card:#ffffff; --ink:#16202e; --muted:#61708a;
+  --line:#dbe3ef; --ok:#16a34a; --no:#e11d48; --shadow:0 10px 30px rgba(22,38,66,.10); --r:18px;
+}
+html[data-theme="dark"]{
+  --bg:#0e1420; --bg2:#111a29; --card:#161f30; --ink:#e8eefb; --muted:#93a3bd;
+  --line:#243149; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);line-height:1.55;
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(124,92,255,.18),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(18,181,165,.16),transparent 55%),var(--bg)}
+/* header */
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--card) 82%,transparent);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1320px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+.unitbadge{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:22px;
+  background:linear-gradient(135deg,var(--purple),var(--blue));box-shadow:0 6px 16px rgba(124,92,255,.35)}
+.brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.xpbox{flex:1;min-width:220px;max-width:420px}
+.xpbar{height:12px;border-radius:99px;background:var(--bg2);overflow:hidden;border:1px solid var(--line)}
+.xpfill{height:100%;width:0;border-radius:99px;transition:width .5s cubic-bezier(.2,.9,.2,1);
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
+.xpmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  padding:8px 14px;border-radius:12px;font-weight:700;font-size:13px;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.medals{display:flex;gap:6px}
+.medal{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--bg2);
+  filter:grayscale(1);opacity:.4;font-size:16px;transition:.4s;border:1px solid var(--line)}
+.medal.on{filter:none;opacity:1;transform:scale(1.08);box-shadow:0 0 0 3px rgba(255,194,51,.25)}
+/* layout */
+main{max-width:1320px;margin:0 auto;padding:20px 18px 90px;display:grid;gap:22px;
+  grid-template-columns:minmax(240px,300px) minmax(0,1fr)}
+@media(max-width:960px){main{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(min-width:961px){.side .sticky{position:sticky;top:78px}}
+.flow{display:flex;flex-direction:column;gap:20px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card>h3{margin:0;padding:13px 16px;font-size:14px;letter-spacing:.3px;
+  display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.card .body{padding:15px 17px}
+.stage{scroll-margin-top:76px}
+.stagehead{display:flex;align-items:center;gap:11px;margin:0;padding:14px 16px;border-bottom:1px solid var(--line)}
+.stageno{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;color:#fff;
+  font-size:14px;font-weight:800;background:linear-gradient(135deg,var(--purple),var(--blue))}
+.stagehead h3{margin:0;font-size:15px;letter-spacing:.2px}
+.stagehead .skill{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 9px;border-radius:99px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+.xpchip{font-size:10px;font-weight:800;letter-spacing:.5px;padding:3px 8px;border-radius:99px;
+  background:rgba(124,92,255,.12);color:var(--purple);border:1px solid rgba(124,92,255,.3)}
+.hint{font-size:12.5px;color:var(--muted)}
+.lead{font-size:13.5px;margin:0 0 12px}
+/* aims + nav */
+.aims{background:linear-gradient(135deg,rgba(124,92,255,.14),rgba(29,127,214,.10));border:1px solid var(--line)}
+.aims .body{font-size:13px}
+.aims b{color:var(--purple)}
+.nav a{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:10px;text-decoration:none;
+  color:var(--ink);font-size:12.7px;font-weight:600}
+.nav a:hover{background:var(--bg2)}
+.nav a .tick{width:18px;height:18px;flex:none;border-radius:6px;border:1.5px solid var(--muted);
+  display:grid;place-items:center;font-size:11px}
+.nav a.done .tick{background:var(--green);border-color:var(--green);color:#fff}
+.nav a.done{color:var(--muted)}
+.nav a .sk{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+ul.tight{margin:6px 0;padding-left:18px;font-size:13px}
+ul.tight li{margin-bottom:5px}
+.callout{border-left:4px solid var(--yellow);background:var(--bg2);padding:9px 12px;border-radius:0 10px 10px 0;font-size:13px;margin:9px 0}
+.gtab{width:100%;border-collapse:collapse;font-size:12.7px;margin:4px 0}
+.gtab th,.gtab td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+.gtab th{background:var(--bg2);font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+/* tasks */
+.q{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:var(--bg2)}
+.q p{margin:0 0 8px;font-size:13.5px;font-weight:600}
+.q .num{color:var(--muted);font-weight:800;margin-right:6px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.opt.good{background:rgba(22,163,74,.14);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:rgba(225,29,72,.12);border-color:var(--no);color:var(--no);text-decoration:line-through}
+.fb{font-size:12px;margin-top:7px;display:none}
+.fb.on{display:block}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--no)}
+input.txt{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:7px 10px;font-size:13px;width:150px;font-weight:700}
+input.txt.good{border-color:var(--ok);color:var(--ok)} input.txt.bad{border-color:var(--no);color:var(--no)}
+.gapline{font-size:13.5px;margin:0 0 9px;padding-left:22px;text-indent:-22px}
+.gapline .num{color:var(--muted);font-weight:800;margin-right:6px}
+/* categorize */
+.pool{display:flex;gap:7px;flex-wrap:wrap;min-height:26px;margin-bottom:12px}
+.buckets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:520px){.buckets{grid-template-columns:1fr}}
+.bucket{border:1.5px dashed var(--line);border-radius:14px;padding:10px;min-height:110px;background:var(--bg2)}
+.bucket h4{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);text-align:center}
+.bucket.sel{border-color:var(--blue);background:rgba(29,127,214,.08)}
+.bucket .drop{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.wchip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:5px 12px;cursor:pointer;font-size:12.5px;font-weight:700;transition:.12s}
+.wchip:hover{transform:translateY(-2px)}
+.wchip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.wchip.good{border-color:var(--ok);background:rgba(22,163,74,.14);color:var(--ok)}
+.wchip.bad{border-color:var(--no);background:rgba(225,29,72,.12);color:var(--no)}
+/* relative-clause / stress */
+.stressrow{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+.stressrow .n{color:var(--muted);font-weight:800}
+.syl{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:5px 11px;cursor:pointer;font-size:13px;font-weight:700}
+.syl.sel{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.syl.good{background:rgba(22,163,74,.16);border-color:var(--ok);color:var(--ok);text-transform:uppercase}
+.syl.bad{background:rgba(225,29,72,.12);border-color:var(--no);color:var(--no)}
+.syl+.syl{margin-left:-1px}
+/* proofreading */
+.proof{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:9px;background:var(--bg2);font-size:13.5px}
+.proof .tok{cursor:pointer;padding:1px 2px;border-radius:5px}
+.proof .tok:hover{background:rgba(29,127,214,.15)}
+.proof .tok.sel{background:rgba(29,127,214,.25);outline:1px solid var(--blue)}
+.proof.good .tok.key{background:rgba(22,163,74,.22);outline:1px solid var(--ok)}
+.proof.bad .tok.sel{background:rgba(225,29,72,.2);outline:1px solid var(--no)}
+.proof .fix{display:none;font-size:12px;margin-top:6px;color:var(--ok);font-weight:700}
+.proof.checked .fix{display:block}
+/* reading + writing */
+.reader{font-size:14px;line-height:1.7;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:6px}
+.reader h4{margin:0 0 8px;font-size:16px;color:var(--purple)}
+.reader p{margin:0 0 10px}
+.reader mark{background:rgba(255,194,51,.5);padding:0 2px;border-radius:3px}
+textarea.write{width:100%;min-height:150px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);color:var(--ink);font-family:inherit;font-size:13.5px;resize:vertical;outline:none}
+textarea.write:focus{border-color:var(--blue)}
+.wcbar{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:6px}
+.plan{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.plan div{font-size:12.5px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+.plan b{color:var(--purple)}
+/* self-assessment */
+.rate{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.rate:last-child{border-bottom:none}
+.rate .txt{flex:1}
+.stars{display:flex;gap:3px}
+.star{cursor:pointer;font-size:19px;filter:grayscale(1);opacity:.4;transition:.12s}
+.star.on{filter:none;opacity:1;transform:scale(1.1)}
+/* fx */
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;width:9px;height:14px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:400;background:var(--ink);color:var(--bg);
+  padding:11px 20px;border-radius:99px;font-weight:800;font-size:13.5px;transition:transform .4s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <div class="unitbadge">3</div>
+      <div>PEOPLE &amp; STYLE<small>Review &amp; Beyond · Units 1–2</small></div>
+    </div>
+    <div class="xpbox">
+      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+      <div class="xpmeta"><span id="xplabel">0 XP</span><span id="xpright">Level 1 · Warming Up</span></div>
+    </div>
+    <div class="medals" id="medals">
+      <div class="medal" data-need="90" title="90 XP — Word Weaver">🧩</div>
+      <div class="medal" data-need="170" title="170 XP — Grammar Builder">🏗️</div>
+      <div class="medal" data-need="250" title="250 XP — Skilled Communicator">💬</div>
+      <div class="medal" data-need="330" title="330 XP — Unit 3 Champion">🏆</div>
+    </div>
+    <button class="btn" id="themebtn">🌙 Theme</button>
+    <button class="btn" id="resetbtn">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ SIDE ============ -->
+<div class="side">
+  <div class="sticky" style="display:flex;flex-direction:column;gap:16px">
+    <div class="card nav">
+      <h3>🗺️ Lesson map</h3>
+      <div class="body" id="nav" style="padding:8px"></div>
+    </div>
+  </div>
+
+  <div class="card aims">
+    <h3>🎯 Today's aims</h3>
+    <div class="body">
+      By the end of this lesson I can…
+      <ul class="tight">
+        <li>sort words for <b>appearance</b>, <b>personality</b> and <b>clothes</b>;</li>
+        <li><b>compare</b> people and styles (comparatives &amp; superlatives);</li>
+        <li>join ideas with <b>who</b> / <b>which</b> / <b>that</b>;</li>
+        <li>read a blog post and understand <b>gist</b> and <b>detail</b>;</li>
+        <li>hear and mark <b>word stress</b>;</li>
+        <li><b>proofread</b> and fix common mistakes;</li>
+        <li><b>write</b> and <b>talk</b> about a person I admire.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📘 Grammar reference</h3>
+    <div class="body">
+      <p style="margin:0 0 5px;font-weight:700;font-size:13px">Comparatives &amp; superlatives</p>
+      <table class="gtab">
+        <tr><th>Adjective</th><th>Comparative</th><th>Superlative</th></tr>
+        <tr><td>short</td><td>short<b>er</b></td><td>the short<b>est</b></td></tr>
+        <tr><td>friendly</td><td>friendl<b>ier</b></td><td>the friendl<b>iest</b></td></tr>
+        <tr><td>confident</td><td><b>more</b> confident</td><td>the <b>most</b> confident</td></tr>
+        <tr><td>good</td><td><b>better</b></td><td>the <b>best</b></td></tr>
+      </table>
+      <div class="callout" style="margin:6px 0">…<b>er than</b> · <b>more</b> … <b>than</b> · one adjective only:
+      ❌ <s>more taller</s> → <b>taller</b>.</div>
+      <p style="margin:9px 0 5px;font-weight:700;font-size:13px">Relative pronouns</p>
+      <ul class="tight" style="margin-top:0">
+        <li><b>who</b> → people: the girl <b>who</b> is wearing a cap</li>
+        <li><b>which</b> → things: a jacket <b>which</b> is second-hand</li>
+        <li><b>that</b> → people <i>or</i> things (informal)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🗣️ Useful language</h3>
+    <div class="body">
+      <p style="margin:0 0 5px;font-weight:700;font-size:13px">Comparing</p>
+      <ul class="tight" style="margin-top:0"><li>…is more … than… · …isn't as … as… · Both of them are… · The main difference is…</li></ul>
+      <p style="margin:8px 0 5px;font-weight:700;font-size:13px">Opinion &amp; reason</p>
+      <ul class="tight" style="margin-top:0"><li>I admire her because… · What I like most is… · The reason is that…</li></ul>
+      <p style="margin:8px 0 5px;font-weight:700;font-size:13px">Reacting</p>
+      <ul class="tight" style="margin-top:0"><li>Really? Why do you say that? · That's a good point. · I feel the same.</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FLOW ============ -->
+<div class="flow">
+
+  <!-- Stage 1 -->
+  <div class="card stage" id="s1">
+    <div class="stagehead"><span class="stageno">1</span><h3>Warm-up: sort the words</h3>
+      <span class="xpchip" id="s1xp">+40 XP</span><span class="skill">Vocabulary</span></div>
+    <div class="body">
+      <p class="lead">A quick review of Units 1–2. Click a word, then click the box it belongs to.
+        Put a word back by clicking it again.</p>
+      <div class="pool" id="pool"></div>
+      <div class="buckets">
+        <div class="bucket" data-cat="app"><h4>👤 Appearance</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="per"><h4>😊 Personality</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="clo"><h4>👕 Clothes</h4><div class="drop"></div></div>
+      </div>
+      <div style="margin-top:12px"><button class="btn primary" data-check="s1">Check</button>
+        <span class="fb" id="s1fb"></span></div>
+    </div>
+  </div>
+
+  <!-- Stage 2 -->
+  <div class="card stage" id="s2">
+    <div class="stagehead"><span class="stageno">2</span><h3>Compare them</h3>
+      <span class="xpchip">+40 XP</span><span class="skill">Grammar</span></div>
+    <div class="body">
+      <p class="lead">Write the comparative or superlative of the adjective in brackets. Press Enter to check a line.</p>
+      <div id="g1"></div>
+      <button class="btn primary" data-check="g1">Check all</button>
+      <button class="btn" id="g1hint">💡 Hint</button>
+      <span class="fb" id="g1fb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 3 -->
+  <div class="card stage" id="s3">
+    <div class="stagehead"><span class="stageno">3</span><h3>Join the ideas: who or which?</h3>
+      <span class="xpchip">+30 XP</span><span class="skill">Grammar</span></div>
+    <div class="body">
+      <p class="lead">Choose the correct relative pronoun. Remember: <b>who</b> for people, <b>which</b> for things.</p>
+      <div id="g2"></div>
+      <button class="btn primary" data-check="g2">Check</button>
+      <span class="fb" id="g2fb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 4 -->
+  <div class="card stage" id="s4">
+    <div class="stagehead"><span class="stageno">4</span><h3>Reading: "The coolest person I know"</h3>
+      <span class="xpchip">+60 XP</span><span class="skill">Reading</span></div>
+    <div class="body">
+      <p class="lead">First read the blog post <b>once</b> for the general idea (gist). Then answer the questions.</p>
+      <div class="reader">
+        <h4>My grandma is the coolest person I know 💛</h4>
+        <p>Everyone talks about celebrities and YouTubers, but the most stylish person I know is my grandma, Rosa.
+        She's in her late seventies, she's got short silver hair, and she always wears bright colours. People think
+        older people dress in <mark>boring</mark> clothes, but Rosa is different. She loves second-hand shops, and
+        she often finds jackets which are more interesting than anything in the shopping centre.</p>
+        <p>Rosa is also the most confident person in our family. She's friendly and funny, and she talks to everyone.
+        My friends say she is cooler than most teenagers! When I feel shy, she always tells me the same thing:
+        "Wear what makes <mark>you</mark> happy, not what makes other people happy."</p>
+        <p>Last month she wore a bright yellow coat and green boots to my school concert. Some people looked
+        surprised, but I felt proud. My grandma taught me that style isn't about being young or rich —
+        it's about being yourself.</p>
+      </div>
+      <div class="secthead"></div>
+      <p style="font-weight:700;font-size:12.5px;margin:10px 0 6px;color:var(--muted)">A · Comprehension</p>
+      <div id="r1"></div>
+      <p style="font-weight:700;font-size:12.5px;margin:12px 0 6px;color:var(--muted)">B · Words in context — what does the word mean here?</p>
+      <div id="r2"></div>
+      <button class="btn primary" data-check="rall">Check reading</button>
+      <span class="fb" id="rallfb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 5 -->
+  <div class="card stage" id="s5">
+    <div class="stagehead"><span class="stageno">5</span><h3>Say it right: word stress</h3>
+      <span class="xpchip">+40 XP</span><span class="skill">Pronunciation</span></div>
+    <div class="body">
+      <p class="lead">Every long word has one <b>strong</b> syllable. Click the syllable you say the loudest.
+        Say each word out loud first — your ear usually knows.</p>
+      <div id="p1"></div>
+      <button class="btn primary" data-check="p1">Check</button>
+      <span class="fb" id="p1fb"></span>
+      <div class="callout" style="margin-bottom:0">Tip: clap as you say the word. The clap that feels biggest is
+        the stressed syllable — <i>at&nbsp;·&nbsp;<b>TRAC</b>&nbsp;·&nbsp;tive</i>.</div>
+    </div>
+  </div>
+
+  <!-- Stage 6 -->
+  <div class="card stage" id="s6">
+    <div class="stagehead"><span class="stageno">6</span><h3>Proofreader: find the mistake</h3>
+      <span class="xpchip">+40 XP</span><span class="skill">Use of English</span></div>
+    <div class="body">
+      <p class="lead">Each sentence has <b>one</b> mistake. Click the word that is wrong.</p>
+      <div id="pr"></div>
+      <button class="btn primary" data-check="pr">Check</button>
+      <span class="fb" id="prfb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 7 -->
+  <div class="card stage" id="s7">
+    <div class="stagehead"><span class="stageno">7</span><h3>Write: a person you admire</h3>
+      <span class="xpchip">+30 XP</span><span class="skill">Writing</span></div>
+    <div class="body">
+      <p class="lead">Write about a real person you admire — like Rosa in the reading. Use the plan.</p>
+      <div class="plan">
+        <div><b>Sentence 1–2 —</b> Who is the person and how do you know them?</div>
+        <div><b>Sentence 3–4 —</b> Appearance &amp; clothes (use 2 adjectives from Stage 1).</div>
+        <div><b>Sentence 5–6 —</b> Personality + one comparative (…is more … than…).</div>
+        <div><b>Sentence 7 —</b> Why you admire them (…because…).</div>
+      </div>
+      <textarea class="write" id="wtext" placeholder="The person I admire is…"></textarea>
+      <div class="wcbar"><span class="hint" id="wcnt">0 words</span><span class="hint">target: 60–90 words</span></div>
+      <div class="callout">Self-check before you finish: comparative ✓ · relative pronoun (<i>who/which</i>) ✓ ·
+        a reason with <i>because</i> ✓ · full stops and capital letters ✓</div>
+      <button class="btn primary" id="wsubmit">✓ Done — count my words</button>
+      <span class="fb" id="wfb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 8 -->
+  <div class="card stage" id="s8">
+    <div class="stagehead"><span class="stageno">8</span><h3>Speak: two mini-tasks</h3>
+      <span class="xpchip">+40 XP</span><span class="skill">Speaking</span></div>
+    <div class="body">
+      <p class="lead">Work in pairs. Use the <b>Useful language</b> box on the left. Tick a task when you finish it.</p>
+      <div class="q">
+        <p><span class="num">A</span>🕵️ <b>Guess who.</b> Describe a classmate without saying their name, using a
+          relative clause: <i>"I'm thinking of the person who is wearing…"</i>. Your partner guesses. Swap and repeat.</p>
+        <button class="btn primary" data-done="spkA" data-xp="20">✓ We did "Guess who"</button>
+      </div>
+      <div class="q">
+        <p><span class="num">B</span>⏱️ <b>One-minute talk.</b> Talk for one minute about your style icon. Compare them
+          with someone else: <i>"She's more creative than…"</i>. Your partner asks one follow-up question at the end.</p>
+        <button class="btn primary" data-done="spkB" data-xp="20">✓ We did the one-minute talk</button>
+      </div>
+      <span class="fb" id="s8fb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 9 -->
+  <div class="card stage" id="s9">
+    <div class="stagehead"><span class="stageno">9</span><h3>How did it go?</h3>
+      <span class="xpchip">+20 XP</span><span class="skill">Self-assessment</span></div>
+    <div class="body">
+      <p class="lead">Rate yourself honestly — this is for you, not for a mark. Tap the stars.</p>
+      <div id="selfassess"></div>
+      <button class="btn primary" id="finishbtn" style="margin-top:12px">Finish the lesson 🎉</button>
+      <span class="fb" id="s9fb"></span>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>Unit 3 · People &amp; Style — an original review-and-extension lesson building on Units 1 &amp; 2. All content is original; no coursebook material is reproduced.</footer>
+
+<div class="confetti" id="confetti"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== state ===== */
+const KEY='unit3_peoplestyle_v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+S.xp=S.xp||0; S.done=S.done||{}; S.stars=S.stars||{};
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let MAXXP=340;
+const LEVELS=[[0,'Level 1 · Warming Up'],[90,'Level 2 · Word Weaver'],[170,'Level 3 · Grammar Builder'],
+              [250,'Level 4 · Skilled Communicator'],[330,'Level 5 · Unit 3 Champion 🏆']];
+function renderXP(){
+  $('#xpfill').style.width=Math.min(100,S.xp/MAXXP*100)+'%';
+  $('#xplabel').textContent=S.xp+' XP';
+  let lv=LEVELS[0][1]; LEVELS.forEach(l=>{if(S.xp>=l[0])lv=l[1]});
+  $('#xpright').textContent=lv;
+  $$('#medals .medal').forEach(m=>m.classList.toggle('on',S.xp>=+m.dataset.need));
+}
+function addXP(n,label){ if(n<=0)return; S.xp+=n; save(); renderXP(); renderNav(); toast('+'+n+' XP · '+label); if(n>=10)boom(); }
+let tt;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2400)}
+function boom(){const c=$('#confetti'),cols=['#e63946','#1d7fd6','#12b5a5','#ffc233','#7c5cff'];
+  for(let i=0;i<40;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.3)+'s';
+    c.appendChild(s);setTimeout(()=>s.remove(),3400)}}
+document.documentElement.dataset.theme=localStorage.getItem('u3theme')||'light';
+$('#themebtn').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=n;localStorage.setItem('u3theme',n)};
+$('#resetbtn').onclick=()=>{if(confirm('Reset all your progress for this lesson?')){localStorage.removeItem(KEY);location.reload()}};
+
+/* ===== lesson map ===== */
+const NAV=[['s1','Warm-up','Vocab'],['s2','Compare them','Gram'],['s3','Who / which','Gram'],
+ ['s4','Reading','Read'],['s5','Word stress','Pron'],['s6','Proofreader','UoE'],
+ ['s7','Write','Write'],['s8','Speak','Speak'],['s9','Reflect','Self']];
+const DONEKEY={s1:'s1',s2:'g1',s3:'g2',s4:'rall',s5:'p1',s6:'pr',s7:'wtext',s8:'spk',s9:'s9'};
+function renderNav(){
+  const nav=$('#nav'); nav.innerHTML='';
+  NAV.forEach(([id,label,sk],i)=>{
+    const dk=DONEKEY[id];
+    const done=dk==='spk'?(S.done.spkA&&S.done.spkB):S.done[dk];
+    const a=document.createElement('a'); a.href='#'+id; if(done)a.classList.add('done');
+    a.innerHTML=`<span class="tick">${done?'✓':''}</span><span>${i+1}. ${label}</span><span class="sk">${sk}</span>`;
+    a.onclick=e=>{e.preventDefault();document.getElementById(id).scrollIntoView({behavior:'smooth'})};
+    nav.appendChild(a);
+  });
+}
+
+/* ===== MCQ engine ===== */
+function buildMCQ(host,items){
+  const box=$('#'+host); box.innerHTML='';
+  items.forEach((it,i)=>{
+    const q=document.createElement('div'); q.className='q';
+    q.innerHTML=`<p><span class="num">${it.n||(i+1)}</span>${it.q}</p>`;
+    const o=document.createElement('div'); o.className='opts';
+    it.a.forEach(t=>{const b=document.createElement('div');b.className='opt';b.textContent=t;
+      b.onclick=()=>{if(q.classList.contains('locked'))return;
+        [...o.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};o.appendChild(b)});
+    q.appendChild(o);
+    if(it.why){const f=document.createElement('div');f.className='fb';f.dataset.why=it.why;q.appendChild(f)}
+    box.appendChild(q);
+  });
+  box._items=items;
+}
+function gradeMCQ(box){
+  const items=box._items; let ok=0,ans=0;
+  [...box.children].forEach((q,i)=>{
+    const opts=[...q.querySelector('.opts').children];
+    const sel=opts.find(o=>o.classList.contains('sel')); if(!sel)return; ans++;
+    q.classList.add('locked');
+    opts.forEach(o=>{if(o.textContent===items[i].k)o.classList.add('good');else if(o===sel)o.classList.add('bad')});
+    const good=sel.textContent===items[i].k; if(good)ok++;
+    const f=q.querySelector('.fb'); if(f){f.className='fb on '+(good?'good':'bad');f.innerHTML=(good?'✔ ':'✘ ')+f.dataset.why}
+  });
+  return {ok,ans,total:items.length};
+}
+
+/* ===== Stage 1: categorize ===== */
+const WORDS=[['tall','app'],['curly hair','app'],['bald','app'],['good-looking','app'],
+  ['confident','per'],['shy','per'],['generous','per'],['friendly','per'],
+  ['trendy','clo'],['second-hand','clo'],['handbag','clo'],['tracksuit','clo']];
+const CATNAME={app:'Appearance',per:'Personality',clo:'Clothes'};
+let selW=null;
+function makeW(word,cat){
+  const c=document.createElement('span'); c.className='wchip'; c.textContent=word; c.dataset.cat=cat;
+  c.onclick=()=>{
+    if(c.closest('.bucket')){ // back to pool
+      c.classList.remove('sel'); $('#pool').appendChild(c); selW=null;
+      $$('.bucket').forEach(b=>b.classList.remove('sel')); return;
+    }
+    if(selW===c){c.classList.remove('sel');selW=null;$$('.bucket').forEach(b=>b.classList.remove('sel'));return}
+    $$('.wchip').forEach(x=>x.classList.remove('sel')); c.classList.add('sel'); selW=c;
+    $$('.bucket').forEach(b=>b.classList.add('sel'));
+  };
+  return c;
+}
+(function(){
+  const pool=$('#pool');
+  WORDS.map(w=>w).sort(()=>Math.random()-.5).forEach(([w,cat])=>pool.appendChild(makeW(w,cat)));
+  $$('.bucket').forEach(b=>b.onclick=e=>{
+    if(!selW||e.target.classList.contains('wchip'))return;
+    b.querySelector('.drop').appendChild(selW); selW.classList.remove('sel'); selW=null;
+    $$('.bucket').forEach(x=>x.classList.remove('sel'));
+  });
+})();
+
+/* ===== Stage 2: comparatives ===== */
+const G1=[
+ ["My sister is ______ (tall) than me.","taller"],
+ ["This is the ______ (comfortable) sweatshirt I own.","most comfortable"],
+ ["Rosa is ______ (confident) than most teenagers.","more confident"],
+ ["Second-hand shops are ______ (cheap) than the shopping centre.","cheaper"],
+ ["He is the ______ (friendly) person in our class.","friendliest"],
+ ["These trainers are ______ (good) than my old ones.","better"],
+ ["A tracksuit is ______ (casual) than a suit.","more casual"],
+ ["That was the ______ (bad) haircut of my life!","worst"]
+];
+(function(){
+  const box=$('#g1');
+  G1.forEach((s,i)=>{
+    const p=document.createElement('p'); p.className='gapline';
+    const parts=s[0].split('______');
+    p.innerHTML=`<span class="num">${i+1}</span>${parts[0]}`;
+    const inp=document.createElement('input'); inp.className='txt'; inp.placeholder='…';
+    inp.onkeydown=e=>{if(e.key==='Enter')markG1(inp,s[1])};
+    p.appendChild(inp); p.insertAdjacentText('beforeend',parts[1]); box.appendChild(p);
+  });
+})();
+function markG1(inp,key){const ok=inp.value.trim().toLowerCase().replace(/\s+/g,' ')===key;
+  inp.classList.remove('good','bad');inp.classList.add(ok?'good':'bad');return ok}
+$('#g1hint').onclick=()=>{
+  const inps=$$('#g1 input'),i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  const key=G1[i][1]; inps[i].value=key.includes(' ')?key.split(' ')[0]+' ':key.slice(0,2);
+  inps[i].focus(); toast('Starts with: '+inps[i].value.trim());
+};
+
+/* ===== Stage 3: relative pronouns ===== */
+buildMCQ('g2',[
+ {q:"That's the girl ______ won the fashion competition.",a:['who','which'],k:'who',why:'A person → <b>who</b>.'},
+ {q:'I love the jacket ______ you wore yesterday.',a:['who','which'],k:'which',why:'A thing → <b>which</b>.'},
+ {q:"He's the singer ______ always wears sunglasses.",a:['who','which'],k:'who',why:'A person → <b>who</b>.'},
+ {q:'This is the shop ______ sells second-hand clothes.',a:['who','which'],k:'which',why:'A shop is a thing → <b>which</b>.'},
+ {q:"She's the friend ______ helps me choose my clothes.",a:['who','which'],k:'who',why:'A person → <b>who</b>.'},
+ {q:'These are the boots ______ I bought at the market.',a:['who','which'],k:'which',why:'Things → <b>which</b>.'}
+]);
+
+/* ===== Stage 4: reading ===== */
+buildMCQ('r1',[
+ {q:"What is the writer's main message?",
+  a:['Grandparents should dress like teenagers','Real style means being yourself','Second-hand clothes are cheap'],
+  k:'Real style means being yourself',why:'The last line: "style … is about being yourself."'},
+ {q:'How old is Rosa?',a:['in her late seventies','in her sixties','a teenager'],k:'in her late seventies',
+  why:'"She\'s in her late seventies."'},
+ {q:'Where does Rosa like to find her clothes?',a:['the shopping centre','second-hand shops','online'],
+  k:'second-hand shops',why:'"She loves second-hand shops."'},
+ {q:'Why did the writer feel proud at the concert?',
+  a:['Rosa wore boring clothes','Rosa was brave and different','other people were surprised'],
+  k:'Rosa was brave and different',why:'Inference: others were surprised, but the writer admired Rosa for being herself.'}
+]);
+buildMCQ('r2',[
+ {q:'"…dress in <b>boring</b> clothes" — boring means…',a:['not interesting','expensive','colourful'],k:'not interesting',
+  why:'boring = not interesting; the opposite of Rosa\'s bright colours.'},
+ {q:'"jackets <b>which</b> are more interesting" — which refers to…',a:['the jackets','Rosa','the shops'],k:'the jackets',
+  why:'<b>which</b> points back to the things it describes — the jackets.'},
+ {q:'"she is <b>cooler than</b> most teenagers" — this is a…',a:['comparative','superlative','opinion with no comparison'],
+  k:'comparative',why:'cool → cooler <b>than</b> = comparing two things.'},
+ {q:'"the <b>most</b> confident person" — this is a…',a:['comparative','superlative','relative clause'],k:'superlative',
+  why:'the most … = superlative (number one out of the whole group).'}
+]);
+
+/* ===== Stage 5: word stress ===== */
+const STRESS=[
+ [['at','trac','tive'],1],[['con','fi','dent'],0],[['ex','pen','sive'],1],[['com','fort','a','ble'],0],
+ [['fan','tas','tic'],1],[['jew','el','ler','y'],0],[['im','por','tant'],1],[['gen','er','ous'],0]
+];
+(function(){
+  const box=$('#p1');
+  STRESS.forEach((it,i)=>{
+    const row=document.createElement('div'); row.className='stressrow';
+    row.innerHTML=`<span class="n">${i+1}</span>`;
+    it[0].forEach((syl,j)=>{
+      const b=document.createElement('span'); b.className='syl'; b.textContent=syl; b.dataset.j=j;
+      b.onclick=()=>{if(row.classList.contains('locked'))return;
+        [...row.querySelectorAll('.syl')].forEach(x=>x.classList.remove('sel'));b.classList.add('sel')};
+      row.appendChild(b);
+    });
+    box.appendChild(row);
+  });
+})();
+
+/* ===== Stage 6: proofreading ===== */
+const PROOF=[
+ ["These jeans is really trendy.",2,'are — jeans is always plural'],
+ ["She have got curly hair.",1,'has — she / he / it → has got'],
+ ["He is more taller than his brother.",2,'delete "more" — taller is already comparative'],
+ ["That's the boy which is wearing a cap.",3,'who — use who for people'],
+ ["He is really interested on fashion.",4,'in — interested IN something'],
+ ["I need a new pair of trouser.",5,'trousers — always plural']
+];
+(function(){
+  const box=$('#pr');
+  PROOF.forEach((s,i)=>{
+    const d=document.createElement('div'); d.className='proof'; d.dataset.key=s[1];
+    const toks=s[0].replace(/\.$/,'').split(' ');
+    const wrap=document.createElement('div');
+    wrap.innerHTML=`<span class="num" style="color:var(--muted);font-weight:800">${i+1}</span> `;
+    toks.forEach((t,j)=>{
+      const sp=document.createElement('span'); sp.className='tok'; sp.textContent=t; sp.dataset.j=j;
+      if(j===s[1])sp.classList.add('key');
+      sp.onclick=()=>{if(d.classList.contains('checked'))return;
+        [...wrap.querySelectorAll('.tok')].forEach(x=>x.classList.remove('sel'));sp.classList.add('sel')};
+      wrap.appendChild(sp); wrap.insertAdjacentText('beforeend',' ');
+    });
+    wrap.insertAdjacentHTML('beforeend','.');
+    const fix=document.createElement('div'); fix.className='fix'; fix.textContent='✔ '+s[2];
+    d.appendChild(wrap); d.appendChild(fix); box.appendChild(d);
+  });
+})();
+
+/* ===== Stage 7: writing ===== */
+const countWords=t=>(t.trim().match(/\S+/g)||[]).length;
+$('#wtext').value=S.wtext||'';
+function updWords(){const n=countWords($('#wtext').value);
+  $('#wcnt').textContent=n+(n===1?' word':' words');
+  $('#wcnt').style.color=(n>=60&&n<=90)?'var(--ok)':'var(--muted)';return n}
+$('#wtext').oninput=()=>{S.wtext=$('#wtext').value;save();updWords()};
+updWords();
+$('#wsubmit').onclick=()=>{
+  const n=updWords(),f=$('#wfb');
+  if(n<40){f.className='fb on bad';f.textContent=`Only ${n} words — keep going, aim for at least 60.`;return}
+  f.className='fb on good';
+  f.textContent=(n>=60&&n<=90)?`${n} words — right on target 🎯 Read it out loud and check the list above.`
+    :`${n} words. Nice work! The target was 60–90 — read it again and adjust.`;
+  if(!S.done.wtext){S.done.wtext=1;addXP(30,'Writing')}
+};
+
+/* ===== Stage 8: speaking ===== */
+$$('[data-done]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.done; if(S.done[k]){toast('Already counted 🙂');return}
+  S.done[k]=1; addXP(+b.dataset.xp,'Speaking'); b.disabled=true;
+  b.textContent='✓ Counted';
+  if(S.done.spkA&&S.done.spkB){const f=$('#s8fb');f.className='fb on good';f.textContent='Both speaking tasks done 💬';}
+});
+$$('[data-done]').forEach(b=>{if(S.done[b.dataset.done]){b.disabled=true;b.textContent='✓ Counted'}});
+
+/* ===== Stage 9: self-assessment ===== */
+const CANDO=['I can compare people and their styles.','I can use who and which correctly.',
+ 'I understood the main idea of the reading.','I can hear the stressed syllable in a word.',
+ 'I can find and fix common mistakes.','I can write about a person I admire.'];
+(function(){
+  const box=$('#selfassess');
+  CANDO.forEach((txt,i)=>{
+    const row=document.createElement('div'); row.className='rate';
+    const t=document.createElement('div'); t.className='txt'; t.textContent=txt;
+    const st=document.createElement('div'); st.className='stars';
+    for(let s=1;s<=3;s++){const star=document.createElement('span');star.className='star';star.textContent='★';
+      star.dataset.v=s;star.onclick=()=>{S.stars[i]=s;save();paintStars(st,s)};st.appendChild(star)}
+    row.appendChild(t); row.appendChild(st); box.appendChild(row);
+    paintStars(st,S.stars[i]||0);
+  });
+})();
+function paintStars(st,v){[...st.children].forEach(s=>s.classList.toggle('on',+s.dataset.v<=v))}
+$('#finishbtn').onclick=()=>{
+  if(S.done.s9){toast('Lesson already finished 🎉');boom();return}
+  S.done.s9=1; addXP(20,'Reflection');
+  const f=$('#s9fb');f.className='fb on good';
+  f.textContent='Lesson complete! Great work today. 🌟';
+  boom();
+};
+
+/* ===== check buttons ===== */
+$$('[data-check]').forEach(b=>b.onclick=()=>{
+  const h=b.dataset.check;
+  if(h==='s1'){
+    let ok=0;
+    $$('.bucket').forEach(bk=>{
+      const cat=bk.dataset.cat;
+      bk.querySelectorAll('.wchip').forEach(c=>{
+        const good=c.dataset.cat===cat; c.classList.add(good?'good':'bad'); if(good)ok++;
+      });
+    });
+    const placed=$$('.bucket .wchip').length;
+    const f=$('#s1fb'); f.className='fb on '+(ok===WORDS.length?'good':'bad');
+    f.textContent=placed<WORDS.length?`Place all ${WORDS.length} words first (${placed} placed).`
+      :`${ok} out of ${WORDS.length} in the right box`+(ok===WORDS.length?' 🎉':'');
+    if(placed===WORDS.length&&!S.done.s1){S.done.s1=1;addXP(Math.round(40*ok/WORDS.length),'Vocabulary')}
+    return;
+  }
+  if(h==='g1'){
+    let ok=0; $$('#g1 input').forEach((inp,i)=>{if(markG1(inp,G1[i][1]))ok++});
+    const f=$('#g1fb'); f.className='fb on '+(ok===G1.length?'good':'bad');
+    f.textContent=`${ok} out of ${G1.length} correct`+(ok===G1.length?' 🏗️':'');
+    if(!S.done.g1){S.done.g1=1;addXP(Math.round(40*ok/G1.length),'Comparatives')}
+    return;
+  }
+  if(h==='g2'){const r=gradeMCQ($('#g2'));const f=$('#g2fb');
+    f.className='fb on '+(r.ok===r.total?'good':'bad');
+    f.textContent=r.ans<r.total?`${r.ans}/${r.total} answered. Score ${r.ok}/${r.total}`:`Score ${r.ok}/${r.total}`+(r.ok===r.total?' 🎉':'');
+    if(!S.done.g2){S.done.g2=1;addXP(Math.round(30*r.ok/r.total),'Relative clauses')} return;}
+  if(h==='rall'){
+    const a=gradeMCQ($('#r1')), b2=gradeMCQ($('#r2'));
+    const ok=a.ok+b2.ok, tot=a.total+b2.total, ans=a.ans+b2.ans;
+    const f=$('#rallfb'); f.className='fb on '+(ok===tot?'good':'bad');
+    f.textContent=ans<tot?`Answer all ${tot} — ${ans} done. Score ${ok}/${tot}`:`Score ${ok} out of ${tot}`+(ok===tot?' 🎉':'');
+    if(!S.done.rall){S.done.rall=1;addXP(Math.round(60*ok/tot),'Reading')}
+    return;
+  }
+  if(h==='p1'){
+    let ok=0; $$('#p1 .stressrow').forEach((row,i)=>{
+      row.classList.add('locked');
+      const sel=row.querySelector('.syl.sel'); const correct=STRESS[i][1];
+      row.querySelectorAll('.syl').forEach(s=>{if(+s.dataset.j===correct)s.classList.add('good')});
+      if(sel){if(+sel.dataset.j===correct)ok++; else sel.classList.add('bad')}
+    });
+    const f=$('#p1fb'); f.className='fb on '+(ok===STRESS.length?'good':'bad');
+    f.textContent=`${ok} out of ${STRESS.length} correct`+(ok===STRESS.length?' 🔊 great ear!':'');
+    if(!S.done.p1){S.done.p1=1;addXP(Math.round(40*ok/STRESS.length),'Word stress')}
+    return;
+  }
+  if(h==='pr'){
+    let ok=0; $$('#pr .proof').forEach(d=>{
+      d.classList.add('checked');
+      const sel=d.querySelector('.tok.sel');
+      if(sel&&+sel.dataset.j===+d.dataset.key)ok++;
+    });
+    const f=$('#prfb'); f.className='fb on '+(ok===PROOF.length?'good':'bad');
+    f.textContent=`${ok} out of ${PROOF.length} correct`+(ok===PROOF.length?' ✅ sharp eyes!':' — green = the mistake.');
+    if(!S.done.pr){S.done.pr=1;addXP(Math.round(40*ok/PROOF.length),'Proofreading')}
+    return;
+  }
+});
+
+renderXP(); renderNav();
+</script>
+</body>
+</html>

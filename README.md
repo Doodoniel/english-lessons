@@ -9,6 +9,7 @@
 |---|------|-----------|
 | 1 | [All About Me](unit1-all-about-me/) | Describing people, adverbs, prom culture, reading «Birth order» |
 | 2 | [In Fashion](unit2-in-fashion/) | Clothes adjectives, listening (Ashley/Molly/Luke), reading «Fashion and music», домашка p.8–9 с отправкой PDF |
+| 3 | [People & Style](unit3-people-and-style/) | Review & beyond Units 1–2: comparatives, relative clauses, оригинальный reading, word stress, proofreading, writing, speaking, self-assessment. Без страниц учебника |
 
 ## Как пользоваться
 
