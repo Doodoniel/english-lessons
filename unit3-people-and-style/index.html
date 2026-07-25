@@ -128,6 +128,24 @@ input.txt.good{border-color:var(--ok);color:var(--ok)} input.txt.bad{border-colo
 .proof.bad .tok.sel{background:rgba(225,29,72,.2);outline:1px solid var(--no)}
 .proof .fix{display:none;font-size:12px;margin-top:6px;color:var(--ok);font-weight:700}
 .proof.checked .fix{display:block}
+/* dialogue ordering */
+.dlg{display:flex;flex-direction:column;gap:7px}
+.drow{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--bg2);font-size:13px}
+.drow .who{font-weight:800;color:var(--purple);min-width:70px;flex:none}
+.drow .line{flex:1}
+.drow .mv{display:flex;flex-direction:column;gap:2px;flex:none}
+.drow .mv button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;cursor:pointer;font-size:10px;line-height:1;padding:3px 7px}
+.drow .mv button:hover{border-color:var(--blue)}
+.drow.good{border-color:var(--ok);background:rgba(22,163,74,.10)}
+.drow.bad{border-color:var(--no);background:rgba(225,29,72,.08)}
+/* transformation */
+.trrow{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;background:var(--bg2)}
+.trrow .orig{font-size:13px;margin:0 0 7px}
+.trrow .orig .num{color:var(--muted);font-weight:800;margin-right:6px}
+.trrow .keyword{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+  padding:2px 9px;border-radius:99px;background:rgba(124,92,255,.14);color:var(--purple);border:1px solid rgba(124,92,255,.3);margin-left:6px}
+.trrow .rewrite{font-size:13.5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.trrow .rewrite input{min-width:150px}
 /* reading + writing */
 .reader{font-size:14px;line-height:1.7;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:6px}
 .reader h4{margin:0 0 8px;font-size:16px;color:var(--purple)}
@@ -169,10 +187,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
       <div class="xpmeta"><span id="xplabel">0 XP</span><span id="xpright">Level 1 · Warming Up</span></div>
     </div>
     <div class="medals" id="medals">
-      <div class="medal" data-need="90" title="90 XP — Word Weaver">🧩</div>
-      <div class="medal" data-need="170" title="170 XP — Grammar Builder">🏗️</div>
-      <div class="medal" data-need="250" title="250 XP — Skilled Communicator">💬</div>
-      <div class="medal" data-need="330" title="330 XP — Unit 3 Champion">🏆</div>
+      <div class="medal" data-need="120" title="120 XP — Word Weaver">🧩</div>
+      <div class="medal" data-need="240" title="240 XP — Grammar Builder">🏗️</div>
+      <div class="medal" data-need="360" title="360 XP — Skilled Communicator">💬</div>
+      <div class="medal" data-need="480" title="480 XP — Unit 3 Champion">🏆</div>
     </div>
     <button class="btn" id="themebtn">🌙 Theme</button>
     <button class="btn" id="resetbtn">↺ Reset</button>
@@ -196,8 +214,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
       By the end of this lesson I can…
       <ul class="tight">
         <li>sort words for <b>appearance</b>, <b>personality</b> and <b>clothes</b>;</li>
+        <li>build <b>opposite</b> adjectives with <b>un-</b> / <b>im-</b> / <b>dis-</b>;</li>
         <li><b>compare</b> people and styles (comparatives &amp; superlatives);</li>
         <li>join ideas with <b>who</b> / <b>which</b> / <b>that</b>;</li>
+        <li><b>rewrite</b> a sentence and keep the same meaning;</li>
         <li>read a blog post and understand <b>gist</b> and <b>detail</b>;</li>
         <li>hear and mark <b>word stress</b>;</li>
         <li><b>proofread</b> and fix common mistakes;</li>
@@ -262,9 +282,25 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
     </div>
   </div>
 
-  <!-- Stage 2 -->
+  <!-- Stage 2: word formation -->
   <div class="card stage" id="s2">
-    <div class="stagehead"><span class="stageno">2</span><h3>Compare them</h3>
+    <div class="stagehead"><span class="stageno">2</span><h3>Opposites: build the word</h3>
+      <span class="xpchip">+40 XP</span><span class="skill">Word building</span></div>
+    <div class="body">
+      <p class="lead">Make the <b>opposite</b> adjective by adding a negative prefix. Type the whole word.
+        Press Enter to check a line.</p>
+      <div class="callout" style="margin-top:0">Most adjectives take <b>un-</b> (unhappy). Use <b>im-</b> before
+        <b>m</b> or <b>p</b> (impolite, impatient), and <b>dis-</b> with a few words (dishonest).</div>
+      <div id="wf"></div>
+      <button class="btn primary" data-check="wf">Check all</button>
+      <button class="btn" id="wfhint">💡 Hint</button>
+      <span class="fb" id="wffb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 3 -->
+  <div class="card stage" id="s3">
+    <div class="stagehead"><span class="stageno">3</span><h3>Compare them</h3>
       <span class="xpchip">+40 XP</span><span class="skill">Grammar</span></div>
     <div class="body">
       <p class="lead">Write the comparative or superlative of the adjective in brackets. Press Enter to check a line.</p>
@@ -275,9 +311,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
     </div>
   </div>
 
-  <!-- Stage 3 -->
-  <div class="card stage" id="s3">
-    <div class="stagehead"><span class="stageno">3</span><h3>Join the ideas: who or which?</h3>
+  <!-- Stage 4 -->
+  <div class="card stage" id="s4">
+    <div class="stagehead"><span class="stageno">4</span><h3>Join the ideas: who or which?</h3>
       <span class="xpchip">+30 XP</span><span class="skill">Grammar</span></div>
     <div class="body">
       <p class="lead">Choose the correct relative pronoun. Remember: <b>who</b> for people, <b>which</b> for things.</p>
@@ -287,9 +323,23 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
     </div>
   </div>
 
-  <!-- Stage 4 -->
-  <div class="card stage" id="s4">
-    <div class="stagehead"><span class="stageno">4</span><h3>Reading: "The coolest person I know"</h3>
+  <!-- Stage 5: transformation -->
+  <div class="card stage" id="s5">
+    <div class="stagehead"><span class="stageno">5</span><h3>Say it a different way</h3>
+      <span class="xpchip">+50 XP</span><span class="skill">Use of English</span></div>
+    <div class="body">
+      <p class="lead">Complete the second sentence so it means the same as the first. You <b>must</b> use the word in
+        the purple label, and write between <b>two and four words</b>. This pulls together Stages 3 and 4.</p>
+      <div id="tr"></div>
+      <button class="btn primary" data-check="tr">Check all</button>
+      <button class="btn" id="trhint">💡 Hint</button>
+      <span class="fb" id="trfb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 6 -->
+  <div class="card stage" id="s6">
+    <div class="stagehead"><span class="stageno">6</span><h3>Reading: "The coolest person I know"</h3>
       <span class="xpchip">+60 XP</span><span class="skill">Reading</span></div>
     <div class="body">
       <p class="lead">First read the blog post <b>once</b> for the general idea (gist). Then answer the questions.</p>
@@ -316,9 +366,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
     </div>
   </div>
 
-  <!-- Stage 5 -->
-  <div class="card stage" id="s5">
-    <div class="stagehead"><span class="stageno">5</span><h3>Say it right: word stress</h3>
+  <!-- Stage 7 -->
+  <div class="card stage" id="s7">
+    <div class="stagehead"><span class="stageno">7</span><h3>Say it right: word stress</h3>
       <span class="xpchip">+40 XP</span><span class="skill">Pronunciation</span></div>
     <div class="body">
       <p class="lead">Every long word has one <b>strong</b> syllable. Click the syllable you say the loudest.
@@ -331,9 +381,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
     </div>
   </div>
 
-  <!-- Stage 6 -->
-  <div class="card stage" id="s6">
-    <div class="stagehead"><span class="stageno">6</span><h3>Proofreader: find the mistake</h3>
+  <!-- Stage 8 -->
+  <div class="card stage" id="s8">
+    <div class="stagehead"><span class="stageno">8</span><h3>Proofreader: find the mistake</h3>
       <span class="xpchip">+40 XP</span><span class="skill">Use of English</span></div>
     <div class="body">
       <p class="lead">Each sentence has <b>one</b> mistake. Click the word that is wrong.</p>
@@ -343,9 +393,22 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
     </div>
   </div>
 
-  <!-- Stage 7 -->
-  <div class="card stage" id="s7">
-    <div class="stagehead"><span class="stageno">7</span><h3>Write: a person you admire</h3>
+  <!-- Stage 9: dialogue ordering -->
+  <div class="card stage" id="s9">
+    <div class="stagehead"><span class="stageno">9</span><h3>In the shop: put it in order</h3>
+      <span class="xpchip">+40 XP</span><span class="skill">Functional</span></div>
+    <div class="body">
+      <p class="lead">The lines of this conversation are mixed up. Use the ▲ ▼ buttons to put them in a logical order.
+        The shop assistant speaks first.</p>
+      <div class="dlg" id="dlg"></div>
+      <button class="btn primary" data-check="dlg" style="margin-top:10px">Check</button>
+      <span class="fb" id="dlgfb"></span>
+    </div>
+  </div>
+
+  <!-- Stage 10 -->
+  <div class="card stage" id="s10">
+    <div class="stagehead"><span class="stageno">10</span><h3>Write: a person you admire</h3>
       <span class="xpchip">+30 XP</span><span class="skill">Writing</span></div>
     <div class="body">
       <p class="lead">Write about a real person you admire — like Rosa in the reading. Use the plan.</p>
@@ -364,10 +427,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
     </div>
   </div>
 
-  <!-- Stage 8 -->
-  <div class="card stage" id="s8">
-    <div class="stagehead"><span class="stageno">8</span><h3>Speak: two mini-tasks</h3>
-      <span class="xpchip">+40 XP</span><span class="skill">Speaking</span></div>
+  <!-- Stage 11 -->
+  <div class="card stage" id="s11">
+    <div class="stagehead"><span class="stageno">11</span><h3>Speak: three mini-tasks</h3>
+      <span class="xpchip">+60 XP</span><span class="skill">Speaking</span></div>
     <div class="body">
       <p class="lead">Work in pairs. Use the <b>Useful language</b> box on the left. Tick a task when you finish it.</p>
       <div class="q">
@@ -380,13 +443,19 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
           with someone else: <i>"She's more creative than…"</i>. Your partner asks one follow-up question at the end.</p>
         <button class="btn primary" data-done="spkB" data-xp="20">✓ We did the one-minute talk</button>
       </div>
+      <div class="q">
+        <p><span class="num">C</span>🛍️ <b>Role-play: in the shop.</b> Act out the conversation from Stage 9 in pairs —
+          one shop assistant, one customer. Then change <b>three</b> things (a different item, size and opinion)
+          and do it again. Use adjectives like <i>skinny, loose-fitting, trendy, second-hand</i>.</p>
+        <button class="btn primary" data-done="spkC" data-xp="20">✓ We acted out the shop scene</button>
+      </div>
       <span class="fb" id="s8fb"></span>
     </div>
   </div>
 
-  <!-- Stage 9 -->
-  <div class="card stage" id="s9">
-    <div class="stagehead"><span class="stageno">9</span><h3>How did it go?</h3>
+  <!-- Stage 12 -->
+  <div class="card stage" id="s12">
+    <div class="stagehead"><span class="stageno">12</span><h3>How did it go?</h3>
       <span class="xpchip">+20 XP</span><span class="skill">Self-assessment</span></div>
     <div class="body">
       <p class="lead">Rate yourself honestly — this is for you, not for a mark. Tap the stars.</p>
@@ -411,9 +480,9 @@ let S=JSON.parse(localStorage.getItem(KEY)||'{}');
 S.xp=S.xp||0; S.done=S.done||{}; S.stars=S.stars||{};
 const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-let MAXXP=340;
-const LEVELS=[[0,'Level 1 · Warming Up'],[90,'Level 2 · Word Weaver'],[170,'Level 3 · Grammar Builder'],
-              [250,'Level 4 · Skilled Communicator'],[330,'Level 5 · Unit 3 Champion 🏆']];
+let MAXXP=490;
+const LEVELS=[[0,'Level 1 · Warming Up'],[120,'Level 2 · Word Weaver'],[240,'Level 3 · Grammar Builder'],
+              [360,'Level 4 · Skilled Communicator'],[480,'Level 5 · Unit 3 Champion 🏆']];
 function renderXP(){
   $('#xpfill').style.width=Math.min(100,S.xp/MAXXP*100)+'%';
   $('#xplabel').textContent=S.xp+' XP';
@@ -434,15 +503,16 @@ $('#themebtn').onclick=()=>{const n=document.documentElement.dataset.theme==='da
 $('#resetbtn').onclick=()=>{if(confirm('Reset all your progress for this lesson?')){localStorage.removeItem(KEY);location.reload()}};
 
 /* ===== lesson map ===== */
-const NAV=[['s1','Warm-up','Vocab'],['s2','Compare them','Gram'],['s3','Who / which','Gram'],
- ['s4','Reading','Read'],['s5','Word stress','Pron'],['s6','Proofreader','UoE'],
- ['s7','Write','Write'],['s8','Speak','Speak'],['s9','Reflect','Self']];
-const DONEKEY={s1:'s1',s2:'g1',s3:'g2',s4:'rall',s5:'p1',s6:'pr',s7:'wtext',s8:'spk',s9:'s9'};
+const NAV=[['s1','Warm-up','Vocab'],['s2','Opposites','Vocab'],['s3','Compare them','Gram'],
+ ['s4','Who / which','Gram'],['s5','Transform','UoE'],['s6','Reading','Read'],
+ ['s7','Word stress','Pron'],['s8','Proofreader','UoE'],['s9','Dialogue','Read'],
+ ['s10','Write','Write'],['s11','Speak','Speak'],['s12','Reflect','Self']];
+const DONEKEY={s1:'s1',s2:'wf',s3:'g1',s4:'g2',s5:'tr',s6:'rall',s7:'p1',s8:'pr',s9:'dlg',s10:'wtext',s11:'spk',s12:'s9'};
 function renderNav(){
   const nav=$('#nav'); nav.innerHTML='';
   NAV.forEach(([id,label,sk],i)=>{
     const dk=DONEKEY[id];
-    const done=dk==='spk'?(S.done.spkA&&S.done.spkB):S.done[dk];
+    const done=dk==='spk'?(S.done.spkA&&S.done.spkB&&S.done.spkC):S.done[dk];
     const a=document.createElement('a'); a.href='#'+id; if(done)a.classList.add('done');
     a.innerHTML=`<span class="tick">${done?'✓':''}</span><span>${i+1}. ${label}</span><span class="sk">${sk}</span>`;
     a.onclick=e=>{e.preventDefault();document.getElementById(id).scrollIntoView({behavior:'smooth'})};
@@ -644,7 +714,7 @@ $$('[data-done]').forEach(b=>b.onclick=()=>{
   const k=b.dataset.done; if(S.done[k]){toast('Already counted 🙂');return}
   S.done[k]=1; addXP(+b.dataset.xp,'Speaking'); b.disabled=true;
   b.textContent='✓ Counted';
-  if(S.done.spkA&&S.done.spkB){const f=$('#s8fb');f.className='fb on good';f.textContent='Both speaking tasks done 💬';}
+  if(S.done.spkA&&S.done.spkB&&S.done.spkC){const f=$('#s8fb');f.className='fb on good';f.textContent='All three speaking tasks done 💬';}
 });
 $$('[data-done]').forEach(b=>{if(S.done[b.dataset.done]){b.disabled=true;b.textContent='✓ Counted'}});
 
@@ -673,9 +743,119 @@ $('#finishbtn').onclick=()=>{
   boom();
 };
 
+/* ===== Stage 2: word formation ===== */
+function markInput(inp,keys){
+  const v=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
+  const ok=keys.some(k=>k.toLowerCase()===v);
+  inp.classList.remove('good','bad'); inp.classList.add(ok?'good':'bad'); return ok;
+}
+const WF=[
+ ['friendly','unfriendly'],['comfortable','uncomfortable'],['fashionable','unfashionable'],
+ ['tidy','untidy'],['kind','unkind'],['polite','impolite'],['patient','impatient'],['honest','dishonest']
+];
+(function(){
+  const box=$('#wf');
+  WF.forEach((s,i)=>{
+    const p=document.createElement('p'); p.className='gapline';
+    p.innerHTML=`<span class="num">${i+1}</span>${s[0]} → not ${s[0]} = `;
+    const inp=document.createElement('input'); inp.className='txt'; inp.placeholder='opposite…';
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,[s[1]])};
+    p.appendChild(inp); box.appendChild(p);
+  });
+})();
+$('#wfhint').onclick=()=>{
+  const inps=$$('#wf input'),i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  inps[i].value=WF[i][1].match(/^(un|im|dis)/)[0]+'-'; inps[i].focus();
+  toast('Prefix: '+inps[i].value);
+};
+
+/* ===== Stage 5: sentence transformation ===== */
+const TR=[
+ {a:"Ben is taller than Sam.", pre:"Sam is ", post:" Ben.", word:"as", keys:["not as tall as"]},
+ {a:"Her jacket is more expensive than mine.", pre:"My jacket ", post:" hers.", word:"cheaper", keys:["is cheaper than"]},
+ {a:"Rosa is the most confident person I know.", pre:"I don't know anyone ", post:" Rosa.", word:"as", keys:["as confident as"]},
+ {a:"There isn't a cheaper shop than this one.", pre:"This is ", post:" shop.", word:"cheap", keys:["the cheapest"]},
+ {a:"That's the girl. She won the prize.", pre:"That's the girl ", post:" the prize.", word:"who", keys:["who won","that won"]},
+ {a:"I bought this jacket at the market.", pre:"This is the jacket ", post:" at the market.", word:"which", keys:["which i bought","that i bought","i bought"]}
+];
+(function(){
+  const box=$('#tr');
+  TR.forEach((t,i)=>{
+    const row=document.createElement('div'); row.className='trrow';
+    row.innerHTML=`<p class="orig"><span class="num">${i+1}</span>${t.a}<span class="keyword">${t.word}</span></p>`;
+    const rw=document.createElement('div'); rw.className='rewrite';
+    rw.insertAdjacentText('beforeend',t.pre);
+    const inp=document.createElement('input'); inp.className='txt'; inp.placeholder='2–4 words…'; inp.style.minWidth='150px';
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,t.keys)};
+    rw.appendChild(inp); rw.insertAdjacentText('beforeend',t.post);
+    row.appendChild(rw); box.appendChild(row);
+  });
+})();
+$('#trhint').onclick=()=>{
+  const inps=$$('#tr input'),i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  const first=TR[i].keys[0].split(' ')[0]; inps[i].value=first+' '; inps[i].focus();
+  toast('Start with: '+first);
+};
+
+/* ===== Stage 9: dialogue ordering ===== */
+const DLG=[
+ "Hi, can I help you?",
+ "Yes, I'm looking for a jacket.",
+ "What size are you?",
+ "Medium, I think.",
+ "How about this denim one? It's very trendy.",
+ "Do you have it in a bigger size? It's a bit skinny.",
+ "Sure, here's a large. The changing rooms are over there.",
+ "Thanks. I'll try it on."
+];
+function renderDlg(order){
+  const box=$('#dlg'); box.innerHTML='';
+  order.forEach(pos=>{
+    const row=document.createElement('div'); row.className='drow'; row.dataset.pos=pos;
+    const who=pos%2===0?'Assistant':'Customer';
+    row.innerHTML=`<span class="who">${who}:</span><span class="line">${DLG[pos]}</span>`;
+    const mv=document.createElement('span'); mv.className='mv';
+    const up=document.createElement('button'); up.textContent='▲';
+    const dn=document.createElement('button'); dn.textContent='▼';
+    up.onclick=()=>{const p=row.previousElementSibling; if(p)box.insertBefore(row,p)};
+    dn.onclick=()=>{const n=row.nextElementSibling; if(n)box.insertBefore(n,row)};
+    mv.appendChild(up); mv.appendChild(dn); row.appendChild(mv); box.appendChild(row);
+  });
+}
+(function(){
+  let order=[...DLG.keys()];
+  do{order.sort(()=>Math.random()-.5);}while(order.every((v,i)=>v===i));
+  renderDlg(order);
+})();
+
 /* ===== check buttons ===== */
 $$('[data-check]').forEach(b=>b.onclick=()=>{
   const h=b.dataset.check;
+  if(h==='wf'){
+    let ok=0; $$('#wf input').forEach((inp,i)=>{if(markInput(inp,[WF[i][1]]))ok++});
+    const f=$('#wffb'); f.className='fb on '+(ok===WF.length?'good':'bad');
+    f.textContent=`${ok} out of ${WF.length} correct`+(ok===WF.length?' 🧩':'');
+    if(!S.done.wf){S.done.wf=1;addXP(Math.round(40*ok/WF.length),'Word building')}
+    return;
+  }
+  if(h==='tr'){
+    let ok=0; $$('#tr input').forEach((inp,i)=>{if(markInput(inp,TR[i].keys))ok++});
+    const f=$('#trfb'); f.className='fb on '+(ok===TR.length?'good':'bad');
+    f.textContent=`${ok} out of ${TR.length} correct`+(ok===TR.length?' ✍️ excellent!':'');
+    if(!S.done.tr){S.done.tr=1;addXP(Math.round(50*ok/TR.length),'Transformation')}
+    return;
+  }
+  if(h==='dlg'){
+    const rows=$$('#dlg .drow'); let ok=0;
+    rows.forEach((r,i)=>{const good=+r.dataset.pos===i; r.classList.add(good?'good':'bad');
+      r.querySelectorAll('.mv button').forEach(x=>x.disabled=true); if(good)ok++;});
+    const f=$('#dlgfb'); f.className='fb on '+(ok===rows.length?'good':'bad');
+    f.textContent=ok===rows.length?'Perfect order! 🎉':`${ok} of ${rows.length} lines are in the right place.`;
+    if(!S.done.dlg){S.done.dlg=1;addXP(Math.round(40*ok/rows.length),'Dialogue order')}
+    return;
+  }
   if(h==='s1'){
     let ok=0;
     $$('.bucket').forEach(bk=>{
