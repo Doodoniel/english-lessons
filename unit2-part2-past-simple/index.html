@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Unit 2 · Past Simple &amp; Adverbs — Interactive Workspace</title>
+<style>
+:root{
+  --red:#e63946; --blue:#1d7fd6; --teal:#12b5a5; --yellow:#ffc233; --purple:#a855c7; --orange:#f4732a; --green:#16a34a;
+  --bg:#eef2f7; --bg2:#e2e8f2; --card:#ffffff; --ink:#16202e; --muted:#61708a;
+  --line:#dbe3ef; --ok:#16a34a; --no:#e11d48; --shadow:0 10px 30px rgba(22,38,66,.10); --r:18px;
+}
+html[data-theme="dark"]{
+  --bg:#0e1420; --bg2:#111a29; --card:#161f30; --ink:#e8eefb; --muted:#93a3bd;
+  --line:#243149; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);line-height:1.55;
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(168,85,199,.16),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(18,181,165,.16),transparent 55%),var(--bg)}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--card) 82%,transparent);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1700px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+.unitbadge{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:22px;
+  background:linear-gradient(135deg,var(--purple),var(--orange));box-shadow:0 6px 16px rgba(168,85,199,.35)}
+.brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.xpbox{flex:1;min-width:220px;max-width:420px}
+.xpbar{height:12px;border-radius:99px;background:var(--bg2);overflow:hidden;border:1px solid var(--line)}
+.xpfill{height:100%;width:0;border-radius:99px;transition:width .5s cubic-bezier(.2,.9,.2,1);
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
+.xpmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  padding:8px 14px;border-radius:12px;font-weight:700;font-size:13px;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent}
+.btn.go{background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;border-color:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.medals{display:flex;gap:6px}
+.medal{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--bg2);
+  filter:grayscale(1);opacity:.4;font-size:16px;transition:.4s;border:1px solid var(--line)}
+.medal.on{filter:none;opacity:1;transform:scale(1.08);box-shadow:0 0 0 3px rgba(255,194,51,.25)}
+main{max-width:1700px;margin:0 auto;padding:20px 18px 80px;display:grid;gap:20px;
+  grid-template-columns:minmax(260px,.9fr) minmax(420px,1.25fr) minmax(330px,1.2fr)}
+@media(max-width:1250px){main{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(min-width:1251px){.center .stickypages{position:sticky;top:78px}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card>h3{margin:0;padding:13px 16px;font-size:14px;letter-spacing:.3px;
+  display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line)}
+.card>h3 .dot{width:9px;height:9px;border-radius:99px;background:var(--blue);flex:none}
+.card .body{padding:14px 16px}
+.t-red>h3 .dot{background:var(--red)} .t-teal>h3 .dot{background:var(--teal)}
+.t-yellow>h3 .dot{background:var(--yellow)} .t-purple>h3 .dot{background:var(--purple)}
+.t-orange>h3 .dot{background:var(--orange)}
+.hint{font-size:12.5px;color:var(--muted)}
+.lead{font-size:13px;margin:0 0 11px;color:var(--muted)}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 8px;border-radius:99px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+.exno{width:26px;height:26px;flex:none;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:14px;font-weight:800}
+.t-orange .exno{background:linear-gradient(135deg,var(--orange),var(--red))}
+.t-teal .exno{background:linear-gradient(135deg,var(--teal),var(--blue))}
+.showpage{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;border:1px solid var(--blue);color:var(--blue);
+  background:transparent;cursor:pointer;white-space:nowrap}
+.showpage:hover{background:var(--blue);color:#fff}
+.playmini{margin-left:6px;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;
+  padding:4px 9px;border-radius:99px;border:1px solid var(--teal);color:var(--teal);background:transparent;
+  cursor:pointer;white-space:nowrap}
+.playmini:hover,.playmini.on{background:var(--teal);color:#fff}
+.secthead{display:flex;align-items:center;gap:10px;margin:8px 2px -4px;font-size:12px;font-weight:800;
+  letter-spacing:1.1px;text-transform:uppercase;color:var(--muted)}
+.secthead::after{content:"";flex:1;height:1px;background:var(--line)}
+/* pages */
+.tabs{display:flex;gap:6px;padding:12px 12px 0;flex-wrap:wrap}
+.tab{padding:7px 12px;border-radius:12px 12px 0 0;border:1px solid var(--line);border-bottom:none;
+  background:var(--bg2);cursor:pointer;font-weight:700;font-size:12.5px;color:var(--muted)}
+.tab.on{background:var(--card);color:var(--ink)}
+.pagewrap{padding:12px 14px 16px;border-top:1px solid var(--line)}
+.scroller{max-height:74vh;overflow:auto;border-radius:14px;border:1px solid var(--line);scroll-behavior:smooth}
+.pageframe{position:relative;min-height:300px;display:block;
+  background:repeating-linear-gradient(45deg,var(--bg2),var(--bg2) 12px,transparent 12px,transparent 24px)}
+.pageframe img{width:100%;display:block}
+.pagestage{position:relative;width:calc(100% * var(--pz,1));line-height:0;transition:width .35s cubic-bezier(.2,.9,.2,1)}
+.ph{padding:34px 22px;text-align:center;color:var(--muted);font-size:13px}
+.ph b{display:block;font-size:15px;color:var(--ink);margin-bottom:6px}
+.zoombar{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.hl{position:absolute;border:3px solid var(--orange);border-radius:10px;pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(10,16,28,.42);opacity:0;transition:opacity .35s;z-index:3}
+.hl.on{opacity:1;animation:hlpulse 1.1s ease-in-out 2}
+@keyframes hlpulse{0%,100%{border-color:var(--orange)}50%{border-color:var(--yellow)}}
+.lightbox{position:fixed;inset:0;background:rgba(8,12,20,.92);z-index:200;display:none;place-items:center;
+  padding:20px;overflow:auto;cursor:zoom-out}
+.lightbox.on{display:grid}
+.lightbox img{max-width:min(1100px,96vw);border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+/* write + draw */
+.wlayer{position:absolute;inset:0;pointer-events:none}
+.writeon .wlayer{pointer-events:auto;cursor:crosshair}
+.writeon .wlayer::after{content:"✍️ click anywhere on the page to type";position:absolute;left:50%;top:8px;
+  transform:translateX(-50%);background:var(--blue);color:#fff;font:700 11px/1.4 "Segoe UI",sans-serif;
+  padding:4px 12px;border-radius:99px;opacity:.85;white-space:nowrap;pointer-events:none;z-index:4}
+.dlayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;touch-action:none;overflow:visible}
+.drawon .dlayer{pointer-events:auto;cursor:crosshair}
+.eraseon .dlayer{pointer-events:auto}
+.eraseon .dlayer polyline{pointer-events:stroke;cursor:pointer}
+.eraseon .dlayer polyline:hover{opacity:.35}
+.drawon .note,.eraseon .note{pointer-events:none}
+.drawon .wlayer::after{display:none}
+.note{position:absolute;line-height:1.2;pointer-events:auto;transform:translateY(-50%)}
+.note input{border:none;border-bottom:1.5px solid rgba(29,127,214,.45);background:rgba(255,255,255,.55);
+  font-family:"Comic Sans MS","Segoe Print",cursive;font-size:var(--nfs,15px);font-weight:700;
+  color:#1652c8;padding:0 3px;outline:none;border-radius:3px 3px 0 0;min-width:26px}
+.note input:focus{background:rgba(255,235,150,.75);border-bottom-color:var(--blue)}
+.note .del,.note .grip{position:absolute;top:-11px;width:18px;height:18px;border-radius:99px;border:none;
+  color:#fff;font-size:11px;line-height:18px;padding:0;display:none;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.note .del{right:-11px;background:var(--no);cursor:pointer}
+.note .grip{left:-11px;background:var(--blue);cursor:grab;font-size:10px;touch-action:none}
+.note:hover .del,.note:hover .grip,.note:focus-within .del,.note:focus-within .grip{display:block}
+.note.dragging{z-index:9;opacity:.85}
+.dtools{display:none;gap:6px;align-items:center;padding:4px 10px;border:1px solid var(--line);
+  border-radius:99px;background:var(--bg2)}
+body.drawon .dtools,body.eraseon .dtools{display:flex}
+.swatch{width:20px;height:20px;border-radius:99px;border:2px solid rgba(255,255,255,.7);cursor:pointer;
+  padding:0;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:.15s}
+.swatch.on{transform:scale(1.25);box-shadow:0 0 0 3px rgba(29,127,214,.35)}
+.wsize{width:70px;accent-color:var(--blue)}
+.wcount{font-size:11.5px;color:var(--muted);font-weight:700}
+.hwbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;padding:12px 14px;
+  border-radius:14px;border:1px dashed var(--orange);background:var(--bg2)}
+.hwbar input.name{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  padding:7px 11px;font-size:13px;font-weight:700;width:180px}
+/* audio */
+.audio{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:8px 11px;margin:7px 0}
+.audio.playing{border-color:var(--teal);box-shadow:0 0 0 3px rgba(18,181,165,.15)}
+.playbtn{width:36px;height:36px;flex:none;border-radius:99px;border:none;cursor:pointer;color:#fff;
+  font-size:13px;background:linear-gradient(135deg,var(--teal),var(--blue));display:grid;place-items:center}
+.audio .meta{flex:1;min-width:0}
+.audio .meta b{display:block;font-size:12.5px}
+.audio .meta span.sub{font-size:11px;color:var(--muted)}
+.seek{width:100%;height:6px;border-radius:99px;background:var(--line);margin-top:5px;overflow:hidden;cursor:pointer}
+.seek i{display:block;height:100%;width:0;background:var(--blue);border-radius:99px}
+.atools{display:flex;gap:5px;align-items:center;flex:none}
+.abtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;
+  padding:4px 8px;font-size:11px;font-weight:800;cursor:pointer}
+.abtn.on{background:var(--blue);color:#fff;border-color:transparent}
+.atime{font-size:11px;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;flex:none;min-width:72px;text-align:right}
+.miss{font-size:11px;color:var(--no);font-weight:700}
+.agroup{font-size:10.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}
+/* tasks */
+.q{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:var(--bg2)}
+.q p{margin:0 0 8px;font-size:13.5px;font-weight:600}
+.q .num{color:var(--muted);font-weight:800;margin-right:6px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.opt.good{background:rgba(22,163,74,.14);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:rgba(225,29,72,.12);border-color:var(--no);color:var(--no);text-decoration:line-through}
+.fb{font-size:12px;margin-top:7px;display:none}
+.fb.on{display:block}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--no)}
+input.txt{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  padding:6px 9px;font-size:13px;width:130px;font-weight:700}
+input.txt.good{border-color:var(--ok);color:var(--ok)} input.txt.bad{border-color:var(--no);color:var(--no)}
+input.txt.wide{width:190px}
+.gapline{font-size:13.5px;margin:0 0 9px;padding-left:22px;text-indent:-22px}
+.gapline .num{color:var(--muted);font-weight:800;margin-right:6px}
+.dialogue{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px 13px}
+.dialogue p{margin:0 0 8px;font-size:13.5px}
+.dialogue b.who{color:var(--purple);display:inline-block;min-width:22px}
+/* buckets */
+.pool{display:flex;gap:6px;flex-wrap:wrap;min-height:24px;margin-bottom:11px}
+.buckets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+@media(max-width:560px){.buckets{grid-template-columns:1fr}}
+.bucket{border:1.5px dashed var(--line);border-radius:14px;padding:9px;min-height:100px;background:var(--bg2)}
+.bucket h4{margin:0 0 7px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);text-align:center}
+.bucket.sel{border-color:var(--blue);background:rgba(29,127,214,.08)}
+.bucket .drop{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.wchip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:4px 11px;cursor:pointer;font-size:12.5px;font-weight:700;transition:.12s}
+.wchip:hover{transform:translateY(-2px)}
+.wchip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.wchip.good{border-color:var(--ok);background:rgba(22,163,74,.14);color:var(--ok)}
+.wchip.bad{border-color:var(--no);background:rgba(225,29,72,.12);color:var(--no)}
+/* notes / writing */
+textarea.write{width:100%;min-height:120px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  background:var(--card);color:var(--ink);font-family:inherit;font-size:13.5px;resize:vertical;outline:none}
+textarea.write:focus{border-color:var(--blue)}
+textarea.notes{min-height:80px}
+.wcbar{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:6px}
+ul.tight{margin:6px 0;padding-left:18px;font-size:13px}
+ul.tight li{margin-bottom:5px}
+.callout{border-left:4px solid var(--yellow);background:var(--bg2);padding:9px 12px;border-radius:0 10px 10px 0;font-size:13px;margin:9px 0}
+.callout.info{border-color:var(--blue)}
+.callout.warn{border-color:var(--orange)}
+.gtab{width:100%;border-collapse:collapse;font-size:12.7px;margin:4px 0}
+.gtab th,.gtab td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+.gtab th{background:var(--bg2);font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+.cando{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin-bottom:7px}
+.cando i{font-style:normal;color:var(--teal);font-weight:900}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;width:9px;height:14px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:400;background:var(--ink);color:var(--bg);
+  padding:11px 20px;border-radius:99px;font-weight:800;font-size:13.5px;transition:transform .4s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
+#printroot{display:none}
+#printroot .sheet{page-break-after:always;padding:0 0 10px}
+#printroot .phead{font:700 15px/1.5 "Segoe UI",sans-serif;margin:0 0 8px;color:#000;border-bottom:2px solid #000;padding-bottom:5px}
+@media print{
+  body>header,body>main,body>footer,.lightbox,.toast,.confetti{display:none!important}
+  #printroot{display:block!important}
+  #printroot .note input{background:transparent;border-bottom:1px solid #999;color:#00308f;font-weight:700}
+  #printroot .note .del,#printroot .note .grip{display:none!important}
+  @page{margin:10mm}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <div class="unitbadge">2</div>
+      <div>PAST SIMPLE &amp; ADVERBS<small>Student's Book p.16–17 · Workbook p.10–11</small></div>
+    </div>
+    <div class="xpbox">
+      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+      <div class="xpmeta"><span id="xplabel">0 XP</span><span id="xpright">Level 1 · Getting Started</span></div>
+    </div>
+    <div class="medals" id="medals">
+      <div class="medal" data-need="210" title="210 XP — Verb Hunter">🔍</div>
+      <div class="medal" data-need="420" title="420 XP — Past Master">⏳</div>
+      <div class="medal" data-need="630" title="630 XP — Adverb Ace">⚡</div>
+      <div class="medal" data-need="840" title="840 XP — Unit Champion">🏆</div>
+    </div>
+    <button class="btn" id="themebtn">🌙 Theme</button>
+    <button class="btn" id="resetbtn">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ LEFT: REFERENCE ============ -->
+<div class="col">
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Past simple · the whole picture</h3>
+    <div class="body">
+      <p class="hint" style="margin-top:0">We use the past simple for <b>finished</b> past actions and states.</p>
+      <table class="gtab">
+        <tr><th></th><th>Regular</th><th>Irregular</th></tr>
+        <tr><td>+</td><td>I play<b>ed</b></td><td>I <b>wore</b></td></tr>
+        <tr><td>−</td><td colspan="2">I <b>didn't</b> play / wear <span class="hint">(infinitive!)</span></td></tr>
+        <tr><td>?</td><td colspan="2"><b>Did</b> you play / wear…?</td></tr>
+      </table>
+      <div class="callout warn"><b>The classic mistake:</b> after <i>did</i> / <i>didn't</i> the verb goes back to
+      its base form. ❌ <s>I didn't went</s> → ✅ I didn't <b>go</b>. ❌ <s>Did you saw?</s> → ✅ Did you <b>see</b>?</div>
+      <p style="margin:9px 0 5px;font-weight:700;font-size:13px">Spelling of <b>-ed</b></p>
+      <ul class="tight" style="margin-top:0">
+        <li>most verbs: watch → watch<b>ed</b></li>
+        <li>ends in <b>e</b>: use → use<b>d</b></li>
+        <li>short vowel + consonant: plan → pla<b>nned</b>, stop → sto<b>pped</b></li>
+        <li>consonant + <b>y</b>: study → stud<b>ied</b> <span class="hint">(but enjo<b>y</b>ed — vowel + y)</span></li>
+      </ul>
+      <p style="margin:9px 0 5px;font-weight:700;font-size:13px">Time expressions</p>
+      <ul class="tight" style="margin-top:0"><li>yesterday · last night/week · two days <b>ago</b> · in 1969 · when I was young</li></ul>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="dot"></span>Adverbs of manner</h3>
+    <div class="body">
+      <p class="hint" style="margin-top:0">Adjectives describe <b>nouns</b>. Adverbs describe <b>verbs</b> — <i>how</i> we do something.</p>
+      <table class="gtab">
+        <tr><th>Rule</th><th>Adjective</th><th>Adverb</th></tr>
+        <tr><td>+ ly</td><td>polite</td><td>polite<b>ly</b></td></tr>
+        <tr><td>y → ily</td><td>heavy</td><td>heav<b>ily</b></td></tr>
+        <tr><td>irregular</td><td>good</td><td><b>well</b></td></tr>
+        <tr><td>no change</td><td>fast · hard · early</td><td>fast · hard · early</td></tr>
+      </table>
+      <div class="callout"><b>Watch out:</b> <i>hardly</i> is not the adverb of <i>hard</i>!
+      <i>He works <b>hard</b></i> = a lot of effort. <i>He <b>hardly</b> works</i> = almost never 😅</div>
+      <div class="callout info"><b>After <i>be, look, feel, seem</i></b> we use an <b>adjective</b>, not an adverb:
+      She looks <b>happy</b>. / She smiled <b>happily</b>.</div>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="dot"></span>Prepare to speak · talking about yourself</h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li><b>Habits</b> — present simple + frequency adverbs: <i>I usually… · I always… · I often…</i></li>
+        <li><b>Reasons</b> — <i>…because…</i></li>
+        <li><b>Likes &amp; dislikes</b> — <i>I like… · I don't like… · I really like…</i></li>
+        <li><b>Opinion</b> — <i>I think… · I don't think…</i></li>
+      </ul>
+      <div class="callout">🎯 A one-word answer scores nothing. The formula that always works:
+      <b>answer + reason + example</b>.</div>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Culture · The Beatles &amp; the 60s</h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li>🎸 Four musicians from <b>Liverpool</b>: John Lennon, Paul McCartney, George Harrison, Ringo Starr.</li>
+        <li>📺 In the early 1960s British TV was still <b>black and white</b> — colour came at the end of the decade.</li>
+        <li>💇 Their early look: matching suits and "mop-top" haircuts. By 1967–69: long hair, beards, bright, loose clothes.</li>
+        <li>💿 <b>Abbey Road</b> (1969) — the famous zebra-crossing cover, one of their last albums.</li>
+        <li>👗 60s fashion: <b>mini skirts</b>, colourful tights, bold patterns — a real break from parents' style.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="dot"></span>CEFR · Can-do statements (A2+/B1)</h3>
+    <div class="body">
+      <div class="cando"><i>✓</i><span>I can talk about finished past events with regular and irregular verbs. <span class="tag">Grammar</span></span></div>
+      <div class="cando"><i>✓</i><span>I can form past simple questions and short answers. <span class="tag">Interaction</span></span></div>
+      <div class="cando"><i>✓</i><span>I can describe how people do things using adverbs. <span class="tag">Vocabulary</span></span></div>
+      <div class="cando"><i>✓</i><span>I can follow a conversation about the past and catch specific details. <span class="tag">Listening</span></span></div>
+      <div class="cando"><i>✓</i><span>I can answer personal questions with reasons and opinions. <span class="tag">Speaking</span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ CENTER: PAGES ============ -->
+<div class="col center">
+  <div class="stickypages">
+    <div class="card">
+      <div class="tabs" id="tabs">
+        <div class="tab on" data-i="0">📗 SB p.16</div>
+        <div class="tab" data-i="1">📘 SB p.17</div>
+        <div class="tab" data-i="2">✏️ Homework p.10</div>
+        <div class="tab" data-i="3">✏️ Homework p.11</div>
+      </div>
+      <div class="pagewrap">
+        <div class="scroller" id="scroller"><div class="pageframe" id="frame"></div></div>
+        <div class="zoombar">
+          <button class="btn" id="prevbtn">← Back</button>
+          <button class="btn" id="nextbtn">Next →</button>
+          <button class="btn" id="zoutbtn" title="Zoom out">🔍−</button>
+          <button class="btn" id="zinbtn" title="Zoom in">🔍+</button>
+          <button class="btn" id="zfitbtn" title="Fit the whole page">⤢ Fit</button>
+          <button class="btn" id="writebtn">✍️ Write on page</button>
+          <button class="btn" id="smallbtn" title="Smaller text">A−</button>
+          <button class="btn" id="bigbtn" title="Bigger text">A+</button>
+          <button class="btn" id="drawbtn">🖊 Draw</button>
+          <span class="dtools" id="dtools">
+            <button class="swatch on" data-c="#e11d48" style="background:#e11d48" title="Red pen"></button>
+            <button class="swatch" data-c="#1d7fd6" style="background:#1d7fd6" title="Blue pen"></button>
+            <button class="swatch" data-c="#16a34a" style="background:#16a34a" title="Green pen"></button>
+            <button class="swatch" data-c="rgba(255,214,0,.45)" data-hl="1" style="background:#ffd600" title="Highlighter"></button>
+            <input type="range" class="wsize" id="wsize" min="1" max="14" step="1" value="3" title="Line thickness">
+            <button class="btn" id="undobtn" title="Ctrl+Z">↶ Undo</button>
+            <button class="btn" id="erasebtn" title="Click a line to remove it">🧹 Eraser</button>
+          </span>
+          <button class="btn" id="clearbtn">🧽 Clear page</button>
+          <button class="btn primary" id="zoombtn">🔍 Full screen</button>
+          <span class="wcount" id="wcount"></span>
+        </div>
+        <div class="hwbar" id="hwbar" style="display:none">
+          <b style="font-size:13px">📨 Hand in your homework</b>
+          <input class="name" id="hwname" placeholder="Your name" autocomplete="name">
+          <button class="btn go" id="sendbtn">Save as PDF &amp; send</button>
+          <span class="hint" id="hwstatus">Finish both pages — p.10 and p.11 go into one PDF.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card t-teal" style="margin-top:16px">
+      <h3><span class="dot"></span>Audio</h3>
+      <div class="body" id="audios">
+        <div class="agroup">🎧 Student's Book</div>
+        <div class="audio" data-track="07" data-src="audio/sb/track07.mp3">
+          <button class="playbtn">▶</button>
+          <div class="meta"><b>Track 07 · p.17 Listening, Ex. 2</b>
+            <span class="sub">Sara and her grandma — full conversation</span><div class="seek"><i></i></div></div>
+          <span class="atime">0:00 / 0:00</span>
+          <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+        </div>
+        <div class="audio" data-track="08" data-src="audio/sb/track08.mp3">
+          <button class="playbtn">▶</button>
+          <div class="meta"><b>Track 08 · p.17 Listening, Ex. 3</b>
+            <span class="sub">First half of the conversation</span><div class="seek"><i></i></div></div>
+          <span class="atime">0:00 / 0:00</span>
+          <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+        </div>
+        <div class="audio" data-track="09" data-src="audio/sb/track09.mp3">
+          <button class="playbtn">▶</button>
+          <div class="meta"><b>Track 09 · p.17 Listening, Ex. 4</b>
+            <span class="sub">Second half of the conversation</span><div class="seek"><i></i></div></div>
+          <span class="atime">0:00 / 0:00</span>
+          <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+        </div>
+        <div class="audio" data-track="10" data-src="audio/sb/track10.mp3">
+          <button class="playbtn">▶</button>
+          <div class="meta"><b>Track 10 · p.17 Speaking, Ex. 3–5</b>
+            <span class="sub">Harry answers the questions</span><div class="seek"><i></i></div></div>
+          <span class="atime">0:00 / 0:00</span>
+          <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+        </div>
+        <div class="agroup">📝 Workbook (homework)</div>
+        <div class="audio" data-track="w1" data-src="audio/wb/track01.mp3">
+          <button class="playbtn">▶</button>
+          <div class="meta"><b>WB Track 01 · p.11 Listening</b>
+            <span class="sub">Lara and Rob talk about the prom</span><div class="seek"><i></i></div></div>
+          <span class="atime">0:00 / 0:00</span>
+          <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+        </div>
+        <p class="hint" style="margin:8px 0 0">Tap <b>1×</b> to slow the speaker to 0.75×. <b>⏪ 5s</b> jumps back
+          five seconds — the two buttons you need most when a listening feels fast.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RIGHT: TASKS ============ -->
+<div class="col">
+
+  <div class="secthead">SB p.16 · Grammar: Past simple</div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">1</span>Complete the rules <button class="showpage" data-page="0" data-ex="g1">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Read the three examples in the book, then complete the rules with <b>did</b>, <b>didn't</b> or <b>-d or -ed</b>.</p>
+      <div id="g1"></div>
+      <button class="btn primary" data-check="g1">Check</button>
+      <span class="fb" id="g1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">2</span>Choose the correct words <button class="showpage" data-page="0" data-ex="g2">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Careful — half of these test irregular verbs, the other half test the rule after <i>did / didn't</i>.</p>
+      <div id="g2"></div>
+      <button class="btn primary" data-check="g2">Check</button>
+      <span class="fb" id="g2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">3</span>Sentences about you <button class="showpage" data-page="0" data-ex="g3">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Write what is <b>true for you</b> — positive <i>or</i> negative. Both are accepted; only the
+        <b>form</b> is checked. Press Enter to check a line.</p>
+      <div id="g3"></div>
+      <button class="btn primary" data-check="g3">Check all</button>
+      <span class="fb" id="g3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">4</span>Complete the conversation <button class="showpage" data-page="0" data-ex="g4">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Put the verbs into the past simple. Watch for the two questions and the two negatives.</p>
+      <div class="dialogue" id="g4"></div>
+      <button class="btn primary" data-check="g4" style="margin-top:11px">Check</button>
+      <button class="btn" id="g4hint">💡 Hint</button>
+      <span class="fb" id="g4fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">5</span>Make questions <button class="showpage" data-page="0" data-ex="g5">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Write the full question about last weekend. Mind the word order and the question mark.</p>
+      <div class="callout info" style="margin-top:0"><b>Word order:</b> (Question word) + <b>did</b> + subject + infinitive?
+        <br><i>What <b>did</b> you do last weekend? · <b>Did</b> you go shopping?</i></div>
+      <div id="g5"></div>
+      <button class="btn primary" data-check="g5">Check</button>
+      <span class="fb" id="g5fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">6</span>Ask &amp; answer <button class="showpage" data-page="0" data-ex="g6">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">In pairs — ask the questions from Exercise 5 and answer them about your real weekend.</p>
+      <div class="callout">😈 <b>Extra rule:</b> a <i>Yes/No</i> answer is banned. Every answer needs at least one
+        extra detail: <i>"Yes, I did. I went to the shopping centre with my sister."</i></div>
+      <button class="btn primary" data-done="g6" data-xp="25">✓ We asked and answered all of them</button>
+      <span class="fb" id="g6fb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">SB p.16 · Vocabulary: Adverbs</div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">1</span>Find the adjective <button class="showpage" data-page="0" data-ex="v1">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">These adverbs come from adjectives. Write the adjective form.</p>
+      <div id="v1"></div>
+      <button class="btn primary" data-check="v1">Check</button>
+      <span class="fb" id="v1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">2</span>Complete the table <button class="showpage" data-page="0" data-ex="v2">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Click an adjective, then click the column its adverb belongs to. Click a word again to send it back.</p>
+      <div class="pool" id="pool"></div>
+      <div class="buckets">
+        <div class="bucket" data-cat="ly"><h4>+ -ly</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="ily"><h4>y + -ily</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="irr"><h4>irregular</h4><div class="drop"></div></div>
+      </div>
+      <div style="margin-top:11px"><button class="btn primary" data-check="v2">Check</button>
+        <span class="fb" id="v2fb"></span></div>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">3</span>Complete with adverbs <button class="showpage" data-page="0" data-ex="v3">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Form the adverb from the adjective in brackets. Press Enter to check a line.</p>
+      <div id="v3"></div>
+      <button class="btn primary" data-check="v3">Check all</button>
+      <button class="btn" id="v3hint">💡 Hint</button>
+      <span class="fb" id="v3fb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">SB p.17 · Listening</div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">1</span>Before you listen <button class="showpage" data-page="1" data-ex="l1">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Look at the photo of The Beatles. What do you know about them? What are they wearing?
+        Check yourself with this quick quiz — the <b>Culture</b> box on the left helps.</p>
+      <div id="l1"></div>
+      <button class="btn primary" data-check="l1">Check</button>
+      <span class="fb" id="l1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">2</span>What does grandma talk about?
+      <button class="playmini" data-track="07">▶ Track 07</button>
+      <button class="showpage" data-page="1" data-ex="l2">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Listen once for the <b>main idea</b> only. Don't worry about details yet.</p>
+      <div id="l2"></div>
+      <div class="callout warn" style="margin-bottom:0"><b>Checked in class.</b> There is no answer key for the
+        listening tasks here yet — choose your answer, then compare with your teacher. Add the audioscript and
+        auto-checking can be switched on.</div>
+      <button class="btn primary" data-done="l2" data-xp="15" style="margin-top:10px">✓ I listened and chose</button>
+      <span class="fb" id="l2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">3</span>First half — choose
+      <button class="playmini" data-track="08">▶ Track 08</button>
+      <button class="showpage" data-page="1" data-ex="l3">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Listen to the first half again and choose. Use <b>⏪ 5s</b> if you miss something.</p>
+      <div id="l3"></div>
+      <button class="btn primary" data-done="l3" data-xp="20">✓ I listened and chose</button>
+      <span class="fb" id="l3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">4</span>Second half — complete
+      <button class="playmini" data-track="09">▶ Track 09</button>
+      <button class="showpage" data-page="1" data-ex="l4">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Complete the sentences with words from the box. Each word is used once.</p>
+      <div class="callout info" style="margin-top:0"><b>Word box:</b> beards · blue · dresses · hair · jacket ·
+        jeans · loose-fitting · necklaces · tights</div>
+      <div id="l4"></div>
+      <button class="btn primary" data-done="l4" data-xp="20">✓ I listened and completed</button>
+      <span class="fb" id="l4fb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">SB p.17 · Speaking: talking about yourself</div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">1</span>Discuss <button class="showpage" data-page="1" data-ex="s1">Show on page</button></h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li>Do you enjoy shopping for clothes? Why? / Why not?</li>
+        <li>Who do you usually go shopping with?</li>
+        <li>What do you usually buy?</li>
+      </ul>
+      <button class="btn primary" data-done="s1" data-xp="15">✓ We discussed all three</button>
+      <span class="fb" id="s1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">2</span>Make the questions <button class="showpage" data-page="1" data-ex="s2">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Choose the correct words. This is <b>present simple</b> question order — you will need these
+        four questions in Exercise 6.</p>
+      <div id="s2"></div>
+      <button class="btn primary" data-check="s2">Check</button>
+      <span class="fb" id="s2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">3</span>Harry's answers — take notes
+      <button class="playmini" data-track="10">▶ Track 10</button>
+      <button class="showpage" data-page="1" data-ex="s3">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Listen to Harry answering the four questions and make short notes. Notes, not full sentences!</p>
+      <textarea class="write notes" id="s3notes" placeholder="1 What clothes…&#10;2 How often…&#10;3 Where…&#10;4 How much…"></textarea>
+      <button class="btn primary" data-done="s3" data-xp="15" style="margin-top:9px">✓ I took notes</button>
+      <span class="fb" id="s3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">4</span>Complete Harry's sentences
+      <button class="playmini" data-track="10">▶ Track 10</button>
+      <button class="showpage" data-page="1" data-ex="s4">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Listen again and fill each gap. The <b>Prepare to speak</b> box on the left tells you what
+        <i>kind</i> of phrase goes in each one.</p>
+      <div id="s4"></div>
+      <button class="btn primary" data-done="s4" data-xp="20">✓ I listened and completed</button>
+      <span class="fb" id="s4fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">5</span>Which phrases does Harry use?
+      <button class="playmini" data-track="10">▶ Track 10</button>
+      <button class="showpage" data-page="1" data-ex="s5">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Read the <b>Prepare to speak</b> box, then listen once more and tick every phrase type you hear.</p>
+      <div id="s5"></div>
+      <button class="btn primary" data-done="s5" data-xp="15">✓ I ticked what I heard</button>
+      <span class="fb" id="s5fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">6</span>Your turn <button class="showpage" data-page="1" data-ex="s6">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">In pairs, ask and answer the four questions from Exercise 2. Use phrases from
+        <b>Prepare to speak</b>.</p>
+      <div class="callout">🎯 <b>Target:</b> use at least <b>one phrase from each</b> of the four bullet points —
+        a frequency adverb, a <i>because</i> reason, a like/dislike and an opinion. Your partner listens and
+        ticks them off for you.</div>
+      <button class="btn primary" data-done="s6" data-xp="25">✓ We did the full interview</button>
+      <span class="fb" id="s6fb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">Extra practice · beyond the book</div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">A</span>Irregular verb sprint <span class="tag" style="margin-left:auto">+60 XP</span></h3>
+    <div class="body">
+      <p class="lead">Write the past simple. These twelve appear all over pages 16–17 — learn them and the unit gets easy.</p>
+      <div id="x1"></div>
+      <button class="btn primary" data-check="x1">Check all</button>
+      <button class="btn" id="x1hint">💡 Hint</button>
+      <span class="fb" id="x1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">B</span>Spelling lab · -ed <span class="tag" style="margin-left:auto">+40 XP</span></h3>
+    <div class="body">
+      <p class="lead">Which spelling rule does each verb follow? Click a verb, then click a column.</p>
+      <div class="pool" id="pool2"></div>
+      <div class="buckets">
+        <div class="bucket" data-cat="ed"><h4>just + -ed</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="dbl"><h4>double letter</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="ied"><h4>y → -ied</h4><div class="drop"></div></div>
+      </div>
+      <div style="margin-top:11px"><button class="btn primary" data-check="x2">Check</button>
+        <span class="fb" id="x2fb"></span></div>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">C</span>Adjective or adverb? <span class="tag" style="margin-left:auto">+40 XP</span></h3>
+    <div class="body">
+      <p class="lead">The trap from the left-hand box: after <i>be, look, feel, seem</i> we need an <b>adjective</b>.</p>
+      <div id="x3"></div>
+      <button class="btn primary" data-check="x3">Check</button>
+      <span class="fb" id="x3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">D</span>When did it happen? <span class="tag" style="margin-left:auto">+30 XP</span></h3>
+    <div class="body">
+      <p class="lead">Choose the correct time expression.</p>
+      <div id="x4"></div>
+      <button class="btn primary" data-check="x4">Check</button>
+      <span class="fb" id="x4fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">E</span>Writing · my last weekend <span class="tag" style="margin-left:auto">+30 XP</span></h3>
+    <div class="body">
+      <p class="lead">Write about your last weekend — the same topic as the questions in Grammar Exercise 5.</p>
+      <div class="callout info" style="margin-top:0"><b>Include:</b> three irregular verbs · one negative sentence
+        (<i>didn't…</i>) · two adverbs of manner · one time expression with <i>ago</i>.</div>
+      <textarea class="write" id="wtext" placeholder="Last weekend I…"></textarea>
+      <div class="wcbar"><span class="hint" id="wcnt">0 words</span><span class="hint">target: 60–90 words</span></div>
+      <button class="btn primary" id="wsubmit" style="margin-top:9px">✓ Done — count my words</button>
+      <span class="fb" id="wfb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">F</span>Speaking · the interview game 🎤 <span class="tag" style="margin-left:auto">+25 XP</span></h3>
+    <div class="body">
+      <p class="lead">In pairs. One is a <b>reporter from 1969</b>, the other is a teenager of today.</p>
+      <ul class="tight">
+        <li>The reporter asks about clothes, music and shopping <i>today</i> — all in the present simple.</li>
+        <li>The teenager answers, then asks the reporter what people <b>wore</b>, <b>listened to</b> and
+          <b>bought</b> in the 60s — all in the past simple.</li>
+        <li>Swap roles. Aim for six questions each.</li>
+      </ul>
+      <button class="btn primary" data-done="x5" data-xp="25">✓ We played both roles</button>
+      <span class="fb" id="x5fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-red">
+    <h3><span class="dot"></span>Homework · Workbook p.10–11</h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li>Open the tab <b>✏️ Homework p.10</b> or <b>p.11</b> in the middle column.</li>
+        <li>Press <b>✍️ Write on page</b> and type your answers straight onto the page. Drag a field by the blue
+          <b>✥</b> corner if it lands badly.</li>
+        <li>Press <b>🖊 Draw</b> to circle or tick — that is how you do Exercise 5 on p.10 and Exercise 1 on p.11.</li>
+        <li>Page 11 needs the <b>WB Track 01</b> player above (Lara and Rob at the prom).</li>
+        <li>When both pages are done, type your name and press <b>Save as PDF &amp; send</b>.</li>
+      </ul>
+      <div class="callout"><b>No auto-checking in the homework</b> — it is done by writing and drawing, exactly like
+        the paper workbook.</div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>Unit 2 · Past Simple &amp; Adverbs — interactive companion to the Student's Book. Pages and audio are the publisher's material, used for teaching purposes.</footer>
+
+<div class="lightbox" id="lightbox"></div>
+<div class="confetti" id="confetti"></div>
+<div class="toast" id="toast"></div>
+<div id="printroot"></div>
+
+<script>
+/* ===== config ===== */
+const TEACHER_MAIL=['kazankodaniel','gmail.com'].join('@');
+
+/* ===== state ===== */
+const KEY='unit2p2_pastsimple_v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+S.xp=S.xp||0; S.done=S.done||{}; S.notes=S.notes||{}; S.draws=S.draws||{}; S.nfs=S.nfs||15;
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const MAXXP=845;
+const LEVELS=[[0,'Level 1 · Getting Started'],[210,'Level 2 · Verb Hunter'],[420,'Level 3 · Past Master'],
+              [630,'Level 4 · Adverb Ace'],[840,'Level 5 · Unit Champion 🏆']];
+function renderXP(){
+  $('#xpfill').style.width=Math.min(100,S.xp/MAXXP*100)+'%';
+  $('#xplabel').textContent=S.xp+' XP';
+  let lv=LEVELS[0][1]; LEVELS.forEach(l=>{if(S.xp>=l[0])lv=l[1]});
+  $('#xpright').textContent=lv;
+  $$('#medals .medal').forEach(m=>m.classList.toggle('on',S.xp>=+m.dataset.need));
+}
+function addXP(n,label){ if(n<=0)return; S.xp+=n; save(); renderXP(); toast('+'+n+' XP · '+label); if(n>=10)boom(); }
+let tt;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2400)}
+function boom(){const c=$('#confetti'),cols=['#e63946','#1d7fd6','#12b5a5','#ffc233','#a855c7','#f4732a'];
+  for(let i=0;i<40;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%6];
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.3)+'s';
+    c.appendChild(s);setTimeout(()=>s.remove(),3400)}}
+document.documentElement.dataset.theme=localStorage.getItem('u2p2theme')||'light';
+$('#themebtn').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=n;localStorage.setItem('u2p2theme',n)};
+$('#resetbtn').onclick=()=>{if(confirm('Reset everything — XP, your answers and everything you wrote on the pages?')){
+  localStorage.removeItem(KEY);location.reload()}};
+
+/* ===== pages ===== */
+const PAGES=[
+ {id:'sb16',src:'pages/sb16.png',name:'sb16.png',cap:"Student's Book p.16",
+  ex:{g1:{x:3,y:5,w:46,h:23},g2:{x:3,y:29,w:46,h:17},g3:{x:3,y:47,w:46,h:16},g4:{x:3,y:64,w:46,h:32},
+      g5:{x:51,y:3,w:46,h:18},g6:{x:51,y:22,w:46,h:8},v1:{x:51,y:33,w:46,h:11},
+      v2:{x:51,y:45,w:46,h:20},v3:{x:51,y:66,w:46,h:26}}},
+ {id:'sb17',src:'pages/sb17.png',name:'sb17.png',cap:"Student's Book p.17",
+  ex:{l1:{x:3,y:4,w:46,h:27},l2:{x:3,y:31,w:46,h:32},l3:{x:3,y:57,w:46,h:19},l4:{x:3,y:76,w:46,h:22},
+      s1:{x:51,y:27,w:46,h:12},s2:{x:51,y:39,w:46,h:14},s3:{x:51,y:53,w:46,h:7},
+      s4:{x:51,y:60,w:46,h:16},s5:{x:51,y:76,w:46,h:5},s6:{x:51,y:92,w:46,h:6}}},
+ {id:'wb10',src:'pages/wb10.png',name:'wb10.png',cap:'Workbook p.10 — homework',hw:1},
+ {id:'wb11',src:'pages/wb11.png',name:'wb11.png',cap:'Workbook p.11 — homework',hw:1}
+];
+let cur=0, writeMode=false, drawMode=false, eraseMode=false;
+const NS='http://www.w3.org/2000/svg';
+let penColor='#e11d48', penHL=false, penW=3;
+function setFS(){document.documentElement.style.setProperty('--nfs',S.nfs+'px')}
+function updCount(){
+  const p=PAGES[cur], n=(p.id&&S.notes[p.id]||[]).length, d=(p.id&&S.draws[p.id]||[]).length;
+  const b=[]; if(n)b.push(n+(n===1?' note':' notes')); if(d)b.push(d+(d===1?' line':' lines'));
+  $('#wcount').textContent=b.join(' · ');
+}
+function saveNotes(){const p=PAGES[cur];if(!p.id)return;
+  S.notes[p.id]=$$('#frame .note').map(el=>({x:parseFloat(el.dataset.x),y:parseFloat(el.dataset.y),
+    t:el.querySelector('input').value}));save();updCount()}
+function saveDraws(){const p=PAGES[cur];if(!p.id)return;
+  S.draws[p.id]=$$('#frame .dlayer polyline').map(pl=>({p:pl.getAttribute('points'),
+    c:pl.getAttribute('stroke'),w:+pl.getAttribute('stroke-width')}));save();updCount()}
+function strokeEl(st,live){
+  const pl=document.createElementNS(NS,'polyline');
+  pl.setAttribute('points',st.p);pl.setAttribute('fill','none');
+  pl.setAttribute('stroke',st.c);pl.setAttribute('stroke-width',st.w);
+  pl.setAttribute('stroke-linecap','round');pl.setAttribute('stroke-linejoin','round');
+  pl.setAttribute('vector-effect','non-scaling-stroke');
+  if(live)pl.onclick=e=>{if(!eraseMode)return;e.stopPropagation();pl.remove();saveDraws()};
+  return pl;
+}
+function makeNote(layer,x,y,text,live){
+  const el=document.createElement('span');el.className='note';
+  el.style.left=x+'%';el.style.top=y+'%';el.dataset.x=x;el.dataset.y=y;
+  const inp=document.createElement('input');inp.value=text||'';
+  const fit=()=>{inp.size=Math.max(3,inp.value.length+1)};fit();
+  if(!live){el.appendChild(inp);layer.appendChild(el);return inp}
+  inp.oninput=()=>{fit();saveNotes()};
+  inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();inp.blur()}
+    if(e.key==='Escape'){inp.value='';el.remove();saveNotes()}};
+  inp.onblur=()=>{if(!inp.value.trim())el.remove();saveNotes()};
+  inp.onclick=e=>e.stopPropagation();
+  const del=document.createElement('button');del.className='del';del.textContent='✕';
+  del.onclick=e=>{e.stopPropagation();el.remove();saveNotes()};
+  const grip=document.createElement('button');grip.className='grip';grip.textContent='✥';
+  grip.title='Drag to move';grip.onclick=e=>e.stopPropagation();
+  grip.onpointerdown=e=>{
+    e.preventDefault();e.stopPropagation();
+    grip.setPointerCapture(e.pointerId);el.classList.add('dragging');
+    const r=layer.getBoundingClientRect();
+    const move=ev=>{const nx=Math.min(99.5,Math.max(0,(ev.clientX-r.left)/r.width*100));
+      const ny=Math.min(99.5,Math.max(0,(ev.clientY-r.top)/r.height*100));
+      el.style.left=nx+'%';el.style.top=ny+'%';el.dataset.x=nx;el.dataset.y=ny};
+    const up=()=>{grip.removeEventListener('pointermove',move);grip.removeEventListener('pointerup',up);
+      el.classList.remove('dragging');saveNotes()};
+    grip.addEventListener('pointermove',move);grip.addEventListener('pointerup',up);
+  };
+  el.appendChild(inp);el.appendChild(del);el.appendChild(grip);layer.appendChild(el);
+  return inp;
+}
+function initDraw(svg){
+  let live=null,pts=[];
+  const pos=e=>{const r=svg.getBoundingClientRect();
+    return ((e.clientX-r.left)/r.width*100).toFixed(2)+','+((e.clientY-r.top)/r.height*100).toFixed(2)};
+  svg.addEventListener('pointerdown',e=>{if(!drawMode||eraseMode)return;
+    svg.setPointerCapture(e.pointerId);pts=[pos(e)];
+    live=strokeEl({p:pts[0],c:penColor,w:penHL?penW*4:penW},true);svg.appendChild(live)});
+  svg.addEventListener('pointermove',e=>{if(!live)return;pts.push(pos(e));live.setAttribute('points',pts.join(' '))});
+  const end=()=>{if(!live)return;if(pts.length<2)live.remove();live=null;saveDraws()};
+  svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+}
+function drawPage(){
+  const p=PAGES[cur],f=$('#frame');
+  $$('#tabs .tab').forEach((t,i)=>t.classList.toggle('on',i===cur));
+  $('#hwbar').style.display=p.hw?'flex':'none';
+  f.className='pageframe';f.innerHTML='<div class="ph">Loading…</div>';
+  const img=new Image();
+  img.onload=()=>{
+    f.innerHTML='';
+    const stage=document.createElement('div');stage.className='pagestage';
+    const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','dlayer');
+    svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('preserveAspectRatio','none');
+    (S.draws[p.id]||[]).forEach(st=>svg.appendChild(strokeEl(st,true)));
+    initDraw(svg);
+    const layer=document.createElement('div');layer.className='wlayer';
+    layer.onclick=e=>{if(e.target!==layer)return;
+      const r=layer.getBoundingClientRect();
+      makeNote(layer,(e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100,'',true).focus()};
+    const hl=document.createElement('div');hl.className='hl';hl.id='hlbox';
+    stage.appendChild(img);stage.appendChild(svg);stage.appendChild(layer);stage.appendChild(hl);
+    f.appendChild(stage);
+    (S.notes[p.id]||[]).forEach(n=>makeNote(layer,n.x,n.y,n.t,true));
+    updCount();
+  };
+  img.onerror=()=>{f.innerHTML=`<div class="ph"><b>Page image missing</b>Put <code>${p.name}</code> into <code>pages/</code></div>`};
+  img.src=p.src;img.alt=p.cap;
+}
+$$('#tabs .tab').forEach(t=>t.onclick=()=>{cur=+t.dataset.i;drawPage();$('#scroller').scrollTop=0});
+$('#prevbtn').onclick=()=>{cur=(cur+PAGES.length-1)%PAGES.length;drawPage()};
+$('#nextbtn').onclick=()=>{cur=(cur+1)%PAGES.length;drawPage()};
+let pz=S.pz||1;
+function setPZ(v,quiet){pz=Math.round(Math.min(3,Math.max(1,v))*100)/100;S.pz=pz;save();
+  document.documentElement.style.setProperty('--pz',pz);if(!quiet)toast('Zoom '+Math.round(pz*100)+'%')}
+setPZ(pz,true);
+$('#zinbtn').onclick=()=>setPZ(pz+.25);
+$('#zoutbtn').onclick=()=>setPZ(pz-.25);
+$('#zfitbtn').onclick=()=>{setPZ(1);$('#scroller').scrollTo({top:0,left:0,behavior:'smooth'})};
+function showEx(pageIdx,exKey){
+  const go=()=>{
+    const p=PAGES[pageIdx],r=p.ex&&p.ex[exKey];if(!r)return;
+    const hl=$('#hlbox'),stage=$('#frame .pagestage');if(!hl||!stage)return setTimeout(go,250);
+    hl.style.left=r.x+'%';hl.style.top=r.y+'%';hl.style.width=r.w+'%';hl.style.height=r.h+'%';
+    hl.classList.remove('on');void hl.offsetWidth;hl.classList.add('on');
+    if(pz<1.7)setPZ(1.7,true);
+    const sc=$('#scroller');
+    setTimeout(()=>{
+      const sw=stage.offsetWidth,sh=stage.offsetHeight;
+      const top=sh*r.y/100-Math.max(24,(sc.clientHeight-sh*r.h/100)/2);
+      const left=sw*r.x/100-Math.max(12,(sc.clientWidth-sw*r.w/100)/2);
+      sc.scrollTo({top:Math.max(0,top),left:Math.max(0,left),behavior:'smooth'});
+      if(window.innerWidth<=1250)sc.scrollIntoView({behavior:'smooth',block:'center'});
+    },380);
+    clearTimeout(showEx._t);showEx._t=setTimeout(()=>hl.classList.remove('on'),4200);
+  };
+  if(cur!==pageIdx){cur=pageIdx;drawPage();setTimeout(go,320)}else go();
+}
+$$('.showpage').forEach(b=>b.onclick=()=>showEx(+b.dataset.page,b.dataset.ex));
+function setModes(w,d,er){
+  writeMode=!!w;drawMode=!!d;eraseMode=!!er;
+  document.body.classList.toggle('writeon',writeMode);
+  document.body.classList.toggle('drawon',drawMode&&!eraseMode);
+  document.body.classList.toggle('eraseon',eraseMode);
+  $('#writebtn').classList.toggle('primary',writeMode);
+  $('#writebtn').textContent=writeMode?'✅ Writing on':'✍️ Write on page';
+  $('#drawbtn').classList.toggle('primary',drawMode||eraseMode);
+  $('#drawbtn').textContent=(drawMode||eraseMode)?'✅ Drawing on':'🖊 Draw';
+  $('#erasebtn').classList.toggle('primary',eraseMode);
+}
+$('#writebtn').onclick=()=>{const on=!writeMode;setModes(on,false,false);
+  toast(on?'Click anywhere on the page and start typing':'Writing mode off')};
+$('#drawbtn').onclick=()=>{const on=!(drawMode||eraseMode);setModes(false,on,false);
+  toast(on?'Draw with the mouse — circle, underline, tick':'Drawing mode off')};
+$('#erasebtn').onclick=()=>{const on=!eraseMode;setModes(false,true,on);
+  toast(on?'Click a line to delete it':'Back to the pen')};
+$$('#dtools .swatch').forEach(sw=>sw.onclick=()=>{
+  $$('#dtools .swatch').forEach(o=>o.classList.remove('on'));sw.classList.add('on');
+  penColor=sw.dataset.c;penHL=!!sw.dataset.hl;if(eraseMode)setModes(false,true,false)});
+$('#wsize').oninput=e=>{penW=+e.target.value};
+$('#undobtn').onclick=()=>{const a=$$('#frame .dlayer polyline');
+  if(!a.length){toast('Nothing to undo');return}a[a.length-1].remove();saveDraws()};
+$('#bigbtn').onclick=()=>{S.nfs=Math.min(28,S.nfs+2);save();setFS()};
+$('#smallbtn').onclick=()=>{S.nfs=Math.max(9,S.nfs-2);save();setFS()};
+$('#clearbtn').onclick=()=>{
+  const n=$$('#frame .note').length,d=$$('#frame .dlayer polyline').length;
+  if(!n&&!d){toast('Nothing to clear on this page');return}
+  if(confirm('Delete everything on this page — both the text and the drawings?')){
+    $$('#frame .note').forEach(x=>x.remove());$$('#frame .dlayer polyline').forEach(x=>x.remove());
+    saveNotes();saveDraws()}};
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')$('#lightbox').classList.remove('on');
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!/input|textarea/i.test(e.target.tagName)){
+    e.preventDefault();$('#undobtn').click()}});
+function openLB(){const lb=$('#lightbox');lb.innerHTML='';
+  const i=new Image();i.src=PAGES[cur].src;
+  i.onerror=()=>lb.innerHTML='<div style="color:#fff;font-weight:700">'+PAGES[cur].name+' is missing</div>';
+  lb.appendChild(i);lb.classList.add('on')}
+$('#zoombtn').onclick=openLB;
+$('#frame').onclick=e=>{if(writeMode||drawMode||eraseMode||e.target.closest('.note'))return;openLB()};
+$('#lightbox').onclick=()=>$('#lightbox').classList.remove('on');
+setFS();drawPage();
+
+/* ===== homework → PDF ===== */
+$('#hwname').value=S.name||'';
+$('#hwname').oninput=e=>{S.name=e.target.value;save()};
+$('#sendbtn').onclick=()=>{
+  const name=($('#hwname').value||'').trim();
+  if(!name){toast('Type your name first');$('#hwname').focus();return}
+  const hwPages=PAGES.filter(p=>p.hw);
+  if(!hwPages.some(p=>(S.notes[p.id]||[]).length||(S.draws[p.id]||[]).length)){
+    toast('Do some of the homework first 🙂');return}
+  const root=$('#printroot');root.innerHTML='';
+  hwPages.forEach(p=>{
+    const sheet=document.createElement('div');sheet.className='sheet';
+    const h=document.createElement('div');h.className='phead';
+    h.textContent=`Unit 2 · Past simple & Adverbs — ${p.cap} — ${name} — ${new Date().toLocaleDateString('en-GB')}`;
+    const stage=document.createElement('div');stage.className='pagestage';
+    const img=new Image();img.src=p.src;img.style.width='100%';
+    const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','dlayer');
+    svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('preserveAspectRatio','none');
+    (S.draws[p.id]||[]).forEach(st=>svg.appendChild(strokeEl(st,false)));
+    const layer=document.createElement('div');layer.className='wlayer';
+    (S.notes[p.id]||[]).forEach(n=>makeNote(layer,n.x,n.y,n.t,false));
+    stage.appendChild(img);stage.appendChild(svg);stage.appendChild(layer);
+    sheet.appendChild(h);sheet.appendChild(stage);root.appendChild(sheet);
+  });
+  $('#hwstatus').innerHTML='In the print window choose <b>Save as PDF</b> → then attach the file to the email.';
+  setTimeout(()=>{
+    window.print();
+    const subj=encodeURIComponent(`Unit 2 homework (p.10-11) — ${name}`);
+    const body=encodeURIComponent(`Hello!\n\nHere is my homework for Workbook pages 10 and 11.\nPlease find the PDF attached.\n\n${name}`);
+    setTimeout(()=>{location.href=`mailto:${TEACHER_MAIL}?subject=${subj}&body=${body}`},900);
+  },400);
+};
+
+/* ===== audio ===== */
+const TRACKS={};
+const fmt=s=>isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'0:00';
+$$('#audios .audio').forEach(box=>{
+  const a=new Audio(box.dataset.src);a.preload='metadata';
+  const btn=box.querySelector('.playbtn'),bar=box.querySelector('.seek i'),
+        seek=box.querySelector('.seek'),time=box.querySelector('.atime'),
+        rate=box.querySelector('.rate'),back=box.querySelector('.back');
+  TRACKS[box.dataset.track]={a,box,btn};
+  const paint=()=>{if(a.duration)bar.style.width=(a.currentTime/a.duration*100)+'%';
+    time.textContent=fmt(a.currentTime)+' / '+fmt(a.duration)};
+  a.addEventListener('loadedmetadata',paint);
+  a.addEventListener('timeupdate',paint);
+  a.addEventListener('ended',()=>{btn.textContent='▶';box.classList.remove('playing');bar.style.width='0';syncMinis()});
+  a.addEventListener('error',()=>{if(!box.querySelector('.miss')){
+    const s=document.createElement('span');s.className='miss';s.textContent='no file';box.appendChild(s)}});
+  seek.onclick=e=>{if(!a.duration)return;const r=seek.getBoundingClientRect();
+    a.currentTime=(e.clientX-r.left)/r.width*a.duration;paint()};
+  back.onclick=()=>{a.currentTime=Math.max(0,a.currentTime-5);paint()};
+  rate.onclick=()=>{a.playbackRate=a.playbackRate===1?0.75:1;
+    rate.textContent=a.playbackRate===1?'1×':'0.75×';rate.classList.toggle('on',a.playbackRate!==1)};
+  btn.onclick=()=>toggleTrack(box.dataset.track);
+});
+function toggleTrack(id){
+  const t=TRACKS[id];if(!t)return;
+  Object.entries(TRACKS).forEach(([k,o])=>{if(k!==id&&!o.a.paused){
+    o.a.pause();o.btn.textContent='▶';o.box.classList.remove('playing')}});
+  if(t.a.paused){t.a.play().then(()=>{t.btn.textContent='❚❚';t.box.classList.add('playing');syncMinis()})
+    .catch(()=>toast('Audio file missing'))}
+  else{t.a.pause();t.btn.textContent='▶';t.box.classList.remove('playing')}
+  syncMinis();
+}
+function syncMinis(){$$('.playmini').forEach(m=>{const t=TRACKS[m.dataset.track];const on=t&&!t.a.paused;
+  m.classList.toggle('on',!!on);m.textContent=(on?'❚❚ ':'▶ ')+'Track '+m.dataset.track})}
+$$('.playmini').forEach(m=>m.onclick=e=>{e.stopPropagation();toggleTrack(m.dataset.track);
+  $('#audios').scrollIntoView({behavior:'smooth',block:'nearest'})});
+syncMinis();
+
+/* ===== engines ===== */
+function buildMCQ(host,items){
+  const box=$('#'+host);box.innerHTML='';
+  items.forEach((it,i)=>{
+    const q=document.createElement('div');q.className='q';
+    q.innerHTML=`<p><span class="num">${it.n||(i+1)}</span>${it.q}</p>`;
+    const o=document.createElement('div');o.className='opts';
+    it.a.forEach(t=>{const b=document.createElement('div');b.className='opt';b.textContent=t;
+      b.onclick=()=>{if(q.classList.contains('locked'))return;
+        [...o.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};o.appendChild(b)});
+    q.appendChild(o);
+    if(it.why){const f=document.createElement('div');f.className='fb';f.dataset.why=it.why;q.appendChild(f)}
+    box.appendChild(q);
+  });
+  box._items=items;
+}
+function gradeMCQ(host,xp,label){
+  const box=$('#'+host),items=box._items;let ok=0,ans=0;
+  [...box.children].forEach((q,i)=>{
+    const opts=[...q.querySelector('.opts').children];
+    const sel=opts.find(o=>o.classList.contains('sel'));if(!sel)return;ans++;
+    q.classList.add('locked');
+    opts.forEach(o=>{if(o.textContent===items[i].k)o.classList.add('good');else if(o===sel)o.classList.add('bad')});
+    const good=sel.textContent===items[i].k;if(good)ok++;
+    const f=q.querySelector('.fb');if(f){f.className='fb on '+(good?'good':'bad');f.innerHTML=(good?'✔ ':'✘ ')+f.dataset.why}
+  });
+  const fb=$('#'+host+'fb');fb.className='fb on '+(ok===items.length?'good':'bad');
+  fb.textContent=ans<items.length?`${ans} of ${items.length} answered. Score ${ok}/${items.length}`
+    :`Score ${ok} out of ${items.length}`+(ok===items.length?' 🎉 perfect!':'');
+  if(!S.done[host]){S.done[host]=1;addXP(Math.round(xp*ok/items.length),label)}
+}
+function markInput(inp,keys){
+  const v=inp.value.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.?!]+$/,'');
+  const ok=keys.some(k=>k.toLowerCase()===v);
+  inp.classList.remove('good','bad');inp.classList.add(ok?'good':'bad');return ok;
+}
+function buildGaps(host,items,wide){
+  const box=$('#'+host);box.innerHTML='';
+  items.forEach((s,i)=>{
+    const p=document.createElement('p');p.className='gapline';
+    const parts=s.t.split('___');
+    p.innerHTML=`<span class="num">${i+1}</span>${parts[0]}`;
+    const inp=document.createElement('input');inp.className='txt'+(wide?' wide':'');inp.placeholder='…';
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,s.k)};
+    p.appendChild(inp);p.insertAdjacentText('beforeend',parts[1]||'');
+    box.appendChild(p);
+  });
+  box._items=items;
+}
+function gradeGaps(host,xp,label,extra){
+  const box=$('#'+host),items=box._items;let ok=0;
+  $$('#'+host+' input').forEach((inp,i)=>{if(markInput(inp,items[i].k))ok++});
+  const fb=$('#'+host+'fb');fb.className='fb on '+(ok===items.length?'good':'bad');
+  fb.textContent=`${ok} out of ${items.length} correct`+(ok===items.length?' '+(extra||'🎉'):'');
+  if(!S.done[host]){S.done[host]=1;addXP(Math.round(xp*ok/items.length),label)}
+}
+function makeBucketGame(poolId,words,catNames){
+  let sel=null;
+  const pool=$('#'+poolId);
+  const scope=pool.parentElement;
+  function chip(word,cat){
+    const c=document.createElement('span');c.className='wchip';c.textContent=word;c.dataset.cat=cat;
+    c.onclick=()=>{
+      if(c.closest('.bucket')){c.classList.remove('sel');pool.appendChild(c);sel=null;
+        scope.querySelectorAll('.bucket').forEach(b=>b.classList.remove('sel'));return}
+      if(sel===c){c.classList.remove('sel');sel=null;
+        scope.querySelectorAll('.bucket').forEach(b=>b.classList.remove('sel'));return}
+      scope.querySelectorAll('.wchip').forEach(x=>x.classList.remove('sel'));
+      c.classList.add('sel');sel=c;
+      scope.querySelectorAll('.bucket').forEach(b=>b.classList.add('sel'));
+    };
+    return c;
+  }
+  words.map(w=>w).sort(()=>Math.random()-.5).forEach(([w,cat])=>pool.appendChild(chip(w,cat)));
+  scope.querySelectorAll('.bucket').forEach(b=>b.onclick=e=>{
+    if(!sel||e.target.classList.contains('wchip'))return;
+    b.querySelector('.drop').appendChild(sel);sel.classList.remove('sel');sel=null;
+    scope.querySelectorAll('.bucket').forEach(x=>x.classList.remove('sel'));
+  });
+  return scope;
+}
+
+/* ===== SB p.16 Grammar ===== */
+buildMCQ('g1',[
+ {q:'a · Regular verbs end with ______ in the affirmative.',a:['-d or -ed','did','didn’t'],k:'-d or -ed',
+  why:'listen<b>ed</b>, us<b>ed</b> — but many common verbs are irregular (wear → wore).'},
+ {q:'b · We form negative sentences with ______ + infinitive.',a:['-d or -ed','did','didn’t'],k:'didn’t',
+  why:'They <b>didn’t understand</b> — never <s>didn’t understood</s>.'},
+ {q:'c · We form questions with ______ + infinitive.',a:['-d or -ed','did','didn’t'],k:'did',
+  why:'What <b>did</b> they <b>wear</b>? — the main verb stays in the infinitive.'}
+]);
+buildMCQ('g2',[
+ {q:'I ______ some new shoes for the party.',a:['choosed','chose'],k:'chose',why:'choose → chose (irregular).'},
+ {q:'I ______ the new Harry Styles single.',a:['heard','heared'],k:'heard',why:'hear → heard (irregular).'},
+ {q:'My sister and I ______ shopping last Saturday.',a:['enjoyed','enjoied'],k:'enjoyed',
+  why:'Vowel + y → just add -ed: enjo<b>yed</b>. Only consonant + y becomes -ied.'},
+ {q:'Did you ______ any new clothes?',a:['get','got'],k:'get',why:'After <b>did</b> — infinitive.'},
+ {q:'He ______ the lyrics before he ______ them.',a:['read … sang','red … sung','read … sung'],k:'read … sang',
+  why:'read/read (same spelling, different sound) and sing → <b>sang</b>. <i>Sung</i> is the third form.'},
+ {q:'I didn’t ______ your friends at the concert.',a:['met','meet'],k:'meet',why:'After <b>didn’t</b> — infinitive.'},
+ {q:'When did you ______ shopping?',a:['go','went'],k:'go',why:'After <b>did</b> — infinitive.'},
+ {q:'We ______ to go to a concert but they cancelled it.',a:['planned','planed'],k:'planned',
+  why:'Short vowel + one consonant → double it: pla<b>nned</b>.'}
+]);
+const G3=[
+ {t:'I ___ jeans yesterday.',k:['wore','did not wear','didn’t wear',"didn't wear"]},
+ {t:'I ___ clothes for my last birthday.',k:['got','did not get','didn’t get',"didn't get"]},
+ {t:'My parents ___ the clothes I’m wearing.',k:['bought','did not buy','didn’t buy',"didn't buy"]},
+ {t:'My family and I ___ TV last night.',k:['watched','did not watch','didn’t watch',"didn't watch"]},
+ {t:'My best friend ___ me this morning.',k:['texted','did not text','didn’t text',"didn't text"]},
+ {t:'We ___ shopping last weekend.',k:['went','did not go','didn’t go',"didn't go"]},
+ {t:'I ___ a music lesson last week.',k:['had','did not have','didn’t have',"didn't have"]},
+ {t:'I ___ my friends last weekend.',k:['saw','did not see','didn’t see',"didn't see"]}
+];
+buildGaps('g3',G3,true);
+const G4=[
+ {who:'A',pre:'Hey, where ',post:' that T-shirt? It’s really cool!',k:['did you get'],hint:'you / get'},
+ {who:'B',pre:'My brother ',post:' it to me for my birthday.',k:['gave'],hint:'give'},
+ {who:'A',pre:'I really like it. Where ',post:' it?',k:['did he find'],hint:'he / find'},
+ {who:'B',pre:'Well, he ',post:' it exactly. ',k:["didn't find",'did not find','didn’t find'],hint:'not find'},
+ {who:'',pre:'He ',post:' it.',k:['designed'],hint:'design'},
+ {who:'A',pre:'Really? How ',post:' that?',k:['did he do'],hint:'he / do'},
+ {who:'B',pre:'He ',post:' this app called UTme, on his phone.',k:['used'],hint:'use'},
+ {who:'',pre:'He ',post:' a photo and then added the colours.',k:['took'],hint:'take'},
+ {who:'',pre:'He ',post:' me the app. It’s really cool.',k:['showed'],hint:'show'},
+ {who:'A',pre:'Wow! I ',post:' you could do that!',k:["didn't know",'did not know','didn’t know'],hint:'not know'}
+];
+(function(){
+  const box=$('#g4');box.innerHTML='';
+  G4.forEach((s,i)=>{
+    const p=document.createElement('p');
+    p.innerHTML=(s.who?`<b class="who">${s.who}:</b> `:'<b class="who"></b> ')+
+      `<span class="num" style="color:var(--muted);font-weight:800">${i+1}</span> ${s.pre}`;
+    const inp=document.createElement('input');inp.className='txt';inp.placeholder=s.hint;
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,s.k)};
+    p.appendChild(inp);p.insertAdjacentText('beforeend',s.post);
+    box.appendChild(p);
+  });
+  box._items=G4;
+})();
+$('#g4hint').onclick=()=>{
+  const inps=$$('#g4 input'),i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  inps[i].value=G4[i].k[0].split(' ')[0]+' ';inps[i].focus();
+  toast('Starts with: '+G4[i].k[0].split(' ')[0]);
+};
+const G5=[
+ {t:'which friends / you / meet? → ___',k:['which friends did you meet','which friends did you meet?']},
+ {t:'you / play / any sports? → ___',k:['did you play any sports','did you play any sports?']},
+ {t:'what / watch / on TV? → ___',k:['what did you watch on tv','what did you watch on tv?']},
+ {t:'you / go / to bed late? → ___',k:['did you go to bed late','did you go to bed late?']}
+];
+buildGaps('g5',G5,true);
+
+/* ===== SB p.16 Vocabulary ===== */
+const V1=[
+ {t:'Hip hop became popular internationally. → ___',k:['international']},
+ {t:'He shouted at us angrily. → ___',k:['angry']},
+ {t:'You need to work hard. → ___',k:['hard']}
+];
+buildGaps('v1',V1,true);
+const V2WORDS=[['amazing','ly'],['bad','ly'],['careful','ly'],['honest','ly'],['polite','ly'],['quick','ly'],
+ ['rude','ly'],['serious','ly'],['healthy','ily'],['heavy','ily'],['lazy','ily'],['lucky','ily'],
+ ['early','irr'],['fast','irr'],['good','irr']];
+makeBucketGame('pool',V2WORDS);
+const V3=[
+ {t:'The sisters are chatting ___ (happy).',k:['happily']},
+ {t:'She was late, so she was walking ___ (fast).',k:['fast']},
+ {t:'You mustn’t talk ___ (loud) in the cinema.',k:['loudly']},
+ {t:'My grandma is old. She walks quite ___ (slow).',k:['slowly']},
+ {t:'What did he say? He’s talking very ___ (quiet).',k:['quietly']},
+ {t:'I’m studying ___ (hard) for the exam.',k:['hard']},
+ {t:'He plays the piano really ___ (good).',k:['well']},
+ {t:'Alana won the tennis match ___ (easy).',k:['easily']}
+];
+buildGaps('v3',V3);
+$('#v3hint').onclick=()=>{
+  const inps=$$('#v3 input'),i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  inps[i].value=V3[i].k[0].slice(0,3);inps[i].focus();toast('Starts with: '+inps[i].value);
+};
+
+/* ===== SB p.17 Listening ===== */
+buildMCQ('l1',[
+ {q:'The Beatles came from…',a:['Liverpool','London','Manchester'],k:'Liverpool',
+  why:'Four musicians from Liverpool — John, Paul, George and Ringo.'},
+ {q:'Their famous 1969 album with the zebra crossing is…',a:['Abbey Road','Help!','Let It Be'],k:'Abbey Road',
+  why:'<i>Abbey Road</i> — the cover shows the four of them crossing the street.'},
+ {q:'In the early 1960s, British television was mostly…',a:['black and white','colour','3D'],k:'black and white',
+  why:'Colour TV only arrived in Britain at the end of the 1960s. Useful for Exercise 3!'},
+ {q:'By the end of the 1960s the men’s look was…',a:['long hair and beards','short hair and suits','no hair'],
+  k:'long hair and beards',why:'Early Beatles: matching suits and mop-tops. Later: long hair, beards, bright loose clothes.'}
+]);
+(function(){
+  buildMCQ('l2',[{q:'What does Sara’s grandma talk about?',
+    a:['a her favourite band from the 1970s','b music and fashion in the 1960s','c women’s clothes fashions in the 1960s'],
+    k:'b music and fashion in the 1960s'}]);
+})();
+buildMCQ('l3',[
+ {q:'People ______ colour TV in the 1950s.',a:['watched','didn’t watch'],k:'didn’t watch'},
+ {q:'Sara’s grandma ______ pop music in the 1960s.',a:['listened to','didn’t listen to'],k:'listened to'},
+ {q:'Sara’s grandma watched The Beatles play ______.',a:['on TV','at a concert'],k:'on TV'},
+ {q:'Sara’s ______ still plays The Beatles’ <i>Abbey Road</i> album.',a:['dad','grandma'],k:'dad'}
+]);
+const L4=[
+ {t:'Grandma’s ___ jacket matches Sara’s…',k:[]},
+ {t:'…Sara’s ___ .',k:[]},
+ {t:'Girls wore short ___ and colourful…',k:[]},
+ {t:'…colourful ___ in the 1960s.',k:[]},
+ {t:'By the end of the 60s, men wore long ___ ,…',k:[]},
+ {t:'…___ and colourful,…',k:[]},
+ {t:'…___ clothes.',k:[]},
+ {t:'Grandma made her own ___ .',k:[]}
+];
+buildGaps('l4',L4);
+buildMCQ('s2',[
+ {q:'What clothes ______ wearing?',a:['do you like','you like'],k:'do you like',
+  why:'Present simple question: <b>do</b> + subject + verb.'},
+ {q:'How often ______ new clothes?',a:['you buy','do you buy'],k:'do you buy',
+  why:'The question word doesn’t replace <b>do</b>.'},
+ {q:'Where ______ buy your clothes?',a:['do you usually','you do usually'],k:'do you usually',
+  why:'The frequency adverb goes after the subject: do you <b>usually</b> buy.'},
+ {q:'How much ______ on clothes?',a:['are you spend','do you spend'],k:'do you spend',
+  why:'<i>spend</i> is a main verb, so it needs <b>do</b>, not <i>are</i>.'}
+]);
+const S4=[
+ {t:'I ___ jeans always look good.',k:[]},
+ {t:'I don’t go shopping ___ .',k:[]},
+ {t:'I ___ shopping in department stores because the clothes are too expensive.',k:[]},
+ {t:'I ___ spend more when I get money for my birthday.',k:[]}
+];
+buildGaps('s4',S4,true);
+(function(){
+  const box=$('#s5');box.innerHTML='';
+  [['a frequency adverb','I usually… / I always… / I often…'],
+   ['a reason','because…'],
+   ['likes and dislikes','I like… / I don’t like… / I really like…'],
+   ['an opinion','I think… / I don’t think…']].forEach((p,i)=>{
+    const q=document.createElement('div');q.className='q';
+    q.innerHTML=`<p><span class="num">${i+1}</span>${p[0]} — <span class="hint">${p[1]}</span></p>
+      <div class="opts"><div class="opt">Harry uses it ✓</div><div class="opt">He doesn’t</div></div>`;
+    const opts=q.querySelectorAll('.opt');
+    opts.forEach(o=>o.onclick=()=>{opts.forEach(x=>x.classList.remove('sel'));o.classList.add('sel')});
+    box.appendChild(q);
+  });
+})();
+
+/* ===== Extra ===== */
+const X1=[['wear','wore'],['get','got'],['buy','bought'],['go','went'],['see','saw'],['have','had'],
+ ['take','took'],['give','gave'],['find','found'],['know','knew'],['sing','sang'],['choose','chose']];
+(function(){
+  const box=$('#x1');box.innerHTML='';
+  X1.forEach((s,i)=>{
+    const p=document.createElement('p');p.className='gapline';
+    p.innerHTML=`<span class="num">${i+1}</span>${s[0]} → `;
+    const inp=document.createElement('input');inp.className='txt';inp.placeholder='past…';
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,[s[1]])};
+    p.appendChild(inp);box.appendChild(p);
+  });
+  box._items=X1.map(s=>({k:[s[1]]}));
+})();
+$('#x1hint').onclick=()=>{
+  const inps=$$('#x1 input'),i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  inps[i].value=X1[i][1].slice(0,2);inps[i].focus();toast('Starts with: '+inps[i].value);
+};
+const X2WORDS=[['watch','ed'],['text','ed'],['design','ed'],['plan','dbl'],['stop','dbl'],['shop','dbl'],
+ ['chat','dbl'],['study','ied'],['try','ied'],['carry','ied']];
+makeBucketGame('pool2',X2WORDS);
+buildMCQ('x3',[
+ {q:'He plays the guitar really ______.',a:['good','well'],k:'well',why:'It describes the verb <i>plays</i> → adverb.'},
+ {q:'She’s a ______ learner.',a:['quick','quickly'],k:'quick',why:'It describes the noun <i>learner</i> → adjective.'},
+ {q:'They danced ______.',a:['beautiful','beautifully'],k:'beautifully',why:'It describes <i>danced</i> → adverb.'},
+ {q:'The test was ______.',a:['easy','easily'],k:'easy',why:'After <b>was</b> we need an adjective.'},
+ {q:'You look ______ today!',a:['happy','happily'],k:'happy',why:'After <b>look</b> (= seem) we need an adjective.'},
+ {q:'He drives too ______.',a:['fast','fastly'],k:'fast',why:'<i>fastly</i> doesn’t exist — fast is both adjective and adverb.'}
+]);
+buildMCQ('x4',[
+ {q:'I bought these trainers two weeks ______.',a:['ago','last','yesterday'],k:'ago',
+  why:'A period of time + <b>ago</b> = counting back from now.'},
+ {q:'We went to a concert ______ Saturday.',a:['ago','last','in'],k:'last',
+  why:'<b>last</b> + day/week/month — no preposition.'},
+ {q:'She texted me ______ morning.',a:['last','yesterday','ago'],k:'yesterday',
+  why:'<b>yesterday</b> morning / afternoon / evening — but <i>last</i> night.'},
+ {q:'The Beatles became famous ______ the 1960s.',a:['on','at','in'],k:'in',
+  why:'<b>in</b> + years, decades and centuries.'},
+ {q:'______ night I watched a film.',a:['Yesterday','Last','Ago'],k:'Last',
+  why:'The exception: <b>last night</b>, never <s>yesterday night</s>.'}
+]);
+const countWords=t=>(t.trim().match(/\S+/g)||[]).length;
+$('#wtext').value=S.wtext||'';
+$('#s3notes').value=S.s3notes||'';
+$('#s3notes').oninput=()=>{S.s3notes=$('#s3notes').value;save()};
+function updWords(){const n=countWords($('#wtext').value);
+  $('#wcnt').textContent=n+(n===1?' word':' words');
+  $('#wcnt').style.color=(n>=60&&n<=90)?'var(--ok)':'var(--muted)';return n}
+$('#wtext').oninput=()=>{S.wtext=$('#wtext').value;save();updWords()};
+updWords();
+$('#wsubmit').onclick=()=>{
+  const n=updWords(),f=$('#wfb');
+  if(n<40){f.className='fb on bad';f.textContent=`Only ${n} words — keep going, aim for at least 60.`;return}
+  f.className='fb on good';
+  f.textContent=(n>=60&&n<=90)?`${n} words — right on target 🎯 Now check the four things in the blue box.`
+    :`${n} words. Good effort! The target was 60–90 — read it again and adjust.`;
+  if(!S.done.wtext){S.done.wtext=1;addXP(30,'Writing')}
+};
+
+/* ===== self-declared ===== */
+$$('[data-done]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.done,f=$('#'+k+'fb');
+  if(S.done[k]){toast('Already counted 🙂');return}
+  S.done[k]=1;addXP(+b.dataset.xp,'Done');b.disabled=true;b.textContent='✓ Counted';
+  if(f){f.className='fb on good';f.textContent='✔ Counted — well done.'}
+});
+$$('[data-done]').forEach(b=>{if(S.done[b.dataset.done]){b.disabled=true;b.textContent='✓ Counted'}});
+
+/* ===== check buttons ===== */
+const GAPXP={g3:[50,'Past simple about you'],g5:[45,'Questions'],v1:[20,'Adjectives'],
+             v3:[50,'Adverbs'],x1:[60,'Irregular verbs']};
+const MCQXP={g1:[30,'Rules'],g2:[55,'Choose the verb'],l1:[30,'Beatles quiz'],s2:[40,'Question forms'],
+             x3:[40,'Adjective or adverb'],x4:[30,'Time expressions']};
+$$('[data-check]').forEach(b=>b.onclick=()=>{
+  const h=b.dataset.check;
+  if(MCQXP[h]){gradeMCQ(h,MCQXP[h][0],MCQXP[h][1]);return}
+  if(GAPXP[h]){gradeGaps(h,GAPXP[h][0],GAPXP[h][1]);return}
+  if(h==='g4'){
+    let ok=0;$$('#g4 input').forEach((inp,i)=>{if(markInput(inp,G4[i].k))ok++});
+    const f=$('#g4fb');f.className='fb on '+(ok===G4.length?'good':'bad');
+    f.textContent=`${ok} out of ${G4.length} correct`+(ok===G4.length?' 🎉':'');
+    if(!S.done.g4){S.done.g4=1;addXP(Math.round(65*ok/G4.length),'Conversation')}
+    return;
+  }
+  if(h==='v2'||h==='x2'){
+    const poolId=h==='v2'?'pool':'pool2';
+    const total=(h==='v2'?V2WORDS:X2WORDS).length;
+    const scope=$('#'+poolId).parentElement;
+    let ok=0;
+    scope.querySelectorAll('.bucket').forEach(bk=>{
+      bk.querySelectorAll('.wchip').forEach(c=>{
+        const good=c.dataset.cat===bk.dataset.cat;c.classList.add(good?'good':'bad');if(good)ok++});
+    });
+    const placed=scope.querySelectorAll('.bucket .wchip').length;
+    const f=$('#'+h+'fb');f.className='fb on '+(ok===total?'good':'bad');
+    f.textContent=placed<total?`Place all ${total} words first (${placed} placed).`
+      :`${ok} out of ${total} in the right column`+(ok===total?' 🎉':'');
+    if(placed===total&&!S.done[h]){S.done[h]=1;
+      addXP(Math.round((h==='v2'?65:40)*ok/total),h==='v2'?'Adverb table':'Spelling lab')}
+    return;
+  }
+});
+renderXP();
+</script>
+</body>
+</html>

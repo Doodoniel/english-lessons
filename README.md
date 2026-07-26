@@ -9,6 +9,7 @@
 |---|------|-----------|
 | 1 | [All About Me](unit1-all-about-me/) | Describing people, adverbs, prom culture, reading «Birth order» |
 | 2 | [In Fashion](unit2-in-fashion/) | Clothes adjectives, listening (Ashley/Molly/Luke), reading «Fashion and music», домашка p.8–9 с отправкой PDF |
+| 2.2 | [Past Simple & Adverbs](unit2-part2-past-simple/) | SB p.16–17: past simple (правила, выбор формы, вопросы, диалог), adverbs of manner, listening про The Beatles, speaking «talking about yourself». Домашка WB p.10–11. Аудио SB и WB в разных папках |
 | 3 | [People & Style](unit3-people-and-style/) | Review & beyond Units 1–2 (12 этапов, ~90 мин): vocab sort, word building (un-/im-/dis-), comparatives, relative clauses, sentence transformation, оригинальный reading, word stress, proofreading, dialogue ordering, writing, speaking, self-assessment. Без страниц учебника |
 
 ## Как пользоваться
