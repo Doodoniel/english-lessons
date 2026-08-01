@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Revision Checkpoint · Units 1–2</title>
+<style>
+:root{
+  --red:#e63946; --blue:#1d7fd6; --teal:#12b5a5; --yellow:#ffc233; --purple:#7c5cff; --orange:#f4732a; --green:#16a34a;
+  --bg:#eef2f7; --bg2:#e2e8f2; --card:#ffffff; --ink:#16202e; --muted:#61708a;
+  --line:#dbe3ef; --ok:#16a34a; --no:#e11d48; --shadow:0 10px 30px rgba(22,38,66,.10); --r:18px;
+}
+html[data-theme="dark"]{
+  --bg:#0e1420; --bg2:#111a29; --card:#161f30; --ink:#e8eefb; --muted:#93a3bd;
+  --line:#243149; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);line-height:1.55;
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(18,181,165,.16),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(124,92,255,.16),transparent 55%),var(--bg)}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--card) 82%,transparent);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1340px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+.unitbadge{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#fff;font-size:19px;
+  background:linear-gradient(135deg,var(--teal),var(--purple));box-shadow:0 6px 16px rgba(18,181,165,.35)}
+.brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.xpbox{flex:1;min-width:210px;max-width:400px}
+.xpbar{height:12px;border-radius:99px;background:var(--bg2);overflow:hidden;border:1px solid var(--line)}
+.xpfill{height:100%;width:0;border-radius:99px;transition:width .5s cubic-bezier(.2,.9,.2,1);
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
+.xpmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  padding:8px 14px;border-radius:12px;font-weight:700;font-size:13px;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent}
+.btn.go{background:linear-gradient(135deg,var(--teal),var(--green));color:#fff;border-color:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.medals{display:flex;gap:6px}
+.medal{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--bg2);
+  filter:grayscale(1);opacity:.4;font-size:16px;transition:.4s;border:1px solid var(--line)}
+.medal.on{filter:none;opacity:1;transform:scale(1.08);box-shadow:0 0 0 3px rgba(255,194,51,.25)}
+main{max-width:1340px;margin:0 auto;padding:20px 18px 90px;display:grid;gap:22px;
+  grid-template-columns:minmax(230px,290px) minmax(0,1fr)}
+@media(max-width:960px){main{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(min-width:961px){.side .sticky{position:sticky;top:78px;display:flex;flex-direction:column;gap:16px}}
+.flow{display:flex;flex-direction:column;gap:20px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card>h3{margin:0;padding:13px 16px;font-size:14px;letter-spacing:.3px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.card .body{padding:15px 17px}
+.stage{scroll-margin-top:78px}
+.stagehead{display:flex;align-items:center;gap:11px;margin:0;padding:14px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.stageno{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;color:#fff;
+  font-size:14px;font-weight:800;background:linear-gradient(135deg,var(--teal),var(--blue))}
+.stagehead h3{margin:0;font-size:15px;letter-spacing:.2px}
+.stagehead .skill{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 9px;border-radius:99px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+.xpchip{font-size:10px;font-weight:800;letter-spacing:.5px;padding:3px 8px;border-radius:99px;
+  background:rgba(18,181,165,.14);color:var(--teal);border:1px solid rgba(18,181,165,.3)}
+.fmt{font-size:10px;font-weight:700;letter-spacing:.3px;padding:3px 8px;border-radius:99px;
+  background:rgba(124,92,255,.10);color:var(--purple);border:1px solid rgba(124,92,255,.25)}
+.hint{font-size:12.5px;color:var(--muted)}
+.lead{font-size:13.5px;margin:0 0 12px}
+.sect{display:flex;align-items:center;gap:10px;margin:6px 2px -6px;font-size:12px;font-weight:800;
+  letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.sect::after{content:"";flex:1;height:1px;background:var(--line)}
+/* nav */
+.nav a{display:flex;align-items:center;gap:9px;padding:6px 9px;border-radius:10px;text-decoration:none;color:var(--ink);font-size:12.5px;font-weight:600}
+.nav a:hover{background:var(--bg2)}
+.nav a .tick{width:17px;height:17px;flex:none;border-radius:6px;border:1.5px solid var(--muted);display:grid;place-items:center;font-size:10px}
+.nav a.done .tick{background:var(--green);border-color:var(--green);color:#fff}
+.nav a.done{color:var(--muted)}
+.nav a .sk{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--muted)}
+ul.tight{margin:6px 0;padding-left:18px;font-size:13px}
+ul.tight li{margin-bottom:5px}
+.callout{border-left:4px solid var(--yellow);background:var(--bg2);padding:9px 12px;border-radius:0 10px 10px 0;font-size:13px;margin:9px 0}
+.callout.info{border-color:var(--blue)}
+.cando{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin-bottom:7px}
+.cando i{font-style:normal;color:var(--teal);font-weight:900}
+/* generic q */
+.q{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:var(--bg2)}
+.q p{margin:0 0 8px;font-size:13.5px;font-weight:600}
+.q .num{color:var(--muted);font-weight:800;margin-right:6px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.opt.good{background:rgba(22,163,74,.14);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:rgba(225,29,72,.12);border-color:var(--no);color:var(--no);text-decoration:line-through}
+.fb{font-size:12px;margin-top:7px;display:none}
+.fb.on{display:block}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--no)}
+input.txt{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:6px 9px;font-size:13px;width:120px;font-weight:700}
+input.txt.good{border-color:var(--ok);color:var(--ok)} input.txt.bad{border-color:var(--no);color:var(--no)}
+/* blitz */
+.blitz{text-align:center;padding:18px 14px;border-radius:16px;background:var(--bg2);border:1px solid var(--line)}
+.bword{font-size:30px;font-weight:800;letter-spacing:.5px;margin:6px 0 14px;min-height:40px}
+.bopts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.bopt{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:9px 15px;cursor:pointer;font-size:13.5px;font-weight:700;transition:.1s}
+.bopt:hover{border-color:var(--teal);transform:translateY(-2px)}
+.bopt.good{background:rgba(22,163,74,.2);border-color:var(--ok)}
+.bopt.bad{background:rgba(225,29,72,.16);border-color:var(--no)}
+.btimer{display:flex;justify-content:center;gap:20px;font-size:13px;font-weight:800;margin-bottom:4px}
+.btimer .t{color:var(--orange)} .btimer .s{color:var(--teal)}
+.bbar{height:7px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px auto 0;max-width:340px}
+.bbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--teal),var(--orange));transition:width 1s linear}
+/* pairs */
+.pairwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.pairwrap{grid-template-columns:1fr}}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:12.5px;font-weight:700;transition:.15s}
+.chip:hover{transform:translateY(-2px)}
+.chip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.chip.gone{animation:pop .35s forwards}
+@keyframes pop{to{transform:scale(0);opacity:0;width:0;padding:0;margin:0;border:0}}
+/* buckets */
+.pool{display:flex;gap:6px;flex-wrap:wrap;min-height:24px;margin-bottom:11px}
+.buckets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+@media(max-width:560px){.buckets{grid-template-columns:1fr}}
+.bucket{border:1.5px dashed var(--line);border-radius:14px;padding:9px;min-height:96px;background:var(--bg2)}
+.bucket h4{margin:0 0 7px;font-size:12px;letter-spacing:.4px;color:var(--muted);text-align:center}
+.bucket h4 b{font-size:15px;color:var(--ink);display:block}
+.bucket.sel{border-color:var(--blue);background:rgba(29,127,214,.08)}
+.bucket .drop{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.wchip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:4px 11px;cursor:pointer;font-size:12.5px;font-weight:700;transition:.12s}
+.wchip:hover{transform:translateY(-2px)}
+.wchip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.wchip.good{border-color:var(--ok);background:rgba(22,163,74,.14);color:var(--ok)}
+.wchip.bad{border-color:var(--no);background:rgba(225,29,72,.12);color:var(--no)}
+/* cloze text */
+.clozetext{font-size:14px;line-height:2.1;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.clozetext h4{margin:0 0 8px;font-size:15px;color:var(--purple);line-height:1.4}
+.gapsel{border:1px solid var(--blue);background:var(--card);color:var(--blue);border-radius:8px;padding:2px 6px;font-size:12.5px;font-weight:700;font-family:inherit;outline:none}
+.gapsel.good{border-color:var(--ok);color:var(--ok);background:rgba(22,163,74,.1)}
+.gapsel.bad{border-color:var(--no);color:var(--no);background:rgba(225,29,72,.1)}
+.gapnum{font-size:10px;font-weight:800;color:var(--muted);vertical-align:super}
+input.gapin{border:none;border-bottom:2px solid var(--blue);background:transparent;color:var(--blue);
+  font-family:inherit;font-size:13.5px;font-weight:800;width:80px;text-align:center;outline:none;padding:0 2px}
+input.gapin.good{border-color:var(--ok);color:var(--ok)} input.gapin.bad{border-color:var(--no);color:var(--no)}
+/* proofread text */
+.prooftext{font-size:14px;line-height:2;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.tok{cursor:pointer;padding:1px 3px;border-radius:5px}
+.tok:hover{background:rgba(29,127,214,.15)}
+.tok.sel{background:rgba(29,127,214,.28);outline:1px solid var(--blue)}
+.checked .tok.key{background:rgba(22,163,74,.25);outline:1px solid var(--ok)}
+.checked .tok.sel:not(.key){background:rgba(225,29,72,.22);outline:1px solid var(--no)}
+.fixlist{display:none;font-size:12.5px;margin-top:10px}
+.fixlist.on{display:block}
+.fixlist span{display:inline-block;background:var(--card);border:1px solid var(--ok);color:var(--ok);
+  border-radius:99px;padding:2px 10px;margin:3px 4px 0 0;font-weight:700}
+/* builder */
+.build{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:11px;background:var(--bg2)}
+.build .target{min-height:34px;border-bottom:2px dashed var(--blue);display:flex;gap:5px;flex-wrap:wrap;align-items:center;padding:3px 2px 6px;margin-bottom:8px}
+.build .target:empty::before{content:"click the words below…";color:var(--muted);font-size:12.5px;font-style:italic}
+.build .bank{display:flex;gap:5px;flex-wrap:wrap}
+.tokw{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:4px 10px;cursor:pointer;font-size:13px;font-weight:700}
+.tokw:hover{border-color:var(--blue)}
+.build.good .target{border-color:var(--ok)} .build.bad .target{border-color:var(--no)}
+.build .sol{display:none;font-size:12.5px;color:var(--ok);font-weight:700;margin-top:6px}
+.build.checked .sol{display:block}
+/* reading */
+.reader{font-size:14px;line-height:1.75;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:12px}
+.reader h4{margin:0 0 9px;font-size:17px;color:var(--purple)}
+.reader p{margin:0 0 10px}
+.tfrow{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line);border-radius:12px;padding:9px 11px;margin-bottom:8px;background:var(--bg2)}
+.tfrow .st{flex:1;font-size:13.5px;font-weight:600}
+.tfopts{display:flex;gap:5px;flex:none}
+.tfb{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:5px 9px;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.3px}
+.tfb:hover{border-color:var(--blue)}
+.tfb.sel{background:var(--blue);color:#fff;border-color:transparent}
+.tfb.good{background:rgba(22,163,74,.18);border-color:var(--ok);color:var(--ok)}
+.tfb.bad{background:rgba(225,29,72,.15);border-color:var(--no);color:var(--no)}
+/* writing / speaking */
+textarea.write{width:100%;min-height:140px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  background:var(--card);color:var(--ink);font-family:inherit;font-size:13.5px;resize:vertical;outline:none}
+textarea.write:focus{border-color:var(--blue)}
+.wcbar{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:6px}
+.points{display:flex;flex-direction:column;gap:6px;margin:9px 0}
+.pt{display:flex;align-items:center;gap:8px;font-size:12.5px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:7px 10px;cursor:pointer}
+.pt::before{content:"";width:15px;height:15px;border-radius:5px;border:1.5px solid var(--muted);flex:none}
+.pt.on::before{content:"✓";background:var(--green);border-color:var(--green);color:#fff;font-size:10px;display:grid;place-items:center;line-height:1}
+.cue{background:var(--bg2);border:1px dashed var(--teal);border-radius:14px;padding:13px 15px;margin-bottom:10px}
+.cue b{color:var(--teal)}
+.timerbox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px}
+.tdisp{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;min-width:74px;color:var(--teal)}
+.tdisp.low{color:var(--no)}
+/* dashboard */
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px}
+.dcell{border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--bg2)}
+.dcell .lbl{font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.dcell .val{font-size:24px;font-weight:800;margin:2px 0 5px}
+.dbar{height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.dbar i{display:block;height:100%;width:0;border-radius:99px;transition:width .8s cubic-bezier(.2,.9,.2,1)}
+.band{text-align:center;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(18,181,165,.14),rgba(124,92,255,.12));border:1px solid var(--line)}
+.band .b{font-size:22px;font-weight:800}
+.rate{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.rate:last-child{border-bottom:none}
+.rate .txt{flex:1}
+.stars{display:flex;gap:3px}
+.star{cursor:pointer;font-size:18px;filter:grayscale(1);opacity:.4;transition:.12s}
+.star.on{filter:none;opacity:1;transform:scale(1.1)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;width:9px;height:14px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:400;background:var(--ink);color:var(--bg);
+  padding:11px 20px;border-radius:99px;font-weight:800;font-size:13.5px;transition:transform .4s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <div class="unitbadge">1·2</div>
+      <div>REVISION CHECKPOINT<small>Units 1 &amp; 2 · all skills</small></div>
+    </div>
+    <div class="xpbox">
+      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+      <div class="xpmeta"><span id="xplabel">0 XP</span><span id="xpright">Level 1 · Warming Up</span></div>
+    </div>
+    <div class="medals" id="medals">
+      <div class="medal" data-need="150" title="150 XP — Word Bank">🧠</div>
+      <div class="medal" data-need="300" title="300 XP — Language Detective">🔎</div>
+      <div class="medal" data-need="450" title="450 XP — All-Rounder">🎯</div>
+      <div class="medal" data-need="600" title="600 XP — Checkpoint Cleared">🏆</div>
+    </div>
+    <button class="btn" id="themebtn">🌙 Theme</button>
+    <button class="btn" id="resetbtn">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== SIDE ===== -->
+<div class="side">
+  <div class="sticky">
+    <div class="card nav">
+      <h3>🗺️ Checkpoint map</h3>
+      <div class="body" id="nav" style="padding:8px"></div>
+    </div>
+    <div class="card">
+      <h3>📊 Live score</h3>
+      <div class="body" style="padding:12px 14px">
+        <div id="minidash"></div>
+        <p class="hint" style="margin:8px 0 0">Your score builds up as you go. The full report is in Stage 12.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🎯 What this checkpoint tests</h3>
+    <div class="body">
+      <div class="cando"><i>✓</i><span>Vocabulary for <b>appearance</b>, <b>personality</b> and <b>clothes</b>. <span class="hint">Units 1–2</span></span></div>
+      <div class="cando"><i>✓</i><span><b>Past simple</b> — positive, negative and questions.</span></div>
+      <div class="cando"><i>✓</i><span><b>Adverbs of manner</b> and adjective/adverb choice.</span></div>
+      <div class="cando"><i>✓</i><span><b>Comparatives</b> and relative pronouns.</span></div>
+      <div class="cando"><i>✓</i><span>Reading for <b>gist</b>, <b>detail</b> and <b>inference</b>.</span></div>
+      <div class="cando"><i>✓</i><span>Pronunciation of the <b>-ed</b> ending.</span></div>
+      <div class="cando"><i>✓</i><span>Writing a short message and speaking for one minute.</span></div>
+      <p class="hint" style="margin-top:10px">Task formats follow Cambridge A2 Key and B1 Preliminary conventions,
+        so the practice transfers straight to exam day.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>💡 Quick reminders</h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li>After <b>did / didn't</b> → infinitive: <i>didn't <b>go</b></i>.</li>
+        <li>One comparative only: ❌ <s>more taller</s> → <b>taller</b>.</li>
+        <li><b>who</b> = people · <b>which</b> = things.</li>
+        <li>Adverb describes a <b>verb</b>: <i>speaks quietly</i>. Adjective after <b>be / look / seem</b>: <i>looks quiet</i>.</li>
+        <li>Plural-only clothes: <b>jeans, trousers, trainers</b> — <i>they <b>are</b></i>.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FLOW ===== -->
+<div class="flow">
+
+  <div class="sect">Part A · Vocabulary</div>
+
+  <!-- 1 -->
+  <div class="card stage" id="s1">
+    <div class="stagehead"><span class="stageno">1</span><h3>Vocabulary blitz</h3>
+      <span class="xpchip">+80 XP</span><span class="fmt">timed</span><span class="skill">Vocabulary</span></div>
+    <div class="body">
+      <p class="lead">Sixty seconds. Read the word, choose the correct meaning, move on. Speed matters —
+        but a wrong answer costs you one point, so don't guess wildly.</p>
+      <div class="blitz">
+        <div class="btimer"><span class="t" id="btime">60s</span><span class="s" id="bscore">0 points</span></div>
+        <div class="bbar"><i id="bbarfill"></i></div>
+        <div class="bword" id="bword">Ready?</div>
+        <div class="bopts" id="bopts"></div>
+        <button class="btn go" id="bstart" style="margin-top:12px">▶ Start the blitz</button>
+      </div>
+      <span class="fb" id="s1fb"></span>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card stage" id="s2">
+    <div class="stagehead"><span class="stageno">2</span><h3>Collocations: which words go together?</h3>
+      <span class="xpchip">+50 XP</span><span class="fmt">matching</span><span class="skill">Vocabulary</span></div>
+    <div class="body">
+      <p class="lead">Knowing a word is not enough — you need the words that live next to it.
+        Click a verb on the left, then its partner on the right.</p>
+      <div class="pairwrap">
+        <div><div class="hint" style="margin-bottom:6px;font-weight:800">VERB</div><div class="chips" id="colL"></div></div>
+        <div><div class="hint" style="margin-bottom:6px;font-weight:800">GOES WITH</div><div class="chips" id="colR"></div></div>
+      </div>
+      <span class="fb" id="s2fb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Part B · Use of English</div>
+
+  <!-- 3 -->
+  <div class="card stage" id="s3">
+    <div class="stagehead"><span class="stageno">3</span><h3>Multiple-choice cloze</h3>
+      <span class="xpchip">+60 XP</span><span class="fmt">B1 Reading Part 4 style</span><span class="skill">Use of English</span></div>
+    <div class="body">
+      <p class="lead">Choose the best word for each gap. Read the <b>whole</b> sentence before you decide.</p>
+      <div class="clozetext" id="mc"></div>
+      <button class="btn primary" data-check="mc" style="margin-top:11px">Check</button>
+      <span class="fb" id="mcfb"></span>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card stage" id="s4">
+    <div class="stagehead"><span class="stageno">4</span><h3>Open cloze — one word only</h3>
+      <span class="xpchip">+60 XP</span><span class="fmt">B1 Reading Part 5 style</span><span class="skill">Use of English</span></div>
+    <div class="body">
+      <p class="lead">Write <b>one word</b> in each gap. They are all small grammar words —
+        the kind that carry the sentence.</p>
+      <div class="clozetext" id="oc"></div>
+      <button class="btn primary" data-check="oc" style="margin-top:11px">Check</button>
+      <button class="btn" id="ochint">💡 Hint</button>
+      <span class="fb" id="ocfb"></span>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card stage" id="s5">
+    <div class="stagehead"><span class="stageno">5</span><h3>Proofread the paragraph</h3>
+      <span class="xpchip">+60 XP</span><span class="fmt">error correction</span><span class="skill">Use of English</span></div>
+    <div class="body">
+      <p class="lead">There are <b>six</b> mistakes. Click every word that is wrong — click again to unselect.</p>
+      <div class="prooftext" id="pf"></div>
+      <div class="fixlist" id="pffix"></div>
+      <button class="btn primary" data-check="pf" style="margin-top:11px">Check</button>
+      <span class="fb" id="pffb"></span>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card stage" id="s6">
+    <div class="stagehead"><span class="stageno">6</span><h3>Build the sentence</h3>
+      <span class="xpchip">+60 XP</span><span class="fmt">word order</span><span class="skill">Use of English</span></div>
+    <div class="body">
+      <p class="lead">Click the words in the correct order. Click a word in your sentence to take it back.</p>
+      <div id="bld"></div>
+      <button class="btn primary" data-check="bld">Check all</button>
+      <span class="fb" id="bldfb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Part C · Pronunciation</div>
+
+  <!-- 7 -->
+  <div class="card stage" id="s7">
+    <div class="stagehead"><span class="stageno">7</span><h3>The <i>-ed</i> ending: three sounds</h3>
+      <span class="xpchip">+60 XP</span><span class="fmt">sound sorting</span><span class="skill">Pronunciation</span></div>
+    <div class="body">
+      <p class="lead">Say each verb out loud, then put it in the right column. <b>-ed</b> is written the same way
+        but pronounced three different ways.</p>
+      <div class="callout info" style="margin-top:0">
+        <b>/ɪd/</b> — only after <b>t</b> or <b>d</b> (wan<b>t</b>ed, deci<b>d</b>ed) · adds a syllable<br>
+        <b>/t/</b> — after quiet sounds: p, k, f, s, sh, ch (sto<b>pp</b>ed, wat<b>ch</b>ed)<br>
+        <b>/d/</b> — after all the rest, including vowels (pla<b>y</b>ed, liste<b>n</b>ed)
+      </div>
+      <div class="pool" id="poolEd"></div>
+      <div class="buckets">
+        <div class="bucket" data-cat="id"><h4><b>/ɪd/</b>wanted</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="t"><h4><b>/t/</b>stopped</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="d"><h4><b>/d/</b>played</h4><div class="drop"></div></div>
+      </div>
+      <div style="margin-top:11px"><button class="btn primary" data-check="ed">Check</button>
+        <span class="fb" id="edfb"></span></div>
+    </div>
+  </div>
+
+  <div class="sect">Part D · Reading</div>
+
+  <!-- 8 -->
+  <div class="card stage" id="s8">
+    <div class="stagehead"><span class="stageno">8</span><h3>Reading: "The jacket that travelled"</h3>
+      <span class="xpchip">+70 XP</span><span class="fmt">True / False / Doesn't say</span><span class="skill">Reading</span></div>
+    <div class="body">
+      <p class="lead">Read the article once, then decide. Choose <b>Doesn't say</b> when the text simply does not
+        give you the information — that is not the same as <i>False</i>.</p>
+      <div class="reader">
+        <h4>The jacket that travelled 🧥</h4>
+        <p>Maya Osei is sixteen and lives in Bristol. Two years ago, her grandmother gave her an old denim jacket.
+          It belonged to Maya's grandfather, who bought it in 1979.</p>
+        <p>At first Maya didn't wear it. "It was too big and the colour was horrible," she says. "I put it at the
+          back of my wardrobe and forgot about it." Then, last winter, she saw a photo of a singer in a similar
+          jacket. Suddenly the jacket looked interesting.</p>
+        <p>Maya decided to change it. She cut the sleeves, added colourful buttons and painted a small flower on
+          the back. It took her three weekends. When she wore it to school, six people asked her where she
+          bought it.</p>
+        <p>Now Maya repairs and redesigns old clothes for her friends. She doesn't charge much — usually about
+          five pounds. "I don't do it for the money," she explains. "I do it because I hate throwing clothes away.
+          My grandfather wore this jacket for twenty years. Why should I buy a new one?"</p>
+        <p>Maya's mother thinks she should study fashion at university. Maya isn't sure yet.</p>
+      </div>
+      <div id="tf"></div>
+      <p class="hint" style="margin:12px 0 6px;font-weight:800">Words in context — what does it mean <i>here</i>?</p>
+      <div id="rv"></div>
+      <button class="btn primary" data-check="read">Check reading</button>
+      <span class="fb" id="readfb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Part E · Production</div>
+
+  <!-- 9 -->
+  <div class="card stage" id="s9">
+    <div class="stagehead"><span class="stageno">9</span><h3>Writing: a message to a friend</h3>
+      <span class="xpchip">+40 XP</span><span class="fmt">A2/B1 writing task</span><span class="skill">Writing</span></div>
+    <div class="body">
+      <p class="lead">Your English-speaking friend wants to know about your favourite piece of clothing.
+        Write them a message. <b>Answer all three points</b> — in the exam you lose marks for a missing point,
+        however good your English is.</p>
+      <div class="points" id="wpoints">
+        <div class="pt" data-i="0">say what it is and what it looks like</div>
+        <div class="pt" data-i="1">say where and when you got it</div>
+        <div class="pt" data-i="2">explain why you like it</div>
+      </div>
+      <textarea class="write" id="wtext" placeholder="Hi Sam,&#10;&#10;You asked about my favourite…"></textarea>
+      <div class="wcbar"><span class="hint" id="wcnt">0 words</span><span class="hint">target: 60–80 words</span></div>
+      <div class="callout">Before you send it: past simple for <i>where you got it</i> ✓ · two adjectives from
+        Units 1–2 ✓ · one <i>because</i> ✓ · capital letters and full stops ✓</div>
+      <button class="btn primary" id="wsubmit">✓ Done — check my writing</button>
+      <span class="fb" id="wfb"></span>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card stage" id="s10">
+    <div class="stagehead"><span class="stageno">10</span><h3>Speaking: the one-minute cards</h3>
+      <span class="xpchip">+60 XP</span><span class="fmt">B1 long turn</span><span class="skill">Speaking</span></div>
+    <div class="body">
+      <p class="lead">Take a card, think for <b>15 seconds</b>, then talk for <b>one minute</b> without stopping.
+        Your partner listens and gives you one thing you did well and one thing to improve.</p>
+      <div class="cue" id="cuecard">
+        <b>Card 1 · Describe a person you know well</b>
+        <ul class="tight" style="margin-bottom:0">
+          <li>what they look like</li>
+          <li>what kind of person they are</li>
+          <li>what they usually wear</li>
+          <li>why you get on with them</li>
+        </ul>
+      </div>
+      <div class="timerbox">
+        <span class="tdisp" id="tdisp">1:00</span>
+        <button class="btn go" id="tstart">▶ Start</button>
+        <button class="btn" id="tcard">🔀 Next card</button>
+        <span class="hint" id="tstatus">Card 1 of 4</span>
+      </div>
+      <div class="callout" style="margin-bottom:0">🎯 <b>Target:</b> keep going for the whole minute. If you run out
+        of ideas, add a reason (<i>because…</i>) or a comparison (<i>…more … than…</i>) — that is exactly what
+        examiners reward.</div>
+      <div style="margin-top:10px">
+        <button class="btn primary" data-done="spk1" data-xp="30">✓ I did card 1</button>
+        <button class="btn primary" data-done="spk2" data-xp="30">✓ I did a second card</button>
+      </div>
+      <span class="fb" id="s10fb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Part F · Review</div>
+
+  <!-- 11 -->
+  <div class="card stage" id="s11">
+    <div class="stagehead"><span class="stageno">11</span><h3>My word list</h3>
+      <span class="xpchip">+20 XP</span><span class="fmt">learner training</span><span class="skill">Strategy</span></div>
+    <div class="body">
+      <p class="lead">Write down <b>five words</b> from Units 1–2 that you still find difficult, with a sentence
+        for each. Words you write yourself are the ones you remember.</p>
+      <textarea class="write" id="vocablist" placeholder="1 miserable — My brother is never miserable, he always laughs.&#10;2 …"></textarea>
+      <button class="btn primary" data-done="vlist" data-xp="20" style="margin-top:9px">✓ I wrote my five words</button>
+      <span class="fb" id="vlistfb"></span>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card stage" id="s12">
+    <div class="stagehead"><span class="stageno">12</span><h3>Your checkpoint report</h3>
+      <span class="xpchip">+20 XP</span><span class="skill">Self-assessment</span></div>
+    <div class="body">
+      <p class="lead">Here is how you did in each area. A low score is not a problem — it is simply where to
+        spend your next study hour.</p>
+      <div class="dash" id="dash"></div>
+      <div class="band" id="band"><div class="b">Finish the tasks above</div>
+        <div class="hint">Your overall result will appear here.</div></div>
+      <p class="hint" style="margin:14px 0 6px;font-weight:800">Now rate yourself honestly</p>
+      <div id="selfassess"></div>
+      <button class="btn go" id="finishbtn" style="margin-top:12px">Finish the checkpoint 🎉</button>
+      <span class="fb" id="s12fb"></span>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>Revision Checkpoint · Units 1–2 — an original all-skills review lesson. All texts and tasks are original;
+no coursebook material is reproduced.</footer>
+
+<div class="confetti" id="confetti"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== state ===== */
+const KEY='revision_u12_v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+S.xp=S.xp||0; S.done=S.done||{}; S.scores=S.scores||{}; S.stars=S.stars||{}; S.pts=S.pts||{};
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const MAXXP=640;
+const LEVELS=[[0,'Level 1 · Warming Up'],[150,'Level 2 · Word Bank'],[300,'Level 3 · Language Detective'],
+              [450,'Level 4 · All-Rounder'],[600,'Level 5 · Checkpoint Cleared 🏆']];
+function renderXP(){
+  $('#xpfill').style.width=Math.min(100,S.xp/MAXXP*100)+'%';
+  $('#xplabel').textContent=S.xp+' XP';
+  let lv=LEVELS[0][1]; LEVELS.forEach(l=>{if(S.xp>=l[0])lv=l[1]});
+  $('#xpright').textContent=lv;
+  $$('#medals .medal').forEach(m=>m.classList.toggle('on',S.xp>=+m.dataset.need));
+}
+function addXP(n,label){if(n<=0)return;S.xp+=n;save();renderXP();renderNav();toast('+'+n+' XP · '+label);if(n>=10)boom()}
+let tt;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2400)}
+function boom(){const c=$('#confetti'),cols=['#e63946','#1d7fd6','#12b5a5','#ffc233','#7c5cff'];
+  for(let i=0;i<40;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.3)+'s';
+    c.appendChild(s);setTimeout(()=>s.remove(),3400)}}
+document.documentElement.dataset.theme=localStorage.getItem('revtheme')||'light';
+$('#themebtn').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=n;localStorage.setItem('revtheme',n)};
+$('#resetbtn').onclick=()=>{if(confirm('Reset the whole checkpoint and start again?')){localStorage.removeItem(KEY);location.reload()}};
+
+/* ===== score bookkeeping ===== */
+const SKILLS={vocab:'Vocabulary',use:'Use of English',pron:'Pronunciation',read:'Reading'};
+function record(id,ok,total,skill){S.scores[id]={ok,total,skill};save();renderDash()}
+function skillPct(sk){
+  let ok=0,tot=0;
+  Object.values(S.scores).forEach(s=>{if(s.skill===sk){ok+=s.ok;tot+=s.total}});
+  return tot?{pct:Math.round(ok/tot*100),ok,tot}:null;
+}
+function colourFor(p){return p>=80?'var(--ok)':p>=60?'var(--yellow)':'var(--no)'}
+function renderDash(){
+  const mini=$('#minidash'),dash=$('#dash');
+  let html='',dhtml='';
+  Object.entries(SKILLS).forEach(([k,name])=>{
+    const r=skillPct(k);
+    const p=r?r.pct:0;
+    html+=`<div style="display:flex;align-items:center;gap:7px;font-size:11.5px;margin-bottom:6px">
+      <span style="flex:1;font-weight:700">${name}</span>
+      <span style="font-weight:800;color:${r?colourFor(p):'var(--muted)'}">${r?p+'%':'—'}</span></div>
+      <div class="dbar" style="margin-bottom:9px"><i style="width:${p}%;background:${colourFor(p)}"></i></div>`;
+    dhtml+=`<div class="dcell"><div class="lbl">${name}</div>
+      <div class="val" style="color:${r?colourFor(p):'var(--muted)'}">${r?p+'%':'—'}</div>
+      <div class="dbar"><i style="width:${p}%;background:${colourFor(p)}"></i></div>
+      <div class="hint" style="margin-top:5px">${r?r.ok+' / '+r.tot+' correct':'not started'}</div></div>`;
+  });
+  if(mini)mini.innerHTML=html;
+  if(dash)dash.innerHTML=dhtml;
+  renderBand();
+}
+function renderBand(){
+  const el=$('#band');if(!el)return;
+  let ok=0,tot=0;Object.values(S.scores).forEach(s=>{ok+=s.ok;tot+=s.total});
+  if(tot<10){el.innerHTML='<div class="b">Keep going…</div><div class="hint">Finish more tasks to see your overall result.</div>';return}
+  const p=Math.round(ok/tot*100);
+  let title,msg;
+  if(p>=85){title='Excellent — ready to move on 🌟';msg='You control this language, not the other way round. Push into Unit 3 material.'}
+  else if(p>=70){title='Good — solid understanding ✅';msg='Look at the weakest bar above and do ten minutes on it. Everything else is secure.'}
+  else if(p>=50){title='Getting there — keep practising 💪';msg='The ideas are in place; the details need repetition. Redo the two lowest sections.'}
+  else{title='Time to review 📚';msg='Go back through Units 1 and 2 with a teacher before moving forward — that is the fastest route.'}
+  el.innerHTML=`<div class="b" style="color:${colourFor(p)}">${p}% · ${title}</div><div class="hint">${msg}</div>`;
+}
+
+/* ===== nav ===== */
+const NAV=[['s1','Vocabulary blitz','Vocab'],['s2','Collocations','Vocab'],['s3','MC cloze','UoE'],
+ ['s4','Open cloze','UoE'],['s5','Proofread','UoE'],['s6','Word order','UoE'],['s7','-ed sounds','Pron'],
+ ['s8','Reading','Read'],['s9','Writing','Write'],['s10','Speaking','Speak'],['s11','Word list','Strat'],
+ ['s12','Report','Self']];
+const DONEKEY={s1:'blitz',s2:'col',s3:'mc',s4:'oc',s5:'pf',s6:'bld',s7:'ed',s8:'read',s9:'wtext',
+  s10:'spk',s11:'vlist',s12:'s12'};
+function renderNav(){
+  const nav=$('#nav');if(!nav)return;nav.innerHTML='';
+  NAV.forEach(([id,label,sk],i)=>{
+    const dk=DONEKEY[id];
+    const done=dk==='spk'?(S.done.spk1&&S.done.spk2):S.done[dk];
+    const a=document.createElement('a');a.href='#'+id;if(done)a.classList.add('done');
+    a.innerHTML=`<span class="tick">${done?'✓':''}</span><span>${i+1}. ${label}</span><span class="sk">${sk}</span>`;
+    a.onclick=e=>{e.preventDefault();document.getElementById(id).scrollIntoView({behavior:'smooth'})};
+    nav.appendChild(a);
+  });
+}
+
+/* ===== helpers ===== */
+function markInput(inp,keys){
+  const v=inp.value.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.?!,]+$/,'');
+  const ok=keys.some(k=>k.toLowerCase()===v);
+  inp.classList.remove('good','bad');inp.classList.add(ok?'good':'bad');return ok;
+}
+function buildMCQ(host,items){
+  const box=$('#'+host);box.innerHTML='';
+  items.forEach((it,i)=>{
+    const q=document.createElement('div');q.className='q';
+    q.innerHTML=`<p><span class="num">${i+1}</span>${it.q}</p>`;
+    const o=document.createElement('div');o.className='opts';
+    it.a.forEach(t=>{const b=document.createElement('div');b.className='opt';b.textContent=t;
+      b.onclick=()=>{if(q.classList.contains('locked'))return;
+        [...o.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};o.appendChild(b)});
+    q.appendChild(o);
+    if(it.why){const f=document.createElement('div');f.className='fb';f.dataset.why=it.why;q.appendChild(f)}
+    box.appendChild(q);
+  });
+  box._items=items;
+}
+function gradeMCQ(host){
+  const box=$('#'+host),items=box._items;let ok=0;
+  [...box.children].forEach((q,i)=>{
+    const opts=[...q.querySelector('.opts').children];
+    const sel=opts.find(o=>o.classList.contains('sel'));
+    q.classList.add('locked');
+    opts.forEach(o=>{if(o.textContent===items[i].k)o.classList.add('good');else if(o===sel)o.classList.add('bad')});
+    const good=sel&&sel.textContent===items[i].k;if(good)ok++;
+    const f=q.querySelector('.fb');
+    if(f){f.className='fb on '+(good?'good':'bad');f.innerHTML=(good?'✔ ':'✘ ')+f.dataset.why}
+  });
+  return ok;
+}
+function makeBuckets(poolId,words){
+  let sel=null;const pool=$('#'+poolId),scope=pool.parentElement;
+  function chip(word,cat){
+    const c=document.createElement('span');c.className='wchip';c.textContent=word;c.dataset.cat=cat;
+    c.onclick=()=>{
+      if(c.closest('.bucket')){c.classList.remove('sel');pool.appendChild(c);sel=null;
+        scope.querySelectorAll('.bucket').forEach(b=>b.classList.remove('sel'));return}
+      if(sel===c){c.classList.remove('sel');sel=null;
+        scope.querySelectorAll('.bucket').forEach(b=>b.classList.remove('sel'));return}
+      scope.querySelectorAll('.wchip').forEach(x=>x.classList.remove('sel'));
+      c.classList.add('sel');sel=c;scope.querySelectorAll('.bucket').forEach(b=>b.classList.add('sel'));
+    };
+    return c;
+  }
+  words.map(w=>w).sort(()=>Math.random()-.5).forEach(([w,cat])=>pool.appendChild(chip(w,cat)));
+  scope.querySelectorAll('.bucket').forEach(b=>b.onclick=e=>{
+    if(!sel||e.target.classList.contains('wchip'))return;
+    b.querySelector('.drop').appendChild(sel);sel.classList.remove('sel');sel=null;
+    scope.querySelectorAll('.bucket').forEach(x=>x.classList.remove('sel'));
+  });
+}
+
+/* ===== 1 · blitz ===== */
+const BLITZ=[
+ ['bald',['with no hair','with long hair','with curly hair']],
+ ['elderly',['quite old','very young','middle-aged']],
+ ['skinny',['very tight','very loose','very smart']],
+ ['second-hand',['owned by someone before','brand new','very expensive']],
+ ['miserable',['very sad','very funny','very polite']],
+ ['confident',['sure of yourself','shy and quiet','careless']],
+ ['trendy',['fashionable now','old-fashioned','uncomfortable']],
+ ['loose-fitting',['not tight','very tight','very short']],
+ ['careless',['not careful','very careful','very kind']],
+ ['handsome',['good-looking (a man)','good-looking (a woman)','elderly']],
+ ['tracksuit',['soft sports clothes','a formal suit','a pair of shoes']],
+ ['jewellery',['rings and necklaces','shoes and boots','hats and caps']],
+ ['attractive',['nice to look at','unpleasant','boring']],
+ ['rude',['not polite','very polite','very funny']],
+ ['cheerful',['happy and smiling','sad and quiet','angry']],
+ ['fair hair',['light hair','dark hair','no hair']],
+ ['smart',['tidy and stylish','messy','sporty']],
+ ['trainers',['sports shoes','trousers','jackets']],
+ ['generous',['gives to other people','keeps everything','talks a lot']],
+ ['unfashionable',['not in style','very trendy','brand new']]
+];
+let bq=[],bi=0,bscore=0,btimer=null,bleft=60,brunning=false;
+function bnext(){
+  if(bi>=bq.length){bq=BLITZ.map(x=>x).sort(()=>Math.random()-.5);bi=0}
+  const it=bq[bi];
+  $('#bword').textContent=it[0];
+  const opts=$('#bopts');opts.innerHTML='';
+  it[1].map((t,i)=>[t,i]).sort(()=>Math.random()-.5).forEach(([t,orig])=>{
+    const b=document.createElement('div');b.className='bopt';b.textContent=t;
+    b.onclick=()=>{
+      if(!brunning)return;
+      const right=orig===0;
+      b.classList.add(right?'good':'bad');
+      bscore+=right?1:-1;if(bscore<0)bscore=0;
+      $('#bscore').textContent=bscore+(bscore===1?' point':' points');
+      [...opts.children].forEach(c=>c.style.pointerEvents='none');
+      setTimeout(()=>{bi++;bnext()},260);
+    };
+    opts.appendChild(b);
+  });
+}
+$('#bstart').onclick=()=>{
+  if(brunning)return;
+  brunning=true;bscore=0;bleft=60;bi=0;
+  bq=BLITZ.map(x=>x).sort(()=>Math.random()-.5);
+  $('#bscore').textContent='0 points';$('#bstart').disabled=true;$('#bstart').textContent='⏱ Running…';
+  bnext();
+  btimer=setInterval(()=>{
+    bleft--;$('#btime').textContent=bleft+'s';
+    $('#bbarfill').style.width=(bleft/60*100)+'%';
+    if(bleft<=0)bend();
+  },1000);
+};
+function bend(){
+  clearInterval(btimer);brunning=false;
+  $('#bword').textContent='Time!';$('#bopts').innerHTML='';
+  $('#bstart').disabled=false;$('#bstart').textContent='▶ Try again';
+  const f=$('#s1fb');
+  const target=12;
+  f.className='fb on '+(bscore>=target?'good':'bad');
+  f.textContent=`${bscore} points in 60 seconds. `+
+    (bscore>=18?'Outstanding — that vocabulary is automatic 🌟':
+     bscore>=target?'Good pace and good accuracy ✅':
+     'Under '+target+' — reread the word lists from Units 1–2 and try again.');
+  if(!S.done.blitz){
+    S.done.blitz=1;
+    record('blitz',Math.min(bscore,20),20,'vocab');
+    addXP(Math.round(80*Math.min(bscore,20)/20),'Vocabulary blitz');
+  }
+}
+
+/* ===== 2 · collocations ===== */
+const COL=[['wear','a bow tie'],['have got','curly hair'],['go','shopping'],['make','someone laugh'],
+ ['take','a photo'],['try on','a jacket'],['spend','money on clothes'],['become','popular']];
+let selC=null,leftC=COL.length,colOk=0;
+function colChip(w,side){
+  const c=document.createElement('div');c.className='chip';c.textContent=w;
+  c.onclick=()=>{
+    if(side==='L'){$$('#colL .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');selC=c;return}
+    if(!selC){toast('Choose a verb on the left first');return}
+    if(COL.some(p=>p[0]===selC.textContent&&p[1]===c.textContent)){
+      const a=selC,b=c;a.classList.add('gone');b.classList.add('gone');
+      setTimeout(()=>{a.remove();b.remove()},350);selC=null;leftC--;colOk++;addXP(4,'collocation');
+      if(!leftC){const f=$('#s2fb');f.className='fb on good';f.textContent='🎉 All eight collocations matched!';
+        if(!S.done.col){S.done.col=1;record('col',colOk,COL.length,'vocab');addXP(18,'Collocations')}}
+    }else{
+      c.animate([{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],220);
+      const f=$('#s2fb');f.className='fb on bad';f.textContent='Not a natural pair — try again.';
+      setTimeout(()=>f.classList.remove('on'),1400);
+    }
+  };
+  return c;
+}
+(function(){
+  const L=$('#colL'),R=$('#colR'),sh=a=>a.map(v=>[Math.random(),v]).sort().map(v=>v[1]);
+  sh(COL.map(p=>p[0])).forEach(w=>L.appendChild(colChip(w,'L')));
+  sh(COL.map(p=>p[1])).forEach(w=>R.appendChild(colChip(w,'R')));
+})();
+
+/* ===== 3 · MC cloze ===== */
+const MCTEXT=[
+ "Last year my sister ",{o:['started','start','was start'],k:'started'},
+ " a fashion blog. She was only fifteen, but she ",{o:['worked','work','working'],k:'worked'},
+ " hard every evening after school. Her first post was about ",
+ {o:['second-hand','brand new','smart'],k:'second-hand'},
+ " clothes — jackets and dresses that other people wore before her. She ",
+ {o:['always','never','hardly'],k:'always'},
+ " answers her messages, because she thinks her readers are important. Her own style is quite ",
+ {o:['casual','formal','uncomfortable'],k:'casual'},
+ " — she loves loose-fitting jumpers and old trainers. \"You don't need money to look good,\" she says. \"You need ",
+ {o:['confidence','homework','jewellery'],k:'confidence'},".\""
+];
+(function(){
+  const box=$('#mc');box.innerHTML='<h4>The fifteen-year-old fashion blogger</h4>';
+  const p=document.createElement('p');p.style.margin='0';
+  let n=0;const sels=[];
+  MCTEXT.forEach(part=>{
+    if(typeof part==='string'){p.insertAdjacentText('beforeend',part);return}
+    n++;
+    const sup=document.createElement('span');sup.className='gapnum';sup.textContent=n;
+    const sel=document.createElement('select');sel.className='gapsel';
+    sel.innerHTML='<option value="">— choose —</option>'+part.o.map(o=>`<option>${o}</option>`).join('');
+    sel._k=part.k;sels.push(sel);
+    p.appendChild(sup);p.appendChild(sel);
+  });
+  box.appendChild(p);box._sels=sels;
+})();
+
+/* ===== 4 · open cloze ===== */
+const OCTEXT=[
+ "Two years ",{k:['ago'],h:'a__'},
+ ", I bought a jacket at a second-hand market. It cost less ",{k:['than'],h:'t___'},
+ " ten pounds. The woman ",{k:['who','that'],h:'w__'},
+ " sold it to me said it was from the 1970s. I ",{k:['did'],h:'d__'},
+ " not believe her at first, but then I found a small label inside. My friends think it ",
+ {k:['is'],h:'i_'},
+ " the coolest thing I own, and they always ask me ",{k:['where'],h:'w____'},
+ " I found it."
+];
+(function(){
+  const box=$('#oc');box.innerHTML='<h4>The market jacket</h4>';
+  const p=document.createElement('p');p.style.margin='0';
+  let n=0;const inps=[];
+  OCTEXT.forEach(part=>{
+    if(typeof part==='string'){p.insertAdjacentText('beforeend',part);return}
+    n++;
+    const sup=document.createElement('span');sup.className='gapnum';sup.textContent=n;
+    const inp=document.createElement('input');inp.className='gapin';inp.placeholder='…';
+    inp._k=part.k;inp._h=part.h;inps.push(inp);
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,part.k)};
+    p.appendChild(sup);p.appendChild(inp);
+  });
+  box.appendChild(p);box._inps=inps;
+})();
+$('#ochint').onclick=()=>{
+  const inps=$('#oc')._inps,i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  inps[i].value=inps[i]._k[0][0];inps[i].focus();toast('Pattern: '+inps[i]._h);
+};
+
+/* ===== 5 · proofread ===== */
+const PFTEXT="Last weekend I goed shopping with my sister . We buyed two T-shirts and a pair of jean . "+
+ "My sister is more taller than me , so she didn't liked the small sizes . "+
+ "The shop assistant spoke very quiet , but she was really helpful .";
+const PFKEY={3:'goed → went',10:'buyed → bought',17:'jean → jeans',22:'more taller → taller',
+             30:'didn’t liked → didn’t like',40:'quiet → quietly'};
+(function(){
+  const box=$('#pf');box.innerHTML='';
+  PFTEXT.split(' ').forEach((w,i)=>{
+    const s=document.createElement('span');s.className='tok';s.textContent=w;s.dataset.j=i;
+    if(PFKEY[i])s.classList.add('key');
+    s.onclick=()=>{if(box.classList.contains('checked'))return;s.classList.toggle('sel')};
+    box.appendChild(s);box.insertAdjacentText('beforeend',' ');
+  });
+})();
+
+/* ===== 6 · sentence builder ===== */
+const BLD=[
+ {w:['Where','did','you','buy','that','jacket','?'],s:'Where did you buy that jacket?'},
+ {w:['She','has','got','long','curly','hair','.'],s:'She has got long curly hair.'},
+ {w:['I','didn’t','go','to','the','concert','.'],s:'I didn’t go to the concert.'},
+ {w:['This','jacket','is','cheaper','than','that','one','.'],s:'This jacket is cheaper than that one.'},
+ {w:['He','is','the','boy','who','won','the','prize','.'],s:'He is the boy who won the prize.'}
+];
+(function(){
+  const box=$('#bld');box.innerHTML='';
+  BLD.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='build';
+    d.innerHTML=`<div class="hint" style="margin-bottom:5px;font-weight:800">${i+1}</div>`;
+    const target=document.createElement('div');target.className='target';
+    const bank=document.createElement('div');bank.className='bank';
+    it.w.map(w=>w).sort(()=>Math.random()-.5).forEach(w=>{
+      const t=document.createElement('span');t.className='tokw';t.textContent=w;
+      t.onclick=()=>{
+        if(d.classList.contains('checked'))return;
+        if(t.parentElement===bank)target.appendChild(t);else bank.appendChild(t);
+      };
+      bank.appendChild(t);
+    });
+    const sol=document.createElement('div');sol.className='sol';sol.textContent='✔ '+it.s;
+    d.appendChild(target);d.appendChild(bank);d.appendChild(sol);box.appendChild(d);
+    d._target=target;d._sol=it.s;
+  });
+})();
+
+/* ===== 7 · -ed sounds ===== */
+const EDW=[['wanted','id'],['texted','id'],['started','id'],['decided','id'],
+ ['watched','t'],['stopped','t'],['danced','t'],['worked','t'],
+ ['played','d'],['listened','d'],['enjoyed','d'],['designed','d']];
+makeBuckets('poolEd',EDW);
+
+/* ===== 8 · reading ===== */
+const TF=[
+ ['Maya’s grandfather bought the jacket in the 1970s.','T','It says he bought it in <b>1979</b>.'],
+ ['Maya liked the jacket as soon as she got it.','F','"At first Maya didn’t wear it… the colour was horrible."'],
+ ['Maya’s grandmother gave her other clothes too.','DS','The text only mentions the jacket — it never says.'],
+ ['Maya needed more than one weekend to change the jacket.','T','"It took her three weekends."'],
+ ['Maya earns a lot of money from redesigning clothes.','F','"She doesn’t charge much — usually about five pounds."'],
+ ['Maya wants to study fashion at university.','DS','Her <b>mother</b> thinks so, but "Maya isn’t sure yet."']
+];
+(function(){
+  const box=$('#tf');box.innerHTML='';
+  TF.forEach((it,i)=>{
+    const row=document.createElement('div');row.className='tfrow';
+    row.innerHTML=`<span class="hint" style="font-weight:800">${i+1}</span><span class="st">${it[0]}</span>`;
+    const o=document.createElement('div');o.className='tfopts';
+    [['T','True'],['F','False'],['DS','Doesn’t say']].forEach(([v,label])=>{
+      const b=document.createElement('button');b.className='tfb';b.textContent=v;b.title=label;b.dataset.v=v;
+      b.onclick=()=>{if(row.classList.contains('locked'))return;
+        [...o.children].forEach(x=>x.classList.remove('sel'));b.classList.add('sel')};
+      o.appendChild(b);
+    });
+    row.appendChild(o);
+    const f=document.createElement('div');f.className='fb';f.dataset.why=it[2];
+    row.dataset.k=it[1];box.appendChild(row);box.appendChild(f);
+  });
+})();
+buildMCQ('rv',[
+ {q:'"She doesn’t <b>charge</b> much" — charge means…',a:['ask for money','use electricity','run quickly'],
+  k:'ask for money',why:'To charge = to ask someone to pay a price.'},
+ {q:'"Maya <b>repairs</b> old clothes" — repairs means…',a:['mends','throws away','sells'],k:'mends',
+  why:'To repair = to fix something that is damaged.'},
+ {q:'"I hate <b>throwing</b> clothes <b>away</b>" — throw away means…',a:['put in the bin','give as a present','wash'],
+  k:'put in the bin',why:'Throw away = get rid of something you no longer want.'}
+]);
+
+/* ===== 9 · writing ===== */
+$$('#wpoints .pt').forEach(pt=>{
+  if(S.pts[pt.dataset.i])pt.classList.add('on');
+  pt.onclick=()=>{pt.classList.toggle('on');S.pts[pt.dataset.i]=pt.classList.contains('on')?1:0;save()};
+});
+const countWords=t=>(t.trim().match(/\S+/g)||[]).length;
+$('#wtext').value=S.wtext||'';
+$('#vocablist').value=S.vocablist||'';
+$('#vocablist').oninput=()=>{S.vocablist=$('#vocablist').value;save()};
+function updWords(){const n=countWords($('#wtext').value);
+  $('#wcnt').textContent=n+(n===1?' word':' words');
+  $('#wcnt').style.color=(n>=60&&n<=80)?'var(--ok)':'var(--muted)';return n}
+$('#wtext').oninput=()=>{S.wtext=$('#wtext').value;save();updWords()};
+updWords();
+$('#wsubmit').onclick=()=>{
+  const n=updWords(),f=$('#wfb');
+  const ticked=$$('#wpoints .pt.on').length;
+  if(n<40){f.className='fb on bad';f.textContent=`Only ${n} words — that is too short. Aim for 60–80.`;return}
+  if(ticked<3){f.className='fb on bad';
+    f.textContent=`You have ticked ${ticked} of the 3 content points. In the exam a missing point costs marks — check your message covers all three, then tick them.`;return}
+  f.className='fb on good';
+  f.textContent=(n>=60&&n<=80)?`${n} words, all three points covered 🎯 Now read it aloud once to catch small slips.`
+    :`${n} words — all three points covered. The target band was 60–80, so trim or extend a little.`;
+  if(!S.done.wtext){S.done.wtext=1;addXP(40,'Writing')}
+};
+
+/* ===== 10 · speaking cards + timer ===== */
+const CARDS=[
+ ['Describe a person you know well',['what they look like','what kind of person they are','what they usually wear','why you get on with them']],
+ ['Talk about what you wore last weekend',['where you went','what you wore and why','how you felt in those clothes','what you would wear next time']],
+ ['Fashion then and now',['what your parents wore as teenagers','how it is different today','which style you prefer','why fashions change']],
+ ['A person whose style you admire',['who they are','what they usually wear','why their style works','whether you could wear it']]
+];
+let cardI=0,spkT=null,spkLeft=60;
+function drawCard(){
+  const c=CARDS[cardI];
+  $('#cuecard').innerHTML=`<b>Card ${cardI+1} · ${c[0]}</b><ul class="tight" style="margin-bottom:0">`+
+    c[1].map(x=>`<li>${x}</li>`).join('')+'</ul>';
+  $('#tstatus').textContent=`Card ${cardI+1} of ${CARDS.length}`;
+}
+drawCard();
+$('#tcard').onclick=()=>{cardI=(cardI+1)%CARDS.length;drawCard()};
+$('#tstart').onclick=()=>{
+  if(spkT){clearInterval(spkT);spkT=null;$('#tstart').textContent='▶ Start';$('#tdisp').textContent='1:00';
+    $('#tdisp').classList.remove('low');$('#tstatus').textContent='Stopped';return}
+  spkLeft=60;$('#tstart').textContent='⏹ Stop';$('#tstatus').textContent='Talk!';
+  $('#tdisp').classList.remove('low');
+  spkT=setInterval(()=>{
+    spkLeft--;
+    $('#tdisp').textContent='0:'+String(spkLeft).padStart(2,'0');
+    if(spkLeft<=10)$('#tdisp').classList.add('low');
+    if(spkLeft<=0){clearInterval(spkT);spkT=null;$('#tdisp').textContent='0:00';
+      $('#tstart').textContent='▶ Start';$('#tstatus').textContent='⏰ Time — well done!';boom()}
+  },1000);
+};
+
+/* ===== 12 · self-assessment ===== */
+const CANDO=['I can describe a person’s appearance and personality.','I can talk about clothes and style.',
+ 'I can use the past simple correctly.','I can form and use adverbs of manner.',
+ 'I can understand a short article and find details.','I can speak for a minute without stopping.'];
+(function(){
+  const box=$('#selfassess');
+  CANDO.forEach((txt,i)=>{
+    const row=document.createElement('div');row.className='rate';
+    const t=document.createElement('div');t.className='txt';t.textContent=txt;
+    const st=document.createElement('div');st.className='stars';
+    for(let s=1;s<=3;s++){const star=document.createElement('span');star.className='star';star.textContent='★';
+      star.dataset.v=s;star.onclick=()=>{S.stars[i]=s;save();paintStars(st,s)};st.appendChild(star)}
+    row.appendChild(t);row.appendChild(st);box.appendChild(row);
+    paintStars(st,S.stars[i]||0);
+  });
+})();
+function paintStars(st,v){[...st.children].forEach(s=>s.classList.toggle('on',+s.dataset.v<=v))}
+$('#finishbtn').onclick=()=>{
+  if(S.done.s12){toast('Checkpoint already finished 🎉');boom();return}
+  S.done.s12=1;addXP(20,'Reflection');
+  const f=$('#s12fb');f.className='fb on good';
+  f.textContent='Checkpoint complete. Look at your lowest bar — that is your homework 🌟';
+  boom();renderDash();
+};
+
+/* ===== self-declared ===== */
+$$('[data-done]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.done,f=$('#'+k+'fb');
+  if(S.done[k]){toast('Already counted 🙂');return}
+  S.done[k]=1;addXP(+b.dataset.xp,'Done');b.disabled=true;b.textContent='✓ Counted';
+  if(f){f.className='fb on good';f.textContent='✔ Counted — nice work.'}
+  if(k==='spk1'||k==='spk2'){
+    if(S.done.spk1&&S.done.spk2){const g=$('#s10fb');g.className='fb on good';g.textContent='Both cards done 💬'}
+  }
+});
+$$('[data-done]').forEach(b=>{if(S.done[b.dataset.done]){b.disabled=true;b.textContent='✓ Counted'}});
+
+/* ===== check buttons ===== */
+$$('[data-check]').forEach(b=>b.onclick=()=>{
+  const h=b.dataset.check;
+  if(h==='mc'){
+    const sels=$('#mc')._sels;let ok=0;
+    sels.forEach(s=>{const good=s.value===s._k;s.classList.remove('good','bad');
+      s.classList.add(good?'good':'bad');if(good)ok++;s.disabled=true});
+    const f=$('#mcfb');f.className='fb on '+(ok===sels.length?'good':'bad');
+    f.textContent=`${ok} out of ${sels.length} correct`+(ok===sels.length?' 🎉':'');
+    if(!S.done.mc){S.done.mc=1;record('mc',ok,sels.length,'use');addXP(Math.round(60*ok/sels.length),'MC cloze')}
+    return;
+  }
+  if(h==='oc'){
+    const inps=$('#oc')._inps;let ok=0;
+    inps.forEach(i=>{if(markInput(i,i._k))ok++});
+    const f=$('#ocfb');f.className='fb on '+(ok===inps.length?'good':'bad');
+    f.textContent=`${ok} out of ${inps.length} correct`+(ok===inps.length?' 🎉':'');
+    if(!S.done.oc){S.done.oc=1;record('oc',ok,inps.length,'use');addXP(Math.round(60*ok/inps.length),'Open cloze')}
+    return;
+  }
+  if(h==='pf'){
+    const box=$('#pf');box.classList.add('checked');
+    let ok=0;const keys=Object.keys(PFKEY).map(Number);
+    box.querySelectorAll('.tok').forEach(t=>{
+      const isKey=PFKEY[+t.dataset.j]!==undefined,picked=t.classList.contains('sel');
+      if(isKey&&picked)ok++;
+    });
+    const wrong=[...box.querySelectorAll('.tok.sel')].filter(t=>PFKEY[+t.dataset.j]===undefined).length;
+    $('#pffix').className='fixlist on';
+    $('#pffix').innerHTML='Corrections: '+keys.map(k=>`<span>${PFKEY[k]}</span>`).join('');
+    const f=$('#pffb');f.className='fb on '+(ok===keys.length&&!wrong?'good':'bad');
+    f.textContent=`You found ${ok} of ${keys.length} mistakes`+(wrong?`, and marked ${wrong} correct word${wrong>1?'s':''} by mistake.`:'.')
+      +(ok===keys.length&&!wrong?' 🔎 sharp eyes!':'');
+    if(!S.done.pf){S.done.pf=1;record('pf',Math.max(0,ok-wrong),keys.length,'use');
+      addXP(Math.round(60*Math.max(0,ok-wrong)/keys.length),'Proofreading')}
+    return;
+  }
+  if(h==='bld'){
+    let ok=0;const items=$$('#bld .build');
+    items.forEach((d,i)=>{
+      d.classList.add('checked');
+      const got=[...d._target.children].map(x=>x.textContent).join(' ')
+        .replace(/\s+([.?!,])/g,'$1');
+      const good=got===d._sol;d.classList.add(good?'good':'bad');if(good)ok++;
+    });
+    const f=$('#bldfb');f.className='fb on '+(ok===items.length?'good':'bad');
+    f.textContent=`${ok} out of ${items.length} sentences correct`+(ok===items.length?' 🎉':'');
+    if(!S.done.bld){S.done.bld=1;record('bld',ok,items.length,'use');addXP(Math.round(60*ok/items.length),'Word order')}
+    return;
+  }
+  if(h==='ed'){
+    const scope=$('#poolEd').parentElement;let ok=0;
+    scope.querySelectorAll('.bucket').forEach(bk=>{
+      bk.querySelectorAll('.wchip').forEach(c=>{
+        const good=c.dataset.cat===bk.dataset.cat;c.classList.add(good?'good':'bad');if(good)ok++})});
+    const placed=scope.querySelectorAll('.bucket .wchip').length;
+    const f=$('#edfb');f.className='fb on '+(ok===EDW.length?'good':'bad');
+    f.textContent=placed<EDW.length?`Place all ${EDW.length} verbs first (${placed} placed).`
+      :`${ok} out of ${EDW.length} in the right column`+(ok===EDW.length?' 🔊 great ear!':'');
+    if(placed===EDW.length&&!S.done.ed){S.done.ed=1;record('ed',ok,EDW.length,'pron');
+      addXP(Math.round(60*ok/EDW.length),'-ed sounds')}
+    return;
+  }
+  if(h==='read'){
+    let ok=0;const rows=$$('#tf .tfrow');
+    rows.forEach(row=>{
+      row.classList.add('locked');
+      const sel=row.querySelector('.tfb.sel'),key=row.dataset.k;
+      row.querySelectorAll('.tfb').forEach(x=>{if(x.dataset.v===key)x.classList.add('good')});
+      if(sel){if(sel.dataset.v===key)ok++;else sel.classList.add('bad')}
+      const f=row.nextElementSibling;
+      if(f&&f.classList.contains('fb')){f.className='fb on '+(sel&&sel.dataset.v===key?'good':'bad');
+        f.innerHTML=(sel&&sel.dataset.v===key?'✔ ':'✘ ')+f.dataset.why}
+    });
+    const vok=gradeMCQ('rv');
+    const tot=rows.length+3,got=ok+vok;
+    const f=$('#readfb');f.className='fb on '+(got===tot?'good':'bad');
+    f.textContent=`${got} out of ${tot} correct (${ok}/${rows.length} statements, ${vok}/3 vocabulary)`+(got===tot?' 🎉':'');
+    if(!S.done.read){S.done.read=1;record('read',got,tot,'read');addXP(Math.round(70*got/tot),'Reading')}
+    return;
+  }
+});
+
+renderXP();renderNav();renderDash();
+</script>
+</body>
+</html>
