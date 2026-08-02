@@ -912,15 +912,24 @@ function showEx(pageIdx,exKey){
     const hl=$('#hlbox'),stage=$('#frame .pagestage');if(!hl||!stage)return setTimeout(go,250);
     hl.style.left=r.x+'%';hl.style.top=r.y+'%';hl.style.width=r.w+'%';hl.style.height=r.h+'%';
     hl.classList.remove('on');void hl.offsetWidth;hl.classList.add('on');
-    if(pz<1.7)setPZ(1.7,true);
+    const zoomed=pz<1.7; if(zoomed)setPZ(1.7,true);
     const sc=$('#scroller');
-    setTimeout(()=>{
+    // the zoom is a CSS width transition — only measure once it has finished,
+    // otherwise the stage is still its old size and the target lands at 0
+    let fired=false;
+    const doScroll=()=>{
+      if(fired)return; fired=true;
       const sw=stage.offsetWidth,sh=stage.offsetHeight;
       const top=sh*r.y/100-Math.max(24,(sc.clientHeight-sh*r.h/100)/2);
       const left=sw*r.x/100-Math.max(12,(sc.clientWidth-sw*r.w/100)/2);
       sc.scrollTo({top:Math.max(0,top),left:Math.max(0,left),behavior:'smooth'});
       if(window.innerWidth<=1250)sc.scrollIntoView({behavior:'smooth',block:'center'});
-    },380);
+    };
+    // note: transitionend bubbles, so ignore the highlight's own opacity transition
+    if(zoomed)stage.addEventListener('transitionend',e=>{
+      if(e.target===stage&&e.propertyName==='width')doScroll();
+    });
+    setTimeout(doScroll,zoomed?460:40);
     clearTimeout(showEx._t);showEx._t=setTimeout(()=>hl.classList.remove('on'),4200);
   };
   if(cur!==pageIdx){cur=pageIdx;drawPage();setTimeout(go,320)}else go();

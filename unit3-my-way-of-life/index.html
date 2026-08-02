@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Unit 3 · My Way of Life — Interactive Workspace</title>
+<style>
+:root{
+  --red:#e63946; --blue:#1d7fd6; --teal:#12b5a5; --yellow:#ffc233; --purple:#a855c7; --orange:#f4732a; --green:#16a34a;
+  --bg:#eef2f7; --bg2:#e2e8f2; --card:#ffffff; --ink:#16202e; --muted:#61708a;
+  --line:#dbe3ef; --ok:#16a34a; --no:#e11d48; --shadow:0 10px 30px rgba(22,38,66,.10); --r:18px;
+}
+html[data-theme="dark"]{
+  --bg:#0e1420; --bg2:#111a29; --card:#161f30; --ink:#e8eefb; --muted:#93a3bd;
+  --line:#243149; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);line-height:1.55;
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(244,115,42,.16),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(29,127,214,.16),transparent 55%),var(--bg)}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--card) 82%,transparent);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1700px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+.unitbadge{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:22px;
+  background:linear-gradient(135deg,var(--red),var(--orange));box-shadow:0 6px 16px rgba(230,57,70,.35)}
+.brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.xpbox{flex:1;min-width:220px;max-width:420px}
+.xpbar{height:12px;border-radius:99px;background:var(--bg2);overflow:hidden;border:1px solid var(--line)}
+.xpfill{height:100%;width:0;border-radius:99px;transition:width .5s cubic-bezier(.2,.9,.2,1);
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
+.xpmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  padding:8px 14px;border-radius:12px;font-weight:700;font-size:13px;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent}
+.btn.go{background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;border-color:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.medals{display:flex;gap:6px}
+.medal{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--bg2);
+  filter:grayscale(1);opacity:.4;font-size:16px;transition:.4s;border:1px solid var(--line)}
+.medal.on{filter:none;opacity:1;transform:scale(1.08);box-shadow:0 0 0 3px rgba(255,194,51,.25)}
+main{max-width:1700px;margin:0 auto;padding:20px 18px 80px;display:grid;gap:20px;
+  grid-template-columns:minmax(255px,.85fr) minmax(420px,1.25fr) minmax(330px,1.2fr)}
+@media(max-width:1250px){main{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(min-width:1251px){.center .stickypages{position:sticky;top:78px}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card>h3{margin:0;padding:13px 16px;font-size:14px;letter-spacing:.3px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.card>h3 .dot{width:9px;height:9px;border-radius:99px;background:var(--blue);flex:none}
+.card .body{padding:14px 16px}
+.t-red>h3 .dot{background:var(--red)} .t-teal>h3 .dot{background:var(--teal)}
+.t-yellow>h3 .dot{background:var(--yellow)} .t-purple>h3 .dot{background:var(--purple)}
+.t-orange>h3 .dot{background:var(--orange)}
+.hint{font-size:12.5px;color:var(--muted)}
+.lead{font-size:13px;margin:0 0 11px;color:var(--muted)}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 8px;border-radius:99px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+.exno{width:26px;height:26px;flex:none;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:14px;font-weight:800}
+.t-orange .exno{background:linear-gradient(135deg,var(--orange),var(--red))}
+.t-teal .exno{background:linear-gradient(135deg,var(--teal),var(--blue))}
+.showpage{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;border:1px solid var(--blue);color:var(--blue);
+  background:transparent;cursor:pointer;white-space:nowrap}
+.showpage:hover{background:var(--blue);color:#fff}
+.playmini{margin-left:6px;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;
+  padding:4px 9px;border-radius:99px;border:1px solid var(--teal);color:var(--teal);background:transparent;
+  cursor:pointer;white-space:nowrap}
+.playmini:hover,.playmini.on{background:var(--teal);color:#fff}
+.secthead{display:flex;align-items:center;gap:10px;margin:8px 2px -4px;font-size:12px;font-weight:800;
+  letter-spacing:1.1px;text-transform:uppercase;color:var(--muted)}
+.secthead::after{content:"";flex:1;height:1px;background:var(--line)}
+/* warm-up memory game */
+.warm{background:linear-gradient(135deg,rgba(244,115,42,.13),rgba(168,85,199,.11));border:1px solid var(--line)}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+@media(max-width:520px){.mgrid{grid-template-columns:repeat(3,1fr)}}
+.mcard{aspect-ratio:1.35;border-radius:12px;border:1px solid var(--line);background:var(--card);
+  display:grid;place-items:center;cursor:pointer;font-size:12.5px;font-weight:800;text-align:center;
+  padding:4px;transition:.22s;transform-style:preserve-3d;user-select:none;color:transparent;position:relative}
+.mcard::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-size:20px;
+  color:var(--muted);background:var(--bg2);border-radius:11px;transition:.22s}
+.mcard.up,.mcard.done{color:var(--ink)}
+.mcard.up::after,.mcard.done::after{opacity:0;transform:rotateY(90deg)}
+.mcard.up{border-color:var(--blue);box-shadow:0 0 0 2px rgba(29,127,214,.25)}
+.mcard.done{border-color:var(--ok);background:rgba(22,163,74,.12);color:var(--ok);cursor:default}
+.mcard.miss{border-color:var(--no);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.mstat{display:flex;gap:16px;justify-content:center;font-size:12.5px;font-weight:800;color:var(--muted)}
+.mstat b{color:var(--orange)}
+/* pages */
+.tabs{display:flex;gap:6px;padding:12px 12px 0;flex-wrap:wrap}
+.tab{padding:7px 12px;border-radius:12px 12px 0 0;border:1px solid var(--line);border-bottom:none;
+  background:var(--bg2);cursor:pointer;font-weight:700;font-size:12.5px;color:var(--muted)}
+.tab.on{background:var(--card);color:var(--ink)}
+.pagewrap{padding:12px 14px 16px;border-top:1px solid var(--line)}
+.scroller{max-height:74vh;overflow:auto;border-radius:14px;border:1px solid var(--line);scroll-behavior:smooth}
+.pageframe{position:relative;min-height:300px;display:block;
+  background:repeating-linear-gradient(45deg,var(--bg2),var(--bg2) 12px,transparent 12px,transparent 24px)}
+.pageframe img{width:100%;display:block}
+.pagestage{position:relative;width:calc(100% * var(--pz,1));line-height:0;transition:width .35s cubic-bezier(.2,.9,.2,1)}
+.ph{padding:34px 22px;text-align:center;color:var(--muted);font-size:13px}
+.ph b{display:block;font-size:15px;color:var(--ink);margin-bottom:6px}
+.zoombar{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.hl{position:absolute;border:3px solid var(--orange);border-radius:10px;pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(10,16,28,.42);opacity:0;transition:opacity .35s;z-index:3}
+.hl.on{opacity:1;animation:hlpulse 1.1s ease-in-out 2}
+@keyframes hlpulse{0%,100%{border-color:var(--orange)}50%{border-color:var(--yellow)}}
+.lightbox{position:fixed;inset:0;background:rgba(8,12,20,.92);z-index:200;display:none;place-items:center;
+  padding:20px;overflow:auto;cursor:zoom-out}
+.lightbox.on{display:grid}
+.lightbox img{max-width:min(1100px,96vw);border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+/* write + draw */
+.wlayer{position:absolute;inset:0;pointer-events:none}
+.writeon .wlayer{pointer-events:auto;cursor:crosshair}
+.writeon .wlayer::after{content:"✍️ click anywhere on the page to type";position:absolute;left:50%;top:8px;
+  transform:translateX(-50%);background:var(--blue);color:#fff;font:700 11px/1.4 "Segoe UI",sans-serif;
+  padding:4px 12px;border-radius:99px;opacity:.85;white-space:nowrap;pointer-events:none;z-index:4}
+.dlayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;touch-action:none;overflow:visible}
+.drawon .dlayer{pointer-events:auto;cursor:crosshair}
+.eraseon .dlayer{pointer-events:auto}
+.eraseon .dlayer polyline{pointer-events:stroke;cursor:pointer}
+.eraseon .dlayer polyline:hover{opacity:.35}
+.drawon .note,.eraseon .note{pointer-events:none}
+.drawon .wlayer::after{display:none}
+.note{position:absolute;line-height:1.2;pointer-events:auto;transform:translateY(-50%)}
+.note input{border:none;border-bottom:1.5px solid rgba(29,127,214,.45);background:rgba(255,255,255,.55);
+  font-family:"Comic Sans MS","Segoe Print",cursive;font-size:var(--nfs,15px);font-weight:700;
+  color:#1652c8;padding:0 3px;outline:none;border-radius:3px 3px 0 0;min-width:26px}
+.note input:focus{background:rgba(255,235,150,.75);border-bottom-color:var(--blue)}
+.note .del,.note .grip{position:absolute;top:-11px;width:18px;height:18px;border-radius:99px;border:none;
+  color:#fff;font-size:11px;line-height:18px;padding:0;display:none;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.note .del{right:-11px;background:var(--no);cursor:pointer}
+.note .grip{left:-11px;background:var(--blue);cursor:grab;font-size:10px;touch-action:none}
+.note:hover .del,.note:hover .grip,.note:focus-within .del,.note:focus-within .grip{display:block}
+.note.dragging{z-index:9;opacity:.85}
+.dtools{display:none;gap:6px;align-items:center;padding:4px 10px;border:1px solid var(--line);
+  border-radius:99px;background:var(--bg2)}
+body.drawon .dtools,body.eraseon .dtools{display:flex}
+.swatch{width:20px;height:20px;border-radius:99px;border:2px solid rgba(255,255,255,.7);cursor:pointer;
+  padding:0;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:.15s}
+.swatch.on{transform:scale(1.25);box-shadow:0 0 0 3px rgba(29,127,214,.35)}
+.wsize{width:70px;accent-color:var(--blue)}
+.wcount{font-size:11.5px;color:var(--muted);font-weight:700}
+.hwbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;padding:12px 14px;
+  border-radius:14px;border:1px dashed var(--orange);background:var(--bg2)}
+.hwbar input.name{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  padding:7px 11px;font-size:13px;font-weight:700;width:180px}
+/* audio */
+.audio{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:8px 11px;margin:7px 0}
+.audio.playing{border-color:var(--teal);box-shadow:0 0 0 3px rgba(18,181,165,.15)}
+.playbtn{width:36px;height:36px;flex:none;border-radius:99px;border:none;cursor:pointer;color:#fff;
+  font-size:13px;background:linear-gradient(135deg,var(--teal),var(--blue));display:grid;place-items:center}
+.audio .meta{flex:1;min-width:0}
+.audio .meta b{display:block;font-size:12.5px}
+.audio .meta span.sub{font-size:11px;color:var(--muted)}
+.seek{width:100%;height:6px;border-radius:99px;background:var(--line);margin-top:5px;overflow:hidden;cursor:pointer}
+.seek i{display:block;height:100%;width:0;background:var(--blue);border-radius:99px}
+.atools{display:flex;gap:5px;align-items:center;flex:none}
+.abtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;
+  padding:4px 8px;font-size:11px;font-weight:800;cursor:pointer}
+.abtn.on{background:var(--blue);color:#fff;border-color:transparent}
+.atime{font-size:11px;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;flex:none;min-width:72px;text-align:right}
+.miss{font-size:11px;color:var(--no);font-weight:700}
+/* tasks */
+.q{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:var(--bg2)}
+.q p{margin:0 0 8px;font-size:13.5px;font-weight:600}
+.q .num{color:var(--muted);font-weight:800;margin-right:6px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.opt.good{background:rgba(22,163,74,.14);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:rgba(225,29,72,.12);border-color:var(--no);color:var(--no);text-decoration:line-through}
+.fb{font-size:12px;margin-top:7px;display:none}
+.fb.on{display:block}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--no)}
+input.txt{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  padding:6px 9px;font-size:13px;width:150px;font-weight:700}
+input.txt.good{border-color:var(--ok);color:var(--ok)} input.txt.bad{border-color:var(--no);color:var(--no)}
+input.txt.wide{width:210px}
+.gapline{font-size:13.5px;margin:0 0 9px;padding-left:22px;text-indent:-22px}
+.gapline .num{color:var(--muted);font-weight:800;margin-right:6px}
+select.pick{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  padding:6px 8px;font-size:13px;font-weight:700;font-family:inherit;outline:none;max-width:100%}
+select.pick.good{border-color:var(--ok);color:var(--ok)} select.pick.bad{border-color:var(--no);color:var(--no)}
+.photorow{display:flex;align-items:center;gap:9px;margin-bottom:8px;flex-wrap:wrap}
+.plet{width:28px;height:28px;flex:none;border-radius:8px;display:grid;place-items:center;color:#fff;
+  font-weight:800;font-size:13px;background:linear-gradient(135deg,var(--purple),var(--red))}
+/* ticks */
+.ticks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media(max-width:520px){.ticks{grid-template-columns:1fr}}
+.tick{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 10px;cursor:pointer;
+  font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:7px;transition:.15s}
+.tick::before{content:"";width:15px;height:15px;border-radius:5px;border:1.5px solid var(--muted);flex:none}
+.tick.on::before{content:"✓";background:var(--blue);border-color:var(--blue);color:#fff;font-size:11px;display:grid;place-items:center;line-height:1}
+.tick.good{border-color:var(--ok);background:rgba(22,163,74,.12)}
+.tick.bad{border-color:var(--no);background:rgba(225,29,72,.10)}
+/* order list */
+.olist{display:flex;flex-direction:column;gap:6px}
+.orow{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;padding:7px 10px;background:var(--bg2);font-size:13px}
+.orow .n{width:20px;flex:none;color:var(--muted);font-weight:800;text-align:center}
+.orow .lb{flex:1;font-weight:600}
+.orow .mv{display:flex;flex-direction:column;gap:2px;flex:none}
+.orow .mv button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;cursor:pointer;font-size:10px;line-height:1;padding:3px 7px}
+.orow .mv button:hover{border-color:var(--blue)}
+/* pairs */
+.pairwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.pairwrap{grid-template-columns:1fr}}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:5px 12px;cursor:pointer;font-size:12.5px;font-weight:700;transition:.15s}
+.chip:hover{transform:translateY(-2px)}
+.chip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.chip.gone{animation:pop .35s forwards}
+@keyframes pop{to{transform:scale(0);opacity:0;width:0;padding:0;margin:0;border:0}}
+/* quiz */
+.qz{border:1px solid var(--line);border-radius:12px;padding:9px 11px;margin-bottom:8px;background:var(--bg2);font-size:13px}
+.qz .qn{font-weight:800;color:var(--purple);margin-right:5px}
+.qz .qopts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.qz .qo{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:4px 11px;cursor:pointer;font-size:12.5px;font-weight:700}
+.qz .qo:hover{border-color:var(--blue)}
+.qz .qo.sel{background:var(--blue);color:#fff;border-color:transparent}
+textarea.write{width:100%;min-height:120px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  background:var(--card);color:var(--ink);font-family:inherit;font-size:13.5px;resize:vertical;outline:none}
+textarea.write:focus{border-color:var(--blue)}
+.wcbar{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:6px}
+ul.tight{margin:6px 0;padding-left:18px;font-size:13px}
+ul.tight li{margin-bottom:5px}
+.callout{border-left:4px solid var(--yellow);background:var(--bg2);padding:9px 12px;border-radius:0 10px 10px 0;font-size:13px;margin:9px 0}
+.callout.info{border-color:var(--blue)}
+.callout.warn{border-color:var(--orange)}
+.gtab{width:100%;border-collapse:collapse;font-size:12.7px;margin:4px 0}
+.gtab th,.gtab td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+.gtab th{background:var(--bg2);font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+.cando{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin-bottom:7px}
+.cando i{font-style:normal;color:var(--teal);font-weight:900}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;width:9px;height:14px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:400;background:var(--ink);color:var(--bg);
+  padding:11px 20px;border-radius:99px;font-weight:800;font-size:13.5px;transition:transform .4s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
+#printroot{display:none}
+#printroot .sheet{page-break-after:always;padding:0 0 10px}
+#printroot .phead{font:700 15px/1.5 "Segoe UI",sans-serif;margin:0 0 8px;color:#000;border-bottom:2px solid #000;padding-bottom:5px}
+@media print{
+  body>header,body>main,body>footer,.lightbox,.toast,.confetti{display:none!important}
+  #printroot{display:block!important}
+  #printroot .note input{background:transparent;border-bottom:1px solid #999;color:#00308f;font-weight:700}
+  #printroot .note .del,#printroot .note .grip{display:none!important}
+  @page{margin:10mm}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <div class="unitbadge">3</div>
+      <div>MY WAY OF LIFE<small>Student's Book p.20–21 · Workbook p.12–13</small></div>
+    </div>
+    <div class="xpbox">
+      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+      <div class="xpmeta"><span id="xplabel">0 XP</span><span id="xpright">Level 1 · Starting Out</span></div>
+    </div>
+    <div class="medals" id="medals">
+      <div class="medal" data-need="170" title="170 XP — Warmed Up">🔥</div>
+      <div class="medal" data-need="335" title="335 XP — Life Events Expert">🎓</div>
+      <div class="medal" data-need="505" title="505 XP — Sharp Reader">📖</div>
+      <div class="medal" data-need="670" title="670 XP — Unit 3 Champion">🏆</div>
+    </div>
+    <button class="btn" id="themebtn">🌙 Theme</button>
+    <button class="btn" id="resetbtn">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ LEFT: REFERENCE ============ -->
+<div class="col">
+
+  <div class="card t-orange">
+    <h3><span class="dot"></span>Word Bank · Life events</h3>
+    <div class="body">
+      <p class="hint" style="margin-top:0">Hover over a phrase to see what it means. Watch the <b>verb</b> — it is
+        the part people get wrong.</p>
+      <table class="gtab">
+        <tr><th style="width:34%">get</th><td>
+          <span title="finish university successfully">get a degree</span> ·
+          <span title="pass your driving test">get a driving licence</span> ·
+          <span title="start working somewhere">get a job</span> ·
+          <span title="become husband and wife">get married</span></td></tr>
+        <tr><th>leave</th><td>
+          <span title="stop living with your parents">leave home</span> ·
+          <span title="finish your school education">leave school</span></td></tr>
+        <tr><th>go / start</th><td>
+          <span title="become a university student">go to university</span> ·
+          <span title="begin your school life, about age 5">start school</span></td></tr>
+        <tr><th>other</th><td>
+          <span title="come into the world">be born</span> ·
+          <span title="become a parent">have children</span> ·
+          <span title="change the place you live in">move home</span> ·
+          <span title="stop working, usually around 65">retire</span> ·
+          <span title="choose in an election">vote</span></td></tr>
+      </table>
+      <div class="callout warn"><b>Careful:</b> ❌ <s>make a degree</s> · ❌ <s>go in university</s> ·
+        ❌ <s>marry with someone</s> → <b>get married to</b> someone.</div>
+    </div>
+  </div>
+
+  <div class="card t-blue">
+    <h3><span class="dot"></span>Talking about ages &amp; times</h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li><b>at</b> the age of 18 · <b>at</b> 18</li>
+        <li><b>when</b> I was five · I started school <b>when</b> I was five</li>
+        <li>two years <b>ago</b> · <b>in</b> 2019 · <b>in</b> the 1990s</li>
+        <li><b>before</b> I'm 25 · <b>by</b> the time I'm 30</li>
+        <li>she's <b>in</b> her twenties / thirties</li>
+      </ul>
+      <div class="callout info"><b>For Exercise 6:</b> <i>I want to</i> + infinitive.
+        <br>I want to <b>leave</b> home before I'm 25. ❌ <s>I want to leaving</s></div>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="dot"></span>Reading strategy · p.21</h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li><b>Exercise 1</b> is a <i>gist</i> task — read fast, 60 seconds, just find who likes <i>now</i> and who
+          likes <i>the past</i>. Don't stop at unknown words.</li>
+        <li><b>Exercise 2</b> is a <i>detail</i> task — this time find the exact line that proves your answer.
+          Two of the three options are usually "almost right".</li>
+        <li><b>Exercise 3</b> — guess the meaning from the sentence around the word before you look it up.</li>
+      </ul>
+      <div class="callout"><b>Extreme adjectives.</b> The article is full of them:
+        <i>huge</i> = very big · <i>tiny</i> = very small · <i>awful</i> = very bad · <i>exhausted</i> = very tired.
+        We don't say <s>very huge</s> — we say <b>absolutely</b> huge.</div>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="dot"></span>CEFR · Can-do statements (A2+/B1)</h3>
+    <div class="body">
+      <div class="cando"><i>✓</i><span>I can name and order the main events in a person's life. <span class="tag">Vocabulary</span></span></div>
+      <div class="cando"><i>✓</i><span>I can talk about ages and typical ages in my country. <span class="tag">Spoken interaction</span></span></div>
+      <div class="cando"><i>✓</i><span>I can say what I want to do in the future with <i>I want to…</i> <span class="tag">Spoken production</span></span></div>
+      <div class="cando"><i>✓</i><span>I can understand two opinions in an article and tell them apart. <span class="tag">Reading</span></span></div>
+      <div class="cando"><i>✓</i><span>I can guess the meaning of new words from context. <span class="tag">Strategy</span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ CENTER: PAGES ============ -->
+<div class="col center">
+  <div class="stickypages">
+    <div class="card">
+      <div class="tabs" id="tabs">
+        <div class="tab on" data-i="0">📙 SB p.20</div>
+        <div class="tab" data-i="1">📕 SB p.21</div>
+        <div class="tab" data-i="2">✏️ Homework p.12</div>
+        <div class="tab" data-i="3">✏️ Homework p.13</div>
+      </div>
+      <div class="pagewrap">
+        <div class="scroller" id="scroller"><div class="pageframe" id="frame"></div></div>
+        <div class="zoombar">
+          <button class="btn" id="prevbtn">← Back</button>
+          <button class="btn" id="nextbtn">Next →</button>
+          <button class="btn" id="zoutbtn" title="Zoom out">🔍−</button>
+          <button class="btn" id="zinbtn" title="Zoom in">🔍+</button>
+          <button class="btn" id="zfitbtn" title="Fit the whole page">⤢ Fit</button>
+          <button class="btn" id="writebtn">✍️ Write on page</button>
+          <button class="btn" id="smallbtn" title="Smaller text">A−</button>
+          <button class="btn" id="bigbtn" title="Bigger text">A+</button>
+          <button class="btn" id="drawbtn">🖊 Draw</button>
+          <span class="dtools" id="dtools">
+            <button class="swatch on" data-c="#e11d48" style="background:#e11d48" title="Red pen"></button>
+            <button class="swatch" data-c="#1d7fd6" style="background:#1d7fd6" title="Blue pen"></button>
+            <button class="swatch" data-c="#16a34a" style="background:#16a34a" title="Green pen"></button>
+            <button class="swatch" data-c="rgba(255,214,0,.45)" data-hl="1" style="background:#ffd600" title="Highlighter"></button>
+            <input type="range" class="wsize" id="wsize" min="1" max="14" step="1" value="3" title="Line thickness">
+            <button class="btn" id="undobtn" title="Ctrl+Z">↶ Undo</button>
+            <button class="btn" id="erasebtn" title="Click a line to remove it">🧹 Eraser</button>
+          </span>
+          <button class="btn" id="clearbtn">🧽 Clear page</button>
+          <button class="btn primary" id="zoombtn">🔍 Full screen</button>
+          <span class="wcount" id="wcount"></span>
+        </div>
+        <div class="hwbar" id="hwbar" style="display:none">
+          <b style="font-size:13px">📨 Hand in your homework</b>
+          <input class="name" id="hwname" placeholder="Your name" autocomplete="name">
+          <button class="btn go" id="sendbtn">Save as PDF &amp; send</button>
+          <span class="hint" id="hwstatus">Finish both pages — p.12 and p.13 go into one PDF.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card t-teal" style="margin-top:16px">
+      <h3><span class="dot"></span>Audio</h3>
+      <div class="body" id="audios">
+        <div class="audio" data-track="13" data-src="audio/sb/track13.mp3">
+          <button class="playbtn">▶</button>
+          <div class="meta"><b>Track 13 · SB p.20, Ex. 4</b>
+            <span class="sub">Charlie answers the quiz</span><div class="seek"><i></i></div></div>
+          <span class="atime">0:00 / 0:00</span>
+          <span class="atools"><button class="abtn back">⏪ 5s</button><button class="abtn rate">1×</button></span>
+        </div>
+        <p class="hint" style="margin:8px 0 0">Drop <code>track13.mp3</code> into <b>audio/sb/</b> and this player
+          starts working — no other change needed. The <b>ABOUT YOU</b> video (03) is on the publisher's platform.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RIGHT: TASKS ============ -->
+<div class="col">
+
+  <!-- WARM-UP -->
+  <div class="card warm">
+    <h3>🔥 Warm-up · Memory pairs <span class="tag" style="margin-left:auto">5 min · +40 XP</span></h3>
+    <div class="body">
+      <p class="lead">Before we start Unit 3 — a quick review of Units 1–2. Turn over two cards and find the
+        <b>opposites</b>. Say each word out loud as you turn it over.</p>
+      <div class="mstat"><span>Pairs found: <b id="mfound">0</b>/6</span><span>Moves: <b id="mmoves">0</b></span>
+        <span>Time: <b id="mtime">0:00</b></span></div>
+      <div class="mgrid" id="mgrid"></div>
+      <button class="btn go" id="mrestart">🔀 Shuffle &amp; play again</button>
+      <span class="fb" id="warmfb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">SB p.20 · Vocabulary: Life events</div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">1</span>Match the phrases to the photos <button class="showpage" data-page="0" data-ex="v1">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Look at photos <b>A–F</b> at the top of page 20 and choose the life event for each one.</p>
+      <div id="v1"></div>
+      <button class="btn primary" data-check="v1">Check</button>
+      <span class="fb" id="v1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">2</span>Put the events in order <button class="showpage" data-page="0" data-ex="v2">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Use ▲ ▼ to put the events into a life order. <b>There is more than one possible answer</b> —
+        so this one is not marked. Compare with your partner and explain your choices.</p>
+      <div class="olist" id="v2"></div>
+      <div style="margin-top:11px">
+        <button class="btn" id="v2show">👀 Show one possible order</button>
+        <button class="btn primary" data-done="v2" data-xp="25">✓ We compared our answers</button>
+      </div>
+      <span class="fb" id="v2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">3</span>Which four are NOT in the quiz? <button class="showpage" data-page="0" data-ex="v3">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Read the quiz on page 20. Tick the <b>four</b> life events from Exercise 1 that the quiz
+        questions never mention.</p>
+      <div class="ticks" id="v3"></div>
+      <button class="btn primary" data-check="v3" style="margin-top:10px">Check</button>
+      <span class="fb" id="v3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">4</span>Charlie's answers
+      <button class="playmini" data-track="13">▶ Track 13</button>
+      <button class="showpage" data-page="0" data-ex="v4">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Listen and choose the answers <b>Charlie</b> gives to the quiz.</p>
+      <div id="v4"></div>
+      <div class="callout warn" style="margin-bottom:0"><b>Checked in class.</b> Choose Charlie's answers here,
+        then compare with your teacher — this task needs the recording, so there is no answer key in the app.</div>
+      <button class="btn primary" data-done="v4" data-xp="25" style="margin-top:10px">✓ I listened and chose</button>
+      <span class="fb" id="v4fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">5</span>Your own quiz answers <button class="showpage" data-page="0" data-ex="v5">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">In pairs, choose <b>your</b> answers to the same eight questions. Then check them on
+        <b>page 120</b> of your book. Did you beat Charlie?</p>
+      <div id="v5"></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px">
+        <span class="hint">My score out of 8:</span>
+        <input class="txt" id="v5score" style="width:70px" placeholder="e.g. 5">
+        <button class="btn primary" data-done="v5" data-xp="25">✓ We checked on page 120</button>
+      </div>
+      <span class="fb" id="v5fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-purple">
+    <h3><span class="exno">6</span>Six sentences with <i>I want to…</i> <button class="showpage" data-page="0" data-ex="v6">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Write six true sentences about your own future, one per line. Use six <b>different</b>
+        life events from Exercise 1.</p>
+      <div class="callout info" style="margin-top:0"><i>I want to leave home before I'm 25.</i> ·
+        <i>I want to retire before I'm 40!</i></div>
+      <textarea class="write" id="v6text" placeholder="1 I want to…&#10;2 I want to…"></textarea>
+      <div class="wcbar"><span class="hint" id="v6cnt">0 sentences with "I want to"</span>
+        <span class="hint">target: 6</span></div>
+      <button class="btn primary" id="v6submit">✓ Check my six sentences</button>
+      <span class="fb" id="v6fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-teal">
+    <h3><span class="exno">7</span>Discuss <button class="showpage" data-page="0" data-ex="v7">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">In pairs or small groups. Give a <b>reason</b> for every answer — one-word answers don't count.</p>
+      <ul class="tight" style="margin-top:0">
+        <li>When can you leave school in your country?</li>
+        <li>At what age can you get a job?</li>
+        <li>How old do you have to be to get a driving licence?</li>
+        <li>What do you think is the best age to get married?</li>
+        <li>Is it important to go to university and get a degree? Why? / Why not?</li>
+        <li>Which of your relatives have retired?</li>
+      </ul>
+      <button class="btn primary" data-done="v7" data-xp="25">✓ We discussed all six</button>
+      <span class="fb" id="v7fb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">SB p.21 · Reading</div>
+
+  <div class="card t-red">
+    <h3><span class="exno">1</span>Read quickly — who thinks what? <button class="showpage" data-page="1" data-ex="r1">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">You have <b>60 seconds</b>. Don't read every word — just find each person's overall opinion.</p>
+      <div id="r1"></div>
+      <button class="btn primary" data-check="r1">Check</button>
+      <span class="fb" id="r1fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-red">
+    <h3><span class="exno">2</span>Read again — choose the answer <button class="showpage" data-page="1" data-ex="r2">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Now read slowly. For every answer, find the exact words in the text that prove it.</p>
+      <div id="r2"></div>
+      <button class="btn primary" data-check="r2">Check</button>
+      <span class="fb" id="r2fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-red">
+    <h3><span class="exno">3</span>Highlighted words <button class="showpage" data-page="1" data-ex="r3">Show on page</button></h3>
+    <div class="body">
+      <p class="lead">Match the highlighted words in the article to these meanings.</p>
+      <div id="r3"></div>
+      <button class="btn primary" data-check="r3">Check</button>
+      <span class="fb" id="r3fb"></span>
+    </div>
+  </div>
+
+  <div class="card t-red">
+    <h3><span class="dot"></span>Talking points <button class="showpage" data-page="1" data-ex="talk">Show on page</button></h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li>How was your parents' teenage life different from yours?</li>
+        <li>What problems can modern life bring for teenagers?</li>
+      </ul>
+      <div class="callout">🎯 Use the extreme adjectives from the article: <i>huge, tiny, awful, exhausted,
+        unbelievable, relaxed</i>.</div>
+      <button class="btn primary" data-done="talk" data-xp="25">✓ We discussed both</button>
+      <span class="fb" id="talkfb"></span>
+    </div>
+  </div>
+
+  <div class="secthead">Extra practice · beyond the book</div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">A</span>Which verb goes with it? <span class="tag" style="margin-left:auto">+45 XP</span></h3>
+    <div class="body">
+      <p class="lead">Life events live in fixed pairs. Click a verb, then its partner.</p>
+      <div class="pairwrap">
+        <div><div class="hint" style="margin-bottom:6px;font-weight:800">VERB</div><div class="chips" id="colL"></div></div>
+        <div><div class="hint" style="margin-bottom:6px;font-weight:800">GOES WITH</div><div class="chips" id="colR"></div></div>
+      </div>
+      <span class="fb" id="colfb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">B</span>Word families <span class="tag" style="margin-left:auto">+45 XP</span></h3>
+    <div class="body">
+      <p class="lead">Write the <b>noun</b> for each verb. These come up constantly when you talk about life events.</p>
+      <div id="wf"></div>
+      <button class="btn primary" data-check="wf">Check all</button>
+      <button class="btn" id="wfhint">💡 Hint</button>
+      <span class="fb" id="wffb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">C</span>Ages &amp; time expressions <span class="tag" style="margin-left:auto">+45 XP</span></h3>
+    <div class="body">
+      <p class="lead">Choose the correct word. The left-hand box has all the rules.</p>
+      <div id="tm"></div>
+      <button class="btn primary" data-check="tm">Check</button>
+      <span class="fb" id="tmfb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">D</span>Extreme adjectives <span class="tag" style="margin-left:auto">+40 XP</span></h3>
+    <div class="body">
+      <p class="lead">Replace <i>very + adjective</i> with <b>one</b> stronger word from the article.</p>
+      <div id="ext"></div>
+      <button class="btn primary" data-check="ext">Check all</button>
+      <span class="fb" id="extfb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">E</span>Writing · my life timeline <span class="tag" style="margin-left:auto">+35 XP</span></h3>
+    <div class="body">
+      <p class="lead">Write a short text about your life: three things that <b>already happened</b> and three you
+        <b>want to do</b>.</p>
+      <div class="callout info" style="margin-top:0"><b>Use:</b> past simple for the first part (<i>I started
+        school when I was six</i>) and <i>I want to / I'd like to</i> for the second.</div>
+      <textarea class="write" id="wtext" placeholder="I was born in…"></textarea>
+      <div class="wcbar"><span class="hint" id="wcnt">0 words</span><span class="hint">target: 70–100 words</span></div>
+      <button class="btn primary" id="wsubmit">✓ Done — count my words</button>
+      <span class="fb" id="wfb"></span>
+    </div>
+  </div>
+
+  <div class="card t-orange">
+    <h3><span class="exno">F</span>Speaking · the life interview 🎤 <span class="tag" style="margin-left:auto">+30 XP</span></h3>
+    <div class="body">
+      <p class="lead">In pairs. Interview your partner about their life plan, then report back to the class
+        about <b>them</b>, not about yourself.</p>
+      <ul class="tight">
+        <li>Ask six questions using life events: <i>At what age do you want to…?</i></li>
+        <li>Ask a follow-up for each one: <i>Why? · Really? · Isn't that late/early?</i></li>
+        <li>Then tell the class three things: <i>Marta wants to get a job before she goes to university because…</i></li>
+      </ul>
+      <div class="callout">😈 <b>Hard mode:</b> your partner must not answer with a number only — every answer
+        needs a reason.</div>
+      <button class="btn primary" data-done="spk" data-xp="30">✓ We did the interview and reported back</button>
+      <span class="fb" id="spkfb"></span>
+    </div>
+  </div>
+
+  <div class="card t-red">
+    <h3><span class="dot"></span>Homework · Workbook p.12–13</h3>
+    <div class="body">
+      <ul class="tight" style="margin-top:0">
+        <li>Open the tab <b>✏️ Homework p.12</b> or <b>p.13</b> in the middle column.</li>
+        <li>Press <b>✍️ Write on page</b> and type your answers onto the page. Drag a field by the blue
+          <b>✥</b> corner if it lands badly.</li>
+        <li>Press <b>🖊 Draw</b> to tick or join — that is how you do Exercise 4 on p.12 and Exercise 1 on p.13.</li>
+        <li>When both pages are done, type your name and press <b>Save as PDF &amp; send</b>.</li>
+      </ul>
+      <div class="callout"><b>p.12 Ex.1</b> is the vowel puzzle — the same thirteen events you learned today.
+        <b>p.13</b> is a newspaper article: read the title first and predict, exactly like Exercise 1 on page 21.</div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>Unit 3 · My Way of Life — interactive companion to the Student's Book. Pages and audio are the publisher's
+material, used for teaching purposes.</footer>
+
+<div class="lightbox" id="lightbox"></div>
+<div class="confetti" id="confetti"></div>
+<div class="toast" id="toast"></div>
+<div id="printroot"></div>
+
+<script>
+/* ===== config ===== */
+const TEACHER_MAIL=['kazankodaniel','gmail.com'].join('@');
+
+/* ===== state ===== */
+const KEY='unit3_mywayoflife_v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+S.xp=S.xp||0; S.done=S.done||{}; S.notes=S.notes||{}; S.draws=S.draws||{}; S.nfs=S.nfs||15;
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const MAXXP=675;
+const LEVELS=[[0,'Level 1 · Starting Out'],[170,'Level 2 · Warmed Up'],[335,'Level 3 · Life Events Expert'],
+              [505,'Level 4 · Sharp Reader'],[670,'Level 5 · Unit 3 Champion 🏆']];
+function renderXP(){
+  $('#xpfill').style.width=Math.min(100,S.xp/MAXXP*100)+'%';
+  $('#xplabel').textContent=S.xp+' XP';
+  let lv=LEVELS[0][1]; LEVELS.forEach(l=>{if(S.xp>=l[0])lv=l[1]});
+  $('#xpright').textContent=lv;
+  $$('#medals .medal').forEach(m=>m.classList.toggle('on',S.xp>=+m.dataset.need));
+}
+function addXP(n,label){if(n<=0)return;S.xp+=n;save();renderXP();toast('+'+n+' XP · '+label);if(n>=10)boom()}
+let tt;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2400)}
+function boom(){const c=$('#confetti'),cols=['#e63946','#1d7fd6','#12b5a5','#ffc233','#a855c7','#f4732a'];
+  for(let i=0;i<40;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%6];
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.3)+'s';
+    c.appendChild(s);setTimeout(()=>s.remove(),3400)}}
+document.documentElement.dataset.theme=localStorage.getItem('u3theme')||'light';
+$('#themebtn').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=n;localStorage.setItem('u3theme',n)};
+$('#resetbtn').onclick=()=>{if(confirm('Reset everything — XP, your answers and everything you wrote on the pages?')){
+  localStorage.removeItem(KEY);location.reload()}};
+
+/* ===== WARM-UP: memory pairs (Units 1-2 opposites) ===== */
+const MPAIRS=[['confident','shy'],['polite','rude'],['smart','casual'],
+              ['brand new','second-hand'],['skinny','loose-fitting'],['cheerful','miserable']];
+let mUp=[],mFound=0,mMoves=0,mT=null,mSec=0,mLock=false;
+function mfmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+function buildMemory(){
+  const grid=$('#mgrid');grid.innerHTML='';
+  mUp=[];mFound=0;mMoves=0;mSec=0;mLock=false;
+  clearInterval(mT);mT=null;
+  $('#mfound').textContent='0';$('#mmoves').textContent='0';$('#mtime').textContent='0:00';
+  $('#warmfb').classList.remove('on');
+  const cards=[];
+  MPAIRS.forEach((p,i)=>{cards.push({t:p[0],p:i});cards.push({t:p[1],p:i})});
+  cards.sort(()=>Math.random()-.5).forEach(c=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent=c.t;el.dataset.p=c.p;
+    el.onclick=()=>flip(el);grid.appendChild(el);
+  });
+}
+function flip(el){
+  if(mLock||el.classList.contains('up')||el.classList.contains('done'))return;
+  if(!mT){mT=setInterval(()=>{mSec++;$('#mtime').textContent=mfmt(mSec)},1000)}
+  el.classList.add('up');mUp.push(el);
+  if(mUp.length<2)return;
+  mMoves++;$('#mmoves').textContent=mMoves;
+  const [a,b]=mUp;
+  if(a.dataset.p===b.dataset.p){
+    a.classList.add('done');b.classList.add('done');
+    a.classList.remove('up');b.classList.remove('up');
+    mUp=[];mFound++;$('#mfound').textContent=mFound;
+    if(mFound===MPAIRS.length)mEnd();
+  }else{
+    mLock=true;a.classList.add('miss');b.classList.add('miss');
+    setTimeout(()=>{a.classList.remove('up','miss');b.classList.remove('up','miss');mUp=[];mLock=false},700);
+  }
+}
+function mEnd(){
+  clearInterval(mT);mT=null;
+  const f=$('#warmfb');f.className='fb on good';
+  const perfect=mMoves<=8;
+  f.textContent=`All six pairs in ${mMoves} moves and ${mfmt(mSec)}. `+
+    (perfect?'Outstanding memory 🧠':mMoves<=12?'Nicely done — now say each pair out loud once more.':
+     'Good work. Try again and beat your own score.');
+  boom();
+  if(!S.done.warm){S.done.warm=1;addXP(40,'Warm-up')}
+}
+$('#mrestart').onclick=buildMemory;
+buildMemory();
+
+/* ===== pages ===== */
+const PAGES=[
+ {id:'sb20',src:'pages/sb20.png',name:'sb20.png',cap:"Student's Book p.20",
+  ex:{v1:{x:4,y:33,w:92,h:10},v2:{x:4,y:43,w:92,h:4},v3:{x:4,y:46,w:92,h:4},
+      quiz:{x:5,y:49,w:92,h:27},v4:{x:3,y:75,w:62,h:5},v5:{x:3,y:79,w:62,h:6},
+      v6:{x:3,y:84,w:62,h:7},v7:{x:3,y:90,w:94,h:8}}},
+ {id:'sb21',src:'pages/sb21.png',name:'sb21.png',cap:"Student's Book p.21",
+  ex:{article:{x:3,y:9,w:94,h:42},r1:{x:5,y:55,w:53,h:7},r2:{x:5,y:62,w:53,h:34},
+      r3:{x:59,y:69,w:38,h:12},talk:{x:59,y:82,w:38,h:13}}},
+ {id:'wb12',src:'pages/wb12.png',name:'wb12.png',cap:'Workbook p.12 — homework',hw:1},
+ {id:'wb13',src:'pages/wb13.png',name:'wb13.png',cap:'Workbook p.13 — homework',hw:1}
+];
+let cur=0, writeMode=false, drawMode=false, eraseMode=false;
+const NS='http://www.w3.org/2000/svg';
+let penColor='#e11d48', penHL=false, penW=3;
+function setFS(){document.documentElement.style.setProperty('--nfs',S.nfs+'px')}
+function updCount(){
+  const p=PAGES[cur], n=(p.id&&S.notes[p.id]||[]).length, d=(p.id&&S.draws[p.id]||[]).length;
+  const b=[]; if(n)b.push(n+(n===1?' note':' notes')); if(d)b.push(d+(d===1?' line':' lines'));
+  $('#wcount').textContent=b.join(' · ');
+}
+function saveNotes(){const p=PAGES[cur];if(!p.id)return;
+  S.notes[p.id]=$$('#frame .note').map(el=>({x:parseFloat(el.dataset.x),y:parseFloat(el.dataset.y),
+    t:el.querySelector('input').value}));save();updCount()}
+function saveDraws(){const p=PAGES[cur];if(!p.id)return;
+  S.draws[p.id]=$$('#frame .dlayer polyline').map(pl=>({p:pl.getAttribute('points'),
+    c:pl.getAttribute('stroke'),w:+pl.getAttribute('stroke-width')}));save();updCount()}
+function strokeEl(st,live){
+  const pl=document.createElementNS(NS,'polyline');
+  pl.setAttribute('points',st.p);pl.setAttribute('fill','none');
+  pl.setAttribute('stroke',st.c);pl.setAttribute('stroke-width',st.w);
+  pl.setAttribute('stroke-linecap','round');pl.setAttribute('stroke-linejoin','round');
+  pl.setAttribute('vector-effect','non-scaling-stroke');
+  if(live)pl.onclick=e=>{if(!eraseMode)return;e.stopPropagation();pl.remove();saveDraws()};
+  return pl;
+}
+function makeNote(layer,x,y,text,live){
+  const el=document.createElement('span');el.className='note';
+  el.style.left=x+'%';el.style.top=y+'%';el.dataset.x=x;el.dataset.y=y;
+  const inp=document.createElement('input');inp.value=text||'';
+  const fit=()=>{inp.size=Math.max(3,inp.value.length+1)};fit();
+  if(!live){el.appendChild(inp);layer.appendChild(el);return inp}
+  inp.oninput=()=>{fit();saveNotes()};
+  inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();inp.blur()}
+    if(e.key==='Escape'){inp.value='';el.remove();saveNotes()}};
+  inp.onblur=()=>{if(!inp.value.trim())el.remove();saveNotes()};
+  inp.onclick=e=>e.stopPropagation();
+  const del=document.createElement('button');del.className='del';del.textContent='✕';
+  del.onclick=e=>{e.stopPropagation();el.remove();saveNotes()};
+  const grip=document.createElement('button');grip.className='grip';grip.textContent='✥';
+  grip.title='Drag to move';grip.onclick=e=>e.stopPropagation();
+  grip.onpointerdown=e=>{
+    e.preventDefault();e.stopPropagation();
+    grip.setPointerCapture(e.pointerId);el.classList.add('dragging');
+    const r=layer.getBoundingClientRect();
+    const move=ev=>{const nx=Math.min(99.5,Math.max(0,(ev.clientX-r.left)/r.width*100));
+      const ny=Math.min(99.5,Math.max(0,(ev.clientY-r.top)/r.height*100));
+      el.style.left=nx+'%';el.style.top=ny+'%';el.dataset.x=nx;el.dataset.y=ny};
+    const up=()=>{grip.removeEventListener('pointermove',move);grip.removeEventListener('pointerup',up);
+      el.classList.remove('dragging');saveNotes()};
+    grip.addEventListener('pointermove',move);grip.addEventListener('pointerup',up);
+  };
+  el.appendChild(inp);el.appendChild(del);el.appendChild(grip);layer.appendChild(el);
+  return inp;
+}
+function initDraw(svg){
+  let live=null,pts=[];
+  const pos=e=>{const r=svg.getBoundingClientRect();
+    return ((e.clientX-r.left)/r.width*100).toFixed(2)+','+((e.clientY-r.top)/r.height*100).toFixed(2)};
+  svg.addEventListener('pointerdown',e=>{if(!drawMode||eraseMode)return;
+    svg.setPointerCapture(e.pointerId);pts=[pos(e)];
+    live=strokeEl({p:pts[0],c:penColor,w:penHL?penW*4:penW},true);svg.appendChild(live)});
+  svg.addEventListener('pointermove',e=>{if(!live)return;pts.push(pos(e));live.setAttribute('points',pts.join(' '))});
+  const end=()=>{if(!live)return;if(pts.length<2)live.remove();live=null;saveDraws()};
+  svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+}
+function drawPage(){
+  const p=PAGES[cur],f=$('#frame');
+  $$('#tabs .tab').forEach((t,i)=>t.classList.toggle('on',i===cur));
+  $('#hwbar').style.display=p.hw?'flex':'none';
+  f.className='pageframe';f.innerHTML='<div class="ph">Loading…</div>';
+  const img=new Image();
+  img.onload=()=>{
+    f.innerHTML='';
+    const stage=document.createElement('div');stage.className='pagestage';
+    const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','dlayer');
+    svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('preserveAspectRatio','none');
+    (S.draws[p.id]||[]).forEach(st=>svg.appendChild(strokeEl(st,true)));
+    initDraw(svg);
+    const layer=document.createElement('div');layer.className='wlayer';
+    layer.onclick=e=>{if(e.target!==layer)return;
+      const r=layer.getBoundingClientRect();
+      makeNote(layer,(e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100,'',true).focus()};
+    const hl=document.createElement('div');hl.className='hl';hl.id='hlbox';
+    stage.appendChild(img);stage.appendChild(svg);stage.appendChild(layer);stage.appendChild(hl);
+    f.appendChild(stage);
+    (S.notes[p.id]||[]).forEach(n=>makeNote(layer,n.x,n.y,n.t,true));
+    updCount();
+  };
+  img.onerror=()=>{f.innerHTML=`<div class="ph"><b>Page image missing</b>Put <code>${p.name}</code> into <code>pages/</code></div>`};
+  img.src=p.src;img.alt=p.cap;
+}
+$$('#tabs .tab').forEach(t=>t.onclick=()=>{cur=+t.dataset.i;drawPage();$('#scroller').scrollTop=0});
+$('#prevbtn').onclick=()=>{cur=(cur+PAGES.length-1)%PAGES.length;drawPage()};
+$('#nextbtn').onclick=()=>{cur=(cur+1)%PAGES.length;drawPage()};
+let pz=S.pz||1;
+function setPZ(v,quiet){pz=Math.round(Math.min(3,Math.max(1,v))*100)/100;S.pz=pz;save();
+  document.documentElement.style.setProperty('--pz',pz);if(!quiet)toast('Zoom '+Math.round(pz*100)+'%')}
+setPZ(pz,true);
+$('#zinbtn').onclick=()=>setPZ(pz+.25);
+$('#zoutbtn').onclick=()=>setPZ(pz-.25);
+$('#zfitbtn').onclick=()=>{setPZ(1);$('#scroller').scrollTo({top:0,left:0,behavior:'smooth'})};
+function showEx(pageIdx,exKey){
+  const go=()=>{
+    const p=PAGES[pageIdx],r=p.ex&&p.ex[exKey];if(!r)return;
+    const hl=$('#hlbox'),stage=$('#frame .pagestage');if(!hl||!stage)return setTimeout(go,250);
+    hl.style.left=r.x+'%';hl.style.top=r.y+'%';hl.style.width=r.w+'%';hl.style.height=r.h+'%';
+    hl.classList.remove('on');void hl.offsetWidth;hl.classList.add('on');
+    const zoomed=pz<1.7; if(zoomed)setPZ(1.7,true);
+    const sc=$('#scroller');
+    // the zoom is a CSS width transition — only measure once it has finished,
+    // otherwise the stage is still its old size and the target lands at 0
+    let fired=false;
+    const doScroll=()=>{
+      if(fired)return; fired=true;
+      const sw=stage.offsetWidth,sh=stage.offsetHeight;
+      const top=sh*r.y/100-Math.max(24,(sc.clientHeight-sh*r.h/100)/2);
+      const left=sw*r.x/100-Math.max(12,(sc.clientWidth-sw*r.w/100)/2);
+      sc.scrollTo({top:Math.max(0,top),left:Math.max(0,left),behavior:'smooth'});
+      if(window.innerWidth<=1250)sc.scrollIntoView({behavior:'smooth',block:'center'});
+    };
+    // note: transitionend bubbles, so ignore the highlight's own opacity transition
+    if(zoomed)stage.addEventListener('transitionend',e=>{
+      if(e.target===stage&&e.propertyName==='width')doScroll();
+    });
+    setTimeout(doScroll,zoomed?460:40);
+    clearTimeout(showEx._t);showEx._t=setTimeout(()=>hl.classList.remove('on'),4200);
+  };
+  if(cur!==pageIdx){cur=pageIdx;drawPage();setTimeout(go,320)}else go();
+}
+$$('.showpage').forEach(b=>b.onclick=()=>showEx(+b.dataset.page,b.dataset.ex));
+function setModes(w,d,er){
+  writeMode=!!w;drawMode=!!d;eraseMode=!!er;
+  document.body.classList.toggle('writeon',writeMode);
+  document.body.classList.toggle('drawon',drawMode&&!eraseMode);
+  document.body.classList.toggle('eraseon',eraseMode);
+  $('#writebtn').classList.toggle('primary',writeMode);
+  $('#writebtn').textContent=writeMode?'✅ Writing on':'✍️ Write on page';
+  $('#drawbtn').classList.toggle('primary',drawMode||eraseMode);
+  $('#drawbtn').textContent=(drawMode||eraseMode)?'✅ Drawing on':'🖊 Draw';
+  $('#erasebtn').classList.toggle('primary',eraseMode);
+}
+$('#writebtn').onclick=()=>{const on=!writeMode;setModes(on,false,false);
+  toast(on?'Click anywhere on the page and start typing':'Writing mode off')};
+$('#drawbtn').onclick=()=>{const on=!(drawMode||eraseMode);setModes(false,on,false);
+  toast(on?'Draw with the mouse — circle, underline, tick':'Drawing mode off')};
+$('#erasebtn').onclick=()=>{const on=!eraseMode;setModes(false,true,on);
+  toast(on?'Click a line to delete it':'Back to the pen')};
+$$('#dtools .swatch').forEach(sw=>sw.onclick=()=>{
+  $$('#dtools .swatch').forEach(o=>o.classList.remove('on'));sw.classList.add('on');
+  penColor=sw.dataset.c;penHL=!!sw.dataset.hl;if(eraseMode)setModes(false,true,false)});
+$('#wsize').oninput=e=>{penW=+e.target.value};
+$('#undobtn').onclick=()=>{const a=$$('#frame .dlayer polyline');
+  if(!a.length){toast('Nothing to undo');return}a[a.length-1].remove();saveDraws()};
+$('#bigbtn').onclick=()=>{S.nfs=Math.min(28,S.nfs+2);save();setFS()};
+$('#smallbtn').onclick=()=>{S.nfs=Math.max(9,S.nfs-2);save();setFS()};
+$('#clearbtn').onclick=()=>{
+  const n=$$('#frame .note').length,d=$$('#frame .dlayer polyline').length;
+  if(!n&&!d){toast('Nothing to clear on this page');return}
+  if(confirm('Delete everything on this page — both the text and the drawings?')){
+    $$('#frame .note').forEach(x=>x.remove());$$('#frame .dlayer polyline').forEach(x=>x.remove());
+    saveNotes();saveDraws()}};
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')$('#lightbox').classList.remove('on');
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!/input|textarea/i.test(e.target.tagName)){
+    e.preventDefault();$('#undobtn').click()}});
+function openLB(){const lb=$('#lightbox');lb.innerHTML='';
+  const i=new Image();i.src=PAGES[cur].src;
+  i.onerror=()=>lb.innerHTML='<div style="color:#fff;font-weight:700">'+PAGES[cur].name+' is missing</div>';
+  lb.appendChild(i);lb.classList.add('on')}
+$('#zoombtn').onclick=openLB;
+$('#frame').onclick=e=>{if(writeMode||drawMode||eraseMode||e.target.closest('.note'))return;openLB()};
+$('#lightbox').onclick=()=>$('#lightbox').classList.remove('on');
+setFS();drawPage();
+
+/* ===== homework → PDF ===== */
+$('#hwname').value=S.name||'';
+$('#hwname').oninput=e=>{S.name=e.target.value;save()};
+$('#sendbtn').onclick=()=>{
+  const name=($('#hwname').value||'').trim();
+  if(!name){toast('Type your name first');$('#hwname').focus();return}
+  const hwPages=PAGES.filter(p=>p.hw);
+  if(!hwPages.some(p=>(S.notes[p.id]||[]).length||(S.draws[p.id]||[]).length)){
+    toast('Do some of the homework first 🙂');return}
+  const root=$('#printroot');root.innerHTML='';
+  hwPages.forEach(p=>{
+    const sheet=document.createElement('div');sheet.className='sheet';
+    const h=document.createElement('div');h.className='phead';
+    h.textContent=`Unit 3 · My Way of Life — ${p.cap} — ${name} — ${new Date().toLocaleDateString('en-GB')}`;
+    const stage=document.createElement('div');stage.className='pagestage';
+    const img=new Image();img.src=p.src;img.style.width='100%';
+    const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','dlayer');
+    svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('preserveAspectRatio','none');
+    (S.draws[p.id]||[]).forEach(st=>svg.appendChild(strokeEl(st,false)));
+    const layer=document.createElement('div');layer.className='wlayer';
+    (S.notes[p.id]||[]).forEach(n=>makeNote(layer,n.x,n.y,n.t,false));
+    stage.appendChild(img);stage.appendChild(svg);stage.appendChild(layer);
+    sheet.appendChild(h);sheet.appendChild(stage);root.appendChild(sheet);
+  });
+  $('#hwstatus').innerHTML='In the print window choose <b>Save as PDF</b> → then attach the file to the email.';
+  setTimeout(()=>{
+    window.print();
+    const subj=encodeURIComponent(`Unit 3 homework (p.12-13) — ${name}`);
+    const body=encodeURIComponent(`Hello!\n\nHere is my homework for Workbook pages 12 and 13.\nPlease find the PDF attached.\n\n${name}`);
+    setTimeout(()=>{location.href=`mailto:${TEACHER_MAIL}?subject=${subj}&body=${body}`},900);
+  },400);
+};
+
+/* ===== audio ===== */
+const TRACKS={};
+const fmt=s=>isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'0:00';
+$$('#audios .audio').forEach(box=>{
+  const a=new Audio(box.dataset.src);a.preload='metadata';
+  const btn=box.querySelector('.playbtn'),bar=box.querySelector('.seek i'),
+        seek=box.querySelector('.seek'),time=box.querySelector('.atime'),
+        rate=box.querySelector('.rate'),back=box.querySelector('.back');
+  TRACKS[box.dataset.track]={a,box,btn};
+  const paint=()=>{if(a.duration)bar.style.width=(a.currentTime/a.duration*100)+'%';
+    time.textContent=fmt(a.currentTime)+' / '+fmt(a.duration)};
+  a.addEventListener('loadedmetadata',paint);
+  a.addEventListener('timeupdate',paint);
+  a.addEventListener('ended',()=>{btn.textContent='▶';box.classList.remove('playing');bar.style.width='0';syncMinis()});
+  a.addEventListener('error',()=>{if(!box.querySelector('.miss')){
+    const s=document.createElement('span');s.className='miss';s.textContent='no file yet';box.appendChild(s)}});
+  seek.onclick=e=>{if(!a.duration)return;const r=seek.getBoundingClientRect();
+    a.currentTime=(e.clientX-r.left)/r.width*a.duration;paint()};
+  back.onclick=()=>{a.currentTime=Math.max(0,a.currentTime-5);paint()};
+  rate.onclick=()=>{a.playbackRate=a.playbackRate===1?0.75:1;
+    rate.textContent=a.playbackRate===1?'1×':'0.75×';rate.classList.toggle('on',a.playbackRate!==1)};
+  btn.onclick=()=>toggleTrack(box.dataset.track);
+});
+function toggleTrack(id){
+  const t=TRACKS[id];if(!t)return;
+  Object.entries(TRACKS).forEach(([k,o])=>{if(k!==id&&!o.a.paused){
+    o.a.pause();o.btn.textContent='▶';o.box.classList.remove('playing')}});
+  if(t.a.paused){t.a.play().then(()=>{t.btn.textContent='❚❚';t.box.classList.add('playing');syncMinis()})
+    .catch(()=>toast('Audio file not added yet'))}
+  else{t.a.pause();t.btn.textContent='▶';t.box.classList.remove('playing')}
+  syncMinis();
+}
+function syncMinis(){$$('.playmini').forEach(m=>{const t=TRACKS[m.dataset.track];const on=t&&!t.a.paused;
+  m.classList.toggle('on',!!on);m.textContent=(on?'❚❚ ':'▶ ')+'Track '+m.dataset.track})}
+$$('.playmini').forEach(m=>m.onclick=e=>{e.stopPropagation();toggleTrack(m.dataset.track);
+  $('#audios').scrollIntoView({behavior:'smooth',block:'nearest'})});
+syncMinis();
+
+/* ===== engines ===== */
+function buildMCQ(host,items){
+  const box=$('#'+host);box.innerHTML='';
+  items.forEach((it,i)=>{
+    const q=document.createElement('div');q.className='q';
+    q.innerHTML=`<p><span class="num">${it.n||(i+1)}</span>${it.q}</p>`;
+    const o=document.createElement('div');o.className='opts';
+    it.a.forEach(t=>{const b=document.createElement('div');b.className='opt';b.textContent=t;
+      b.onclick=()=>{if(q.classList.contains('locked'))return;
+        [...o.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};o.appendChild(b)});
+    q.appendChild(o);
+    if(it.why){const f=document.createElement('div');f.className='fb';f.dataset.why=it.why;q.appendChild(f)}
+    box.appendChild(q);
+  });
+  box._items=items;
+}
+function gradeMCQ(host,xp,label){
+  const box=$('#'+host),items=box._items;let ok=0,ans=0;
+  [...box.children].forEach((q,i)=>{
+    const opts=[...q.querySelector('.opts').children];
+    const sel=opts.find(o=>o.classList.contains('sel'));if(!sel)return;ans++;
+    q.classList.add('locked');
+    opts.forEach(o=>{if(o.textContent===items[i].k)o.classList.add('good');else if(o===sel)o.classList.add('bad')});
+    const good=sel.textContent===items[i].k;if(good)ok++;
+    const f=q.querySelector('.fb');if(f){f.className='fb on '+(good?'good':'bad');f.innerHTML=(good?'✔ ':'✘ ')+f.dataset.why}
+  });
+  const fb=$('#'+host+'fb');fb.className='fb on '+(ok===items.length?'good':'bad');
+  fb.textContent=ans<items.length?`${ans} of ${items.length} answered. Score ${ok}/${items.length}`
+    :`Score ${ok} out of ${items.length}`+(ok===items.length?' 🎉 perfect!':'');
+  if(!S.done[host]){S.done[host]=1;addXP(Math.round(xp*ok/items.length),label)}
+}
+function markInput(inp,keys){
+  const v=inp.value.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.?!,]+$/,'');
+  const ok=keys.some(k=>k.toLowerCase()===v);
+  inp.classList.remove('good','bad');inp.classList.add(ok?'good':'bad');return ok;
+}
+
+/* ===== SB p.20 Ex.1 · photos ===== */
+const EVENTS=['be born','get a degree','get a driving licence','get a job','get married','go to university',
+ 'have children','leave home','leave school','move home','retire','start school','vote'];
+const PHOTOS=[['A','start school','a boy with a backpack in front of a school board'],
+ ['B','get a degree','students in caps and gowns'],
+ ['C','get a driving licence','a young man, a car and traffic cones'],
+ ['D','get married','two hands holding each other'],
+ ['E','move home','two people carrying a sofa'],
+ ['F','vote','a hand posting a paper into a box']];
+(function(){
+  const box=$('#v1');box.innerHTML='';
+  PHOTOS.forEach(p=>{
+    const row=document.createElement('div');row.className='photorow';
+    row.innerHTML=`<span class="plet">${p[0]}</span><span class="hint" style="flex:1;min-width:130px">${p[2]}</span>`;
+    const sel=document.createElement('select');sel.className='pick';
+    sel.innerHTML='<option value="">— choose —</option>'+EVENTS.map(e=>`<option>${e}</option>`).join('');
+    sel._k=p[1];row.appendChild(sel);box.appendChild(row);
+  });
+  box._sels=[...box.querySelectorAll('select')];
+})();
+
+/* ===== SB p.20 Ex.2 · ordering ===== */
+const ORDER=['be born','start school','leave school','get a driving licence','go to university','get a degree',
+ 'get a job','leave home','get married','have children','move home','vote','retire'];
+const TYPICAL=['be born','start school','vote','leave school','get a driving licence','go to university',
+ 'get a degree','get a job','leave home','get married','have children','move home','retire'];
+(function(){
+  const box=$('#v2');box.innerHTML='';
+  ORDER.map(x=>x).sort(()=>Math.random()-.5).forEach(ev=>{
+    const row=document.createElement('div');row.className='orow';
+    row.innerHTML=`<span class="n"></span><span class="lb">${ev}</span>`;
+    const mv=document.createElement('span');mv.className='mv';
+    const up=document.createElement('button');up.textContent='▲';
+    const dn=document.createElement('button');dn.textContent='▼';
+    up.onclick=()=>{const p=row.previousElementSibling;if(p)box.insertBefore(row,p);renum()};
+    dn.onclick=()=>{const n=row.nextElementSibling;if(n)box.insertBefore(n,row);renum()};
+    mv.appendChild(up);mv.appendChild(dn);row.appendChild(mv);box.appendChild(row);
+  });
+  renum();
+})();
+function renum(){$$('#v2 .orow').forEach((r,i)=>r.querySelector('.n').textContent=i+1)}
+$('#v2show').onclick=()=>{
+  const f=$('#v2fb');f.className='fb on good';
+  f.innerHTML='<b>One possible order:</b> '+TYPICAL.join(' → ')+
+    '<br><span class="hint">Yours can be different and still be right — some people work before university, '+
+    'or move home many times. Be ready to explain your order.</span>';
+};
+
+/* ===== SB p.20 Ex.3 · not in the quiz ===== */
+const NOTINQUIZ=['be born','retire','have children','move home'];
+(function(){
+  const box=$('#v3');box.innerHTML='';
+  EVENTS.forEach(ev=>{
+    const d=document.createElement('div');d.className='tick';d.textContent=ev;
+    d.dataset.in=NOTINQUIZ.includes(ev)?'1':'0';
+    d.onclick=()=>{if(!d.classList.contains('locked'))d.classList.toggle('on')};
+    box.appendChild(d);
+  });
+})();
+
+/* ===== SB p.20 Ex.4 & 5 · the quiz ===== */
+const QUIZ=[
+ ['In England, children usually start school when they are ___.',['4','5','6']],
+ ['In Belgium and Germany, students cannot leave school before they are ___.',['14','16','18']],
+ ['In some states in the USA, the youngest age you can get a driving licence is ___.',['14','16','17']],
+ ['In England, around ___ % of young people go to university.',['33','43','53']],
+ ['In almost all European countries, ___ leave home before ___.',['men, women','women, men']],
+ ['In the UK, children of ___ are allowed to get a part-time job.',['any age','13 or over','16 or over']],
+ ['In ___, the average age at which women and men get married is 33.',['Spain','India','Japan']],
+ ['In Brazil you can vote in elections from the age of ___.',['16','18','21']]
+];
+function buildQuiz(host){
+  const box=$('#'+host);box.innerHTML='';
+  QUIZ.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='qz';
+    d.innerHTML=`<span class="qn">${i+1}</span>${q[0]}`;
+    const o=document.createElement('div');o.className='qopts';
+    q[1].forEach((t,j)=>{const b=document.createElement('div');b.className='qo';
+      b.textContent=String.fromCharCode(65+j)+' '+t;
+      b.onclick=()=>{[...o.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};
+      o.appendChild(b)});
+    d.appendChild(o);box.appendChild(d);
+  });
+}
+buildQuiz('v4');buildQuiz('v5');
+$('#v5score').value=S.v5score||'';
+$('#v5score').oninput=e=>{S.v5score=e.target.value;save()};
+
+/* ===== SB p.20 Ex.6 · I want to ===== */
+$('#v6text').value=S.v6text||'';
+function countWant(){
+  const t=$('#v6text').value;
+  const n=(t.match(/i\s+want\s+to\s+\S+/gi)||[]).length;
+  $('#v6cnt').textContent=n+' sentence'+(n===1?'':'s')+' with "I want to"';
+  $('#v6cnt').style.color=n>=6?'var(--ok)':'var(--muted)';
+  return n;
+}
+$('#v6text').oninput=()=>{S.v6text=$('#v6text').value;save();countWant()};
+countWant();
+$('#v6submit').onclick=()=>{
+  const n=countWant(),f=$('#v6fb');
+  const t=$('#v6text').value.toLowerCase();
+  const used=EVENTS.filter(e=>t.includes(e.replace(/^(get|go|be|have|leave|move|start)\s/,''))||t.includes(e));
+  if(n<6){f.className='fb on bad';
+    f.textContent=`Only ${n} of 6. Each line needs "I want to" + a life event.`;return}
+  f.className='fb on good';
+  f.textContent=`Six sentences ✓ and I can see about ${used.length} different life events. `+
+    'Now read them to your partner — do they agree with your ages?';
+  if(!S.done.v6){S.done.v6=1;addXP(35,'I want to…')}
+};
+
+/* ===== SB p.21 Reading ===== */
+buildMCQ('r1',[
+ {q:'Who thinks teenage life <b>is better now</b>?',a:['Simon','Emily'],k:'Simon',
+  why:'"To me, teenage life looks more exciting than it was."'},
+ {q:'Who thinks teenage life <b>was better in the past</b>?',a:['Simon','Emily'],k:'Emily',
+  why:'"I think my parents’ teenage years were more relaxed than ours are today."'}
+]);
+buildMCQ('r2',[
+ {q:'When Simon was a teenager,',
+  a:['his dad owned a computer and a mobile phone','he owned a computer','he played games on his dad’s phone'],
+  k:'he owned a computer',
+  why:'"I had a computer – but only for games." The mobile phone was his dad’s, and it stayed in the car.'},
+ {q:'Simon thinks that before the internet,',
+  a:['teenagers spent a lot of money on music','it was hard to stay friends with people you didn’t see',
+     'teenagers enjoyed writing letters'],
+  k:'it was hard to stay friends with people you didn’t see',
+  why:'"When we moved home, we often never saw old friends again."'},
+ {q:'Why does Simon think that teenagers spent a lot of time outside?',
+  a:['because their parents weren’t worried about them','because the roads weren’t as dangerous',
+     'because phones and computers didn’t exist'],
+  k:'because phones and computers didn’t exist',
+  why:'"<b>Without technology</b>, we were more active and spent a lot of our free time outside." Safer roads are mentioned, but as an extra comment.'},
+ {q:'Emily thinks that teenagers',
+  a:['need technology for their school work','shouldn’t use social media','aren’t as happy as they were'],
+  k:'need technology for their school work',
+  why:'"technology… is now essential for entertainment <b>and school</b>."'},
+ {q:'During the week, Emily',
+  a:['has extra music and language lessons','never has time for lunch','doesn’t do any sport'],
+  k:'has extra music and language lessons',
+  why:'"Spanish lessons, trumpet on Wednesdays" — a language and an instrument.'},
+ {q:'Why does Emily think she has to go to university?',
+  a:['because her friends want to go','because jobs will be harder to find in the future',
+     'because she always gets good marks at school'],
+  k:'because jobs will be harder to find in the future',
+  why:'"we won’t be able to leave home and get a job" without a good degree.'}
+]);
+buildMCQ('r3',[
+ {q:'1 difficult to think it’s true',a:['unbelievable','relaxed','exhausted','awful','tiny','huge'],k:'unbelievable',
+  why:'"it’s <b>unbelievable</b> to think that often our parents didn’t have any idea where we were!"'},
+ {q:'2 calm and not busy',a:['unbelievable','relaxed','exhausted','awful','tiny','huge'],k:'relaxed',
+  why:'"my parents’ teenage years were more <b>relaxed</b> than ours."'},
+ {q:'3 very tired',a:['unbelievable','relaxed','exhausted','awful','tiny','huge'],k:'exhausted',
+  why:'"Sometimes I’m <b>exhausted</b> on Sunday evenings!"'},
+ {q:'4 very bad',a:['unbelievable','relaxed','exhausted','awful','tiny','huge'],k:'awful',
+  why:'"the worst are <b>awful</b> things like bullying on social media."'},
+ {q:'5 very small',a:['unbelievable','relaxed','exhausted','awful','tiny','huge'],k:'tiny',
+  why:'"almost every song in the world – in a <b>tiny</b> device in their pocket!"'},
+ {q:'6 very big',a:['unbelievable','relaxed','exhausted','awful','tiny','huge'],k:'huge',
+  why:'"my dad’s first mobile phone was in the car – it was <b>huge</b>!"'}
+]);
+
+/* ===== Extra A · verb pairs ===== */
+const COL=[['be','born'],['get','a driving licence'],['go','to university'],['have','children'],
+ ['move','home'],['retire','from work'],['start','school'],['vote','in an election']];
+let selC=null,leftC=COL.length,colOk=0;
+function colChip(w,side){
+  const c=document.createElement('div');c.className='chip';c.textContent=w;
+  c.onclick=()=>{
+    if(side==='L'){$$('#colL .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');selC=c;return}
+    if(!selC){toast('Choose a verb on the left first');return}
+    if(COL.some(p=>p[0]===selC.textContent&&p[1]===c.textContent)){
+      const a=selC,b=c;a.classList.add('gone');b.classList.add('gone');
+      setTimeout(()=>{a.remove();b.remove()},350);selC=null;leftC--;colOk++;addXP(4,'pair');
+      if(!leftC){const f=$('#colfb');f.className='fb on good';f.textContent='🎉 All eight pairs matched!';
+        if(!S.done.col){S.done.col=1;addXP(13,'Verb pairs')}}
+    }else{
+      c.animate([{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],220);
+      const f=$('#colfb');f.className='fb on bad';f.textContent='Not a natural pair — try again.';
+      setTimeout(()=>f.classList.remove('on'),1400);
+    }
+  };
+  return c;
+}
+(function(){
+  const L=$('#colL'),R=$('#colR'),sh=a=>a.map(v=>[Math.random(),v]).sort().map(v=>v[1]);
+  sh(COL.map(p=>p[0])).forEach(w=>L.appendChild(colChip(w,'L')));
+  sh(COL.map(p=>p[1])).forEach(w=>R.appendChild(colChip(w,'R')));
+})();
+
+/* ===== Extra B · word families ===== */
+const WF=[['marry','marriage'],['employ','employment'],['know','knowledge'],['educate','education'],
+ ['graduate','graduation'],['retire','retirement']];
+(function(){
+  const box=$('#wf');box.innerHTML='';
+  WF.forEach((s,i)=>{
+    const p=document.createElement('p');p.className='gapline';
+    p.innerHTML=`<span class="num">${i+1}</span>to <b>${s[0]}</b> → the …`;
+    const inp=document.createElement('input');inp.className='txt';inp.placeholder='noun…';
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,[s[1]])};
+    p.appendChild(inp);box.appendChild(p);
+  });
+  box._items=WF;
+})();
+$('#wfhint').onclick=()=>{
+  const inps=$$('#wf input'),i=inps.findIndex(x=>!x.classList.contains('good'));
+  if(i<0){toast('All correct already 😎');return}
+  inps[i].value=WF[i][1].slice(0,4);inps[i].focus();toast('Starts with: '+inps[i].value);
+};
+
+/* ===== Extra C · time expressions ===== */
+buildMCQ('tm',[
+ {q:'I want to leave home ______ I’m 25.',a:['before','ago','since'],k:'before',
+  why:'<b>before</b> + a future point in time.'},
+ {q:'My grandfather retired ______ the age of 65.',a:['at','in','on'],k:'at',
+  why:'<b>at</b> the age of + number.'},
+ {q:'They got married ______ 2019.',a:['in','at','on'],k:'in',
+  why:'<b>in</b> + years, months, decades.'},
+ {q:'I started school ______ I was five.',a:['when','while','during'],k:'when',
+  why:'<b>when</b> + a clause with a verb.'},
+ {q:'He got his driving licence two years ______.',a:['ago','before','since'],k:'ago',
+  why:'A period of time + <b>ago</b> counts back from now.'},
+ {q:'My sister is ______ her twenties.',a:['in','at','on'],k:'in',
+  why:'<b>in</b> her twenties / thirties.'}
+]);
+
+/* ===== Extra D · extreme adjectives ===== */
+const EXT=[['very big','huge'],['very small','tiny'],['very bad','awful'],['very tired','exhausted'],
+ ['very surprising, hard to believe','unbelievable']];
+(function(){
+  const box=$('#ext');box.innerHTML='';
+  EXT.forEach((s,i)=>{
+    const p=document.createElement('p');p.className='gapline';
+    p.innerHTML=`<span class="num">${i+1}</span>${s[0]} → `;
+    const inp=document.createElement('input');inp.className='txt';inp.placeholder='one word…';
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,[s[1]])};
+    p.appendChild(inp);box.appendChild(p);
+  });
+  box._items=EXT;
+})();
+
+/* ===== Extra E · writing ===== */
+const countWords=t=>(t.trim().match(/\S+/g)||[]).length;
+$('#wtext').value=S.wtext||'';
+function updWords(){const n=countWords($('#wtext').value);
+  $('#wcnt').textContent=n+(n===1?' word':' words');
+  $('#wcnt').style.color=(n>=70&&n<=100)?'var(--ok)':'var(--muted)';return n}
+$('#wtext').oninput=()=>{S.wtext=$('#wtext').value;save();updWords()};
+updWords();
+$('#wsubmit').onclick=()=>{
+  const n=updWords(),f=$('#wfb');
+  if(n<45){f.className='fb on bad';f.textContent=`Only ${n} words — keep going, aim for at least 70.`;return}
+  f.className='fb on good';
+  f.textContent=(n>=70&&n<=100)?`${n} words — right on target 🎯 Check you used the past simple in part one.`
+    :`${n} words. Good effort! The target was 70–100 — adjust a little.`;
+  if(!S.done.wtext){S.done.wtext=1;addXP(35,'Writing')}
+};
+
+/* ===== self-declared ===== */
+$$('[data-done]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.done,f=$('#'+k+'fb');
+  if(S.done[k]){toast('Already counted 🙂');return}
+  S.done[k]=1;addXP(+b.dataset.xp,'Done');b.disabled=true;b.textContent='✓ Counted';
+  if(f&&!f.classList.contains('on')){f.className='fb on good';f.textContent='✔ Counted — nice work.'}
+});
+$$('[data-done]').forEach(b=>{if(S.done[b.dataset.done]){b.disabled=true;b.textContent='✓ Counted'}});
+
+/* ===== check buttons ===== */
+const MCQXP={r1:[25,'Reading gist'],r2:[65,'Reading detail'],r3:[55,'Highlighted words'],tm:[45,'Time expressions']};
+$$('[data-check]').forEach(b=>b.onclick=()=>{
+  const h=b.dataset.check;
+  if(MCQXP[h]){gradeMCQ(h,MCQXP[h][0],MCQXP[h][1]);return}
+  if(h==='v1'){
+    const sels=$('#v1')._sels;let ok=0;
+    sels.forEach(s=>{const good=s.value===s._k;s.classList.remove('good','bad');
+      s.classList.add(good?'good':'bad');if(good)ok++;s.disabled=true});
+    const f=$('#v1fb');f.className='fb on '+(ok===sels.length?'good':'bad');
+    f.textContent=`${ok} out of ${sels.length} correct`+(ok===sels.length?' 🎉':'');
+    if(!S.done.v1){S.done.v1=1;addXP(Math.round(45*ok/sels.length),'Photos')}
+    return;
+  }
+  if(h==='v3'){
+    let ok=0;const ticks=$$('#v3 .tick');
+    ticks.forEach(t=>{
+      t.classList.add('locked');
+      const should=t.dataset.in==='1',got=t.classList.contains('on');
+      t.classList.add(should===got?'good':'bad');if(should===got)ok++;
+    });
+    const f=$('#v3fb');f.className='fb on '+(ok===ticks.length?'good':'bad');
+    f.textContent=`${ok} out of ${ticks.length} correct`+
+      (ok===ticks.length?' 🎉':' — the four missing ones are: '+NOTINQUIZ.join(', ')+'.');
+    if(!S.done.v3){S.done.v3=1;addXP(Math.round(45*ok/ticks.length),'Quiz events')}
+    return;
+  }
+  if(h==='wf'||h==='ext'){
+    const items=$('#'+h)._items;let ok=0;
+    $$('#'+h+' input').forEach((inp,i)=>{if(markInput(inp,[items[i][1]]))ok++});
+    const f=$('#'+h+'fb');f.className='fb on '+(ok===items.length?'good':'bad');
+    f.textContent=`${ok} out of ${items.length} correct`+(ok===items.length?' 🎉':'');
+    if(!S.done[h]){S.done[h]=1;addXP(Math.round((h==='wf'?45:40)*ok/items.length),h==='wf'?'Word families':'Extreme adjectives')}
+    return;
+  }
+});
+renderXP();
+</script>
+</body>
+</html>
