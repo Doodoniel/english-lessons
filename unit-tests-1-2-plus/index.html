@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Unit Tests 1 &amp; 2: Plus — Prepare Level 4</title>
+<style>
+:root{
+  --red:#e63946; --blue:#1d7fd6; --teal:#12b5a5; --yellow:#ffc233; --purple:#7c5cff; --orange:#f4732a; --green:#16a34a;
+  --bg:#eef2f7; --bg2:#e2e8f2; --card:#ffffff; --ink:#16202e; --muted:#61708a;
+  --line:#dbe3ef; --ok:#16a34a; --no:#e11d48; --shadow:0 10px 30px rgba(22,38,66,.10); --r:18px;
+}
+html[data-theme="dark"]{
+  --bg:#0e1420; --bg2:#111a29; --card:#161f30; --ink:#e8eefb; --muted:#93a3bd;
+  --line:#243149; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);line-height:1.55;
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(29,127,214,.16),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(244,115,42,.14),transparent 55%),var(--bg)}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--card) 82%,transparent);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1240px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+.unitbadge{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#fff;font-size:16px;
+  background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 6px 16px rgba(29,127,214,.35)}
+.brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.xpbox{flex:1;min-width:210px;max-width:400px}
+.xpbar{height:12px;border-radius:99px;background:var(--bg2);overflow:hidden;border:1px solid var(--line)}
+.xpfill{height:100%;width:0;border-radius:99px;transition:width .5s cubic-bezier(.2,.9,.2,1);
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
+.xpmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  padding:8px 14px;border-radius:12px;font-weight:700;font-size:13px;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent}
+.btn.go{background:linear-gradient(135deg,var(--teal),var(--green));color:#fff;border-color:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.medals{display:flex;gap:6px}
+.medal{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--bg2);
+  filter:grayscale(1);opacity:.4;font-size:16px;transition:.4s;border:1px solid var(--line)}
+.medal.on{filter:none;opacity:1;transform:scale(1.08);box-shadow:0 0 0 3px rgba(255,194,51,.25)}
+main{max-width:1240px;margin:0 auto;padding:20px 18px 90px;display:grid;gap:22px;
+  grid-template-columns:minmax(230px,286px) minmax(0,1fr)}
+@media(max-width:960px){main{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(min-width:961px){.side .sticky{position:sticky;top:78px;display:flex;flex-direction:column;gap:16px}}
+.flow{display:flex;flex-direction:column;gap:20px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card>h3{margin:0;padding:13px 16px;font-size:14px;letter-spacing:.3px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.card .body{padding:15px 17px}
+.stage{scroll-margin-top:78px}
+.stagehead{display:flex;align-items:center;gap:11px;margin:0;padding:14px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.stageno{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;color:#fff;
+  font-size:14px;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--purple))}
+.stageno.u2{background:linear-gradient(135deg,var(--orange),var(--red))}
+.stagehead h3{margin:0;font-size:15px;letter-spacing:.2px}
+.stagehead .skill{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 9px;border-radius:99px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+.xpchip{font-size:10px;font-weight:800;letter-spacing:.5px;padding:3px 8px;border-radius:99px;
+  background:rgba(18,181,165,.14);color:var(--teal);border:1px solid rgba(18,181,165,.3)}
+.xpchip.done{background:rgba(22,163,74,.14);color:var(--ok);border-color:rgba(22,163,74,.3)}
+.xpchip.miss{background:rgba(225,29,72,.12);color:var(--no);border-color:rgba(225,29,72,.3)}
+.hint{font-size:12.5px;color:var(--muted)}
+.rubric{font-size:13.5px;margin:0 0 12px;font-weight:600}
+.testbar{display:flex;align-items:center;gap:12px;padding:13px 17px;border-radius:var(--r);
+  background:linear-gradient(135deg,rgba(29,127,214,.16),rgba(124,92,255,.13));border:1px solid var(--line)}
+.testbar.u2{background:linear-gradient(135deg,rgba(244,115,42,.16),rgba(230,57,70,.12))}
+.testbar b{font-size:17px;letter-spacing:.3px}
+.testbar .hint{margin-left:auto;text-align:right}
+.sect{display:flex;align-items:center;gap:10px;margin:2px 2px -4px;font-size:12px;font-weight:800;
+  letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.sect::after{content:"";flex:1;height:1px;background:var(--line)}
+/* nav */
+.nav a{display:flex;align-items:center;gap:9px;padding:6px 9px;border-radius:10px;text-decoration:none;color:var(--ink);font-size:12.5px;font-weight:600}
+.nav a:hover{background:var(--bg2)}
+.nav a .tick{width:17px;height:17px;flex:none;border-radius:6px;border:1.5px solid var(--muted);display:grid;place-items:center;font-size:10px}
+.nav a.done .tick{background:var(--green);border-color:var(--green);color:#fff}
+.nav a.done{color:var(--muted)}
+.nav a .sk{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.4px;color:var(--muted)}
+.nav .navsect{font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);margin:9px 0 3px 9px}
+/* student box */
+.field{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.field label{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);width:48px;flex:none}
+.field input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg2);color:var(--ink);
+  border-radius:9px;padding:5px 9px;font-size:13px;font-weight:700;font-family:inherit;outline:none}
+.field input:focus{border-color:var(--blue)}
+/* questions */
+.q{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:9px;background:var(--bg2)}
+.q p{margin:0;font-size:13.5px;font-weight:600}
+.q .num{color:var(--muted);font-weight:800;margin-right:6px}
+.q .said{display:block;font-size:12.5px;color:var(--muted);font-weight:600;margin-top:5px}
+.q .said b{color:var(--ink);font-weight:800}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.wchip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:4px 11px;font-size:12.5px;font-weight:700;color:var(--muted)}
+input.gapin{border:none;border-bottom:2px solid var(--blue);background:transparent;color:var(--blue);
+  font-family:inherit;font-size:13.5px;font-weight:800;width:132px;text-align:center;outline:none;padding:0 2px}
+input.gapin:focus{border-bottom-width:3px}
+input.gapin.good{border-color:var(--ok);color:var(--ok)}
+input.gapin.bad{border-color:var(--no);color:var(--no)}
+input.gapin.wide{width:100%;display:block;text-align:left;margin-top:5px}
+input.gapin.narrow{width:96px}
+input.gapin:disabled{opacity:1}
+.cue{color:var(--muted);font-size:12.5px;font-weight:700}
+.pat{font-family:"Consolas",monospace;font-weight:800;letter-spacing:2px;color:var(--purple);margin-right:8px}
+.defrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px}
+.clozetext{font-size:14px;line-height:2.4;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.gapnum{font-size:10px;font-weight:800;color:var(--muted);vertical-align:super;margin-right:2px}
+.advgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:8px;margin-bottom:14px}
+.advcell{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:6px 10px}
+.advcell b{font-size:13px;min-width:52px}
+.advcell .arr{color:var(--muted);font-weight:800}
+.checkrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.scorechip{font-size:13px;font-weight:800;padding:5px 12px;border-radius:99px;border:1px solid var(--line);background:var(--bg2)}
+.callout{border-left:4px solid var(--yellow);background:var(--bg2);padding:9px 12px;border-radius:0 10px 10px 0;font-size:13px;margin:9px 0}
+.callout.info{border-color:var(--blue)}
+/* dashboard */
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:12px}
+.dcell{border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--bg2)}
+.dcell .lbl{font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.dcell .val{font-size:26px;font-weight:800;margin:2px 0 5px}
+.dbar{height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.dbar i{display:block;height:100%;width:0;border-radius:99px;transition:width .8s cubic-bezier(.2,.9,.2,1)}
+.band{text-align:center;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(29,127,214,.14),rgba(124,92,255,.12));border:1px solid var(--line)}
+.band .b{font-size:22px;font-weight:800}
+.mini{font-size:11.5px}
+.mini .row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.mini .row span:first-child{flex:1;font-weight:700}
+.mini .row b{font-weight:800}
+table.brk{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:14px}
+table.brk th,table.brk td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+table.brk th{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+table.brk td.n{text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+table.brk tr.tot td{border-top:2px solid var(--line);border-bottom:none;font-weight:800;background:var(--bg2)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;width:9px;height:14px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:400;background:var(--ink);color:var(--bg);
+  padding:11px 20px;border-radius:99px;font-weight:800;font-size:13.5px;transition:transform .4s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
+/* print sheet */
+#printroot{display:none;color:#111;background:#fff;font-family:"Segoe UI",system-ui,sans-serif}
+#printroot .ph{border-bottom:2px solid #111;padding-bottom:8px;margin-bottom:14px}
+#printroot .ph h1{font-size:19px;margin:0 0 3px;letter-spacing:.3px}
+#printroot .ph .s{font-size:12px;color:#555}
+#printroot .who{display:flex;gap:26px;font-size:13px;margin-bottom:16px;flex-wrap:wrap}
+#printroot .who span{border-bottom:1px solid #999;min-width:150px;padding:0 4px 2px}
+#printroot h2{font-size:14px;margin:16px 0 6px;letter-spacing:.5px;text-transform:uppercase}
+#printroot table{width:100%;border-collapse:collapse;font-size:13px}
+#printroot th,#printroot td{border:1px solid #bbb;padding:5px 8px;text-align:left}
+#printroot th{background:#eee;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+#printroot td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+#printroot tr.tot td{background:#f2f2f2;font-weight:800}
+#printroot .grand{margin-top:16px;border:2px solid #111;border-radius:8px;padding:10px 14px;display:flex;
+  align-items:baseline;gap:14px;flex-wrap:wrap}
+#printroot .grand b{font-size:22px}
+#printroot .sign{margin-top:26px;display:flex;gap:40px;font-size:12px;color:#333}
+#printroot .sign span{border-bottom:1px solid #999;min-width:170px;display:inline-block}
+#printroot .foot{margin-top:20px;font-size:10.5px;color:#666;border-top:1px solid #ccc;padding-top:6px}
+@media print{
+  body>header,body>main,body>footer,.toast,.confetti{display:none!important}
+  #printroot{display:block!important}
+  @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <div class="unitbadge">1·2</div>
+      <div>UNIT TESTS: PLUS<small>Prepare 2nd ed. Level 4 · Units 1 &amp; 2</small></div>
+    </div>
+    <div class="xpbox">
+      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+      <div class="xpmeta"><span id="xplabel">0 / 9 exercises checked</span><span id="xpright">Not started</span></div>
+    </div>
+    <div class="medals" id="medals">
+      <div class="medal" data-need="60" title="60% overall">🥉</div>
+      <div class="medal" data-need="75" title="75% overall">🥈</div>
+      <div class="medal" data-need="90" title="90% overall">🥇</div>
+      <div class="medal" data-need="100" title="100% overall">🏆</div>
+    </div>
+    <button class="btn" id="themebtn">🌙 Theme</button>
+    <button class="btn" id="resetbtn">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+  <aside class="side">
+    <div class="sticky">
+      <div class="card">
+        <h3>👤 Student</h3>
+        <div class="body">
+          <div class="field"><label>Name</label><input id="fname" placeholder="…"></div>
+          <div class="field"><label>Class</label><input id="fclass" placeholder="…"></div>
+          <div class="field"><label>Date</label><input id="fdate" placeholder="…"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📊 Live score</h3>
+        <div class="body">
+          <div class="mini" id="minidash"></div>
+          <button class="btn primary" style="width:100%;margin-top:10px" onclick="document.getElementById('result').scrollIntoView({behavior:'smooth'})">Go to the result ↓</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🧭 Contents</h3>
+        <div class="body nav" id="nav"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="flow">
+
+    <div class="card">
+      <div class="body">
+        <p class="rubric" style="margin-bottom:6px">Two unit tests in one paper: <b>Unit 1 Test: Plus</b> and <b>Unit 2 Test: Plus</b>.</p>
+        <p class="hint" style="margin:0">Type your answers, then press <b>Check</b> under each exercise. Each exercise is worth
+          <b>8 points</b>, so Unit 1 is out of <b>40</b> and Unit 2 is out of <b>32</b>. You get one check per exercise —
+          after that the answers are locked, exactly like a paper test. At the end you get a score in points and a
+          percentage for each test separately, plus a printable report.</p>
+      </div>
+    </div>
+
+    <div class="testbar" id="t-u1">
+      <div><b>UNIT 1 TEST: PLUS</b><div class="hint">Vocabulary · Grammar — 40 points</div></div>
+      <div class="hint"><span id="u1head">0 / 40</span></div>
+    </div>
+
+    <div class="sect">Vocabulary</div>
+    <div id="host-u1e1"></div>
+    <div id="host-u1e2"></div>
+    <div class="sect">Grammar</div>
+    <div id="host-u1e3"></div>
+    <div id="host-u1e4"></div>
+    <div id="host-u1e5"></div>
+
+    <div class="testbar u2" id="t-u2">
+      <div><b>UNIT 2 TEST: PLUS</b><div class="hint">Vocabulary · Grammar — 32 points</div></div>
+      <div class="hint"><span id="u2head">0 / 32</span></div>
+    </div>
+
+    <div class="sect">Vocabulary</div>
+    <div id="host-u2e1"></div>
+    <div id="host-u2e2"></div>
+    <div class="sect">Grammar</div>
+    <div id="host-u2e3"></div>
+    <div id="host-u2e4"></div>
+
+    <!-- RESULT -->
+    <div class="card stage" id="result">
+      <div class="stagehead"><span class="stageno" style="background:linear-gradient(135deg,var(--teal),var(--green))">★</span>
+        <h3>Your result</h3><span class="skill">Score report</span></div>
+      <div class="body">
+        <div class="dash" id="dash"></div>
+        <div class="band" id="band"><div class="b">No score yet</div>
+          <div class="hint">Check the exercises above and your result will appear here.</div></div>
+
+        <p class="hint" style="margin:16px 0 6px;font-weight:800;letter-spacing:.6px;text-transform:uppercase">Breakdown</p>
+        <table class="brk" id="brk"></table>
+
+        <div class="checkrow">
+          <button class="btn go" id="printbtn">🖨 Print the result</button>
+          <span class="hint" id="printhint"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>Prepare Second Edition Level 4 · Unit 1 &amp; Unit 2 Test: Plus — © Cambridge University Press and UCLES 2019.
+Interactive version for classroom use only.</footer>
+
+<div class="confetti" id="confetti"></div>
+<div class="toast" id="toast"></div>
+
+<div id="printroot"></div>
+
+<script>
+/* ===== state ===== */
+const KEY='ut12plus_v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+S.res=S.res||{};        /* exId -> {ok,total} */
+S.ans=S.ans||{};        /* exId -> [values] */
+S.who=S.who||{};
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+/* ===== content — reproduced exactly from the tests ===== */
+const TESTS=[
+{
+  id:'u1', no:'1', title:'UNIT 1 TEST: PLUS', max:40,
+  ex:[
+  { id:'u1e1', n:1, sect:'VOCABULARY', type:'def',
+    rubric:'Read the definition and write the word. The first letter is given and there is a space for all the other letters in the word.',
+    items:[
+      {d:'with little or no hair on the head', p:'b _ _ _', k:['bald']},
+      {d:'aged between 13 and 19 years old', p:'t _ _ _ _ _ _', k:['teenage']},
+      {d:'sad', p:'m _ _ _ _ _ _ _ _', k:['miserable']},
+      {d:'not confident, often about meeting or talking to new people', p:'s _ _', k:['shy']},
+      {d:'behaving in a way which is not polite and upsets other people', p:'r _ _ _', k:['rude']},
+      {d:'nearer to black than white in colour', p:'d _ _ _', k:['dark']},
+      {d:'happy and positive', p:'c _ _ _ _ _ _ _', k:['cheerful']},
+      {d:'having pale skin or a light colour of hair', p:'f _ _ _', k:['fair']}
+    ]},
+  { id:'u1e2', n:2, sect:'VOCABULARY', type:'gap',
+    rubric:'Add the prefix un-, im- or in- to each adjective below and complete the sentences with the adjectives formed.',
+    bank:['correct','expensive','kind','known','lucky','patient','possible','visible'],
+    items:[
+      {s:'These plants grow well in this area, but the reason why they do is still {}.', k:[['unknown']]},
+      {s:'That’s not the right answer – I’m afraid it’s {}.', k:[['incorrect']]},
+      {s:'Karen hates waiting for the bus – she’s very {}.', k:[['impatient']]},
+      {s:'I’m sorry I was angry and said some {} things to you.', k:[['unkind']]},
+      {s:'You can’t jump over the house! That’s {}!', k:[['impossible']]},
+      {s:'Larry has a lot of accidents. He’s very {}.', k:[['unlucky']]},
+      {s:'It would be fun to be {} for a day so nobody could see me!', k:[['invisible']]},
+      {s:'These trousers didn’t cost much at all – they were very {}.', k:[['inexpensive']]}
+    ]},
+  { id:'u1e3', n:3, sect:'GRAMMAR', type:'gap',
+    rubric:'Complete the sentences with the correct verb.',
+    bank:['believe','like','mean','need','own','prefer','understand','want'],
+    items:[
+      {s:'I {} listening to pop music than listening to rock music.', k:[['prefer']]},
+      {s:'I don’t {} this exercise. Can you help me?', k:[['understand']]},
+      {s:'My uncle and aunt {} two houses – one in the city and one near the sea.', k:[['own']]},
+      {s:'What does funny {}?', k:[['mean']]},
+      {s:'Your sister isn’t in her twenties. I don’t {} you.', k:[['believe']]},
+      {s:'You are all very careless. You {} to check your homework more often.', k:[['need']]},
+      {s:'I’m not into football. I don’t {} it.', k:[['like']]},
+      {s:'Do you {} to go to the cinema with me tomorrow? I’ve got two tickets.', k:[['want']]}
+    ]},
+  { id:'u1e4', n:4, sect:'GRAMMAR', type:'cloze',
+    rubric:'Complete the text with the correct form of the verbs. Use the present simple or present continuous.',
+    text:[
+      'Hi! I’m Natalie and I ', {cue:'live', k:['live']},
+      ' with my parents, my sister and my dog. In my free time, I ', {cue:'enjoy', k:['enjoy']},
+      ' having fun with my friends. We’re keen on music but we ', {cue:'not like', k:['don’t like','do not like']},
+      ' loud music. At the weekend, we sometimes ', {cue:'go', k:['go']},
+      ' to concerts. Our favourite band ', {cue:'play', k:['is playing','’s playing']},
+      ' next month so we ', {cue:'need', k:['need']},
+      ' to buy a ticket soon. I ', {cue:'learn', k:['’m learning','am learning','i’m learning','i am learning']},
+      ' to play the guitar right now. My best friend ', {cue:'want', k:['wants']},
+      ' to play in the school concert but I’m too shy.'
+    ]},
+  { id:'u1e5', n:5, sect:'GRAMMAR', type:'gap',
+    rubric:'Complete the sentences with the correct form of the verbs. Use the present simple or present continuous.',
+    bank:['concentrate','do','not watch','not work','say','spend','visit','want'],
+    items:[
+      {s:'We {} our grandparents every week.', k:[['visit']]},
+      {s:'{} anything interesting after school today?', k:[['are you doing']]},
+      {s:'He {} television at the moment.', k:[['isn’t watching','is not watching']]},
+      {s:'Ssh! I {} right now.', k:[['’m concentrating','am concentrating','i’m concentrating','i am concentrating']]},
+      {s:'I think my friends {} a lot of time online every day.', k:[['spend']]},
+      {s:'My mum is a teacher at my school but she {} on Fridays.', k:[['doesn’t work','does not work']]},
+      {s:'My best friend is really friendly and polite. He always {} hello to everyone.', k:[['says']]},
+      {s:'What {} to do later?', k:[['do you want']]}
+    ]}
+  ]
+},
+{
+  id:'u2', no:'2', title:'UNIT 2 TEST: PLUS', max:32,
+  ex:[
+  { id:'u2e1', n:1, sect:'VOCABULARY', type:'gap',
+    rubric:'Complete the sentences with one of these words/phrases. There are some extra words which you do not need to use.',
+    bank:['badly-dressed','brand new','casual','comfortable','fashionable','loose','second-hand','skinny','smart','tight','trendy','uncomfortable','unfashionable','well-dressed'],
+    items:[
+      {s:'My sister is much smaller than me so her clothes are too {} on me.', k:[['tight']]},
+      {s:'His trainers are white and very clean. They must be {}.', k:[['brand new']]},
+      {s:'My dad doesn’t need to wear a jacket and tie at work. Everyone is quite {}.', k:[['casual']]},
+      {s:'My cousin wore an old top and dirty trainers to the party. He was {}.', k:[['badly-dressed','badly dressed']]},
+      {s:'These boots are too small for me. They’re very {}.', k:[['uncomfortable']]},
+      {s:'When I was ill, I didn’t eat much and I got too {}.', k:[['skinny']]},
+      {s:'My history teacher isn’t interested in new clothes or looking good. He’s quite {}.', k:[['unfashionable']]},
+      {s:'When I bought this {} raincoat, there were bus tickets from the 1990s in the pockets.', k:[['second-hand','second hand']]}
+    ]},
+  { id:'u2e2', n:2, sect:'VOCABULARY', type:'adv',
+    rubric:'Write the correct adverb next to each adjective. Then complete each sentence with an adjective and its adverb.',
+    bank:['angry','bad','careful','easy','fast','good','heavy','rude'],
+    pairs:[['angry','angrily'],['bad','badly'],['careful','carefully'],['easy','easily'],['fast','fast'],['good','well'],['heavy','heavily'],['rude','rudely']],
+    items:[
+      {s:'Dad was very {} with us because we were late. He spoke to us {}.', k:[['angry'],['angrily']]},
+      {s:'My best friend is a {} runner. He runs {}.', k:[['fast'],['fast']]},
+      {s:'She’s {} at drawing animals – they look real. She can draw {}.', k:[['good'],['well']]},
+      {s:'The maths test was really {}. I finished it {} and I got everything right.', k:[['easy'],['easily']]},
+      {s:'Be {} with those eggs! Hold them {}.', k:[['careful'],['carefully']]},
+      {s:'My cousin is sometimes quite {} and doesn’t always say ‘please’ or ‘thank you’. His parents don’t like it when he behaves {}.', k:[['rude'],['rudely']]},
+      {s:'The rain was {} all weekend. It rained {}.', k:[['heavy'],['heavily']]},
+      {s:'I’m really {} at cooking. I cook very {}. Nobody eats my food.', k:[['bad'],['badly']]}
+    ]},
+  { id:'u2e3', n:3, sect:'GRAMMAR', type:'gap',
+    rubric:'Complete the sentences with the past simple form of these verbs.',
+    bank:['buy','listen','not go','not have','not like','not meet','use','wear'],
+    items:[
+      {s:'In the 1980s, my parents {} to hip hop.', k:[['listened']]},
+      {s:'I {} to bed late last night.', k:[['didn’t go','did not go']]},
+      {s:'We {} maths today because the teacher was ill.', k:[['didn’t have','did not have']]},
+      {s:'My best friend {} a new jumper yesterday.', k:[['bought']]},
+      {s:'My brother {} his friends because it was really cold.', k:[['didn’t meet','did not meet']]},
+      {s:'All my friends {} smart clothes to the party.', k:[['wore']]},
+      {s:'I wanted to buy a new pair of jeans but I {} any of them.', k:[['didn’t like','did not like']]},
+      {s:'When we went on holiday, I {} my sunglasses every day.', k:[['used']]}
+    ]},
+  { id:'u2e4', n:4, sect:'GRAMMAR', type:'quest',
+    rubric:'Read the conversations and write complete questions.',
+    items:[
+      {a:'Where / you / yesterday?', b:'I went to the beach.', k:['where did you go yesterday']},
+      {a:'What sports / you and your friends / on Saturday?', b:'We played football and tennis.', k:['what sports did you and your friends play on saturday','what sports did you and your friends do on saturday']},
+      {a:'you / TV / last night?', b:'Yes, I did. I watched a film.', k:['did you watch tv last night']},
+      {a:'you / David / at the weekend?', b:'No, I didn’t see anyone.', k:['did you see david at the weekend']},
+      {a:'What / your brother / for his birthday?', b:'He got some clothes, a new game and some money.', k:['what did your brother get for his birthday','what did your brother have for his birthday']},
+      {a:'How many photos / your dad?', b:'I think he took about 100!', k:['how many photos did your dad take']},
+      {a:'Gareth / you his new sweatshirt?', b:'No, he didn’t but he showed me his new sunglasses – they’re cool!', k:['did gareth show you his new sweatshirt']},
+      {a:'What / you / to your teacher / when she left your school?', b:'We gave her a top with our photo on it.', k:['what did you give to your teacher when she left your school','what did you give your teacher when she left your school']}
+    ]}
+  ]
+}];
+
+const ALLEX=[]; TESTS.forEach(t=>t.ex.forEach(e=>{e.test=t.id;e.tno=t.no;ALLEX.push(e)}));
+const byId=id=>ALLEX.find(e=>e.id===id);
+
+/* ===== helpers ===== */
+function norm(v){
+  return (v||'').toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s+/g,' ').trim().replace(/[.?!,;:]+$/,'');
+}
+function hit(val,keys){const v=norm(val);return keys.some(k=>norm(k)===v)}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>e.classList.remove('on'),2600)}
+function boom(){const c=$('#confetti'),cols=['#e63946','#1d7fd6','#12b5a5','#ffc233','#7c5cff'];
+  for(let i=0;i<40;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.3)+'s';
+    c.appendChild(s);setTimeout(()=>s.remove(),3400)}}
+function colourFor(p){return p>=80?'var(--ok)':p>=60?'var(--yellow)':'var(--no)'}
+function inp(cls){const i=document.createElement('input');i.type='text';i.className='gapin'+(cls?' '+cls:'');
+  i.autocomplete='off';i.spellcheck=false;return i}
+function sentence(str,gaps,cls){
+  /* str contains {} placeholders; returns a fragment and pushes inputs into gaps */
+  const frag=document.createDocumentFragment();
+  str.split('{}').forEach((part,i,arr)=>{
+    frag.appendChild(document.createTextNode(part));
+    if(i<arr.length-1){const el=inp(cls);gaps.push(el);frag.appendChild(el)}
+  });
+  return frag;
+}
+
+/* ===== build the exercises ===== */
+function buildEx(ex){
+  const host=$('#host-'+ex.id);
+  const card=document.createElement('div');
+  card.className='card stage';card.id=ex.id;
+  const head=document.createElement('div');head.className='stagehead';
+  head.innerHTML=`<span class="stageno${ex.test==='u2'?' u2':''}">${ex.n}</span>
+    <h3>Unit ${ex.tno} · Exercise ${ex.n}</h3>
+    <span class="xpchip" id="chip-${ex.id}">8 points</span>
+    <span class="skill">${ex.sect}</span>`;
+  const body=document.createElement('div');body.className='body';
+  const r=document.createElement('p');r.className='rubric';r.textContent=ex.rubric;body.appendChild(r);
+
+  const gaps=[];
+  ex._gaps=gaps;
+
+  if(ex.bank){
+    const b=document.createElement('div');b.className='chips';
+    ex.bank.forEach(w=>{const c=document.createElement('span');c.className='wchip';c.textContent=w;b.appendChild(c)});
+    body.appendChild(b);
+  }
+
+  if(ex.type==='def'){
+    ex.items.forEach((it,i)=>{
+      const q=document.createElement('div');q.className='q';
+      const p=document.createElement('p');
+      p.innerHTML=`<span class="num">${i+1}</span>${it.d}`;
+      const row=document.createElement('div');row.className='defrow';
+      const pat=document.createElement('span');pat.className='pat';pat.textContent=it.p;
+      const el=inp('narrow');el.maxLength=it.k[0].length+4;gaps.push(el);
+      row.appendChild(pat);row.appendChild(el);
+      q.appendChild(p);q.appendChild(row);body.appendChild(q);
+    });
+  }
+  else if(ex.type==='gap'||ex.type==='adv'){
+    if(ex.type==='adv'){
+      const grid=document.createElement('div');grid.className='advgrid';
+      ex._adv=[];
+      ex.pairs.forEach(([adj,adv])=>{
+        const c=document.createElement('div');c.className='advcell';
+        const b=document.createElement('b');b.textContent=adj;
+        const a=document.createElement('span');a.className='arr';a.textContent='→';
+        const el=inp('narrow');el.style.width='100px';
+        c.appendChild(b);c.appendChild(a);c.appendChild(el);
+        ex._adv.push({el,k:[adv]});grid.appendChild(c);
+      });
+      body.appendChild(grid);
+      const note=document.createElement('div');note.className='callout info';
+      note.innerHTML='These adverbs are a warm-up — the <b>8 points</b> come from the sentences below (both words must be right).';
+      body.appendChild(note);
+    }
+    ex.items.forEach((it,i)=>{
+      const q=document.createElement('div');q.className='q';
+      const p=document.createElement('p');
+      p.innerHTML=`<span class="num">${i+1}</span>`;
+      p.appendChild(sentence(it.s,gaps));
+      q.appendChild(p);body.appendChild(q);
+    });
+  }
+  else if(ex.type==='cloze'){
+    const box=document.createElement('div');box.className='clozetext';
+    let n=0;
+    ex.text.forEach(part=>{
+      if(typeof part==='string'){box.appendChild(document.createTextNode(part));return}
+      n++;
+      const num=document.createElement('span');num.className='gapnum';num.textContent='('+n+')';
+      const el=inp();gaps.push(el);
+      const cue=document.createElement('span');cue.className='cue';cue.textContent=' ('+part.cue+')';
+      box.appendChild(num);box.appendChild(el);box.appendChild(cue);
+    });
+    body.appendChild(box);
+  }
+  else if(ex.type==='quest'){
+    ex.items.forEach((it,i)=>{
+      const q=document.createElement('div');q.className='q';
+      const p=document.createElement('p');
+      p.innerHTML=`<span class="num">${i+1}</span><b>A:</b> ${it.a}`;
+      const el=inp('wide');el.placeholder='Write the complete question…';gaps.push(el);
+      p.appendChild(el);
+      const said=document.createElement('span');said.className='said';
+      said.innerHTML='<b>B:</b> '+it.b;
+      p.appendChild(said);
+      q.appendChild(p);body.appendChild(q);
+    });
+  }
+
+  const row=document.createElement('div');row.className='checkrow';
+  const btn=document.createElement('button');btn.className='btn primary';btn.textContent='✓ Check exercise '+ex.n;
+  const chip=document.createElement('span');chip.className='scorechip';chip.id='sc-'+ex.id;chip.textContent='— / 8';
+  const note=document.createElement('span');note.className='hint';note.textContent='One check only.';
+  row.appendChild(btn);row.appendChild(chip);row.appendChild(note);
+  body.appendChild(row);
+  ex._btn=btn;ex._note=note;
+
+  btn.onclick=()=>{
+    const empty=gaps.filter(g=>!g.value.trim()).length;
+    if(empty && !confirm(empty+' answer(s) are still empty. Check the exercise anyway? You cannot change it afterwards.'))return;
+    grade(ex);
+  };
+
+  card.appendChild(head);card.appendChild(body);host.appendChild(card);
+}
+
+/* ===== grading ===== */
+function keysFor(ex,i){
+  if(ex.type==='def')return ex.items[i].k;
+  if(ex.type==='cloze'){const g=ex.text.filter(p=>typeof p!=='string');return g[i].k}
+  if(ex.type==='quest')return ex.items[i].k;
+  return null; /* gap / adv handled per item */
+}
+function grade(ex,silent){
+  const gaps=ex._gaps;let ok=0,gi=0;
+  if(ex.type==='gap'||ex.type==='adv'){
+    ex.items.forEach(it=>{
+      let all=true;
+      it.k.forEach(keys=>{
+        const el=gaps[gi++];const good=hit(el.value,keys);
+        el.classList.add(good?'good':'bad');el.disabled=true;if(!good)all=false;
+      });
+      if(all)ok++;
+    });
+    if(ex.type==='adv')ex._adv.forEach(a=>{
+      const good=hit(a.el.value,a.k);a.el.classList.add(good?'good':'bad');a.el.disabled=true;
+    });
+  }else{
+    gaps.forEach((el,i)=>{
+      const good=hit(el.value,keysFor(ex,i));
+      el.classList.add(good?'good':'bad');el.disabled=true;if(good)ok++;
+    });
+  }
+  ex._btn.disabled=true;ex._btn.textContent='Checked';
+  ex._note.textContent='Locked.';
+  S.res[ex.id]={ok,total:8};
+  S.ans[ex.id]=gaps.map(g=>g.value);
+  if(ex._adv)S.ans[ex.id+'_adv']=ex._adv.map(a=>a.el.value);
+  save();
+  paint(ex);renderAll();
+  if(!silent){
+    toast('Exercise '+ex.n+': '+ok+' / 8');
+    if(ok===8)boom();
+    if(Object.keys(S.res).length===ALLEX.length){
+      setTimeout(()=>{$('#result').scrollIntoView({behavior:'smooth'});boom()},600);
+    }
+  }
+}
+function paint(ex){
+  const r=S.res[ex.id];if(!r)return;
+  const chip=$('#sc-'+ex.id);chip.textContent=r.ok+' / 8';
+  chip.style.color=colourFor(r.ok/8*100);chip.style.fontWeight=800;
+  const h=$('#chip-'+ex.id);h.textContent=r.ok+' / 8 points';
+  h.className='xpchip '+(r.ok>=6?'done':'miss');
+}
+function restore(ex){
+  const a=S.ans[ex.id];if(!a)return;
+  ex._gaps.forEach((g,i)=>g.value=a[i]||'');
+  if(ex._adv&&S.ans[ex.id+'_adv'])ex._adv.forEach((x,i)=>x.el.value=S.ans[ex.id+'_adv'][i]||'');
+  grade(ex,true);
+}
+
+/* ===== totals ===== */
+function testScore(tid){
+  const t=TESTS.find(x=>x.id===tid);
+  let ok=0,done=0;
+  t.ex.forEach(e=>{const r=S.res[e.id];if(r){ok+=r.ok;done++}});
+  return {ok,max:t.max,pct:Math.round(ok/t.max*100),done,n:t.ex.length};
+}
+function renderAll(){
+  const u1=testScore('u1'),u2=testScore('u2');
+  const doneN=u1.done+u2.done, allN=u1.n+u2.n;
+  $('#xpfill').style.width=(doneN/allN*100)+'%';
+  $('#xplabel').textContent=doneN+' / '+allN+' exercises checked';
+  const overall=Math.round((u1.ok+u2.ok)/(u1.max+u2.max)*100);
+  $('#xpright').textContent=doneN?('Overall '+overall+'%'):'Not started';
+  $$('#medals .medal').forEach(m=>m.classList.toggle('on',doneN===allN&&overall>=+m.dataset.need));
+  $('#u1head').textContent=u1.ok+' / '+u1.max+(u1.done?' · '+u1.pct+'%':'');
+  $('#u2head').textContent=u2.ok+' / '+u2.max+(u2.done?' · '+u2.pct+'%':'');
+
+  /* sidebar mini */
+  $('#minidash').innerHTML=[['Unit 1 Test',u1],['Unit 2 Test',u2]].map(([lbl,r])=>
+    `<div class="row"><span>${lbl}</span><b style="color:${r.done?colourFor(r.pct):'var(--muted)'}">${r.done?r.pct+'%':'—'}</b></div>
+     <div class="dbar" style="margin-bottom:9px"><i style="width:${r.pct}%;background:${colourFor(r.pct)}"></i></div>`
+  ).join('')+`<div class="row" style="margin-top:2px"><span>Checked</span><b>${doneN} / ${allN}</b></div>`;
+
+  /* dashboard */
+  $('#dash').innerHTML=[['Unit 1 Test: Plus',u1],['Unit 2 Test: Plus',u2],
+    ['Both tests',{ok:u1.ok+u2.ok,max:u1.max+u2.max,pct:overall,done:doneN}]].map(([lbl,r])=>
+    `<div class="dcell"><div class="lbl">${lbl}</div>
+      <div class="val" style="color:${r.done?colourFor(r.pct):'var(--muted)'}">${r.done?r.pct+'%':'—'}</div>
+      <div class="dbar"><i style="width:${r.pct}%;background:${colourFor(r.pct)}"></i></div>
+      <div class="hint" style="margin-top:5px">${r.ok} / ${r.max} points</div></div>`).join('');
+
+  /* band */
+  const band=$('#band');
+  if(!doneN){band.innerHTML='<div class="b">No score yet</div><div class="hint">Check the exercises above and your result will appear here.</div>'}
+  else{
+    const g=gradeText(overall);
+    band.innerHTML=`<div class="b" style="color:${colourFor(overall)}">${overall}% · ${g.t}</div>
+      <div class="hint">${g.m}</div>
+      <div class="hint" style="margin-top:6px">Unit 1: <b>${u1.ok}/${u1.max} = ${u1.pct}%</b> · Unit 2: <b>${u2.ok}/${u2.max} = ${u2.pct}%</b></div>
+      ${doneN<allN?'<div class="hint" style="margin-top:6px;color:var(--no)">'+(allN-doneN)+' exercise(s) not checked yet — they count as 0.</div>':''}`;
+  }
+
+  /* breakdown table */
+  let rows='<tr><th>Exercise</th><th>Section</th><th style="text-align:right">Score</th><th style="text-align:right">%</th></tr>';
+  TESTS.forEach(t=>{
+    const ts=testScore(t.id);
+    t.ex.forEach(e=>{
+      const r=S.res[e.id];
+      rows+=`<tr><td>Unit ${t.no} · Ex ${e.n}</td><td class="hint">${e.sect[0]+e.sect.slice(1).toLowerCase()}</td>
+        <td class="n">${r?r.ok+' / 8':'—'}</td><td class="n" style="color:${r?colourFor(r.ok/8*100):'var(--muted)'}">${r?Math.round(r.ok/8*100)+'%':'—'}</td></tr>`;
+    });
+    rows+=`<tr class="tot"><td colspan="2">${t.title}</td><td class="n">${ts.ok} / ${ts.max}</td>
+      <td class="n" style="color:${ts.done?colourFor(ts.pct):'var(--muted)'}">${ts.pct}%</td></tr>`;
+  });
+  $('#brk').innerHTML=rows;
+  $('#printhint').textContent=doneN<allN?'Tip: finish all 9 exercises first.':'Everything is checked — ready to print.';
+
+  renderNav();
+}
+function gradeText(p){
+  if(p>=90)return {t:'Excellent 🌟',m:'Both units are secure. Move on to Unit 3 with confidence.'};
+  if(p>=75)return {t:'Very good ✅',m:'Strong result. Look at the two lowest exercises and review those points.'};
+  if(p>=60)return {t:'Pass 👍',m:'The main ideas are there; the details need practice. Redo the weakest exercise in the workbook.'};
+  if(p>=40)return {t:'Needs more practice 💪',m:'Go back over the unit language with your teacher before the next test.'};
+  return {t:'Review the units 📚',m:'Work through Units 1–2 again — vocabulary lists first, then the grammar boxes.'};
+}
+function renderNav(){
+  const nav=$('#nav');nav.innerHTML='';
+  TESTS.forEach(t=>{
+    const h=document.createElement('div');h.className='navsect';h.textContent='Unit '+t.no+' Test: Plus';nav.appendChild(h);
+    t.ex.forEach(e=>{
+      const r=S.res[e.id];
+      const a=document.createElement('a');a.href='#'+e.id;if(r)a.classList.add('done');
+      a.innerHTML=`<span class="tick">${r?'✓':''}</span><span>Ex ${e.n} · ${e.sect[0]+e.sect.slice(1).toLowerCase()}</span>
+        <span class="sk">${r?r.ok+'/8':''}</span>`;
+      a.onclick=ev=>{ev.preventDefault();document.getElementById(e.id).scrollIntoView({behavior:'smooth'})};
+      nav.appendChild(a);
+    });
+  });
+  const a=document.createElement('a');a.href='#result';
+  a.innerHTML='<span class="tick">★</span><span>Your result</span>';
+  a.onclick=ev=>{ev.preventDefault();$('#result').scrollIntoView({behavior:'smooth'})};
+  nav.appendChild(a);
+}
+
+/* ===== student fields ===== */
+['fname','fclass','fdate'].forEach(id=>{
+  const el=$('#'+id);
+  el.value=S.who[id]||'';
+  el.oninput=()=>{S.who[id]=el.value;save()};
+});
+if(!S.who.fdate){const d=new Date();$('#fdate').value=d.toLocaleDateString('en-GB');S.who.fdate=$('#fdate').value;save()}
+
+/* ===== print ===== */
+$('#printbtn').onclick=()=>{
+  const u1=testScore('u1'),u2=testScore('u2');
+  const overall=Math.round((u1.ok+u2.ok)/(u1.max+u2.max)*100);
+  const g=gradeText(overall);
+  const esc=s=>(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const tbl=t=>{
+    const ts=testScore(t.id);
+    return `<h2>${t.title}</h2>
+    <table><tr><th>Exercise</th><th>Section</th><th style="text-align:right">Score</th><th style="text-align:right">%</th></tr>
+    ${t.ex.map(e=>{const r=S.res[e.id];
+      return `<tr><td>Exercise ${e.n}</td><td>${e.sect[0]+e.sect.slice(1).toLowerCase()}</td>
+      <td class="n">${r?r.ok+' / 8':'not done'}</td><td class="n">${r?Math.round(r.ok/8*100)+'%':'0%'}</td></tr>`}).join('')}
+    <tr class="tot"><td colspan="2">Total</td><td class="n">${ts.ok} / ${ts.max}</td><td class="n">${ts.pct}%</td></tr></table>`;
+  };
+  $('#printroot').innerHTML=`
+    <div class="ph"><h1>Unit 1 &amp; Unit 2 Test: Plus — Score Report</h1>
+      <div class="s">Prepare Second Edition Level 4 · Cambridge University Press and UCLES 2019</div></div>
+    <div class="who">
+      <div>Name: <span>${esc(S.who.fname)}</span></div>
+      <div>Class: <span>${esc(S.who.fclass)}</span></div>
+      <div>Date: <span>${esc(S.who.fdate)}</span></div>
+    </div>
+    ${tbl(TESTS[0])}
+    ${tbl(TESTS[1])}
+    <div class="grand">
+      <div>Unit 1: <b>${u1.ok} / ${u1.max} = ${u1.pct}%</b></div>
+      <div>Unit 2: <b>${u2.ok} / ${u2.max} = ${u2.pct}%</b></div>
+      <div>Both tests: <b>${u1.ok+u2.ok} / ${u1.max+u2.max} = ${overall}%</b></div>
+    </div>
+    <p style="font-size:13px;margin:10px 0 0"><b>${g.t}</b> — ${g.m}</p>
+    <div class="sign"><div>Teacher: <span></span></div><div>Signature: <span></span></div></div>
+    <div class="foot">Each exercise is marked out of 8. Unit 1 Test: Plus is out of 40, Unit 2 Test: Plus is out of 32.
+      Unchecked exercises are counted as 0. Printed ${new Date().toLocaleString('en-GB')}.</div>`;
+  window.print();
+};
+
+/* ===== theme / reset ===== */
+document.documentElement.dataset.theme=localStorage.getItem('uttheme')||'light';
+$('#themebtn').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=n;localStorage.setItem('uttheme',n)};
+$('#resetbtn').onclick=()=>{if(confirm('Clear all answers and start both tests again?')){localStorage.removeItem(KEY);location.reload()}};
+
+/* ===== go ===== */
+ALLEX.forEach(buildEx);
+ALLEX.forEach(restore);
+renderAll();
+</script>
+</body>
+</html>
