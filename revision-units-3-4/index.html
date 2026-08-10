@@ -403,8 +403,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
       <span class="xpchip">+80 XP</span><span class="fmt">typing + hints</span><span class="skill">Spelling</span></div>
     <div class="body">
       <p class="lead">Ten words that almost everyone spells wrong. You get the <b>meaning</b>, the number of
-        syllables and the letters we kept — type the whole word. <b>💡 Hint</b> uncovers one more letter,
-        but it costs you half a point.</p>
+        letters and syllables, and the <b>first letter only</b> — type the whole word.
+        <b>💡 Hint</b> uncovers the next letter, then the next one, as many times as you need —
+        but each hint costs you a quarter of a point.</p>
       <div id="sp10"></div>
       <button class="btn primary" data-check="sp10">Check all ten</button>
       <span class="fb" id="sp10fb"></span>
@@ -884,17 +885,19 @@ function colChip(w,side){
 
 /* ===== 5 · spelling lab ===== */
 const SPELL=[
- {w:'gymnastics',  m:'a sport with jumps, balance and control, usually in a gym', s:3, mask:'g_mnasti_s'},
- {w:'athletics',   m:'running, jumping and throwing as a sport',                  s:3, mask:'at_leti_s'},
- {w:'exhausted',   m:'extremely tired, with no energy left',                      s:3, mask:'ex_a_sted'},
- {w:'unbelievable',m:'so surprising that it is hard to believe',                  s:5, mask:'unbel__vable'},
- {w:'dangerous',   m:'likely to hurt you or make you ill',                        s:3, mask:'dangero_s'},
- {w:'licence',     m:'the official card that says you are allowed to drive',      s:2, mask:'li_en_e'},
- {w:'university',  m:'the place where you study for a degree after school',       s:5, mask:'univers_ty'},
- {w:'competition', m:'an event where people or teams try to win',                 s:4, mask:'compet_t_on'},
- {w:'equipment',   m:'the things you need for a sport or a job',                  s:3, mask:'eq_ipm_nt'},
- {w:'retirement',  m:'the part of life after you stop working',                   s:3, mask:'retir_ment'}
+ {w:'gymnastics',  m:'a sport with jumps, balance and control, usually in a gym', s:3},
+ {w:'athletics',   m:'running, jumping and throwing as a sport',                  s:3},
+ {w:'exhausted',   m:'extremely tired, with no energy left',                      s:3},
+ {w:'unbelievable',m:'so surprising that it is hard to believe',                  s:5},
+ {w:'dangerous',   m:'likely to hurt you or make you ill',                        s:3},
+ {w:'licence',     m:'the official card that says you are allowed to drive',      s:2},
+ {w:'university',  m:'the place where you study for a degree after school',       s:5},
+ {w:'competition', m:'an event where people or teams try to win',                 s:4},
+ {w:'equipment',   m:'the things you need for a sport or a job',                  s:3},
+ {w:'retirement',  m:'the part of life after you stop working',                   s:3}
 ];
+/* only the first letter is given; every 💡 hint uncovers the next one */
+SPELL.forEach(it=>it.mask=it.w[0]+'_'.repeat(it.w.length-1));
 (function(){
   const box=$('#sp10');box.innerHTML='';
   SPELL.forEach((it,i)=>{
@@ -912,6 +915,7 @@ const SPELL=[
       if(j<0){toast('No letters left to uncover 🙂');return}
       mask.textContent=mask.textContent.slice(0,j)+it.w[j]+mask.textContent.slice(j+1);
       row._hints=(row._hints||0)+1;
+      hb.textContent=`💡 Hint (${row._hints})`;
       if(mask.textContent.indexOf('_')<0)hb.disabled=true;
     };
     line.appendChild(mask);line.appendChild(inp);line.appendChild(hb);
@@ -1389,14 +1393,15 @@ $$('[data-check]').forEach(b=>b.onclick=()=>{
       const hints=r._hints||0;
       r.classList.add(good?'good':'bad');
       r._inp.disabled=true;
-      if(good){pts+=hints?0.5:1;r._mask.textContent=r._it.w}
+      if(good){pts+=Math.max(0.25,1-0.25*hints);r._mask.textContent=r._it.w}
       else{r._sol.textContent='✔ '+r._it.w;r._mask.textContent=r._it.w}
       r.querySelector('.hintb').disabled=true;
     });
+    pts=Math.round(pts*100)/100;
     const f=$('#sp10fb');const full=rows.length;
     f.className='fb on '+(pts>=full-0.01?'good':'bad');
     f.textContent=`${pts} of ${full} points`+
-      (pts>=full?' — perfect spelling 🏆':' (a hinted word is worth half a point). The correct spellings are shown above.');
+      (pts>=full?' — perfect spelling, no hints 🏆':' (every hint costs a quarter of a point). The correct spellings are shown above.');
     if(!S.done.sp10){S.done.sp10=1;record('sp10',Math.round(pts),full,'spell');
       addXP(Math.round(80*pts/full),'Spelling lab')}
     return;
