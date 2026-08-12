@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12314a">
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <title>Lesson 9 — The Fourth Floor</title>
+  <style>
+    :root{
+      --ink:#16303f;--muted:#5f7686;--paper:#fffdf9;--bg:#eef3f4;
+      --navy:#12314a;--teal:#1f7a6b;--teal2:#146154;--teal-soft:#e6f5f1;
+      --amber:#e2a032;--amber-soft:#fff4e2;--rose:#c2544f;--rose-soft:#fdeeed;
+      --indigo:#3f5d94;--indigo-soft:#ecf1fa;
+      --border:#dbe4e6;--shadow:0 12px 34px rgba(18,49,74,.09);
+      --radius:20px;--focus:0 0 0 4px rgba(31,122,107,.22)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;padding-bottom:90px}
+    button,input,textarea{font:inherit}
+    button{touch-action:manipulation}
+    button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:0;box-shadow:var(--focus)}
+    .skip{position:absolute;left:-9999px;top:8px;background:#fff;padding:10px 14px;border-radius:10px;z-index:50}.skip:focus{left:8px}
+
+    .hero{background:linear-gradient(125deg,#0e2438 0%,#12314a 45%,#1f7a6b 150%);color:#fff;padding:34px clamp(20px,5vw,72px) 30px}
+    .hero-inner{max-width:1160px;margin:auto;display:grid;grid-template-columns:1fr 310px;gap:38px;align-items:end}
+    .eyebrow{font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:9px}
+    h1{font-size:clamp(38px,6vw,64px);line-height:.98;letter-spacing:-.045em;margin:0}
+    .hero p{margin:14px 0 0;color:rgba(255,255,255,.8);font-size:15px}
+    .hero-side{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:18px;backdrop-filter:blur(6px)}
+    .progress-line{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;margin-bottom:8px}
+    .track{height:9px;background:rgba(255,255,255,.17);border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:var(--amber);transition:width .3s ease}
+    .hero-actions{display:flex;justify-content:space-between;align-items:center;margin-top:13px;gap:8px}.xp{font-weight:900;color:var(--amber)}
+    .reset{border:0;background:transparent;color:rgba(255,255,255,.78);text-decoration:underline;cursor:pointer;font-size:12px}
+
+    .nav-wrap{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);box-shadow:0 4px 15px rgba(22,48,63,.06);backdrop-filter:blur(10px)}
+    .nav{max-width:1300px;margin:auto;display:flex;overflow-x:auto;padding:0 10px;scrollbar-width:thin}
+    .tab{border:0;border-bottom:3px solid transparent;background:transparent;color:var(--muted);padding:15px 13px;white-space:nowrap;font-weight:800;font-size:13px;cursor:pointer}
+    .tab:hover,.tab[aria-selected="true"]{color:var(--teal)}.tab[aria-selected="true"]{border-color:var(--teal)}
+    .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#e3ebec;margin-right:6px;font-size:11px}
+    .tab.done .n{background:var(--teal);color:#fff}.tab[aria-selected="true"] .n{background:var(--navy);color:#fff}
+
+    main{max-width:1120px;margin:auto}
+    .section{display:none;padding:42px clamp(17px,4vw,44px)}.section.active{display:block}
+    .section-head{margin-bottom:26px;display:grid;grid-template-columns:1fr auto;gap:15px;align-items:start}
+    .section h2{font-size:clamp(28px,4vw,40px);line-height:1.05;letter-spacing:-.035em;margin:0 0 8px}.lead{margin:0;color:var(--muted);max-width:760px}
+    .time{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--border);border-radius:30px;padding:7px 12px;font-weight:800;font-size:12px;color:var(--muted)}
+    .card{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(21px,3.5vw,34px);box-shadow:var(--shadow);margin:0 0 22px}
+    .kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);font-weight:900;margin-bottom:15px}
+    .question{font-weight:800;margin:0 0 12px}.small{font-size:14px;color:var(--muted)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .goal{padding:18px;border-radius:16px;background:var(--teal-soft);border:1px solid #bfe3da}.goal b{display:block;margin-bottom:4px}.goal span{font-size:14px;color:#4a6a63}
+    .chip{display:inline-block;background:#e7eded;color:#4f6673;border-radius:30px;padding:6px 11px;margin:3px;font-size:13px;font-weight:700}.speak .chip{background:rgba(255,255,255,.15);color:#fff}
+    .task{padding:18px 0;border-bottom:1px solid var(--border)}.task:first-child{padding-top:0}.task:last-child{border-bottom:0;padding-bottom:0}
+    .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .choice{border:2px solid var(--border);background:#fff;color:var(--ink);padding:13px 15px;border-radius:13px;text-align:left;font-weight:750;cursor:pointer;transition:.15s}
+    .choice:hover:not(:disabled){border-color:var(--teal);transform:translateY(-1px)}
+    .choice.correct{border-color:var(--teal);background:var(--teal-soft);color:#146154}.choice.wrong{border-color:var(--rose);background:var(--rose-soft);color:#8e332f}.choice:disabled{cursor:default}
+    .feedback{display:none;margin-top:10px;border-radius:12px;padding:11px 13px;font-size:14px;font-weight:750}.feedback.show{display:block}
+    .feedback.good{background:var(--teal-soft);color:#146154;border:1px solid #bfe3da}
+    .feedback.try{background:var(--amber-soft);color:#8a5a10;border:1px solid #f0d49b}
+    .feedback.info{background:var(--indigo-soft);color:#3b5074;border:1px solid #ccd8ee}
+    .btn{border:0;border-radius:11px;padding:11px 17px;font-weight:850;cursor:pointer}
+    .primary{background:var(--teal);color:#fff}.primary:hover{background:var(--teal2)}
+    .secondary{background:#e4eaeb;color:var(--ink)}.accent{background:var(--amber);color:#3b2a06}.small-btn{padding:8px 13px;font-size:13px}.btn:disabled{opacity:.55;cursor:default}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .section-nav{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--border);padding-top:25px;margin-top:31px}.section-nav .right{margin-left:auto}
+    .input,.textarea{width:100%;border:2px solid var(--border);border-radius:12px;background:#fff;padding:11px 13px;color:var(--ink)}
+    .input:focus,.textarea:focus{border-color:var(--teal);outline:0}.textarea{min-height:140px;resize:vertical}
+    .inline-check{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.inline-check .input{flex:1;min-width:210px}
+    details.support{margin-top:14px;background:#f2f6f6;border-radius:12px;padding:11px 14px;color:var(--muted)}details.support summary{font-weight:800;color:var(--teal);cursor:pointer}
+    .notice{border-left:5px solid var(--amber);background:var(--amber-soft);padding:13px 15px;border-radius:0 12px 12px 0;margin-top:15px}
+    .rule{padding:19px;border-radius:16px;border:2px solid var(--border);background:#fff}
+    .rule.r1{background:var(--teal-soft);border-color:#bfe3da}.rule.r2{background:var(--indigo-soft);border-color:#ccd8ee}.rule.r3{background:var(--amber-soft);border-color:#f0d49b}
+    .rule .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:900;color:var(--navy)}
+    .rule .formula{font-size:17px;font-weight:900;margin:6px 0}
+    .rule .example{font-family:ui-monospace,Consolas,monospace;font-size:13px;line-height:1.7;color:#4f6673}
+
+    /* vocabulary sprint */
+    .sprint{border:2px solid var(--border);border-radius:18px;padding:clamp(16px,2.5vw,24px);background:#fff}
+    .sprint-track{height:8px;background:#e8eeef;border-radius:99px;overflow:hidden;margin-bottom:14px}
+    .sprint-fill{height:100%;width:100%;background:var(--teal);transition:width 1s linear}
+    .sprint-fill.low{background:var(--rose)}
+    .sprint-head{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+    .stat{background:#f3f7f7;border:1px solid var(--border);border-radius:30px;padding:7px 13px;font-weight:800;font-size:13px}
+    .stat b{color:var(--teal2)}
+    .sprint-q{font-size:clamp(17px,2.2vw,22px);font-weight:800;margin:0 0 14px;min-height:56px}
+    .sprint-miss{margin-top:12px;font-size:14px;line-height:1.7}
+    .sprint-miss b{color:var(--rose)}
+
+    .text-read{max-width:720px}.text-read p{margin:0 0 12px}
+    .criteria{list-style:none;padding:0;margin:12px 0}
+    .criteria li{margin:8px 0;padding-left:27px;position:relative}
+    .criteria li::before{content:"✓";position:absolute;left:0;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--teal-soft);color:var(--teal);font-size:12px;font-weight:900}
+    .persona{background:var(--rose-soft);border:1px solid #f2cbc9;border-radius:14px;padding:16px}.persona b{display:block;margin-bottom:5px}
+    .speak{background:linear-gradient(135deg,#12314a,#1f7a6b);color:#fff;border-radius:20px;padding:clamp(23px,4vw,34px);margin-bottom:22px}
+    .speak .kicker{color:var(--amber)}.speak h3{font-size:clamp(21px,3vw,29px);line-height:1.25;margin:0 0 12px}
+    .timer{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;border:4px solid rgba(255,255,255,.22);font:900 28px ui-monospace,monospace;margin:18px 0}
+    .timer.running{border-color:var(--amber);color:var(--amber)}.timer.finished{border-color:#9ce2c8;color:#9ce2c8}
+    .checklist{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .check{display:flex;gap:9px;align-items:flex-start;background:#f3f7f7;border-radius:12px;padding:11px}.check input{margin-top:4px;accent-color:var(--teal)}
+    .writing-shell{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .counter{text-align:right;color:var(--muted);font-size:13px;margin-top:5px}
+    .model{background:var(--indigo-soft);border-radius:14px;padding:15px;font-size:14px}.model p{margin:0}
+    .info-card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}.info-card h3{margin:0 0 8px}
+    .result{padding:25px;text-align:center;border-radius:17px;background:linear-gradient(120deg,var(--teal-soft),var(--amber-soft));font-size:19px;font-weight:900}
+    .export{background:linear-gradient(125deg,#12314a,#3f5d94);color:#fff;border:0}
+    .export .kicker{color:var(--amber)}.export .small{color:rgba(255,255,255,.75)}
+    .export .input{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff}
+    .export .input::placeholder{color:rgba(255,255,255,.55)}
+    .teacher{border:1px dashed #b9c9cd;background:transparent;box-shadow:none}.teacher summary{cursor:pointer;font-weight:900}
+    .teacher-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.teacher-grid div{background:#fff;border-radius:12px;padding:13px;font-size:13px}
+
+    /* printable answer sheet */
+    #answerSheet{display:none}
+    .sheet{max-width:900px;margin:auto;padding:26px;background:#fff;color:#000;font-size:13px;line-height:1.5}
+    .sheet h1{font-size:21px;margin:0 0 3px;letter-spacing:-.02em}
+    .sheet .sheet-meta{font-size:12px;color:#444;margin-bottom:8px}
+    .sheet .sheet-score{font-size:13px;font-weight:800;border:1px solid #999;border-radius:8px;padding:8px 11px;margin-bottom:16px}
+    .sheet h2{font-size:14px;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #999}
+    .sheet-item{margin:0 0 10px;page-break-inside:avoid;break-inside:avoid}
+    .sheet-q{font-weight:700}
+    .sheet-a{margin:2px 0 0 14px}
+    .sheet-a .st{font-size:10px;text-transform:uppercase;letter-spacing:.07em;border:1px solid #666;border-radius:20px;padding:1px 7px;margin-left:6px}
+    .sheet-free{margin:4px 0 0 14px;white-space:pre-wrap;border-left:3px solid #ccc;padding-left:10px}
+    .sheet-foot{margin-top:22px;border-top:1px solid #999;padding-top:10px;font-size:11px;color:#444}
+
+    @media(max-width:800px){.hero-inner{grid-template-columns:1fr}.hero-side{display:none}.grid3,.teacher-grid{grid-template-columns:1fr 1fr}.writing-shell{grid-template-columns:1fr}}
+    @media(max-width:620px){.section{padding-top:30px}.section-head{grid-template-columns:1fr}.grid2,.grid3,.choices,.checklist,.teacher-grid{grid-template-columns:1fr}.section-nav{flex-wrap:wrap}.section-nav .btn{flex:1}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.choice:hover{transform:none!important}}
+    @media print{
+      .hero-side,.nav-wrap,.section-nav,.btn,.feedback,.teacher{display:none!important}
+      .section{display:block!important;padding:22px}.hero{padding:22px}.hero-inner{display:block}
+      .card,.speak{break-inside:avoid;box-shadow:none}
+      body.printing>*{display:none!important}
+      body.printing #answerSheet{display:block!important}
+      @page{margin:14mm}
+    }
+  </style>
+</head>
+<body>
+<a class="skip" href="#lesson">Skip to lesson</a>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Lesson 9 · continues Lesson 8 · CEFR A2 · 60 minutes · no listening</div>
+      <h1>The Fourth<br>Floor</h1>
+      <p>Vocabulary sprint · words from the text · adverbs · because / so / but / although · reading · speaking · homework you can send as a PDF</p>
+    </div>
+    <div class="hero-side" aria-label="Lesson progress">
+      <div class="progress-line"><span>Lesson progress</span><span id="progressText">0%</span></div>
+      <div class="track"><div class="fill" id="progressFill"></div></div>
+      <div class="hero-actions"><span class="xp">★ <span id="xp">0</span> XP</span><button class="reset" id="resetBtn" type="button">Reset lesson</button></div>
+    </div>
+  </div>
+</header>
+
+<div class="nav-wrap">
+  <nav class="nav" role="tablist" aria-label="Lesson sections">
+    <button class="tab" role="tab" aria-selected="true" data-tab="0"><span class="n">1</span>Sprint</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="1"><span class="n">2</span>Words</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="2"><span class="n">3</span>Linking</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="3"><span class="n">4</span>Reading</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="4"><span class="n">5</span>Speaking</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="5"><span class="n">6</span>Homework</button>
+  </nav>
+</div>
+
+<main id="lesson">
+
+  <!-- 1 · SPRINT -->
+  <section class="section active" id="section-0" role="tabpanel">
+    <div class="section-head"><div><h2>Vocabulary sprint</h2><p class="lead">A new warm-up game. Twelve meanings, sixty seconds, one answer each. Speed is not the point — the point is that the words come back without help. Say each correct word aloud before you move on.</p></div><span class="time">⏱ 6 min</span></div>
+
+    <div class="card">
+      <div class="kicker">1A · The sprint · 60 seconds · 12 words</div>
+      <div class="sprint">
+        <div class="sprint-track"><div class="sprint-fill" id="sprintFill"></div></div>
+        <div class="sprint-head">
+          <span class="stat">Time: <b id="sprintTime">60</b>s</span>
+          <span class="stat">Score: <b id="sprintScore">0</b>/12</span>
+          <span class="stat">Streak: <b id="sprintStreak">0</b></span>
+        </div>
+        <p class="sprint-q" id="sprintQ">Press <b>Start</b>, then choose the word that matches the meaning.</p>
+        <div class="choices" id="sprintOpts"></div>
+        <div class="row" style="margin-top:16px"><button class="btn primary" id="sprintStart" type="button">Start the sprint</button></div>
+        <div class="feedback" id="sprintResult" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">1B · Which verb goes with it?</div>
+      <p class="small" style="margin:-6px 0 14px">Words travel in pairs. Choose the verb that native speakers really use.</p>
+      <div id="verbMC"></div>
+    </div>
+
+    <div class="section-nav"><span></span><button class="btn primary right" data-go="1" type="button">Words for the text →</button></div>
+  </section>
+
+  <!-- 2 · WORDS -->
+  <section class="section" id="section-1" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>The words you will meet today</h2><p class="lead">These words come from the blog you are going to read in section 4. Meet them here first — reading is much easier when the difficult words are already old friends.</p></div><span class="time">⏱ 9 min</span></div>
+
+    <div class="card">
+      <div class="kicker">2A · How? · building adverbs</div>
+      <div class="notice" style="margin-top:0;margin-bottom:16px"><b>The rule:</b> adjective + <b>-ly</b> tells us <i>how</i> something happens. quick → quick<b>ly</b> · slow → slow<b>ly</b>. If the word ends in <b>-y</b>, change it: easy → eas<b>ily</b>. The adverb usually goes after the verb: <i>She walks slowly.</i></div>
+      <div id="adverbTyped"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">2B · New words in context</div>
+      <p class="small" style="margin:-6px 0 14px">Do not translate. Read the whole sentence and choose the word that fits the situation.</p>
+      <div id="newWordsMC"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">2C · Opposites</div>
+      <p class="small" style="margin:-6px 0 14px">Write the opposite word. Knowing pairs of opposites doubles your vocabulary.</p>
+      <div id="oppositeTyped"></div>
+    </div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="0" type="button">← Sprint</button><button class="btn primary" data-go="2" type="button">Linking words →</button></div>
+  </section>
+
+  <!-- 3 · LINKING -->
+  <section class="section" id="section-2" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Because · so · but · although</h2><p class="lead">Until now you built single sentences. Today you join them. These four words are what turns a list of facts into a story — and they are exactly what the writer of today’s text uses.</p></div><span class="time">⏱ 12 min</span></div>
+
+    <div class="card">
+      <div class="kicker">3A · Four jobs, four words</div>
+      <div class="grid2">
+        <div class="rule r1"><div class="tag">reason · why?</div><div class="formula">because</div><div class="example">She isn’t going to cook <b>because</b> the kitchen is full of boxes.</div></div>
+        <div class="rule r2"><div class="tag">result · what happens then?</div><div class="formula">so</div><div class="example">The lift is broken, <b>so</b> everybody uses the stairs.</div></div>
+        <div class="rule r3"><div class="tag">contrast · a surprise</div><div class="formula">but</div><div class="example">The rooms are small, <b>but</b> they are full of light.</div></div>
+        <div class="rule"><div class="tag">strong contrast · start or middle</div><div class="formula">although</div><div class="example"><b>Although</b> the flat is small, Emma loves it.<br>Emma loves the flat <b>although</b> it is small.</div></div>
+      </div>
+      <div class="notice"><b>Watch the order:</b> <i>because</i> and <i>although</i> are followed by the reason or the surprising fact. <i>so</i> is always followed by the result — you cannot start an English sentence with <i>So</i> in writing at this level.</div>
+      <details class="support"><summary>Нужна опора на русском?</summary><p><b>because</b> — потому что (причина). <b>so</b> — поэтому (результат). <b>but</b> — но (противопоставление). <b>although</b> — хотя (сильное противопоставление; ставится в начале предложения или перед второй частью). Запятая ставится перед <i>but</i> и <i>so</i>, а перед <i>because</i> — обычно нет.</p></details>
+    </div>
+
+    <div class="card"><div class="kicker">3B · Choose the linking word</div><div id="linkerMC"></div></div>
+
+    <div class="card">
+      <div class="kicker">3C · Join the two sentences</div>
+      <p class="small" style="margin:-6px 0 14px">Use the word in brackets and write <b>one</b> sentence. Keep the information in both halves.</p>
+      <div id="joinTyped"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">3D · Be the editor · the wrong linking word</div>
+      <p class="small" style="margin:-6px 0 14px">Each sentence is grammatically fine but the logic is broken. Write the linking word that should be there — one word only.</p>
+      <div id="linkerFixTyped"></div>
+    </div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="1" type="button">← Words</button><button class="btn primary" data-go="3" type="button">Reading →</button></div>
+  </section>
+
+  <!-- 4 · READING (carried over from Lesson 8) -->
+  <section class="section" id="section-3" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Reading: The Flat on the Fourth Floor</h2><p class="lead">Skim once for the general idea (about 1 minute), then read again slowly and scan for the details each task needs. Some answers are not written directly — you will have to think about what the writer means.</p></div><span class="time">⏱ 20 min</span></div>
+
+    <div class="card">
+      <div class="kicker">4A · Before reading · predict</div>
+      <p class="question">Read only the title, then look at the first line of each paragraph. What do you think the text will tell you? Choose three ideas and say why.</p>
+      <span class="chip">the rooms</span><span class="chip">her routine</span><span class="chip">what she is doing today</span><span class="chip">a plan for Sunday</span><span class="chip">a problem</span><span class="chip">her salary</span>
+    </div>
+
+    <div class="card">
+      <div class="kicker">4B · The text · blog post</div>
+      <div class="text-read">
+        <h3 style="margin:0 0 2px">The Flat on the Fourth Floor</h3>
+        <em class="small" style="display:block;margin-bottom:14px">student blog · ≈ 390 words · four paragraphs</em>
+        <p><b>1.</b> Emma’s new flat is on the fourth floor of an old building near the river. The rooms are small, but they are full of light. There are three of them: a bedroom, a living room and a narrow kitchen with a window that looks over the roofs of the city. In the bedroom there is a bed under the window and, next to the door, a tall wardrobe that the old owner left behind. One of its doors doesn’t close properly, but Emma isn’t going to throw it away — it is the only piece of furniture she didn’t pay for. Between the two living-room windows there is a bookshelf with all her photos on it. That corner is her favourite place in the flat.</p>
+        <p><b>2.</b> Her weekdays are always the same. She wakes up at half past six, has breakfast standing in the kitchen and takes the number 12 bus to the office. She gets home late, so she usually cooks something quick, tidies up and reads until she falls asleep. Saturday is different: she does the shopping early and then meets her friend Kate in the park, because it is the only morning when nobody needs anything from her.</p>
+        <p><b>3.</b> This week, however, there is no routine at all. Right now, Emma isn’t sitting on the sofa with a book. She is standing in the middle of the living room with a paintbrush in her hand, and the grey walls are slowly turning yellow. Her brother Max is putting up a shelf — with the wrong screws, but nobody is telling him. Kate is cleaning windows that nobody cleaned for years. There are boxes in every corner and nobody is relaxing, but everybody is laughing.</p>
+        <p><b>4.</b> On Sunday, Emma is going to have a housewarming party. Nine friends are going to come at seven o’clock, and there is one small problem: the lift is broken and the flat is on the fourth floor. She isn’t going to cook, because the kitchen is still full of boxes, so she is going to order pizza — the delivery man is not going to enjoy the stairs. Kate is going to bring music and Max is going to carry the drinks up. The forecast says rain, but nobody minds: the party is indoors, and there is nowhere else Emma wants to be on Sunday evening.</p>
+      </div>
+    </div>
+
+    <div class="card"><div class="kicker">4C · Read for the main idea (gist)</div><div id="gistMC"></div></div>
+
+    <div class="card">
+      <div class="kicker">4D · True, False or Doesn’t say?</div>
+      <p class="small" style="margin:-6px 0 12px">Choose <b>True</b> if the text says it, <b>False</b> if the text says the opposite, and <b>Doesn’t say</b> if the information is simply not there. Careful: “not written” is not the same as “not true”.</p>
+      <div id="tfndMC"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">4E · Reading between the lines</div>
+      <p class="small" style="margin:-6px 0 12px">The writer does not explain everything. Choose the best explanation for each line from the text.</p>
+      <div id="inferenceMC"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">4F · Words in context</div>
+      <p class="small" style="margin:-6px 0 12px">Find the word or phrase in the blog for each meaning. The paragraph number is in brackets. Spelling counts.</p>
+      <div id="contextTyped"></div>
+    </div>
+
+    <div class="card"><div class="kicker">4G · Find the evidence · full answers</div><div id="evidenceTyped"></div></div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="2" type="button">← Linking</button><button class="btn primary" data-go="4" type="button">Speaking →</button></div>
+  </section>
+
+  <!-- 5 · SPEAKING (carried over from Lesson 8) -->
+  <section class="section" id="section-4" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Speaking studio</h2><p class="lead">Three tasks: explain words, describe with detail, and interact with a partner. Full sentences matter more than speed — and if you forget a word, define it instead of stopping.</p></div><span class="time">⏱ 13 min</span></div>
+
+    <div class="card">
+      <div class="kicker">5A · Explain it, don’t say it · game</div>
+      <p class="question">Your partner (or teacher) closes their eyes. Take a word and describe it in English until they guess it. You may not say the word or translate it.</p>
+      <div><span class="chip">wardrobe</span><span class="chip">kitchen</span><span class="chip">to tidy up</span><span class="chip">the entrance</span><span class="chip">an exhibition</span><span class="chip">the forecast</span><span class="chip">a bookshelf</span><span class="chip">to book tickets</span></div>
+      <div class="notice"><b>Useful language:</b> It is a place where… · It is a thing you use to… · You do it when… · It is usually in the… · It is the opposite of…</div>
+      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="explainGame" data-section="4" data-xp="10" type="button">We guessed 5 words ✓</button>
+    </div>
+
+    <div class="speak">
+      <div class="kicker">5B · 90-second studio challenge</div>
+      <h3>Describe your home, then your weekend. Use all four structures: <i>there is / there are</i>, a preposition, a routine, something happening now, and a Sunday plan.</h3>
+      <span class="chip">In my room there is…</span><span class="chip">next to / between / under</span><span class="chip">I usually…</span><span class="chip">Right now…</span><span class="chip">I’m going to…</span>
+      <div class="timer" id="timer" aria-live="polite">90</div>
+      <button class="btn accent small-btn" id="timerStart" type="button">Start 90 seconds</button>
+      <button class="btn secondary small-btn" id="timerReset" type="button">Reset</button>
+    </div>
+
+    <div class="card">
+      <div class="kicker">5C · Role-play · the housewarming</div>
+      <p class="question">Emma’s party is on Sunday. Take a role and agree on one plan together: what to bring, what time to arrive and how to get there.</p>
+      <div class="grid2">
+        <div class="persona"><b>You are Emma</b>Your kitchen is full of boxes, so you aren’t going to cook. You want help at 6 p.m. and you have a small budget. Suggest food and a time.</div>
+        <div class="persona"><b>Your partner is Max</b>Max finishes work at 6:30 and doesn’t have a car. He is going to bring music and wants to know what to buy. Ask about time, transport and money.</div>
+      </div>
+      <div class="grid3" style="margin-top:14px">
+        <div class="goal"><b>Suggest</b><span>How about…?<br>Why don’t we…?</span></div>
+        <div class="goal"><b>Respond</b><span>That sounds great.<br>I’d rather… because…</span></div>
+        <div class="goal"><b>Clarify</b><span>What time exactly?<br>How are you going to get there?</span></div>
+      </div>
+      <div class="checklist" style="margin-top:16px">
+        <label class="check"><input type="checkbox"> I made a suggestion.</label>
+        <label class="check"><input type="checkbox"> I gave a reason with <i>because</i>.</label>
+        <label class="check"><input type="checkbox"> I asked a follow-up question.</label>
+        <label class="check"><input type="checkbox"> We found one compromise.</label>
+      </div>
+      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="rolePlay" data-section="4" data-xp="12" type="button">We agreed on one plan ✓</button>
+    </div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="3" type="button">← Reading</button><button class="btn primary" data-go="5" type="button">Homework →</button></div>
+  </section>
+
+  <!-- 6 · HOMEWORK -->
+  <section class="section" id="section-5" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Homework you can send</h2><p class="lead">Seven short tasks, seven different mechanics. Answer everything, then press the button at the bottom: the page collects your answers into one clean sheet that you can save as a PDF and send to your teacher.</p></div><span class="time">⏱ 25–30 min</span></div>
+
+    <div class="card" data-hw="H1 · Quick quiz">
+      <div class="kicker">H1 · Quick quiz · 5 min</div>
+      <p class="small" style="margin:-6px 0 14px">Answer from memory first. Open the lesson only after your first attempt.</p>
+      <div id="hwQuizMC"></div>
+    </div>
+
+    <div class="card" data-hw="H2 · Word forms and opposites">
+      <div class="kicker">H2 · Word forms and opposites · 4 min</div>
+      <p class="small" style="margin:-6px 0 14px">Items 1–3: write the adverb. Items 4–5: write the opposite word.</p>
+      <div id="hwFormsTyped"></div>
+    </div>
+
+    <div class="card" data-hw="H3 · Linking words">
+      <div class="kicker">H3 · Linking words · 4 min</div>
+      <p class="small" style="margin:-6px 0 14px">Write one word in each gap: <b>because · so · but · although</b>. Use each word once.</p>
+      <div id="hwLinkerTyped"></div>
+    </div>
+
+    <div class="card" data-hw="H4 · Reading: the building notice">
+      <div class="kicker">H4 · Read a real-world notice · 5 min</div>
+      <div class="info-card">
+        <h3>NOTICE · 14 River Street</h3>
+        <p>Dear residents,</p>
+        <p>The lift in this building is out of order. An engineer is going to come on Monday morning, so the lift is not going to work this weekend. We are sorry about the stairs.</p>
+        <p>If you are expecting visitors or a delivery, please tell them to use the main entrance on River Street, because the back door is locked after 18:00. The caretaker, Mr Novak, is in flat 2 if you need help with heavy bags.</p>
+        <p class="small" style="margin-top:10px">Thank you for your patience — The Building Office</p>
+      </div>
+      <div id="hwNoticeMC" style="margin-top:18px"></div>
+    </div>
+
+    <div class="card" data-hw="H5 · Be the editor">
+      <div class="kicker">H5 · Be the editor · 4 min</div>
+      <p class="small" style="margin:-6px 0 14px">Each sentence has one mistake. Write the whole sentence correctly.</p>
+      <div id="hwErrorTyped"></div>
+    </div>
+
+    <div class="card writing-shell" data-hw="H6 · Writing: a message to a friend">
+      <div>
+        <div class="kicker">H6 · Write the message · 8–10 min</div>
+        <p class="question">A friend is going to visit your home on Saturday. Write a message of 70–90 words.</p>
+        <textarea class="textarea" id="hwWriting" data-label="My message (70–90 words)" placeholder="Hi …,&#10;Great news — see you on Saturday! I live in…"></textarea>
+        <div class="counter"><span id="hwWordCount">0</span> words · target 70–90</div>
+        <button class="btn primary small-btn" id="checkHwWriting" type="button">Check my message</button>
+        <div class="feedback" id="hwWritingFeedback" aria-live="polite"></div>
+      </div>
+      <div>
+        <div class="kicker">Success criteria</div>
+        <ul class="criteria">
+          <li>a friendly opening and ending</li>
+          <li>two sentences with <b>there is / there are</b></li>
+          <li>at least two prepositions of place</li>
+          <li>one routine with <b>usually / every</b></li>
+          <li>one plan with <b>going to</b></li>
+          <li>at least one linking word: <b>because / so / but / although</b></li>
+        </ul>
+        <details class="support"><summary>Need a frame?</summary><p>Hi …, I’m happy you’re coming! I live in … There is … next to … and there are … On Saturdays I usually …, so we can … I’m going to … because … See you at …!</p></details>
+      </div>
+    </div>
+
+    <div class="card" data-hw="H7 · Speaking notes and reflection">
+      <div class="kicker">H7 · Speak, then reflect · 4 min</div>
+      <p class="question">Speak for 60 seconds about your home and your weekend. Do not read your message — use notes only. Then fill in both boxes; your teacher will read them.</p>
+      <div class="timer" id="hwTimer" aria-live="polite" style="border-color:var(--border);color:var(--ink)">60</div>
+      <div class="row" style="margin-bottom:16px">
+        <button class="btn accent small-btn" id="hwTimerStart" type="button">Start 60 seconds</button>
+        <button class="btn secondary small-btn" id="hwTimerReset" type="button">Reset</button>
+      </div>
+      <p class="question">1. The three notes I spoke from:</p>
+      <textarea class="textarea" style="min-height:80px" id="hwNotes" data-label="My three speaking notes" placeholder="1 … 2 … 3 …"></textarea>
+      <p class="question" style="margin-top:16px">2. Which task was the most difficult today, and why?</p>
+      <textarea class="textarea" style="min-height:80px" id="hwReflect" data-label="The most difficult task and why" placeholder="The most difficult task was … because …"></textarea>
+    </div>
+
+    <div class="card export">
+      <div class="kicker">Send it to your teacher</div>
+      <p class="question" style="color:#fff">Everything you typed on this page goes into one answer sheet.</p>
+      <p class="small" style="margin-bottom:14px">Press <b>Save as PDF</b>: your browser opens the print window — choose <b>“Save as PDF”</b> (or “Microsoft Print to PDF”) as the printer and save the file. Then send that file to your teacher. The text file button does the same job if you prefer to paste the answers into a message.</p>
+      <input class="input" id="studentName" placeholder="Your name (it goes on the sheet)" autocomplete="name" style="margin-bottom:12px">
+      <div class="row">
+        <button class="btn accent" id="makePdf" type="button">Save my answers as PDF</button>
+        <button class="btn secondary" id="makeTxt" type="button">Download as text file</button>
+      </div>
+      <div class="feedback" id="exportFeedback" aria-live="polite"></div>
+    </div>
+
+    <div class="result" id="result">Answer the tasks above, then create your answer sheet.</div>
+
+    <details class="card teacher">
+      <summary>Teacher notes · lesson design</summary>
+      <div class="teacher-grid">
+        <div><b>Continuity</b><br>Lesson 8 ran out of time before the reading and the speaking, so both stages are carried over unchanged. Everything before them was rebuilt so that nothing is repeated twice.</div>
+        <div><b>Pre-teaching before reading</b><br>Section 2 front-loads exactly the words that make the text hard (narrow, roofs, lift, broken, screws, delivery, properly, slowly). This is standard practice for lowering the reading load without simplifying the text.</div>
+        <div><b>One new language step</b><br>Linking words are the logical next step after single-sentence grammar: they move the learner from sentence level to discourse level, which the CEFR A2 descriptors ask for in both writing and speaking.</div>
+        <div><b>Retrieval before instruction</b><br>The sprint is timed retrieval of everything from Lessons 4–8; the homework opens with retrieval too. Testing beats re-reading for long-term memory.</div>
+        <div><b>Reading skills ladder</b><br>Gist → detail (T/F/Doesn’t say) → inference → vocabulary in context → evidence in full sentences.</div>
+        <div><b>Seven homework mechanics</b><br>Quiz, word formation, gap-fill with linkers, real-world text comprehension, error correction, guided writing, and spoken production with reflection.</div>
+        <div><b>Assessment for learning</b><br>Objective tasks are auto-marked with retry-friendly hints; the answer sheet shows the teacher both the answer and whether the app accepted it, so feedback time goes to the open tasks.</div>
+        <div><b>Learner autonomy</b><br>The reflection box (H7) makes the student name their own difficulty — the first step of self-regulated learning.</div>
+        <div><b>If time is short</b><br>Keep 1A, 3A–3B, and the full reading. Move section 2C, 3D and the role-play to the next lesson; the homework already recycles them.</div>
+      </div>
+    </details>
+
+    <div class="section-nav"><button class="btn secondary" data-go="4" type="button">← Speaking</button><button class="btn primary" data-go="0" type="button">Back to the sprint ↺</button></div>
+  </section>
+</main>
+
+<div id="answerSheet" aria-hidden="true"></div>
+
+<script>
+(() => {
+  'use strict';
+  const STORAGE_KEY = 'masha-lesson-9-fourth-floor-v1';
+  const TABS = 6;
+  const state = {xp:0, scored:new Set(), done:new Set()};
+  const $ = (id) => document.getElementById(id);
+  const all = (sel, root=document) => [...root.querySelectorAll(sel)];
+  const norm = (s) => (s||'').toLowerCase().trim().replace(/[’`]/g,"'").replace(/[.,!?;:]/g,'').replace(/\s+/g,' ');
+  const shuffled = (arr) => [...arr].sort(() => Math.random()-.5);
+  const esc = (s) => String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+  /* ---------- progress ---------- */
+  function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({xp:state.xp,scored:[...state.scored],done:[...state.done]}));}catch(e){}}
+  function load(){try{const s=JSON.parse(localStorage.getItem(STORAGE_KEY));if(s){state.xp=Number(s.xp)||0;state.scored=new Set(s.scored||[]);state.done=new Set(s.done||[]);}}catch(e){}renderProgress();}
+  function renderProgress(){
+    $('xp').textContent=state.xp;
+    const pct=Math.round(state.done.size/TABS*100);
+    $('progressText').textContent=pct+'%';$('progressFill').style.width=pct+'%';
+    all('.tab').forEach((t,i)=>t.classList.toggle('done',state.done.has(i)));
+  }
+  function award(points,key,section){
+    if(!state.scored.has(key)){state.scored.add(key);state.xp+=points;}
+    if(Number.isInteger(section))state.done.add(section);
+    renderProgress();save();
+  }
+  function showFeedback(id,type,text){const el=$(id);el.className='feedback show '+type;el.textContent=text;}
+  function goTab(i){
+    all('.tab').forEach((t,n)=>t.setAttribute('aria-selected',String(n===i)));
+    all('.section').forEach((s,n)=>{s.classList.toggle('active',n===i);s.hidden=n!==i;});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  all('.tab').forEach(t=>t.addEventListener('click',()=>goTab(Number(t.dataset.tab))));
+  all('[data-go]').forEach(b=>b.addEventListener('click',()=>goTab(Number(b.dataset.go))));
+  all('.speaking-complete').forEach(btn=>btn.addEventListener('click',()=>{
+    award(Number(btn.dataset.xp),btn.dataset.key,Number(btn.dataset.section));
+    btn.disabled=true;btn.textContent='Completed ✓';
+  }));
+  $('resetBtn').addEventListener('click',()=>{try{localStorage.removeItem(STORAGE_KEY);}catch(e){}location.reload();});
+
+  /* ---------- generic builders ---------- */
+  function buildMC(id,data,points,prefix,section){
+    const box=$(id);
+    data.forEach((q,qi)=>{
+      const task=document.createElement('div');task.className='task';
+      task.innerHTML=`<p class="question">${qi+1}. ${q.q}</p><div class="choices">${q.options.map((o,oi)=>`<button class="choice" type="button" data-option="${oi}">${o}</button>`).join('')}</div><div class="feedback" id="${id}Fb${qi}" aria-live="polite"></div>`;
+      box.appendChild(task);
+      all('.choice',task).forEach(btn=>btn.addEventListener('click',()=>{
+        const chosen=Number(btn.dataset.option);
+        all('.choice',task).forEach(x=>x.classList.remove('wrong'));
+        if(chosen===q.answer){
+          btn.classList.add('correct');
+          all('.choice',task).forEach(x=>x.disabled=true);
+          showFeedback(`${id}Fb${qi}`,'good',`Correct. ${q.explain||''} +${points} XP`);
+          award(points,prefix+qi,section);
+        }else{
+          btn.classList.add('wrong');
+          showFeedback(`${id}Fb${qi}`,'try',q.hint||'Not yet. Read the whole sentence again and try the other answer.');
+        }
+      }));
+    });
+  }
+
+  function buildTyped(id,data,points,prefix,section){
+    const box=$(id);
+    data.forEach((t,i)=>{
+      const task=document.createElement('div');task.className='task';
+      task.innerHTML=`<p class="question">${i+1}. ${t.q}</p>${t.extra||''}<div class="inline-check"><input class="input" id="${id}In${i}" placeholder="${t.ph||'Type your answer'}" autocomplete="off" spellcheck="false"><button class="btn primary small-btn" type="button">Check</button></div><div class="feedback" id="${id}Fb${i}" aria-live="polite"></div>`;
+      box.appendChild(task);
+      const input=task.querySelector('input');
+      const check=()=>{
+        const v=norm(input.value);
+        if(!v){showFeedback(`${id}Fb${i}`,'info','Write your answer first.');return;}
+        if(t.a.some(x=>norm(x)===v)){
+          showFeedback(`${id}Fb${i}`,'good',`Correct: ${t.show||(t.a[0]+'.')} +${points} XP`);
+          award(points,prefix+i,section);
+        }else{
+          showFeedback(`${id}Fb${i}`,'try',t.hint||'Not yet. Check your spelling and the word order, then try again.');
+        }
+      };
+      task.querySelector('button').addEventListener('click',check);
+      input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();check();}});
+    });
+  }
+
+  /* ---------- 1A · VOCABULARY SPRINT ---------- */
+  const sprintItems=[
+    {q:'You keep your clothes in it.',a:'a wardrobe',opts:['a wardrobe','a bookshelf','an entrance','a forecast']},
+    {q:'The room where you cook.',a:'the kitchen',opts:['the kitchen','the bedroom','the entrance','the exhibition']},
+    {q:'You buy the food you need for the week.',a:'do the shopping',opts:['do the shopping','tidy up','book tickets','go for a walk']},
+    {q:'You make a place clean and neat.',a:'tidy up',opts:['tidy up','wake up','get dressed','take the bus']},
+    {q:'You reserve places online before a show.',a:'book tickets',opts:['book tickets','cook dinner','do the shopping','meet friends']},
+    {q:'You walk in the park just for pleasure.',a:'go for a walk',opts:['go for a walk','go ice skating','tidy up','wake up']},
+    {q:'The way into a building.',a:'the entrance',opts:['the entrance','the forecast','the wardrobe','the bookshelf']},
+    {q:'It tells you if it is going to rain tomorrow.',a:'the forecast',opts:['the forecast','the entrance','the exhibition','the kitchen']},
+    {q:'A place where you go to see art or photos.',a:'an exhibition',opts:['an exhibition','a bookshelf','a forecast','a wardrobe']},
+    {q:'You stop sleeping in the morning.',a:'wake up',opts:['wake up','tidy up','get dressed','relax']},
+    {q:'The plant is ___ the sofa and the shelf.',a:'between',opts:['between','under','on','in front of']},
+    {q:'The cat is sleeping ___ the bed.',a:'under',opts:['under','between','next to','on']}
+  ];
+  let spOrder=[],spIdx=0,spScore=0,spStreak=0,spBest=0,spMissed=[],spTime=60,spInt=null,spRunning=false;
+  function sprintRender(){
+    const item=spOrder[spIdx];
+    $('sprintQ').innerHTML=`<span class="small" style="display:block;font-weight:700">Word ${spIdx+1} of ${spOrder.length}</span>${item.q}`;
+    const opts=shuffled(item.opts);
+    $('sprintOpts').innerHTML=opts.map(o=>`<button class="choice" type="button" data-o="${esc(o)}">${o}</button>`).join('');
+    all('.choice',$('sprintOpts')).forEach(b=>b.addEventListener('click',()=>sprintAnswer(b,item)));
+  }
+  function sprintAnswer(btn,item){
+    if(!spRunning)return;
+    all('.choice',$('sprintOpts')).forEach(b=>b.disabled=true);
+    if(btn.dataset.o===item.a){
+      btn.classList.add('correct');spScore++;spStreak++;spBest=Math.max(spBest,spStreak);
+    }else{
+      btn.classList.add('wrong');spStreak=0;spMissed.push(item);
+      const right=all('.choice',$('sprintOpts')).find(b=>b.dataset.o===item.a);
+      if(right)right.classList.add('correct');
+    }
+    $('sprintScore').textContent=spScore;$('sprintStreak').textContent=spStreak;
+    setTimeout(()=>{
+      if(!spRunning)return;
+      spIdx++;
+      if(spIdx>=spOrder.length)sprintFinish('You finished all 12 words');
+      else sprintRender();
+    },520);
+  }
+  function sprintTick(){
+    spTime--;
+    $('sprintTime').textContent=Math.max(spTime,0);
+    $('sprintFill').style.width=Math.max(spTime,0)/60*100+'%';
+    $('sprintFill').classList.toggle('low',spTime<=15);
+    if(spTime<=0)sprintFinish('Time is up');
+  }
+  function sprintFinish(reason){
+    spRunning=false;clearInterval(spInt);spInt=null;
+    all('.choice',$('sprintOpts')).forEach(b=>b.disabled=true);
+    $('sprintQ').innerHTML='<span class="small" style="display:block;font-weight:700">Sprint finished</span>Read the words you missed aloud, then play again.';
+    $('sprintStart').disabled=false;$('sprintStart').textContent='Play again';
+    const missed=spMissed.length?`<div class="sprint-miss">Words to review: ${spMissed.map(m=>`<b>${esc(m.a)}</b>`).join(' · ')}</div>`:'<div class="sprint-miss">Nothing to review — every answer was correct.</div>';
+    const el=$('sprintResult');
+    el.className='feedback show '+(spScore>=9?'good':'try');
+    el.innerHTML=`${reason}. Score: <b>${spScore}/${spOrder.length}</b> · best streak: <b>${spBest}</b> · time left: <b>${Math.max(spTime,0)}s</b>. +15 XP${missed}`;
+    award(15,'sprint',0);
+  }
+  $('sprintStart').addEventListener('click',()=>{
+    spOrder=shuffled(sprintItems);spIdx=0;spScore=0;spStreak=0;spBest=0;spMissed=[];spTime=60;spRunning=true;
+    $('sprintScore').textContent='0';$('sprintStreak').textContent='0';$('sprintTime').textContent='60';
+    $('sprintFill').style.width='100%';$('sprintFill').classList.remove('low');
+    $('sprintResult').className='feedback';$('sprintResult').innerHTML='';
+    $('sprintStart').disabled=true;$('sprintStart').textContent='Sprint running…';
+    sprintRender();
+    clearInterval(spInt);spInt=setInterval(sprintTick,1000);
+  });
+
+  /* ---------- 1B · VERB COLLOCATIONS ---------- */
+  buildMC('verbMC',[
+    {q:'___ the shopping',options:['do','make','take'],answer:0,explain:'We do the shopping, the washing and the homework.'},
+    {q:'___ breakfast',options:['have','do','put'],answer:0,explain:'have breakfast / lunch / dinner.'},
+    {q:'___ the bus to work',options:['take','go','make'],answer:0,explain:'take the bus / the train / a taxi.'},
+    {q:'___ for a walk',options:['go','make','have'],answer:0,explain:'go for a walk / for a run / for a coffee.'},
+    {q:'___ tickets online',options:['book','make','put'],answer:0,explain:'We book tickets and a table.'},
+    {q:'___ friends at the weekend',options:['meet','do','take'],answer:0,explain:'meet friends / meet at the entrance.'}
+  ],4,'verb',0);
+
+  /* ---------- 2 · WORDS ---------- */
+  buildTyped('adverbTyped',[
+    {q:'quick → She cooks something ___ after work.',a:['quickly'],ph:'one word',hint:'Just add -ly.'},
+    {q:'slow → The grey walls are ___ turning yellow.',a:['slowly'],ph:'one word',hint:'Just add -ly.'},
+    {q:'proper → One door doesn’t close ___ .',a:['properly'],ph:'one word',hint:'proper + ly, with a double letter in the middle.'},
+    {q:'easy → Emma found the flat very ___ .',a:['easily'],ph:'one word',hint:'The word ends in -y, so change the -y to -i first.'},
+    {q:'quiet → Max works ___ , so nobody hears him.',a:['quietly'],ph:'one word',hint:'quiet + ly. Do not remove the -t.'}
+  ],4,'adverb',1);
+
+  buildMC('newWordsMC',[
+    {q:'The corridor is very ___ — two people can’t walk side by side.',options:['narrow','bright','busy'],answer:0,explain:'narrow = not wide.'},
+    {q:'From the top floor you can see the ___ of all the houses.',options:['roofs','stairs','windows'],answer:0,explain:'The roof is the top of a building.'},
+    {q:'Our ___ is out of order, so we have to use the stairs.',options:['lift','entrance','kitchen'],answer:0,explain:'A lift takes people up and down inside a building.'},
+    {q:'The washing machine is ___ , so I wash everything by hand.',options:['broken','narrow','quiet'],answer:0,explain:'broken = not working.'},
+    {q:'He needs a screwdriver and some ___ to put up the shelf.',options:['screws','boxes','photos'],answer:0,explain:'Screws hold the shelf on the wall.'},
+    {q:'We ordered pizza; the ___ usually takes about thirty minutes.',options:['delivery','forecast','entrance'],answer:0,explain:'delivery = bringing the food to your door.'}
+  ],4,'newWord',1);
+
+  buildTyped('oppositeTyped',[
+    {q:'narrow ↔ ___ (a wide street)',a:['wide','broad'],ph:'one word',hint:'A big road is not narrow, it is w___.'},
+    {q:'broken ↔ ___ (the lift is fine again)',a:['working','fixed','repaired'],ph:'one word',hint:'The engineer came, so now the lift is w___.'},
+    {q:'early ↔ ___ (she gets home at 9 p.m.)',a:['late'],ph:'one word',hint:'The opposite of early in the day.'},
+    {q:'indoors ↔ ___ (the party is in the garden)',a:['outdoors','outside'],ph:'one word',hint:'Not inside the building.'},
+    {q:'quick ↔ ___ (a long, calm dinner)',a:['slow'],ph:'one word',hint:'The opposite of fast.'}
+  ],4,'opposite',1);
+
+  /* ---------- 3 · LINKING WORDS ---------- */
+  buildMC('linkerMC',[
+    {q:'Emma is painting the walls ___ the old colour is grey and sad.',options:['because','so'],answer:0,explain:'The second part is the reason, so we use because.'},
+    {q:'The lift is broken, ___ everybody is going to use the stairs.',options:['so','because'],answer:0,explain:'The second part is the result, so we use so.'},
+    {q:'The rooms are small, ___ they are full of light.',options:['but','so'],answer:0,explain:'Small + full of light is a surprise, so we use but.'},
+    {q:'___ the kitchen is full of boxes, Emma is going to order pizza.',options:['Because','But'],answer:0,explain:'A sentence can start with Because + reason, then the result.'},
+    {q:'Max is putting up a shelf, ___ he is using the wrong screws.',options:['but','because'],answer:0,explain:'The second part is surprising, not a reason.'},
+    {q:'___ Emma is tired, she is going to have a party on Sunday.',options:['Although','Because'],answer:0,explain:'“Because Emma is tired” would explain nothing here — the two facts are in contrast.'}
+  ],4,'linker',2);
+
+  buildTyped('joinTyped',[
+    {q:'It is raining. + The party is indoors. <b>(but)</b>',a:['it is raining but the party is indoors','it’s raining but the party is indoors'],show:'It is raining, but the party is indoors.',ph:'Write one sentence',hint:'Keep the order of the two halves and put but in the middle.'},
+    {q:'The lift is broken. + Everybody is going to use the stairs. <b>(so)</b>',a:['the lift is broken so everybody is going to use the stairs'],show:'The lift is broken, so everybody is going to use the stairs.',ph:'Write one sentence',hint:'so comes before the result.'},
+    {q:'Emma isn’t going to cook. + The kitchen is full of boxes. <b>(because)</b>',a:['emma isn’t going to cook because the kitchen is full of boxes','emma is not going to cook because the kitchen is full of boxes'],show:'Emma isn’t going to cook because the kitchen is full of boxes.',ph:'Write one sentence',hint:'because comes before the reason — no comma is needed.'},
+    {q:'The flat is small. + Emma loves it. <b>(although)</b>',a:['although the flat is small emma loves it','emma loves the flat although it is small','emma loves it although the flat is small'],show:'Although the flat is small, Emma loves it.',ph:'Write one sentence',hint:'Start with Although + the surprising fact, then a comma and the main idea.'}
+  ],6,'join',2);
+
+  buildTyped('linkerFixTyped',[
+    {q:'✗ The lift is broken, <b>but</b> we are going to use the stairs.',a:['so'],ph:'one word',hint:'Using the stairs is the result of the broken lift.'},
+    {q:'✗ Emma isn’t going to cook, <b>although</b> the kitchen is full of boxes.',a:['because'],ph:'one word',hint:'The boxes are the reason, not a surprise.'},
+    {q:'✗ The rooms are small, <b>so</b> they are full of light.',a:['but'],ph:'one word',hint:'Light is not the result of small rooms — it is a contrast.'},
+    {q:'✗ <b>Because</b> the flat is small, Emma loves it.',a:['although'],ph:'one word',hint:'She loves it in spite of the size, not because of it.'}
+  ],5,'linkerFix',2);
+
+  /* ---------- 4 · READING (carried over from Lesson 8) ---------- */
+  buildMC('gistMC',[
+    {q:'Which sentence gives the main idea of the whole text?',options:[
+      'Emma’s new flat is small and not perfect, but it is becoming her home.',
+      'Emma is unhappy in her new flat and wants to move again.',
+      'Emma explains how to organise a party for nine people.'
+    ],answer:0,explain:'The flat is old, small and half-finished, but every paragraph shows her building a life in it.',hint:'Not yet. Think about the whole text, not one paragraph.'},
+    {q:'Which paragraph describes things happening at this moment?',options:['Paragraph 3','Paragraph 2','Paragraph 4'],answer:0,explain:'Paragraph 3 uses Present Continuous: she is standing, Max is putting up a shelf.',hint:'Look for “Right now” and verbs with -ing.'},
+    {q:'How does Emma feel about the flat?',options:[
+      'Happy, although some things in it are old or broken.',
+      'Disappointed, because the rooms are too small.',
+      'Nervous, because she doesn’t know her neighbours.'
+    ],answer:0,explain:'She keeps the broken wardrobe, has a favourite corner, and wants to be nowhere else on Sunday.',hint:'Look at the last line of paragraph 1 and the last line of the text.'}
+  ],5,'gist',3);
+
+  buildMC('tfndMC',[
+    {q:'There is a window in Emma’s kitchen.',options:['True','False','Doesn’t say'],answer:0,explain:'“…a narrow kitchen with a window that looks over the roofs.”'},
+    {q:'Emma bought the wardrobe for her new flat.',options:['True','False','Doesn’t say'],answer:1,explain:'The old owner left it behind — it is the only furniture she didn’t pay for.'},
+    {q:'Emma’s flat is on the top floor of the building.',options:['True','False','Doesn’t say'],answer:2,explain:'We know it is on the fourth floor, but the text never says how many floors the building has.',hint:'Careful: the text gives a floor number, but not the size of the building.'},
+    {q:'Max is putting up the shelf correctly.',options:['True','False','Doesn’t say'],answer:1,explain:'He is using the wrong screws — the others just say nothing.'},
+    {q:'Emma meets Kate in the park on Saturday mornings.',options:['True','False','Doesn’t say'],answer:0,explain:'Paragraph 2: “Saturday is different: she does the shopping early and then meets her friend Kate in the park.”'},
+    {q:'Emma’s neighbours are going to come to the party.',options:['True','False','Doesn’t say'],answer:2,explain:'Nine friends are coming, but the text says nothing about the neighbours.'},
+    {q:'Emma is worried about the weather on Sunday.',options:['True','False','Doesn’t say'],answer:1,explain:'“The forecast says rain, but nobody minds: the party is indoors.”'}
+  ],4,'tfnd',3);
+
+  buildMC('inferenceMC',[
+    {q:'“…with the wrong screws, but nobody is telling him.” Why is nobody telling Max?',options:[
+      'They don’t want to upset him, because he is helping.',
+      'They can’t see what he is doing.'
+    ],answer:0,explain:'It is a friendly, funny detail: the help matters more than the shelf.',hint:'Think about how you speak to someone who is helping you for free.'},
+    {q:'“Kate is cleaning windows that nobody cleaned for years.” What does this tell us about the flat?',options:[
+      'It was empty or badly looked after before Emma moved in.',
+      'Kate cleans the windows every week.'
+    ],answer:0,explain:'“Nobody cleaned them for years” describes the flat’s past, not Kate’s habit.',hint:'Who cleaned the windows before? Nobody — for a long time.'},
+    {q:'“…the delivery man is not going to enjoy the stairs.” Why does the writer say this?',options:[
+      'It is a joke: the lift is broken and the flat is on the fourth floor.',
+      'The delivery man is ill and cannot walk.'
+    ],answer:0,explain:'The writer connects two facts from the same sentence: the broken lift and the pizza.',hint:'Read the sentence about the lift again.'},
+    {q:'“…there is nowhere else Emma wants to be on Sunday evening.” What does this suggest?',options:[
+      'She is happy in her new home with her friends around her.',
+      'She is too tired to go anywhere.'
+    ],answer:0,explain:'It is the writer’s way of ending the text on a warm, positive note.',hint:'Is this sentence positive or negative?'}
+  ],5,'inference',3);
+
+  buildTyped('contextTyped',[
+    {q:'not wide (paragraph 1)',a:['narrow'],ph:'one word from the text',hint:'It describes the kitchen.'},
+    {q:'did not take it away when he moved out (paragraph 1)',a:['left it behind','left behind'],ph:'two or three words',hint:'“…a tall wardrobe that the old owner …”'},
+    {q:'the tops of the buildings (paragraph 1)',a:['roofs','the roofs'],ph:'one word from the text',hint:'The kitchen window looks over them.'},
+    {q:'the machine that takes people up and down inside a building (paragraph 4)',a:['lift','the lift'],ph:'one word from the text',hint:'It is broken, and that is the problem.'},
+    {q:'not working (paragraph 4)',a:['broken'],ph:'one word from the text',hint:'The lift is …'}
+  ],5,'context',3);
+
+  buildTyped('evidenceTyped',[
+    {q:'Where exactly is Emma’s bed?',a:['it is under the window','under the window','the bed is under the window','it’s under the window'],show:'It is under the window.',ph:'Answer in a full sentence',hint:'Read paragraph 1 again: “a bed … the window”.'},
+    {q:'Why doesn’t Emma want to throw the old wardrobe away?',a:['because it is the only piece of furniture she didn’t pay for','because it is the only piece of furniture she did not pay for','because she didn’t pay for it','because it was free','because it is free'],show:'Because it is the only piece of furniture she didn’t pay for.',ph:'Start with “Because…”',hint:'Paragraph 1 explains it after the dash (—).'},
+    {q:'What is Emma doing right now?',a:['she is painting the walls','she is painting the walls yellow','she’s painting the walls','she’s painting the walls yellow'],show:'She is painting the walls (yellow).',ph:'Answer in a full sentence',hint:'Paragraph 3: she has a paintbrush and the walls are turning yellow.'},
+    {q:'Why is the broken lift a problem for the party?',a:['because the flat is on the fourth floor','because the flat is on the fourth floor and the guests must walk','the flat is on the fourth floor'],show:'Because the flat is on the fourth floor.',ph:'Start with “Because…”',hint:'How are nine friends and the pizza going to get up?'},
+    {q:'Why isn’t Emma going to cook?',a:['because the kitchen is full of boxes','because the kitchen is still full of boxes','the kitchen is full of boxes'],show:'Because the kitchen is still full of boxes.',ph:'Start with “Because…”',hint:'Paragraph 4 gives the reason after “because”.'}
+  ],5,'evidence',3);
+
+  /* ---------- 5 · TIMERS ---------- */
+  function setupTimer(displayId,startId,resetId,seconds,key,section,points){
+    let int=null;
+    const display=$(displayId);
+    const stop=()=>{if(int){clearInterval(int);int=null;}};
+    $(startId).addEventListener('click',()=>{
+      stop();let n=seconds;display.className='timer running';display.textContent=n;
+      int=setInterval(()=>{
+        n--;display.textContent=n;
+        if(n<=0){stop();display.className='timer finished';display.textContent='✓';award(points,key,section);}
+      },1000);
+    });
+    $(resetId).addEventListener('click',()=>{stop();display.className='timer';display.textContent=seconds;});
+  }
+  setupTimer('timer','timerStart','timerReset',90,'speakTimer',4,12);
+  setupTimer('hwTimer','hwTimerStart','hwTimerReset',60,'hwTimer',5,8);
+
+  /* ---------- 6 · HOMEWORK ---------- */
+  buildMC('hwQuizMC',[
+    {q:'There ___ three photos on the bookshelf.',options:['are','is'],answer:0,explain:'Three photos are plural.'},
+    {q:'We ___ ice skating on Saturday. It is already decided.',options:['are going to go','go'],answer:0,explain:'A decided plan → be going to.'},
+    {q:'Listen! Somebody ___ up the stairs.',options:['is walking','walks'],answer:0,explain:'It is happening at this moment.'},
+    {q:'Emma ___ the number 12 bus to work every day.',options:['takes','is taking'],answer:0,explain:'“Every day” → routine.'},
+    {q:'The cat always sleeps ___ my bed.',options:['under','between'],answer:0,explain:'Under = below something.'},
+    {q:'Which question is correct?',options:['Is there a lift in the building?','Are there a lift in the building?'],answer:0,explain:'One lift → Is there…?'}
+  ],4,'hwQuiz',5);
+
+  buildTyped('hwFormsTyped',[
+    {q:'careful → Please drive ___ .',a:['carefully'],ph:'the adverb'},
+    {q:'bad → He plays the guitar very ___ .',a:['badly'],ph:'the adverb'},
+    {q:'happy → She smiled ___ at the camera.',a:['happily'],ph:'the adverb',hint:'The word ends in -y: change the -y to -i, then add -ly.'},
+    {q:'Write the opposite: <b>narrow</b> ↔ ___',a:['wide','broad'],ph:'one word'},
+    {q:'Write the opposite: <b>broken</b> ↔ ___',a:['working','fixed','repaired'],ph:'one word'}
+  ],4,'hwForms',5);
+
+  buildTyped('hwLinkerTyped',[
+    {q:'We can’t use the lift, ___ we are going to walk up the stairs.',a:['so'],ph:'one word'},
+    {q:'___ the flat is small, Emma loves it.',a:['although'],ph:'one word',hint:'This word starts the sentence and shows a contrast.'},
+    {q:'She isn’t going to cook ___ the kitchen is full of boxes.',a:['because'],ph:'one word'},
+    {q:'The forecast says rain, ___ nobody minds.',a:['but'],ph:'one word'}
+  ],4,'hwLinker',5);
+
+  buildMC('hwNoticeMC',[
+    {q:'The lift is going to work on Sunday.',options:['True','False','Doesn’t say'],answer:1,explain:'“The lift is not going to work this weekend.”'},
+    {q:'An engineer is going to come on Monday morning.',options:['True','False','Doesn’t say'],answer:0,explain:'It is in the second paragraph of the notice.'},
+    {q:'The back door is locked after six o’clock in the evening.',options:['True','False','Doesn’t say'],answer:0,explain:'18:00 is six o’clock in the evening.'},
+    {q:'Mr Novak lives on the second floor.',options:['True','False','Doesn’t say'],answer:2,explain:'He is in flat 2 — the notice never says which floor that is.',hint:'Careful: a flat number is not a floor number.'},
+    {q:'The residents have to pay for the repair.',options:['True','False','Doesn’t say'],answer:2,explain:'The notice says nothing about money.'}
+  ],4,'hwNotice',5);
+
+  buildTyped('hwErrorTyped',[
+    {q:'✗ There is two lifts in this building.',a:['there are two lifts in this building'],show:'There are two lifts in this building.',ph:'Write the correct sentence',hint:'Two lifts are plural.'},
+    {q:'✗ Emma is go to order pizza.',a:['emma is going to order pizza'],show:'Emma is going to order pizza.',ph:'Write the correct sentence',hint:'The structure is be + going to + verb.'},
+    {q:'✗ My brother put up a shelf every weekend.',a:['my brother puts up a shelf every weekend'],show:'My brother puts up a shelf every weekend.',ph:'Write the correct sentence',hint:'He/she/it needs -s in Present Simple.'},
+    {q:'✗ The cat is sleep under the bed now.',a:['the cat is sleeping under the bed now'],show:'The cat is sleeping under the bed now.',ph:'Write the correct sentence',hint:'am/is/are + verb-ing.'}
+  ],5,'hwError',5);
+
+  const hwArea=$('hwWriting');
+  const hwCount=()=>{$('hwWordCount').textContent=hwArea.value.trim().split(/\s+/).filter(Boolean).length;};
+  hwArea.addEventListener('input',hwCount);hwCount();
+  $('checkHwWriting').addEventListener('click',()=>{
+    const text=hwArea.value.trim();
+    const low=text.toLowerCase().replace(/[’`]/g,"'");
+    const n=text.split(/\s+/).filter(Boolean).length;
+    const checks=[
+      [(low.match(/there (is|are)/g)||[]).length>=2,'two sentences with there is / there are'],
+      [(low.match(/\b(in|on|under|next to|between|in front of)\b/g)||[]).length>=2,'two prepositions of place'],
+      [/\b(usually|every|often|always)\b/.test(low),'a routine word (usually / every)'],
+      [/going to/.test(low),'a plan with going to'],
+      [/\b(because|so|but|although)\b/.test(low),'a linking word']
+    ];
+    const missing=checks.filter(c=>!c[0]).map(c=>c[1]);
+    if(n<70){showFeedback('hwWritingFeedback','info',`You have ${n} words. Write ${70-n} more to reach the target.`);return;}
+    if(n>110){showFeedback('hwWritingFeedback','info',`${n} words is long for a message. Cut it to 70–90 and keep the best sentences.`);return;}
+    if(missing.length){showFeedback('hwWritingFeedback','try',`Good length (${n} words), but still missing: ${missing.join(' · ')}`);return;}
+    const lengthNote=n>90?` It is ${n} words — a little over the 70–90 target, so cut one sentence if you can.`:'';
+    showFeedback('hwWritingFeedback','good',`Every criterion is there.${lengthNote} Now read it once as your own editor: capital letters, full stops, and -s on he/she verbs. +20 XP`);
+    award(20,'hwWriting',5);
+  });
+
+  /* ---------- ANSWER SHEET · PDF / TEXT ---------- */
+  function collectAnswers(){
+    return all('[data-hw]').map(box=>{
+      const items=[];
+      all('.task',box).forEach(task=>{
+        const q=(task.querySelector('.question')||{}).innerText||'';
+        const input=task.querySelector('input.input');
+        const fb=task.querySelector('.feedback');
+        let a='—';
+        if(input){a=input.value.trim()||'—';}
+        else{
+          const chosen=task.querySelector('.choice.correct')||task.querySelector('.choice.wrong');
+          if(chosen)a=chosen.innerText.trim();
+        }
+        let status='not answered';
+        if(a!=='—')status=(fb&&fb.classList.contains('good'))?'correct':'please check';
+        items.push({q:q.trim(),a,status,free:false});
+      });
+      all('textarea[data-label]',box).forEach(ta=>{
+        items.push({q:ta.dataset.label,a:ta.value.trim()||'—',status:'for the teacher',free:true});
+      });
+      return {title:box.dataset.hw,items};
+    });
+  }
+  function answerStats(groups){
+    let auto=0,right=0,blank=0;
+    groups.forEach(g=>g.items.forEach(i=>{
+      if(i.free)return;
+      auto++;
+      if(i.status==='correct')right++;
+      if(i.status==='not answered')blank++;
+    }));
+    return {auto,right,blank};
+  }
+  function buildSheetHTML(){
+    const groups=collectAnswers();
+    const s=answerStats(groups);
+    const name=$('studentName').value.trim()||'(no name)';
+    const date=new Date().toLocaleDateString();
+    const body=groups.map(g=>`<h2>${esc(g.title)}</h2>`+g.items.map(i=>i.free
+      ? `<div class="sheet-item"><div class="sheet-q">${esc(i.q)}</div><div class="sheet-free">${esc(i.a)}</div></div>`
+      : `<div class="sheet-item"><div class="sheet-q">${esc(i.q)}</div><div class="sheet-a">Answer: ${esc(i.a)}<span class="st">${esc(i.status)}</span></div></div>`
+    ).join('')).join('');
+    return `<div class="sheet">
+      <h1>English homework · Lesson 9 · The Fourth Floor</h1>
+      <div class="sheet-meta">Student: <b>${esc(name)}</b> · Date: ${esc(date)} · CEFR A2</div>
+      <div class="sheet-score">Auto-marked tasks: ${s.right} correct out of ${s.auto} · not answered: ${s.blank}. The open tasks (writing, notes, reflection) need the teacher’s feedback.</div>
+      ${body}
+      <div class="sheet-foot">Generated by the lesson page. “Please check” means the answer was typed but the page did not accept it — it may still be right, or nearly right.</div>
+    </div>`;
+  }
+  function sheetText(){
+    const groups=collectAnswers();
+    const s=answerStats(groups);
+    const name=$('studentName').value.trim()||'(no name)';
+    const lines=[`ENGLISH HOMEWORK — LESSON 9 — THE FOURTH FLOOR`,`Student: ${name}`,`Date: ${new Date().toLocaleDateString()}`,
+      `Auto-marked: ${s.right}/${s.auto} correct, ${s.blank} not answered`,''];
+    groups.forEach(g=>{
+      lines.push('== '+g.title+' ==');
+      g.items.forEach(i=>{lines.push(i.q);lines.push('   > '+i.a+'   ['+i.status+']');});
+      lines.push('');
+    });
+    return lines.join('\n');
+  }
+  function refreshResult(){
+    const s=answerStats(collectAnswers());
+    $('result').textContent=`Homework so far: ${s.right} of ${s.auto} auto-marked answers correct · ${s.blank} still empty · ${state.xp} XP in the lesson.`;
+  }
+  $('makePdf').addEventListener('click',()=>{
+    const sheet=$('answerSheet');
+    sheet.innerHTML=buildSheetHTML();
+    refreshResult();
+    document.body.classList.add('printing');
+    showFeedback('exportFeedback','info','The print window is opening. Choose “Save as PDF” as the printer, save the file, and send it to your teacher.');
+    const cleanup=()=>{document.body.classList.remove('printing');window.removeEventListener('afterprint',cleanup);};
+    window.addEventListener('afterprint',cleanup);
+    setTimeout(()=>{window.print();setTimeout(cleanup,1500);},60);
+  });
+  $('makeTxt').addEventListener('click',()=>{
+    refreshResult();
+    const name=($('studentName').value.trim()||'student').replace(/[^\w\-]+/g,'_');
+    const blob=new Blob([sheetText()],{type:'text/plain;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=`English_Lesson9_homework_${name}.txt`;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    showFeedback('exportFeedback','good','The text file is in your Downloads folder. You can send it to your teacher or paste it into a message.');
+  });
+
+  load();
+  refreshResult();
+})();
+</script>
+</body>
+</html>
