@@ -145,9 +145,9 @@
 <header class="hero">
   <div class="hero-inner">
     <div>
-      <div class="eyebrow">Lesson 9 · continues Lesson 8 · CEFR A2 · 60 minutes · no listening</div>
+      <div class="eyebrow">Lesson 9 · continues Lesson 8 · CEFR A2 · 65–70 minutes · no listening</div>
       <h1>The Fourth<br>Floor</h1>
-      <p>Vocabulary sprint · words from the text · adverbs · because / so / but / although · reading · speaking · homework you can send as a PDF</p>
+      <p>Vocabulary sprint · words from the text · adverbs · because / so / but / although · reading · syllables, stress &amp; silent letters · speaking · homework you can send as a PDF</p>
     </div>
     <div class="hero-side" aria-label="Lesson progress">
       <div class="progress-line"><span>Lesson progress</span><span id="progressText">0%</span></div>
@@ -163,8 +163,9 @@
     <button class="tab" role="tab" aria-selected="false" data-tab="1"><span class="n">2</span>Words</button>
     <button class="tab" role="tab" aria-selected="false" data-tab="2"><span class="n">3</span>Linking</button>
     <button class="tab" role="tab" aria-selected="false" data-tab="3"><span class="n">4</span>Reading</button>
-    <button class="tab" role="tab" aria-selected="false" data-tab="4"><span class="n">5</span>Speaking</button>
-    <button class="tab" role="tab" aria-selected="false" data-tab="5"><span class="n">6</span>Homework</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="4"><span class="n">5</span>Sounds</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="5"><span class="n">6</span>Speaking</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="6"><span class="n">7</span>Homework</button>
   </nav>
 </div>
 
@@ -301,23 +302,61 @@
 
     <div class="card"><div class="kicker">4G · Find the evidence · full answers</div><div id="evidenceTyped"></div></div>
 
-    <div class="section-nav"><button class="btn secondary" data-go="2" type="button">← Linking</button><button class="btn primary" data-go="4" type="button">Speaking →</button></div>
+    <div class="section-nav"><button class="btn secondary" data-go="2" type="button">← Linking</button><button class="btn primary" data-go="4" type="button">Sounds →</button></div>
   </section>
 
-  <!-- 5 · SPEAKING (carried over from Lesson 8) -->
+  <!-- 5 · PRONUNCIATION -->
   <section class="section" id="section-4" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Pronunciation lab</h2><p class="lead">You have read these words — now say them. There is no audio here: everything on this page you can see with your eyes and feel in your mouth. Syllables, stress and silent letters are the three things that make an A2 speaker easy or hard to understand.</p></div><span class="time">⏱ 7 min</span></div>
+
+    <div class="card">
+      <div class="kicker">5A · Count the syllables</div>
+      <div class="notice" style="margin-top:0;margin-bottom:16px"><b>How to count:</b> put your hand under your chin and say the word. Every time your chin goes down, that is one syllable. <i>kitch-en</i> = 2 · <i>de-liv-er-y</i> = 4.</div>
+      <div id="syllableTyped"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">5B · Where is the stress?</div>
+      <p class="small" style="margin:-6px 0 14px">One syllable in every English word is longer and louder. Choose the version that sounds right, then say the word twice — the wrong way first, so you can hear the difference.</p>
+      <div id="stressMC"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">5C · The letter you do not say</div>
+      <p class="small" style="margin:-6px 0 14px">English keeps letters it does not pronounce. Write the silent letter — one letter only.</p>
+      <div id="silentTyped"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">5D · Read it aloud · stress in a whole sentence</div>
+      <p class="small" style="margin:-6px 0 14px">In a sentence we stress the words that carry the meaning (nouns, main verbs, adjectives) and we say the small words quickly. Read each line aloud three times — the <b>bold</b> parts are the loud ones.</p>
+      <div class="grid2">
+        <div class="rule r1"><div class="example">There is a <b>BED</b> under the <b>WIN</b>dow.</div></div>
+        <div class="rule r2"><div class="example">She is <b>PAINT</b>ing the <b>WALLS</b> <b>YEL</b>low.</div></div>
+        <div class="rule r3"><div class="example">The <b>LIFT</b> is <b>BRO</b>ken, so we <b>WALK</b>.</div></div>
+        <div class="rule"><div class="example">I’m <b>GO</b>ing to <b>OR</b>der a <b>PIZ</b>za.</div></div>
+      </div>
+      <div class="notice"><b>Listen to yourself:</b> <i>is a</i>, <i>to</i>, <i>so we</i> should be short and quiet. If every word is equally loud, English sounds robotic.</div>
+      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="readAloud" data-section="4" data-xp="8" type="button">I read all four lines aloud ✓</button>
+    </div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="3" type="button">← Reading</button><button class="btn primary" data-go="5" type="button">Speaking →</button></div>
+  </section>
+
+  <!-- 6 · SPEAKING (carried over from Lesson 8) -->
+  <section class="section" id="section-5" role="tabpanel" hidden>
     <div class="section-head"><div><h2>Speaking studio</h2><p class="lead">Three tasks: explain words, describe with detail, and interact with a partner. Full sentences matter more than speed — and if you forget a word, define it instead of stopping.</p></div><span class="time">⏱ 13 min</span></div>
 
     <div class="card">
-      <div class="kicker">5A · Explain it, don’t say it · game</div>
+      <div class="kicker">6A · Explain it, don’t say it · game</div>
       <p class="question">Your partner (or teacher) closes their eyes. Take a word and describe it in English until they guess it. You may not say the word or translate it.</p>
       <div><span class="chip">wardrobe</span><span class="chip">kitchen</span><span class="chip">to tidy up</span><span class="chip">the entrance</span><span class="chip">an exhibition</span><span class="chip">the forecast</span><span class="chip">a bookshelf</span><span class="chip">to book tickets</span></div>
       <div class="notice"><b>Useful language:</b> It is a place where… · It is a thing you use to… · You do it when… · It is usually in the… · It is the opposite of…</div>
-      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="explainGame" data-section="4" data-xp="10" type="button">We guessed 5 words ✓</button>
+      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="explainGame" data-section="5" data-xp="10" type="button">We guessed 5 words ✓</button>
     </div>
 
     <div class="speak">
-      <div class="kicker">5B · 90-second studio challenge</div>
+      <div class="kicker">6B · 90-second studio challenge</div>
       <h3>Describe your home, then your weekend. Use all four structures: <i>there is / there are</i>, a preposition, a routine, something happening now, and a Sunday plan.</h3>
       <span class="chip">In my room there is…</span><span class="chip">next to / between / under</span><span class="chip">I usually…</span><span class="chip">Right now…</span><span class="chip">I’m going to…</span>
       <div class="timer" id="timer" aria-live="polite">90</div>
@@ -326,7 +365,7 @@
     </div>
 
     <div class="card">
-      <div class="kicker">5C · Role-play · the housewarming</div>
+      <div class="kicker">6C · Role-play · the housewarming</div>
       <p class="question">Emma’s party is on Sunday. Take a role and agree on one plan together: what to bring, what time to arrive and how to get there.</p>
       <div class="grid2">
         <div class="persona"><b>You are Emma</b>Your kitchen is full of boxes, so you aren’t going to cook. You want help at 6 p.m. and you have a small budget. Suggest food and a time.</div>
@@ -343,14 +382,14 @@
         <label class="check"><input type="checkbox"> I asked a follow-up question.</label>
         <label class="check"><input type="checkbox"> We found one compromise.</label>
       </div>
-      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="rolePlay" data-section="4" data-xp="12" type="button">We agreed on one plan ✓</button>
+      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="rolePlay" data-section="5" data-xp="12" type="button">We agreed on one plan ✓</button>
     </div>
 
-    <div class="section-nav"><button class="btn secondary" data-go="3" type="button">← Reading</button><button class="btn primary" data-go="5" type="button">Homework →</button></div>
+    <div class="section-nav"><button class="btn secondary" data-go="4" type="button">← Sounds</button><button class="btn primary" data-go="6" type="button">Homework →</button></div>
   </section>
 
-  <!-- 6 · HOMEWORK -->
-  <section class="section" id="section-5" role="tabpanel" hidden>
+  <!-- 7 · HOMEWORK -->
+  <section class="section" id="section-6" role="tabpanel" hidden>
     <div class="section-head"><div><h2>Homework you can send</h2><p class="lead">Seven short tasks, seven different mechanics. Answer everything, then press the button at the bottom: the page collects your answers into one clean sheet that you can save as a PDF and send to your teacher.</p></div><span class="time">⏱ 25–30 min</span></div>
 
     <div class="card" data-hw="H1 · Quick quiz">
@@ -451,11 +490,12 @@
         <div><b>Seven homework mechanics</b><br>Quiz, word formation, gap-fill with linkers, real-world text comprehension, error correction, guided writing, and spoken production with reflection.</div>
         <div><b>Assessment for learning</b><br>Objective tasks are auto-marked with retry-friendly hints; the answer sheet shows the teacher both the answer and whether the app accepted it, so feedback time goes to the open tasks.</div>
         <div><b>Learner autonomy</b><br>The reflection box (H7) makes the student name their own difficulty — the first step of self-regulated learning.</div>
-        <div><b>If time is short</b><br>Keep 1A, 3A–3B, and the full reading. Move section 2C, 3D and the role-play to the next lesson; the homework already recycles them.</div>
+        <div><b>Pronunciation without audio</b><br>Syllables, word stress and silent letters are visible, testable features — no recording is needed, which keeps the no-listening rule. The lab sits between reading and speaking so the words are said aloud immediately after they are met on the page.</div>
+        <div><b>If time is short</b><br>The pronunciation lab (section 5) is the first stage to cut — it works just as well at the start of the next lesson. After that: section 2C, 3D and the role-play. Keep 1A, 3A–3B and the full reading; the homework recycles the rest.</div>
       </div>
     </details>
 
-    <div class="section-nav"><button class="btn secondary" data-go="4" type="button">← Speaking</button><button class="btn primary" data-go="0" type="button">Back to the sprint ↺</button></div>
+    <div class="section-nav"><button class="btn secondary" data-go="5" type="button">← Speaking</button><button class="btn primary" data-go="0" type="button">Back to the sprint ↺</button></div>
   </section>
 </main>
 
@@ -464,8 +504,8 @@
 <script>
 (() => {
   'use strict';
-  const STORAGE_KEY = 'masha-lesson-9-fourth-floor-v1';
-  const TABS = 6;
+  const STORAGE_KEY = 'masha-lesson-9-fourth-floor-v2';
+  const TABS = 7;
   const state = {xp:0, scored:new Set(), done:new Set()};
   const $ = (id) => document.getElementById(id);
   const all = (sel, root=document) => [...root.querySelectorAll(sel)];
@@ -735,7 +775,34 @@
     {q:'Why isn’t Emma going to cook?',a:['because the kitchen is full of boxes','because the kitchen is still full of boxes','the kitchen is full of boxes'],show:'Because the kitchen is still full of boxes.',ph:'Start with “Because…”',hint:'Paragraph 4 gives the reason after “because”.'}
   ],5,'evidence',3);
 
-  /* ---------- 5 · TIMERS ---------- */
+  /* ---------- 5 · PRONUNCIATION ---------- */
+  buildTyped('syllableTyped',[
+    {q:'kitchen — how many syllables?',a:['2','two'],ph:'a number',hint:'kitch-en.'},
+    {q:'wardrobe — how many syllables?',a:['2','two'],ph:'a number',hint:'ward-robe.'},
+    {q:'delivery — how many syllables?',a:['4','four'],ph:'a number',hint:'de-liv-er-y.'},
+    {q:'exhibition — how many syllables?',a:['4','four'],ph:'a number',hint:'ex-hi-bi-tion.'},
+    {q:'housewarming — how many syllables?',a:['3','three'],ph:'a number',hint:'house-warm-ing.'},
+    {q:'properly — how many syllables?',a:['3','three'],ph:'a number',hint:'prop-er-ly.'}
+  ],3,'syllable',4);
+
+  buildMC('stressMC',[
+    {q:'wardrobe',options:['WARDrobe','wardROBE'],answer:0,explain:'Most two-syllable nouns take the stress on the first syllable.'},
+    {q:'exhibition',options:['exhiBItion','EXhibition'],answer:0,explain:'Words ending in -tion take the stress on the syllable just before it.'},
+    {q:'delivery',options:['deLIVery','DELivery'],answer:0,explain:'de-LIV-er-y — the second syllable is the long one.'},
+    {q:'entrance',options:['ENtrance','enTRANCE'],answer:0,explain:'The noun is EN-trance.'},
+    {q:'between',options:['beTWEEN','BEtween'],answer:0,explain:'Here the stress is on the second syllable — the opposite of most nouns.'},
+    {q:'housewarming',options:['HOUSEwarming','housewarMING'],answer:0,explain:'In compound nouns the first word carries the stress: HOUSEwarming, BOOKshelf.'}
+  ],3,'stress',4);
+
+  buildTyped('silentTyped',[
+    {q:'exhibition — which letter do you <b>not</b> say?',a:['h'],ph:'one letter',hint:'Say it: ex-i-bi-tion. Which letter disappeared?'},
+    {q:'listen — which letter do you <b>not</b> say?',a:['t'],ph:'one letter',hint:'lis-en.'},
+    {q:'walk — which letter do you <b>not</b> say?',a:['l'],ph:'one letter',hint:'It rhymes with “talk”.'},
+    {q:'cupboard — which letter do you <b>not</b> say?',a:['p'],ph:'one letter',hint:'We say “cubbard”.'},
+    {q:'Wednesday — which letter do you <b>not</b> say?',a:['d'],ph:'one letter',hint:'Two syllables only: Wenz-day.'}
+  ],3,'silent',4);
+
+  /* ---------- 6 · TIMERS ---------- */
   function setupTimer(displayId,startId,resetId,seconds,key,section,points){
     let int=null;
     const display=$(displayId);
@@ -749,10 +816,10 @@
     });
     $(resetId).addEventListener('click',()=>{stop();display.className='timer';display.textContent=seconds;});
   }
-  setupTimer('timer','timerStart','timerReset',90,'speakTimer',4,12);
-  setupTimer('hwTimer','hwTimerStart','hwTimerReset',60,'hwTimer',5,8);
+  setupTimer('timer','timerStart','timerReset',90,'speakTimer',5,12);
+  setupTimer('hwTimer','hwTimerStart','hwTimerReset',60,'hwTimer',6,8);
 
-  /* ---------- 6 · HOMEWORK ---------- */
+  /* ---------- 7 · HOMEWORK ---------- */
   buildMC('hwQuizMC',[
     {q:'There ___ three photos on the bookshelf.',options:['are','is'],answer:0,explain:'Three photos are plural.'},
     {q:'We ___ ice skating on Saturday. It is already decided.',options:['are going to go','go'],answer:0,explain:'A decided plan → be going to.'},
@@ -760,7 +827,7 @@
     {q:'Emma ___ the number 12 bus to work every day.',options:['takes','is taking'],answer:0,explain:'“Every day” → routine.'},
     {q:'The cat always sleeps ___ my bed.',options:['under','between'],answer:0,explain:'Under = below something.'},
     {q:'Which question is correct?',options:['Is there a lift in the building?','Are there a lift in the building?'],answer:0,explain:'One lift → Is there…?'}
-  ],4,'hwQuiz',5);
+  ],4,'hwQuiz',6);
 
   buildTyped('hwFormsTyped',[
     {q:'careful → Please drive ___ .',a:['carefully'],ph:'the adverb'},
@@ -768,14 +835,14 @@
     {q:'happy → She smiled ___ at the camera.',a:['happily'],ph:'the adverb',hint:'The word ends in -y: change the -y to -i, then add -ly.'},
     {q:'Write the opposite: <b>narrow</b> ↔ ___',a:['wide','broad'],ph:'one word'},
     {q:'Write the opposite: <b>broken</b> ↔ ___',a:['working','fixed','repaired'],ph:'one word'}
-  ],4,'hwForms',5);
+  ],4,'hwForms',6);
 
   buildTyped('hwLinkerTyped',[
     {q:'We can’t use the lift, ___ we are going to walk up the stairs.',a:['so'],ph:'one word'},
     {q:'___ the flat is small, Emma loves it.',a:['although'],ph:'one word',hint:'This word starts the sentence and shows a contrast.'},
     {q:'She isn’t going to cook ___ the kitchen is full of boxes.',a:['because'],ph:'one word'},
     {q:'The forecast says rain, ___ nobody minds.',a:['but'],ph:'one word'}
-  ],4,'hwLinker',5);
+  ],4,'hwLinker',6);
 
   buildMC('hwNoticeMC',[
     {q:'The lift is going to work on Sunday.',options:['True','False','Doesn’t say'],answer:1,explain:'“The lift is not going to work this weekend.”'},
@@ -783,14 +850,14 @@
     {q:'The back door is locked after six o’clock in the evening.',options:['True','False','Doesn’t say'],answer:0,explain:'18:00 is six o’clock in the evening.'},
     {q:'Mr Novak lives on the second floor.',options:['True','False','Doesn’t say'],answer:2,explain:'He is in flat 2 — the notice never says which floor that is.',hint:'Careful: a flat number is not a floor number.'},
     {q:'The residents have to pay for the repair.',options:['True','False','Doesn’t say'],answer:2,explain:'The notice says nothing about money.'}
-  ],4,'hwNotice',5);
+  ],4,'hwNotice',6);
 
   buildTyped('hwErrorTyped',[
     {q:'✗ There is two lifts in this building.',a:['there are two lifts in this building'],show:'There are two lifts in this building.',ph:'Write the correct sentence',hint:'Two lifts are plural.'},
     {q:'✗ Emma is go to order pizza.',a:['emma is going to order pizza'],show:'Emma is going to order pizza.',ph:'Write the correct sentence',hint:'The structure is be + going to + verb.'},
     {q:'✗ My brother put up a shelf every weekend.',a:['my brother puts up a shelf every weekend'],show:'My brother puts up a shelf every weekend.',ph:'Write the correct sentence',hint:'He/she/it needs -s in Present Simple.'},
     {q:'✗ The cat is sleep under the bed now.',a:['the cat is sleeping under the bed now'],show:'The cat is sleeping under the bed now.',ph:'Write the correct sentence',hint:'am/is/are + verb-ing.'}
-  ],5,'hwError',5);
+  ],5,'hwError',6);
 
   const hwArea=$('hwWriting');
   const hwCount=()=>{$('hwWordCount').textContent=hwArea.value.trim().split(/\s+/).filter(Boolean).length;};
@@ -812,7 +879,7 @@
     if(missing.length){showFeedback('hwWritingFeedback','try',`Good length (${n} words), but still missing: ${missing.join(' · ')}`);return;}
     const lengthNote=n>90?` It is ${n} words — a little over the 70–90 target, so cut one sentence if you can.`:'';
     showFeedback('hwWritingFeedback','good',`Every criterion is there.${lengthNote} Now read it once as your own editor: capital letters, full stops, and -s on he/she verbs. +20 XP`);
-    award(20,'hwWriting',5);
+    award(20,'hwWriting',6);
   });
 
   /* ---------- ANSWER SHEET · PDF / TEXT ---------- */
