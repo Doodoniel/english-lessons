@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173a2c">
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <title>Lesson 10 — The Morning After</title>
+  <style>
+    :root{
+      --ink:#22302a;--muted:#63776d;--paper:#fffdf8;--bg:#f0f4f0;
+      --forest:#173a2c;--green:#2e7d5b;--green2:#1f6047;--green-soft:#e7f4ee;
+      --terra:#c9613f;--terra-soft:#fdeee8;--gold:#dda93c;--gold-soft:#fff5e0;
+      --plum:#6b4a7a;--plum-soft:#f3edf6;
+      --border:#dde5e0;--shadow:0 12px 34px rgba(23,58,44,.09);
+      --radius:20px;--focus:0 0 0 4px rgba(46,125,91,.22)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;padding-bottom:90px}
+    button,input,textarea{font:inherit}
+    button{touch-action:manipulation}
+    button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:0;box-shadow:var(--focus)}
+    .skip{position:absolute;left:-9999px;top:8px;background:#fff;padding:10px 14px;border-radius:10px;z-index:50}.skip:focus{left:8px}
+
+    .hero{background:linear-gradient(125deg,#102a20 0%,#173a2c 45%,#c9613f 165%);color:#fff;padding:34px clamp(20px,5vw,72px) 30px}
+    .hero-inner{max-width:1160px;margin:auto;display:grid;grid-template-columns:1fr 310px;gap:38px;align-items:end}
+    .eyebrow{font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+    h1{font-size:clamp(38px,6vw,64px);line-height:.98;letter-spacing:-.045em;margin:0}
+    .hero p{margin:14px 0 0;color:rgba(255,255,255,.8);font-size:15px}
+    .hero-side{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:18px;backdrop-filter:blur(6px)}
+    .progress-line{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;margin-bottom:8px}
+    .track{height:9px;background:rgba(255,255,255,.17);border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:var(--gold);transition:width .3s ease}
+    .hero-actions{display:flex;justify-content:space-between;align-items:center;margin-top:13px;gap:8px}.xp{font-weight:900;color:var(--gold)}
+    .reset{border:0;background:transparent;color:rgba(255,255,255,.78);text-decoration:underline;cursor:pointer;font-size:12px}
+
+    .nav-wrap{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);box-shadow:0 4px 15px rgba(23,58,44,.06);backdrop-filter:blur(10px)}
+    .nav{max-width:1300px;margin:auto;display:flex;overflow-x:auto;padding:0 10px;scrollbar-width:thin}
+    .tab{border:0;border-bottom:3px solid transparent;background:transparent;color:var(--muted);padding:15px 13px;white-space:nowrap;font-weight:800;font-size:13px;cursor:pointer}
+    .tab:hover,.tab[aria-selected="true"]{color:var(--green)}.tab[aria-selected="true"]{border-color:var(--green)}
+    .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#e5ebe7;margin-right:6px;font-size:11px}
+    .tab.done .n{background:var(--green);color:#fff}.tab[aria-selected="true"] .n{background:var(--forest);color:#fff}
+
+    main{max-width:1120px;margin:auto}
+    .section{display:none;padding:42px clamp(17px,4vw,44px)}.section.active{display:block}
+    .section-head{margin-bottom:26px;display:grid;grid-template-columns:1fr auto;gap:15px;align-items:start}
+    .section h2{font-size:clamp(28px,4vw,40px);line-height:1.05;letter-spacing:-.035em;margin:0 0 8px}.lead{margin:0;color:var(--muted);max-width:760px}
+    .time{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--border);border-radius:30px;padding:7px 12px;font-weight:800;font-size:12px;color:var(--muted)}
+    .card{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(21px,3.5vw,34px);box-shadow:var(--shadow);margin:0 0 22px}
+    .kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--green);font-weight:900;margin-bottom:15px}
+    .question{font-weight:800;margin:0 0 12px}.small{font-size:14px;color:var(--muted)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .goal{padding:18px;border-radius:16px;background:var(--green-soft);border:1px solid #c3e2d4}.goal b{display:block;margin-bottom:4px}.goal span{font-size:14px;color:#4c6a5d}
+    .chip{display:inline-block;background:#e8edea;color:#53685d;border-radius:30px;padding:6px 11px;margin:3px;font-size:13px;font-weight:700}.speak .chip{background:rgba(255,255,255,.15);color:#fff}
+    .task{padding:18px 0;border-bottom:1px solid var(--border)}.task:first-child{padding-top:0}.task:last-child{border-bottom:0;padding-bottom:0}
+    .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .choice{border:2px solid var(--border);background:#fff;color:var(--ink);padding:13px 15px;border-radius:13px;text-align:left;font-weight:750;cursor:pointer;transition:.15s}
+    .choice:hover:not(:disabled){border-color:var(--green);transform:translateY(-1px)}
+    .choice.correct{border-color:var(--green);background:var(--green-soft);color:#1c5f43}.choice.wrong{border-color:var(--terra);background:var(--terra-soft);color:#8f3c21}.choice:disabled{cursor:default}
+    .feedback{display:none;margin-top:10px;border-radius:12px;padding:11px 13px;font-size:14px;font-weight:750}.feedback.show{display:block}
+    .feedback.good{background:var(--green-soft);color:#1c5f43;border:1px solid #c3e2d4}
+    .feedback.try{background:var(--gold-soft);color:#8a5f10;border:1px solid #eed49b}
+    .feedback.info{background:var(--plum-soft);color:#5b4468;border:1px solid #ddd0e6}
+    .btn{border:0;border-radius:11px;padding:11px 17px;font-weight:850;cursor:pointer}
+    .primary{background:var(--green);color:#fff}.primary:hover{background:var(--green2)}
+    .secondary{background:#e6eae7;color:var(--ink)}.accent{background:var(--gold);color:#3a2c06}.small-btn{padding:8px 13px;font-size:13px}.btn:disabled{opacity:.55;cursor:default}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .section-nav{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--border);padding-top:25px;margin-top:31px}.section-nav .right{margin-left:auto}
+    .input,.textarea{width:100%;border:2px solid var(--border);border-radius:12px;background:#fff;padding:11px 13px;color:var(--ink)}
+    .input:focus,.textarea:focus{border-color:var(--green);outline:0}.textarea{min-height:140px;resize:vertical}
+    .inline-check{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.inline-check .input{flex:1;min-width:210px}
+    details.support{margin-top:14px;background:#f1f5f2;border-radius:12px;padding:11px 14px;color:var(--muted)}details.support summary{font-weight:800;color:var(--green);cursor:pointer}
+    .notice{border-left:5px solid var(--gold);background:var(--gold-soft);padding:13px 15px;border-radius:0 12px 12px 0;margin-top:15px}
+    .rule{padding:19px;border-radius:16px;border:2px solid var(--border);background:#fff}
+    .rule.r1{background:var(--green-soft);border-color:#c3e2d4}.rule.r2{background:var(--plum-soft);border-color:#ddd0e6}.rule.r3{background:var(--gold-soft);border-color:#eed49b}
+    .rule .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:900;color:var(--forest)}
+    .rule .formula{font-size:17px;font-weight:900;margin:6px 0}
+    .rule .example{font-family:ui-monospace,Consolas,monospace;font-size:13px;line-height:1.7;color:#53685d}
+    .verbs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+    .verb{background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px;text-align:center;font-size:14px}
+    .verb b{display:block;color:var(--green2)}
+
+    /* spinner */
+    .spinner{background:linear-gradient(135deg,#173a2c,#2e7d5b);color:#fff;border-radius:18px;padding:clamp(20px,3vw,30px)}
+    .spinner .kicker{color:var(--gold)}
+    .spin-q{font-size:clamp(18px,2.4vw,25px);font-weight:800;min-height:74px;margin:0 0 14px}
+    .spin-count{font-weight:900;color:var(--gold)}
+
+    /* word search */
+    .ws-wrap{display:grid;grid-template-columns:1fr 190px;gap:18px}
+    .ws-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;max-width:520px}
+    .ws-cell{aspect-ratio:1;border:1px solid var(--border);background:#fff;border-radius:7px;font-weight:800;font-size:clamp(11px,1.7vw,15px);color:var(--ink);cursor:pointer;padding:0;display:grid;place-items:center}
+    .ws-cell.sel{background:var(--gold);border-color:var(--gold);color:#3a2c06}
+    .ws-cell.found{background:var(--green-soft);border-color:var(--green);color:#1c5f43}
+    .ws-cell.miss{background:var(--terra-soft);border-color:var(--terra)}
+    .ws-list{list-style:none;margin:0;padding:0}
+    .ws-list li{padding:7px 10px;border:1px solid var(--border);border-radius:10px;margin-bottom:7px;font-weight:800;font-size:14px;background:#fff}
+    .ws-list li.done{background:var(--green-soft);border-color:var(--green);color:#1c5f43;text-decoration:line-through}
+
+    /* sorting */
+    .bank{min-height:56px;display:flex;flex-wrap:wrap;gap:8px;padding:11px;border-radius:13px;margin-bottom:12px;border:2px dashed #cfdad4;background:#f1f5f2;align-content:flex-start}
+    .tile{border:1px solid var(--border);background:#fff;border-radius:25px;padding:8px 12px;font-weight:750;cursor:pointer}
+    .tile.sel{background:var(--gold);color:#3a2c06;border-color:#c99b2c}
+    .tile.placed{background:var(--green);color:#fff;border-color:var(--green)}
+    .tile.ok{background:var(--green-soft);border-color:var(--green);color:#1c5f43}
+    .tile.bad{background:var(--terra-soft);border-color:var(--terra);color:#8f3c21}
+    .zones{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .zone-label{font-weight:800;font-size:14px;margin-bottom:8px}
+    .zone-label span{font-family:ui-monospace,Consolas,monospace;color:var(--green2)}
+    .zone{min-height:96px;border-radius:13px;padding:11px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;border:2px solid #c3e2d4;background:var(--green-soft)}
+    .zone.z2{border-color:#ddd0e6;background:var(--plum-soft)}.zone.z3{border-color:#eed49b;background:var(--gold-soft)}
+
+    .text-read{max-width:720px}.text-read p{margin:0 0 12px}
+    .criteria{list-style:none;padding:0;margin:12px 0}
+    .criteria li{margin:8px 0;padding-left:27px;position:relative}
+    .criteria li::before{content:"✓";position:absolute;left:0;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:900}
+    .persona{background:var(--terra-soft);border:1px solid #f0cbbd;border-radius:14px;padding:16px}.persona b{display:block;margin-bottom:5px}
+    .speak{background:linear-gradient(135deg,#173a2c,#c9613f);color:#fff;border-radius:20px;padding:clamp(23px,4vw,34px);margin-bottom:22px}
+    .speak .kicker{color:var(--gold)}.speak h3{font-size:clamp(21px,3vw,29px);line-height:1.25;margin:0 0 12px}
+    .timer{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;border:4px solid rgba(255,255,255,.22);font:900 28px ui-monospace,monospace;margin:18px 0}
+    .timer.running{border-color:var(--gold);color:var(--gold)}.timer.finished{border-color:#9ce2c8;color:#9ce2c8}
+    .checklist{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .check{display:flex;gap:9px;align-items:flex-start;background:#f1f5f2;border-radius:12px;padding:11px}.check input{margin-top:4px;accent-color:var(--green)}
+    .writing-shell{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .counter{text-align:right;color:var(--muted);font-size:13px;margin-top:5px}
+    .model{background:var(--plum-soft);border-radius:14px;padding:15px;font-size:14px}.model p{margin:0}
+    .result{padding:25px;text-align:center;border-radius:17px;background:linear-gradient(120deg,var(--green-soft),var(--gold-soft));font-size:19px;font-weight:900}
+    .export{background:linear-gradient(125deg,#173a2c,#6b4a7a);color:#fff;border:0}
+    .export .kicker{color:var(--gold)}.export .small{color:rgba(255,255,255,.75)}
+    .export .input{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff}
+    .export .input::placeholder{color:rgba(255,255,255,.55)}
+    .teacher{border:1px dashed #bcccc4;background:transparent;box-shadow:none}.teacher summary{cursor:pointer;font-weight:900}
+    .teacher-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.teacher-grid div{background:#fff;border-radius:12px;padding:13px;font-size:13px}
+
+    #answerSheet{display:none}
+    .sheet{max-width:900px;margin:auto;padding:26px;background:#fff;color:#000;font-size:13px;line-height:1.5}
+    .sheet h1{font-size:21px;margin:0 0 3px;letter-spacing:-.02em}
+    .sheet .sheet-meta{font-size:12px;color:#444;margin-bottom:8px}
+    .sheet .sheet-score{font-size:13px;font-weight:800;border:1px solid #999;border-radius:8px;padding:8px 11px;margin-bottom:16px}
+    .sheet h2{font-size:14px;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #999}
+    .sheet-item{margin:0 0 10px;page-break-inside:avoid;break-inside:avoid}
+    .sheet-q{font-weight:700}
+    .sheet-a{margin:2px 0 0 14px}
+    .sheet-a .st{font-size:10px;text-transform:uppercase;letter-spacing:.07em;border:1px solid #666;border-radius:20px;padding:1px 7px;margin-left:6px}
+    .sheet-free{margin:4px 0 0 14px;white-space:pre-wrap;border-left:3px solid #ccc;padding-left:10px}
+    .sheet-foot{margin-top:22px;border-top:1px solid #999;padding-top:10px;font-size:11px;color:#444}
+
+    @media(max-width:900px){.ws-wrap{grid-template-columns:1fr}.ws-list{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.ws-list li{margin:0}}
+    @media(max-width:800px){.hero-inner{grid-template-columns:1fr}.hero-side{display:none}.grid3,.zones,.teacher-grid,.verbs{grid-template-columns:1fr 1fr}.writing-shell{grid-template-columns:1fr}}
+    @media(max-width:620px){.section{padding-top:30px}.section-head{grid-template-columns:1fr}.grid2,.grid3,.choices,.zones,.checklist,.teacher-grid{grid-template-columns:1fr}.section-nav{flex-wrap:wrap}.section-nav .btn{flex:1}.ws-list{grid-template-columns:repeat(2,1fr)}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.choice:hover{transform:none!important}}
+    @media print{
+      .hero-side,.nav-wrap,.section-nav,.btn,.feedback,.teacher{display:none!important}
+      .section{display:block!important;padding:22px}.hero{padding:22px}.hero-inner{display:block}
+      .card,.speak{break-inside:avoid;box-shadow:none}
+      body.printing>*{display:none!important}
+      body.printing #answerSheet{display:block!important}
+      @page{margin:14mm}
+    }
+  </style>
+</head>
+<body>
+<a class="skip" href="#lesson">Skip to lesson</a>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Lesson 10 · continues Lesson 9 · CEFR A2 · 60 minutes · no listening</div>
+      <h1>The Morning<br>After</h1>
+      <p>10-minute review · party vocabulary · Past Simple · reading · speaking · homework on vocabulary and grammar</p>
+    </div>
+    <div class="hero-side" aria-label="Lesson progress">
+      <div class="progress-line"><span>Lesson progress</span><span id="progressText">0%</span></div>
+      <div class="track"><div class="fill" id="progressFill"></div></div>
+      <div class="hero-actions"><span class="xp">★ <span id="xp">0</span> XP</span><button class="reset" id="resetBtn" type="button">Reset lesson</button></div>
+    </div>
+  </div>
+</header>
+
+<div class="nav-wrap">
+  <nav class="nav" role="tablist" aria-label="Lesson sections">
+    <button class="tab" role="tab" aria-selected="true" data-tab="0"><span class="n">1</span>Review</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="1"><span class="n">2</span>Words</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="2"><span class="n">3</span>Past Simple</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="3"><span class="n">4</span>Story</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="4"><span class="n">5</span>Speaking</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="5"><span class="n">6</span>Homework</button>
+  </nav>
+</div>
+
+<main id="lesson">
+
+  <!-- 1 · REVIEW -->
+  <section class="section active" id="section-0" role="tabpanel">
+    <div class="section-head"><div><h2>Ten minutes of everything</h2><p class="lead">Lessons 4–9 in one stage: rooms and prepositions, three time cameras, linking words and adverbs. Try everything from memory first — looking back is allowed only after your first answer.</p></div><span class="time">⏱ 10 min</span></div>
+
+    <div class="spinner">
+      <div class="kicker">1A · Question spinner · speak, don’t write</div>
+      <p class="spin-q" id="spinQ">Press the button and answer the question out loud in a full sentence.</p>
+      <div class="row">
+        <button class="btn accent small-btn" id="spinBtn" type="button">Give me a question</button>
+        <span class="small" style="color:rgba(255,255,255,.8)">Answered: <span class="spin-count" id="spinCount">0</span> / 6</span>
+      </div>
+    </div>
+
+    <div class="card"><div class="kicker">1B · Lightning round · one answer each</div><div id="reviewMC"></div></div>
+
+    <div class="card">
+      <div class="kicker">1C · Error hunt</div>
+      <p class="small" style="margin:-6px 0 14px">One mistake in each line. Write the whole sentence correctly.</p>
+      <div id="reviewErrorTyped"></div>
+    </div>
+
+    <div class="section-nav"><span></span><button class="btn primary right" data-go="1" type="button">Party words →</button></div>
+  </section>
+
+  <!-- 2 · WORDS -->
+  <section class="section" id="section-1" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>What happens at a party</h2><p class="lead">Emma’s housewarming party is over. Before we talk about it, collect the words you need: the verbs of an evening with guests.</p></div><span class="time">⏱ 10 min</span></div>
+
+    <div class="card">
+      <div class="kicker">2A · Word search · find 8 verbs</div>
+      <p class="small" style="margin:-6px 0 14px">Words go left→right and top→bottom. Click the <b>first</b> letter, then the <b>last</b> letter of a word.</p>
+      <div class="ws-wrap">
+        <div>
+          <div class="ws-grid" id="wsGrid" aria-label="Word search grid"></div>
+          <div class="row" style="margin-top:12px">
+            <button class="btn secondary small-btn" id="wsHint" type="button">Show me one letter</button>
+            <button class="btn secondary small-btn" id="wsNew" type="button">New grid</button>
+          </div>
+        </div>
+        <div>
+          <div class="kicker" style="margin-bottom:10px">Find these</div>
+          <ul class="ws-list" id="wsList"></ul>
+        </div>
+      </div>
+      <div class="feedback" id="wsFeedback" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">2B · The evening, step by step</div>
+      <p class="small" style="margin:-6px 0 14px">Choose the verb that fits each moment of a party.</p>
+      <div id="stepMC"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">2C · Read the meaning, write the verb</div>
+      <div id="verbDefTyped"></div>
+    </div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="0" type="button">← Review</button><button class="btn primary" data-go="2" type="button">Past Simple →</button></div>
+  </section>
+
+  <!-- 3 · PAST SIMPLE -->
+  <section class="section" id="section-2" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Camera 4: what happened</h2><p class="lead">You can talk about a routine, about now and about a plan. The last camera looks backwards: a finished action at a finished time. This is the tense you need to tell the story of the party.</p></div><span class="time">⏱ 16 min</span></div>
+
+    <div class="card">
+      <div class="kicker">3A · The forms</div>
+      <div class="grid3">
+        <div class="rule r1"><div class="tag">+ regular</div><div class="formula">verb + <b>-ed</b></div><div class="example">They danc<b>ed</b> until midnight.<br>He walk<b>ed</b> up four floors.</div></div>
+        <div class="rule r2"><div class="tag">+ irregular</div><div class="formula">a new word</div><div class="example">bring → <b>brought</b><br>come → <b>came</b> · eat → <b>ate</b></div></div>
+        <div class="rule r3"><div class="tag">− and ?</div><div class="formula">did / didn’t + base verb</div><div class="example">She <b>didn’t shout</b>.<br><b>Did</b> Max <b>spill</b> the juice?</div></div>
+      </div>
+      <div class="notice"><b>The golden rule:</b> after <i>did</i> and <i>didn’t</i> the verb goes back to its base form — <i>didn’t <s>came</s> come</i>, <i>Did you <s>went</s> go?</i>. Only <b>be</b> is different: <i>was / were</i>, <i>wasn’t / weren’t</i>, <i>Was it…?</i></div>
+      <div class="notice" style="border-left-color:var(--green)"><b>Spelling of -ed:</b> dance → danc<b>ed</b> (just -d) · stop → sto<b>pped</b> (double letter) · carry → carr<b>ied</b> (-y → -ied) · play → play<b>ed</b> (vowel + y stays).</div>
+      <details class="support"><summary>Нужна опора на русском?</summary><p><b>Past Simple</b> — законченное действие в прошлом: вчера, на прошлой неделе, в семь часов. Правильные глаголы: <i>+ -ed</i>. Неправильные надо запомнить. Отрицание и вопрос: <b>didn’t</b> / <b>did</b> + глагол без окончания. Глагол <b>be</b> живёт отдельно: was / were.</p></details>
+    </div>
+
+    <div class="card">
+      <div class="kicker">3B · The twelve verbs of the evening</div>
+      <p class="small" style="margin:-6px 0 14px">Read the pairs aloud twice, then close the card in your head and do 3C.</p>
+      <div class="verbs">
+        <div class="verb">bring<b>brought</b></div><div class="verb">come<b>came</b></div><div class="verb">give<b>gave</b></div><div class="verb">ring<b>rang</b></div>
+        <div class="verb">eat<b>ate</b></div><div class="verb">drink<b>drank</b></div><div class="verb">go<b>went</b></div><div class="verb">say<b>said</b></div>
+        <div class="verb">sit<b>sat</b></div><div class="verb">take<b>took</b></div><div class="verb">break<b>broke</b></div><div class="verb">be<b>was / were</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">3C · Write the past form</div>
+      <div id="pastFormTyped"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">3D · The sound of -ed · sorting game</div>
+      <p class="small" style="margin:-6px 0 14px">Say each word aloud, then tap the card and tap the group where it belongs. The spelling is always <i>-ed</i>, but the sound changes.</p>
+      <div class="bank" id="edBank" aria-label="Verb cards"></div>
+      <div class="zones">
+        <div><div class="zone-label">1 · sounds like <span>/t/</span><br><span class="small">after k, p, s, f, sh, ch</span></div><div class="zone" id="ed-t" data-bucket="t" aria-label="t sound"></div></div>
+        <div><div class="zone-label">2 · sounds like <span>/d/</span><br><span class="small">after most other sounds</span></div><div class="zone z2" id="ed-d" data-bucket="d" aria-label="d sound"></div></div>
+        <div><div class="zone-label">3 · extra syllable <span>/ɪd/</span><br><span class="small">only after t and d</span></div><div class="zone z3" id="ed-id" data-bucket="id" aria-label="id sound"></div></div>
+      </div>
+      <button class="btn primary small-btn" style="margin-top:14px" id="edCheck" type="button">Check my groups</button>
+      <div class="feedback" id="edFeedback" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">3E · Complete the story</div>
+      <p class="small" style="margin:-6px 0 14px">Write the verb in brackets in the Past Simple.</p>
+      <div id="pastGapTyped"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">3F · Say it differently</div>
+      <p class="small" style="margin:-6px 0 14px">Rewrite each sentence as the instruction says. Watch the golden rule.</p>
+      <div id="transformTyped"></div>
+    </div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="1" type="button">← Words</button><button class="btn primary" data-go="3" type="button">The story →</button></div>
+  </section>
+
+  <!-- 4 · STORY -->
+  <section class="section" id="section-3" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Reading: The Morning After</h2><p class="lead">In Lesson 9 the party was still a plan. Here is what actually happened. Read once for the story, then again for the details.</p></div><span class="time">⏱ 9 min</span></div>
+
+    <div class="card">
+      <div class="kicker">4A · The text</div>
+      <div class="text-read">
+        <h3 style="margin:0 0 2px">The Morning After</h3>
+        <em class="small" style="display:block;margin-bottom:14px">Emma’s blog · ≈ 230 words</em>
+        <p>The party started at seven o’clock. Nine people came, and everybody brought something: Kate brought the music, Max carried the drinks up four floors, and Nina arrived with an enormous chocolate cake.</p>
+        <p>At half past seven the doorbell rang again. It was the pizza delivery man, and he wasn’t happy: the lift was still broken, so he walked up to the fourth floor with six pizzas. Emma gave him a slice of cake and he laughed.</p>
+        <p>The evening was noisy. We played music, danced in the middle of the living room and talked until midnight. Only one thing went wrong: Max spilled orange juice on my new yellow wall, and everybody stopped and looked at him. I didn’t shout. I said, “Now the wall has a story,” and the party continued.</p>
+        <p>The next morning the flat looked terrible. There were glasses on the bookshelf, a shoe under the sofa and half a pizza in the wardrobe. I didn’t tidy up alone: at ten o’clock the doorbell rang again, and Kate and Max came back with coffee and rubber gloves. We cleaned everything in two hours. Then we sat on the floor and ate the last pizza for breakfast. It wasn’t a normal Sunday morning, but it was the best one this year.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">4B · True, False or Doesn’t say?</div>
+      <div id="storyTFND"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">4C · Answer in a full sentence</div>
+      <div id="storyEvidenceTyped"></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">4D · Find the past forms in the text</div>
+      <p class="small" style="margin:-6px 0 14px">Write the Past Simple form that the writer used for each verb.</p>
+      <div id="storyVerbTyped"></div>
+    </div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="2" type="button">← Past Simple</button><button class="btn primary" data-go="4" type="button">Speaking →</button></div>
+  </section>
+
+  <!-- 5 · SPEAKING -->
+  <section class="section" id="section-4" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Speaking: tell me what happened</h2><p class="lead">Three tasks, from a story you know to a story only you know. Mistakes are fine; stopping is not — if a verb disappears, use another one.</p></div><span class="time">⏱ 15 min</span></div>
+
+    <div class="speak">
+      <div class="kicker">5A · 90 seconds · retell the evening</div>
+      <h3>Close the text and tell the story of the party from these six words. Use the Past Simple all the way through.</h3>
+      <span class="chip">started</span><span class="chip">brought</span><span class="chip">rang</span><span class="chip">spilled</span><span class="chip">didn’t shout</span><span class="chip">came back</span>
+      <div class="timer" id="timer" aria-live="polite">90</div>
+      <button class="btn accent small-btn" id="timerStart" type="button">Start 90 seconds</button>
+      <button class="btn secondary small-btn" id="timerReset" type="button">Reset</button>
+    </div>
+
+    <div class="card">
+      <div class="kicker">5B · Interview · did you…?</div>
+      <p class="question">Ask your partner about last weekend. Ask every question, then add one follow-up question of your own.</p>
+      <div class="grid2">
+        <div class="goal"><b>Ask</b><span>Did you go out on Saturday?<br>Did you meet anybody?<br>Did you cook something new?<br>Did you tidy your room?<br>Did you watch a good film?<br>Did you sleep late on Sunday?</span></div>
+        <div class="goal"><b>Follow up</b><span>What time…?<br>Who did you go with?<br>How was it?<br>Why not?</span></div>
+      </div>
+      <div class="notice"><b>Short answers:</b> Yes, I did. / No, I didn’t. Then add one sentence — a one-word answer ends the conversation.</div>
+      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="interview" data-section="4" data-xp="12" type="button">We asked and answered all six ✓</button>
+    </div>
+
+    <div class="card">
+      <div class="kicker">5C · Two truths and a lie · game</div>
+      <p class="question">Say three sentences about last week: two true, one false. Your partner asks two questions and then guesses the lie.</p>
+      <div class="grid2">
+        <div class="persona"><b>Example</b>Last week I ate pizza three times. · I broke a cup on Monday. · I went to the cinema with my cousin.</div>
+        <div class="persona"><b>Useful questions</b>What time did you…? · Who were you with? · How much was it? · Where exactly did you go?</div>
+      </div>
+      <div class="checklist" style="margin-top:16px">
+        <label class="check"><input type="checkbox"> I used three different past verbs.</label>
+        <label class="check"><input type="checkbox"> I asked two questions with <i>did</i>.</label>
+        <label class="check"><input type="checkbox"> I answered with a full sentence.</label>
+        <label class="check"><input type="checkbox"> I guessed my partner’s lie.</label>
+      </div>
+      <button class="btn primary small-btn speaking-complete" style="margin-top:14px" data-key="twoTruths" data-section="4" data-xp="12" type="button">We played both rounds ✓</button>
+    </div>
+
+    <div class="section-nav"><button class="btn secondary" data-go="3" type="button">← Story</button><button class="btn primary" data-go="5" type="button">Homework →</button></div>
+  </section>
+
+  <!-- 6 · HOMEWORK -->
+  <section class="section" id="section-5" role="tabpanel" hidden>
+    <div class="section-head"><div><h2>Homework: words and grammar</h2><p class="lead">Six tasks: three on the vocabulary, three on the Past Simple, and one piece of writing that needs both. Press the button at the bottom to turn your answers into a sheet you can save as a PDF and send to your teacher.</p></div><span class="time">⏱ 25–30 min</span></div>
+
+    <div class="card" data-hw="H1 · Vocabulary: write the verb">
+      <div class="kicker">H1 · Vocabulary · write the verb · 4 min</div>
+      <p class="small" style="margin:-6px 0 14px">Answer from memory first. Spelling counts.</p>
+      <div id="hwVocabTyped"></div>
+    </div>
+
+    <div class="card" data-hw="H2 · Vocabulary: which word fits?">
+      <div class="kicker">H2 · Vocabulary · which word fits? · 4 min</div>
+      <div id="hwVocabMC"></div>
+    </div>
+
+    <div class="card" data-hw="H3 · Grammar: past forms">
+      <div class="kicker">H3 · Grammar · past forms · 4 min</div>
+      <p class="small" style="margin:-6px 0 14px">Write the Past Simple form. Items 1–4 are regular, 5–8 are irregular.</p>
+      <div id="hwPastTyped"></div>
+    </div>
+
+    <div class="card" data-hw="H4 · Grammar: complete the text">
+      <div class="kicker">H4 · Grammar · complete the text · 5 min</div>
+      <p class="small" style="margin:-6px 0 14px">Nina writes about the same evening. Put the verb in brackets into the Past Simple.</p>
+      <div id="hwGapTyped"></div>
+    </div>
+
+    <div class="card" data-hw="H5 · Grammar: negatives and questions">
+      <div class="kicker">H5 · Grammar · negatives and questions · 4 min</div>
+      <div id="hwTransformTyped"></div>
+    </div>
+
+    <div class="card writing-shell" data-hw="H6 · Writing: last weekend">
+      <div>
+        <div class="kicker">H6 · Writing · 8–10 min</div>
+        <p class="question">Write about <b>last weekend</b> — 70–90 words. It does not have to be exciting; it has to be true and correct.</p>
+        <textarea class="textarea" id="hwWriting" data-label="Last weekend (70–90 words)" placeholder="Last Saturday I…"></textarea>
+        <div class="counter"><span id="hwWordCount">0</span> words · target 70–90</div>
+        <button class="btn primary small-btn" id="checkHwWriting" type="button">Check my writing</button>
+        <div class="feedback" id="hwWritingFeedback" aria-live="polite"></div>
+      </div>
+      <div>
+        <div class="kicker">Success criteria</div>
+        <ul class="criteria">
+          <li>a past time expression: <b>last Saturday · yesterday · two days ago</b></li>
+          <li>at least five verbs in the Past Simple</li>
+          <li>at least two irregular verbs</li>
+          <li>one negative sentence with <b>didn’t</b></li>
+          <li>one linking word: <b>because / so / but / although</b></li>
+          <li>three words from this lesson</li>
+        </ul>
+        <details class="support"><summary>Need a frame?</summary><p>Last Saturday I … In the evening we … It was … I didn’t … because … On Sunday morning I … but … It was a good/quiet/busy weekend.</p></details>
+      </div>
+    </div>
+
+    <div class="card export">
+      <div class="kicker">Send it to your teacher</div>
+      <p class="question" style="color:#fff">Everything you typed on this page goes into one answer sheet.</p>
+      <p class="small" style="margin-bottom:14px">Press <b>Save as PDF</b>: your browser opens the print window — choose <b>“Save as PDF”</b> (or “Microsoft Print to PDF”) as the printer and save the file. Then send that file to your teacher. The text-file button does the same job if you prefer to paste the answers into a message.</p>
+      <input class="input" id="studentName" placeholder="Your name (it goes on the sheet)" autocomplete="name" style="margin-bottom:12px">
+      <div class="row">
+        <button class="btn accent" id="makePdf" type="button">Save my answers as PDF</button>
+        <button class="btn secondary" id="makeTxt" type="button">Download as text file</button>
+      </div>
+      <div class="feedback" id="exportFeedback" aria-live="polite"></div>
+    </div>
+
+    <div class="result" id="result">Answer the tasks above, then create your answer sheet.</div>
+
+    <details class="card teacher">
+      <summary>Teacher notes · lesson design</summary>
+      <div class="teacher-grid">
+        <div><b>Why the Past Simple now</b><br>Lesson 9 planned the party with <i>be going to</i>; this lesson tells the same story after the event. The context is already known, so the whole cognitive load can go on the new form.</div>
+        <div><b>Ten-minute spiral review</b><br>Section 1 touches every earlier lesson: there is/are, prepositions, the three cameras, linking words, adverbs. The spinner makes the review oral, which is where the gaps actually show.</div>
+        <div><b>Vocabulary before grammar</b><br>The party verbs are taught in the present first (word search, step-by-step, definitions), so that in section 3 the learner only changes the form, not the meaning.</div>
+        <div><b>Form and sound together</b><br>The <i>-ed</i> sorting game continues the pronunciation lab of Lesson 9: A2 learners who never hear the three endings tend to add a syllable to every regular verb.</div>
+        <div><b>Seven mechanics</b><br>Oral spinner, lightning quiz, error hunt, word search, step-by-step choice, sorting into sound groups, transformations — plus reading, three speaking formats and the writing task.</div>
+        <div><b>Speaking builds up</b><br>Retell a known story → ask questions with <i>did</i> → invent your own three sentences. Support drops at each step, which is the standard scaffolding sequence.</div>
+        <div><b>Homework as requested</b><br>Three vocabulary tasks, three grammar tasks and one integrated writing task; everything auto-marked except the writing, which arrives on the answer sheet with the marked items.</div>
+        <div><b>Assessment for learning</b><br>Retry-friendly hints, visible success criteria, and a sheet that shows the teacher what the page accepted — so lesson time goes to the open task.</div>
+        <div><b>If time is short</b><br>Do 1A orally, keep 3A–3C and 3E, read the story, and choose one speaking task. Move 2A, 3D and 3F to the homework.</div>
+      </div>
+    </details>
+
+    <div class="section-nav"><button class="btn secondary" data-go="4" type="button">← Speaking</button><button class="btn primary" data-go="0" type="button">Back to the review ↺</button></div>
+  </section>
+</main>
+
+<div id="answerSheet" aria-hidden="true"></div>
+
+<script>
+(() => {
+  'use strict';
+  const STORAGE_KEY = 'masha-lesson-10-morning-after-v1';
+  const TABS = 6;
+  const state = {xp:0, scored:new Set(), done:new Set()};
+  const $ = (id) => document.getElementById(id);
+  const all = (sel, root=document) => [...root.querySelectorAll(sel)];
+  const norm = (s) => (s||'').toLowerCase().trim().replace(/[’`]/g,"'").replace(/[.,!?;:"]/g,'').replace(/\s+/g,' ');
+  const shuffled = (arr) => [...arr].sort(() => Math.random()-.5);
+  const esc = (s) => String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+  /* ---------- progress ---------- */
+  function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({xp:state.xp,scored:[...state.scored],done:[...state.done]}));}catch(e){}}
+  function load(){try{const s=JSON.parse(localStorage.getItem(STORAGE_KEY));if(s){state.xp=Number(s.xp)||0;state.scored=new Set(s.scored||[]);state.done=new Set(s.done||[]);}}catch(e){}renderProgress();}
+  function renderProgress(){
+    $('xp').textContent=state.xp;
+    const pct=Math.round(state.done.size/TABS*100);
+    $('progressText').textContent=pct+'%';$('progressFill').style.width=pct+'%';
+    all('.tab').forEach((t,i)=>t.classList.toggle('done',state.done.has(i)));
+  }
+  function award(points,key,section){
+    if(!state.scored.has(key)){state.scored.add(key);state.xp+=points;}
+    if(Number.isInteger(section))state.done.add(section);
+    renderProgress();save();
+  }
+  function showFeedback(id,type,text){const el=$(id);el.className='feedback show '+type;el.textContent=text;}
+  function goTab(i){
+    all('.tab').forEach((t,n)=>t.setAttribute('aria-selected',String(n===i)));
+    all('.section').forEach((s,n)=>{s.classList.toggle('active',n===i);s.hidden=n!==i;});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  all('.tab').forEach(t=>t.addEventListener('click',()=>goTab(Number(t.dataset.tab))));
+  all('[data-go]').forEach(b=>b.addEventListener('click',()=>goTab(Number(b.dataset.go))));
+  all('.speaking-complete').forEach(btn=>btn.addEventListener('click',()=>{
+    award(Number(btn.dataset.xp),btn.dataset.key,Number(btn.dataset.section));
+    btn.disabled=true;btn.textContent='Completed ✓';
+  }));
+  $('resetBtn').addEventListener('click',()=>{try{localStorage.removeItem(STORAGE_KEY);}catch(e){}location.reload();});
+
+  /* ---------- generic builders ---------- */
+  function buildMC(id,data,points,prefix,section){
+    const box=$(id);
+    data.forEach((q,qi)=>{
+      const task=document.createElement('div');task.className='task';
+      task.innerHTML=`<p class="question">${qi+1}. ${q.q}</p><div class="choices">${q.options.map((o,oi)=>`<button class="choice" type="button" data-option="${oi}">${o}</button>`).join('')}</div><div class="feedback" id="${id}Fb${qi}" aria-live="polite"></div>`;
+      box.appendChild(task);
+      all('.choice',task).forEach(btn=>btn.addEventListener('click',()=>{
+        const chosen=Number(btn.dataset.option);
+        all('.choice',task).forEach(x=>x.classList.remove('wrong'));
+        if(chosen===q.answer){
+          btn.classList.add('correct');
+          all('.choice',task).forEach(x=>x.disabled=true);
+          showFeedback(`${id}Fb${qi}`,'good',`Correct. ${q.explain||''} +${points} XP`);
+          award(points,prefix+qi,section);
+        }else{
+          btn.classList.add('wrong');
+          showFeedback(`${id}Fb${qi}`,'try',q.hint||'Not yet. Read the whole sentence again and try the other answer.');
+        }
+      }));
+    });
+  }
+
+  function buildTyped(id,data,points,prefix,section){
+    const box=$(id);
+    data.forEach((t,i)=>{
+      const task=document.createElement('div');task.className='task';
+      task.innerHTML=`<p class="question">${i+1}. ${t.q}</p>${t.extra||''}<div class="inline-check"><input class="input" id="${id}In${i}" placeholder="${t.ph||'Type your answer'}" autocomplete="off" spellcheck="false"><button class="btn primary small-btn" type="button">Check</button></div><div class="feedback" id="${id}Fb${i}" aria-live="polite"></div>`;
+      box.appendChild(task);
+      const input=task.querySelector('input');
+      const check=()=>{
+        const v=norm(input.value);
+        if(!v){showFeedback(`${id}Fb${i}`,'info','Write your answer first.');return;}
+        if(t.a.some(x=>norm(x)===v)){
+          showFeedback(`${id}Fb${i}`,'good',`Correct: ${t.show||(t.a[0]+'.')} +${points} XP`);
+          award(points,prefix+i,section);
+        }else{
+          showFeedback(`${id}Fb${i}`,'try',t.hint||'Not yet. Check the form and the spelling, then try again.');
+        }
+      };
+      task.querySelector('button').addEventListener('click',check);
+      input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();check();}});
+    });
+  }
+
+  /* ---------- 1A · QUESTION SPINNER ---------- */
+  const spinQuestions=[
+    'Describe your bedroom: three sentences with <i>there is / there are</i> and a preposition.',
+    'What do you usually do on Saturday morning? Two sentences.',
+    'What is happening in your home right now? Two sentences.',
+    'What are you going to do next weekend? Two sentences with <i>going to</i>.',
+    'Say one sentence with <i>because</i> and one with <i>although</i>.',
+    'Where exactly is your phone right now? Use two prepositions.',
+    'Describe your kitchen. Is there a window? What is on the table?',
+    'Name four things you do every morning, in order.',
+    'Say two things you never do at the weekend.',
+    'Your friend is coming tonight. What are you going to cook, and why?',
+    'How do you go to school or work? Say it with an adverb (quickly, slowly, easily).',
+    'Say one sentence with <i>so</i> and one with <i>but</i>.'
+  ];
+  let spinPool=[],spinCount=0;
+  $('spinBtn').addEventListener('click',()=>{
+    if(!spinPool.length)spinPool=shuffled(spinQuestions);
+    $('spinQ').innerHTML=spinPool.pop();
+    spinCount++;$('spinCount').textContent=spinCount;
+    if(spinCount>=6){award(10,'spinner',0);$('spinBtn').textContent='Another question';}
+  });
+
+  /* ---------- 1B · LIGHTNING ROUND ---------- */
+  buildMC('reviewMC',[
+    {q:'There ___ two lamps and a plant on the table.',options:['are','is'],answer:0,explain:'The first noun after “there” is plural: two lamps.'},
+    {q:'Emma usually ___ the number 12 bus.',options:['takes','is taking'],answer:0,explain:'“Usually” → a routine.'},
+    {q:'Listen! Somebody ___ up the stairs.',options:['is walking','walks'],answer:0,explain:'It is happening at this moment.'},
+    {q:'On Sunday we ___ visit an exhibition. It’s already decided.',options:['are going to','are'],answer:0,explain:'A decided plan → be going to + verb.'},
+    {q:'The cat is sleeping ___ the bed and the wardrobe.',options:['between','under'],answer:0,explain:'Between = in the middle of two things.'},
+    {q:'The lift is broken, ___ we use the stairs.',options:['so','because'],answer:0,explain:'The stairs are the result.'},
+    {q:'He speaks very ___ , so nobody hears him.',options:['quietly','quiet'],answer:0,explain:'How does he speak? → an adverb.'},
+    {q:'___ the flat is small, Emma loves it.',options:['Although','Because'],answer:0,explain:'The two facts are in contrast.'}
+  ],3,'review',0);
+
+  buildTyped('reviewErrorTyped',[
+    {q:'✗ There is three photos on the shelf.',a:['there are three photos on the shelf'],show:'There are three photos on the shelf.',ph:'Write the correct sentence',hint:'Three photos are plural.'},
+    {q:'✗ She don’t like coffee.',a:["she doesn't like coffee",'she does not like coffee'],show:'She doesn’t like coffee.',ph:'Write the correct sentence',hint:'He/she/it takes doesn’t.'},
+    {q:'✗ We are going to visited an exhibition.',a:['we are going to visit an exhibition',"we're going to visit an exhibition"],show:'We are going to visit an exhibition.',ph:'Write the correct sentence',hint:'After “going to” the verb has no ending.'}
+  ],5,'reviewError',0);
+
+  /* ---------- 2A · WORD SEARCH ---------- */
+  const wsWords=['PIZZA','CAKE','DANCE','LAUGH','SPILL','BRING','CARRY','GUEST'];
+  const WS=10;
+  let wsGrid=[],wsFound=new Set(),wsSel=null,wsPlaced=[];
+  function wsBuild(){
+    wsGrid=Array.from({length:WS},()=>Array(WS).fill(''));
+    wsPlaced=[];wsFound=new Set();wsSel=null;
+    wsWords.forEach(word=>{
+      let done=false,tries=0;
+      while(!done&&tries<500){
+        tries++;
+        const horiz=Math.random()<.5;
+        const r=Math.floor(Math.random()*WS),c=Math.floor(Math.random()*WS);
+        if(horiz&&c+word.length>WS)continue;
+        if(!horiz&&r+word.length>WS)continue;
+        let fits=true;
+        for(let i=0;i<word.length;i++){
+          const rr=horiz?r:r+i,cc=horiz?c+i:c;
+          if(wsGrid[rr][cc]&&wsGrid[rr][cc]!==word[i]){fits=false;break;}
+        }
+        if(!fits)continue;
+        for(let i=0;i<word.length;i++){
+          const rr=horiz?r:r+i,cc=horiz?c+i:c;
+          wsGrid[rr][cc]=word[i];
+        }
+        wsPlaced.push({word,r,c,horiz});done=true;
+      }
+    });
+    const AZ='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for(let r=0;r<WS;r++)for(let c=0;c<WS;c++)if(!wsGrid[r][c])wsGrid[r][c]=AZ[Math.floor(Math.random()*26)];
+    const grid=$('wsGrid');grid.innerHTML='';
+    for(let r=0;r<WS;r++)for(let c=0;c<WS;c++){
+      const b=document.createElement('button');
+      b.type='button';b.className='ws-cell';b.textContent=wsGrid[r][c];
+      b.dataset.r=r;b.dataset.c=c;b.setAttribute('aria-label',`row ${r+1} column ${c+1}, letter ${wsGrid[r][c]}`);
+      b.addEventListener('click',()=>wsClick(b));
+      grid.appendChild(b);
+    }
+    $('wsList').innerHTML=wsWords.map(w=>`<li data-w="${w}">${w}</li>`).join('');
+    $('wsFeedback').className='feedback';
+  }
+  function wsCell(r,c){return $('wsGrid').children[r*WS+c];}
+  function wsClick(cell){
+    if(cell.classList.contains('found'))return;
+    if(!wsSel){wsSel=cell;cell.classList.add('sel');return;}
+    if(wsSel===cell){cell.classList.remove('sel');wsSel=null;return;}
+    const r1=+wsSel.dataset.r,c1=+wsSel.dataset.c,r2=+cell.dataset.r,c2=+cell.dataset.c;
+    const cells=[];
+    if(r1===r2){const step=c2>c1?1:-1;for(let c=c1;;c+=step){cells.push(wsCell(r1,c));if(c===c2)break;}}
+    else if(c1===c2){const step=r2>r1?1:-1;for(let r=r1;;r+=step){cells.push(wsCell(r,c1));if(r===r2)break;}}
+    const word=cells.map(x=>x.textContent).join('');
+    const match=wsWords.find(w=>!wsFound.has(w)&&(w===word||w===[...word].reverse().join('')));
+    const first=wsSel;wsSel=null;first.classList.remove('sel');
+    if(match){
+      cells.forEach(x=>x.classList.add('found'));
+      wsFound.add(match);
+      const li=$('wsList').querySelector(`[data-w="${match}"]`);if(li)li.classList.add('done');
+      if(wsFound.size===wsWords.length){
+        showFeedback('wsFeedback','good','All eight verbs found. Say each one in a sentence about a party. +12 XP');
+        award(12,'wordSearch',1);
+      }else{
+        showFeedback('wsFeedback','info',`${match} ✓ — ${wsWords.length-wsFound.size} to go.`);
+      }
+    }else{
+      cells.forEach(x=>x.classList.add('miss'));
+      setTimeout(()=>cells.forEach(x=>x.classList.remove('miss')),400);
+    }
+  }
+  $('wsHint').addEventListener('click',()=>{
+    const left=wsPlaced.filter(p=>!wsFound.has(p.word));
+    if(!left.length)return;
+    const p=left[Math.floor(Math.random()*left.length)];
+    const cell=wsCell(p.r,p.c);
+    cell.classList.add('sel');
+    showFeedback('wsFeedback','info',`One word starts in the highlighted square and goes ${p.horiz?'to the right':'down'}.`);
+    setTimeout(()=>cell.classList.remove('sel'),1800);
+  });
+  $('wsNew').addEventListener('click',wsBuild);
+  wsBuild();
+
+  /* ---------- 2B · STEP BY STEP ---------- */
+  buildMC('stepMC',[
+    {q:'First, the guests ___ at the flat.',options:['arrive','leave'],answer:0,explain:'arrive = come to a place.'},
+    {q:'Somebody ___ the doorbell and you open the door.',options:['rings','breaks'],answer:0,explain:'We ring a bell.'},
+    {q:'Everybody ___ something: cake, drinks or music.',options:['brings','borrows'],answer:0,explain:'bring = carry something to the place you are going to.'},
+    {q:'You ___ the cake with a knife and give everybody a slice.',options:['cut','drop'],answer:0,explain:'cut the cake — a fixed phrase.'},
+    {q:'Be careful with that glass — don’t ___ the juice!',options:['spill','break'],answer:0,explain:'You spill a liquid; you break a glass.'},
+    {q:'At the end everybody ___ home and the flat is quiet again.',options:['goes','arrives'],answer:0,explain:'go home = leave for your own house.'}
+  ],3,'step',1);
+
+  buildTyped('verbDefTyped',[
+    {q:'take something for a short time and give it back later',a:['borrow','to borrow'],ph:'one verb',hint:'You do this with a friend’s book or umbrella.'},
+    {q:'let something fall by accident',a:['drop','to drop'],ph:'one verb',hint:'Oh no — I ___ my phone!'},
+    {q:'talk in a friendly, relaxed way',a:['chat','to chat'],ph:'one verb',hint:'Four letters, starts with “ch”.'},
+    {q:'come to a place at the end of a journey',a:['arrive','to arrive'],ph:'one verb',hint:'The opposite of “leave”.'},
+    {q:'hold something and move it from one place to another',a:['carry','to carry'],ph:'one verb',hint:'Max did this with the drinks, up four floors.'}
+  ],4,'verbDef',1);
+
+  /* ---------- 3 · PAST SIMPLE ---------- */
+  buildTyped('pastFormTyped',[
+    {q:'walk →',a:['walked'],ph:'past form'},
+    {q:'dance →',a:['danced'],ph:'past form',hint:'The verb already ends in -e, so add only -d.'},
+    {q:'stop →',a:['stopped'],ph:'past form',hint:'One vowel + one consonant: double the last letter.'},
+    {q:'carry →',a:['carried'],ph:'past form',hint:'Consonant + y: change the y to i.'},
+    {q:'bring →',a:['brought'],ph:'past form',hint:'Irregular: it rhymes with “thought”.'},
+    {q:'come →',a:['came'],ph:'past form'},
+    {q:'give →',a:['gave'],ph:'past form'},
+    {q:'ring →',a:['rang'],ph:'past form',hint:'ring → r-a-ng, like sing → sang.'},
+    {q:'eat →',a:['ate'],ph:'past form'},
+    {q:'go →',a:['went'],ph:'past form'}
+  ],4,'pastForm',2);
+
+  const edItems=[
+    ['walked','t'],['stopped','t'],['laughed','t'],['danced','t'],
+    ['played','d'],['cleaned','d'],['carried','d'],['arrived','d'],
+    ['started','id'],['wanted','id'],['waited','id'],['decided','id']
+  ];
+  let edSel=null;
+  function makeEdTile(label,bucket){
+    const tile=document.createElement('button');
+    tile.type='button';tile.className='tile';tile.textContent=label;tile.dataset.bucket=bucket;
+    tile.addEventListener('click',()=>{
+      if(tile.parentElement.classList.contains('zone')){
+        tile.classList.remove('placed','ok','bad','sel');$('edBank').appendChild(tile);edSel=null;return;
+      }
+      if(edSel===tile){tile.classList.remove('sel');edSel=null;return;}
+      if(edSel)edSel.classList.remove('sel');
+      edSel=tile;tile.classList.add('sel');
+    });
+    return tile;
+  }
+  shuffled(edItems).forEach(([w,b])=>$('edBank').appendChild(makeEdTile(w,b)));
+  all('.zone').forEach(zone=>zone.addEventListener('click',e=>{
+    if(e.target!==zone&&e.target.classList.contains('tile'))return;
+    if(!edSel)return;
+    edSel.classList.remove('sel');edSel.classList.add('placed');
+    zone.appendChild(edSel);edSel=null;
+  }));
+  $('edCheck').addEventListener('click',()=>{
+    const left=$('edBank').children.length;
+    if(left){showFeedback('edFeedback','info',`${left} card(s) are still waiting. Put every verb in a group first.`);return;}
+    let correct=0;
+    all('.zone').forEach(zone=>{
+      [...zone.children].forEach(tile=>{
+        const ok=tile.dataset.bucket===zone.dataset.bucket;
+        tile.classList.remove('ok','bad');tile.classList.add(ok?'ok':'bad');
+        if(ok)correct++;
+      });
+    });
+    if(correct===edItems.length){
+      showFeedback('edFeedback','good','All twelve are in the right group. Now say each column aloud — only column 3 has an extra syllable. +12 XP');
+      award(12,'edSort',2);
+    }else{
+      showFeedback('edFeedback','try',`${correct}/12 correct. The red cards are in the wrong group — tap one to send it back. Remember: only verbs ending in t or d get /ɪd/.`);
+    }
+  });
+
+  buildTyped('pastGapTyped',[
+    {q:'The party ___ (start) at seven o’clock.',a:['started'],ph:'one word'},
+    {q:'Nine people ___ (come) to the flat.',a:['came'],ph:'one word'},
+    {q:'Max ___ (carry) the drinks up four floors.',a:['carried'],ph:'one word',hint:'Consonant + y → -ied.'},
+    {q:'The delivery man ___ (not / be) happy.',a:["wasn't",'was not'],ph:'one or two words',hint:'The verb “be” does not use didn’t.'},
+    {q:'Emma ___ (not / shout) at Max.',a:["didn't shout",'did not shout'],ph:'two or three words',hint:'didn’t + the base form.'},
+    {q:'We ___ (sit) on the floor and ___ (eat) the last pizza.',a:['sat and ate','sat ate'],ph:'two past forms',hint:'Write both forms: s___ and a___.'}
+  ],4,'pastGap',2);
+
+  buildTyped('transformTyped',[
+    {q:'Make it negative: <b>Kate brought the music.</b>',a:["kate didn't bring the music",'kate did not bring the music'],show:'Kate didn’t bring the music.',ph:'Write the sentence',hint:'didn’t + base form — not “didn’t brought”.'},
+    {q:'Make it negative: <b>The lift worked.</b>',a:["the lift didn't work",'the lift did not work'],show:'The lift didn’t work.',ph:'Write the sentence'},
+    {q:'Make a question: <b>Max spilled the juice.</b>',a:['did max spill the juice'],show:'Did Max spill the juice?',ph:'Write the question',hint:'Did + subject + base form.'},
+    {q:'Make a question: <b>They danced in the living room.</b>',a:['did they dance in the living room'],show:'Did they dance in the living room?',ph:'Write the question'},
+    {q:'Ask about the time: <b>The party started at seven.</b> (What time…?)',a:['what time did the party start'],show:'What time did the party start?',ph:'Write the question',hint:'Question word + did + subject + base form.'}
+  ],5,'transform',2);
+
+  /* ---------- 4 · STORY ---------- */
+  buildMC('storyTFND',[
+    {q:'Nine guests came to the party.',options:['True','False','Doesn’t say'],answer:0,explain:'“Nine people came, and everybody brought something.”'},
+    {q:'The delivery man used the lift.',options:['True','False','Doesn’t say'],answer:1,explain:'The lift was still broken, so he walked up to the fourth floor.'},
+    {q:'Emma was angry with Max about the juice.',options:['True','False','Doesn’t say'],answer:1,explain:'“I didn’t shout. I said, ‘Now the wall has a story.’”'},
+    {q:'Nina made the chocolate cake herself.',options:['True','False','Doesn’t say'],answer:2,explain:'She arrived with it, but the text never says who made it.',hint:'Careful: bringing a cake is not the same as baking one.'},
+    {q:'Kate and Max helped Emma clean the flat.',options:['True','False','Doesn’t say'],answer:0,explain:'They came back with coffee and rubber gloves at ten o’clock.'},
+    {q:'The cleaning took the whole day.',options:['True','False','Doesn’t say'],answer:1,explain:'“We cleaned everything in two hours.”'}
+  ],4,'storyTF',3);
+
+  buildTyped('storyEvidenceTyped',[
+    {q:'Why wasn’t the delivery man happy?',a:['because the lift was broken','because the lift was still broken','because he walked up to the fourth floor','because he had to walk up to the fourth floor'],show:'Because the lift was still broken and he walked up to the fourth floor.',ph:'Start with “Because…”',hint:'Paragraph 2 gives the reason after the colon.'},
+    {q:'What did Emma give the delivery man?',a:['she gave him a slice of cake','a slice of cake','she gave him a slice of chocolate cake'],show:'She gave him a slice of cake.',ph:'Answer in a full sentence'},
+    {q:'What did Kate and Max bring the next morning?',a:['they brought coffee and rubber gloves','coffee and rubber gloves','they came back with coffee and rubber gloves'],show:'They brought coffee and rubber gloves.',ph:'Answer in a full sentence'},
+    {q:'Where was half a pizza the next morning?',a:['it was in the wardrobe','in the wardrobe','half a pizza was in the wardrobe'],show:'It was in the wardrobe.',ph:'Answer in a full sentence'}
+  ],4,'storyEvidence',3);
+
+  buildTyped('storyVerbTyped',[
+    {q:'bring → the past form in paragraph 1',a:['brought'],ph:'one word'},
+    {q:'ring → the past form in paragraph 2',a:['rang'],ph:'one word'},
+    {q:'go → the past form in paragraph 3',a:['went'],ph:'one word',hint:'“Only one thing ___ wrong.”'},
+    {q:'sit → the past form in paragraph 4',a:['sat'],ph:'one word'},
+    {q:'eat → the past form in paragraph 4',a:['ate'],ph:'one word'}
+  ],3,'storyVerb',3);
+
+  /* ---------- 5 · TIMER ---------- */
+  function setupTimer(displayId,startId,resetId,seconds,key,section,points){
+    let int=null;
+    const display=$(displayId);
+    const stop=()=>{if(int){clearInterval(int);int=null;}};
+    $(startId).addEventListener('click',()=>{
+      stop();let n=seconds;display.className='timer running';display.textContent=n;
+      int=setInterval(()=>{
+        n--;display.textContent=n;
+        if(n<=0){stop();display.className='timer finished';display.textContent='✓';award(points,key,section);}
+      },1000);
+    });
+    $(resetId).addEventListener('click',()=>{stop();display.className='timer';display.textContent=seconds;});
+  }
+  setupTimer('timer','timerStart','timerReset',90,'retellTimer',4,12);
+
+  /* ---------- 6 · HOMEWORK ---------- */
+  buildTyped('hwVocabTyped',[
+    {q:'come to a place at the end of a journey',a:['arrive','to arrive'],ph:'one verb'},
+    {q:'let something fall by accident',a:['drop','to drop'],ph:'one verb'},
+    {q:'a liquid comes out of a glass onto the table',a:['spill','to spill'],ph:'one verb'},
+    {q:'take something for a short time and give it back',a:['borrow','to borrow'],ph:'one verb'},
+    {q:'a person who comes to your home for a party',a:['a guest','guest'],ph:'one noun'}
+  ],4,'hwVocab',5);
+
+  buildMC('hwVocabMC',[
+    {q:'Somebody ___ the doorbell at half past seven.',options:['rang','broke','carried'],answer:0,explain:'ring the doorbell → rang.'},
+    {q:'Max ___ the drinks up four floors.',options:['carried','dropped','cut'],answer:0,explain:'carry = hold and move something.'},
+    {q:'We ___ the cake and everybody got a slice.',options:['cut','spilled','laughed'],answer:0,explain:'cut the cake.'},
+    {q:'Nina told a funny story and everybody ___ .',options:['laughed','arrived','borrowed'],answer:0,explain:'laugh — the sound you make at something funny.'},
+    {q:'I ___ my brother’s camera for the evening and gave it back on Monday.',options:['borrowed','brought','dropped'],answer:0,explain:'borrow = take for a short time.'},
+    {q:'At midnight the last ___ went home.',options:['guest','entrance','forecast'],answer:0,explain:'A guest is a person you invite.'}
+  ],4,'hwVocabMC',5);
+
+  buildTyped('hwPastTyped',[
+    {q:'clean →',a:['cleaned'],ph:'past form'},
+    {q:'tidy →',a:['tidied'],ph:'past form',hint:'Consonant + y → -ied.'},
+    {q:'stop →',a:['stopped'],ph:'past form',hint:'Double the last letter.'},
+    {q:'arrive →',a:['arrived'],ph:'past form',hint:'It already ends in -e.'},
+    {q:'take →',a:['took'],ph:'past form'},
+    {q:'drink →',a:['drank'],ph:'past form'},
+    {q:'say →',a:['said'],ph:'past form'},
+    {q:'break →',a:['broke'],ph:'past form'}
+  ],4,'hwPast',5);
+
+  buildTyped('hwGapTyped',[
+    {q:'I ___ (arrive) at Emma’s flat at seven o’clock.',a:['arrived'],ph:'one word'},
+    {q:'I ___ (bring) a big chocolate cake.',a:['brought'],ph:'one word'},
+    {q:'The lift ___ (not / work), so we ___ (walk) up to the fourth floor.',a:["didn't work and we walked","did not work and we walked","didn't work so we walked"],ph:'both verbs',hint:'Write both: didn’t w___ … and … w___.'},
+    {q:'We ___ (dance) and ___ (talk) until midnight.',a:['danced and talked','danced talked'],ph:'both verbs'},
+    {q:'Max ___ (spill) some juice, but Emma ___ (not / shout).',a:["spilled and emma didn't shout","spilled but emma didn't shout","spilled and emma did not shout","spilt and emma didn't shout"],ph:'both verbs',hint:'Write both: sp___ … and Emma didn’t sh___.'},
+    {q:'It ___ (be) the best evening of the year.',a:['was'],ph:'one word'}
+  ],5,'hwGap',5);
+
+  buildTyped('hwTransformTyped',[
+    {q:'Make it negative: <b>I watched a film on Sunday.</b>',a:["i didn't watch a film on sunday",'i did not watch a film on sunday'],show:'I didn’t watch a film on Sunday.',ph:'Write the sentence'},
+    {q:'Make it negative: <b>They came back at ten.</b>',a:["they didn't come back at ten",'they did not come back at ten'],show:'They didn’t come back at ten.',ph:'Write the sentence',hint:'After didn’t the verb has no past form.'},
+    {q:'Make a question: <b>You tidied your room.</b>',a:['did you tidy your room'],show:'Did you tidy your room?',ph:'Write the question'},
+    {q:'Ask about the place: <b>She went to the cinema.</b> (Where…?)',a:['where did she go'],show:'Where did she go?',ph:'Write the question',hint:'Where + did + subject + base form.'}
+  ],5,'hwTransform',5);
+
+  const hwArea=$('hwWriting');
+  const hwCount=()=>{$('hwWordCount').textContent=hwArea.value.trim().split(/\s+/).filter(Boolean).length;};
+  hwArea.addEventListener('input',hwCount);hwCount();
+  const IRREGULAR=/\b(was|were|went|came|brought|ate|drank|gave|took|said|sat|broke|rang|made|had|got|met|bought|saw|left|slept|woke|read|wrote|felt|found|ran)\b/g;
+  $('checkHwWriting').addEventListener('click',()=>{
+    const text=hwArea.value.trim();
+    const low=text.toLowerCase().replace(/[’`]/g,"'");
+    const n=text.split(/\s+/).filter(Boolean).length;
+    const regular=(low.match(/\b\w+ed\b/g)||[]).length;
+    const irregular=new Set(low.match(IRREGULAR)||[]).size;
+    const checks=[
+      [/\b(last|yesterday|ago)\b/.test(low),'a past time expression (last Saturday / yesterday / two days ago)'],
+      [regular+irregular>=5,'five verbs in the Past Simple'],
+      [irregular>=2,'two irregular verbs'],
+      [/\b(didn't|did not)\b/.test(low),'a negative sentence with didn’t'],
+      [/\b(because|so|but|although)\b/.test(low),'a linking word']
+    ];
+    const missing=checks.filter(c=>!c[0]).map(c=>c[1]);
+    if(n<70){showFeedback('hwWritingFeedback','info',`You have ${n} words. Write ${70-n} more to reach the target.`);return;}
+    if(n>110){showFeedback('hwWritingFeedback','info',`${n} words is long for this task. Cut it to 70–90 and keep the best sentences.`);return;}
+    if(missing.length){showFeedback('hwWritingFeedback','try',`Good length (${n} words), but still missing: ${missing.join(' · ')}`);return;}
+    const lengthNote=n>90?` It is ${n} words — a little over the 70–90 target.`:'';
+    showFeedback('hwWritingFeedback','good',`Every criterion is there.${lengthNote} Now read it once as your own editor: did every verb move into the past? +20 XP`);
+    award(20,'hwWriting',5);
+  });
+
+  /* ---------- ANSWER SHEET ---------- */
+  function collectAnswers(){
+    return all('[data-hw]').map(box=>{
+      const items=[];
+      all('.task',box).forEach(task=>{
+        const q=(task.querySelector('.question')||{}).innerText||'';
+        const input=task.querySelector('input.input');
+        const fb=task.querySelector('.feedback');
+        let a='—';
+        if(input){a=input.value.trim()||'—';}
+        else{
+          const chosen=task.querySelector('.choice.correct')||task.querySelector('.choice.wrong');
+          if(chosen)a=chosen.innerText.trim();
+        }
+        let status='not answered';
+        if(a!=='—')status=(fb&&fb.classList.contains('good'))?'correct':'please check';
+        items.push({q:q.trim(),a,status,free:false});
+      });
+      all('textarea[data-label]',box).forEach(ta=>{
+        items.push({q:ta.dataset.label,a:ta.value.trim()||'—',status:'for the teacher',free:true});
+      });
+      return {title:box.dataset.hw,items};
+    });
+  }
+  function answerStats(groups){
+    let auto=0,right=0,blank=0;
+    groups.forEach(g=>g.items.forEach(i=>{
+      if(i.free)return;
+      auto++;
+      if(i.status==='correct')right++;
+      if(i.status==='not answered')blank++;
+    }));
+    return {auto,right,blank};
+  }
+  function buildSheetHTML(){
+    const groups=collectAnswers();
+    const s=answerStats(groups);
+    const name=$('studentName').value.trim()||'(no name)';
+    const date=new Date().toLocaleDateString();
+    const body=groups.map(g=>`<h2>${esc(g.title)}</h2>`+g.items.map(i=>i.free
+      ? `<div class="sheet-item"><div class="sheet-q">${esc(i.q)}</div><div class="sheet-free">${esc(i.a)}</div></div>`
+      : `<div class="sheet-item"><div class="sheet-q">${esc(i.q)}</div><div class="sheet-a">Answer: ${esc(i.a)}<span class="st">${esc(i.status)}</span></div></div>`
+    ).join('')).join('');
+    return `<div class="sheet">
+      <h1>English homework · Lesson 10 · The Morning After</h1>
+      <div class="sheet-meta">Student: <b>${esc(name)}</b> · Date: ${esc(date)} · CEFR A2 · vocabulary and Past Simple</div>
+      <div class="sheet-score">Auto-marked tasks: ${s.right} correct out of ${s.auto} · not answered: ${s.blank}. The writing task needs the teacher’s feedback.</div>
+      ${body}
+      <div class="sheet-foot">Generated by the lesson page. “Please check” means the answer was typed but the page did not accept it — it may still be right, or nearly right.</div>
+    </div>`;
+  }
+  function sheetText(){
+    const groups=collectAnswers();
+    const s=answerStats(groups);
+    const name=$('studentName').value.trim()||'(no name)';
+    const lines=['ENGLISH HOMEWORK — LESSON 10 — THE MORNING AFTER',`Student: ${name}`,`Date: ${new Date().toLocaleDateString()}`,
+      `Auto-marked: ${s.right}/${s.auto} correct, ${s.blank} not answered`,''];
+    groups.forEach(g=>{
+      lines.push('== '+g.title+' ==');
+      g.items.forEach(i=>{lines.push(i.q);lines.push('   > '+i.a+'   ['+i.status+']');});
+      lines.push('');
+    });
+    return lines.join('\n');
+  }
+  function refreshResult(){
+    const s=answerStats(collectAnswers());
+    $('result').textContent=`Homework so far: ${s.right} of ${s.auto} auto-marked answers correct · ${s.blank} still empty · ${state.xp} XP in the lesson.`;
+  }
+  $('makePdf').addEventListener('click',()=>{
+    $('answerSheet').innerHTML=buildSheetHTML();
+    refreshResult();
+    document.body.classList.add('printing');
+    showFeedback('exportFeedback','info','The print window is opening. Choose “Save as PDF” as the printer, save the file, and send it to your teacher.');
+    const cleanup=()=>{document.body.classList.remove('printing');window.removeEventListener('afterprint',cleanup);};
+    window.addEventListener('afterprint',cleanup);
+    setTimeout(()=>{window.print();setTimeout(cleanup,1500);},60);
+  });
+  $('makeTxt').addEventListener('click',()=>{
+    refreshResult();
+    const name=($('studentName').value.trim()||'student').replace(/[^\w\-]+/g,'_');
+    const blob=new Blob([sheetText()],{type:'text/plain;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=`English_Lesson10_homework_${name}.txt`;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    showFeedback('exportFeedback','good','The text file is in your Downloads folder. You can send it to your teacher or paste it into a message.');
+  });
+
+  load();
+  refreshResult();
+})();
+</script>
+</body>
+</html>
