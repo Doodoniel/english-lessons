@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Nouns &amp; Articles · Review, Extension and Test</title>
+<style>
+:root{
+  --red:#e63946; --blue:#1d4ed8; --teal:#0e9f8f; --yellow:#ffc233; --purple:#6d4aff; --orange:#f4732a; --green:#16a34a;
+  --bg:#eef2f7; --bg2:#e4e9f3; --card:#ffffff; --ink:#151d2b; --muted:#5d6b85;
+  --line:#d9e1ee; --ok:#16a34a; --no:#e11d48; --shadow:0 10px 30px rgba(22,38,66,.10); --r:18px;
+}
+html[data-theme="dark"]{
+  --bg:#0d1320; --bg2:#111a29; --card:#151e2f; --ink:#e8eefb; --muted:#93a3bd;
+  --line:#233047; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);line-height:1.55;
+  background:radial-gradient(1200px 600px at 6% -10%,rgba(109,74,255,.14),transparent 60%),
+             radial-gradient(1000px 600px at 100% 0%,rgba(29,78,216,.14),transparent 55%),var(--bg)}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--card) 84%,transparent);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1380px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+.unitbadge{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#fff;font-size:19px;
+  background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 6px 16px rgba(29,78,216,.35)}
+.brand small{display:block;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.xpbox{flex:1;min-width:210px;max-width:400px}
+.xpbar{height:12px;border-radius:99px;background:var(--bg2);overflow:hidden;border:1px solid var(--line)}
+.xpfill{height:100%;width:0;border-radius:99px;transition:width .5s cubic-bezier(.2,.9,.2,1);
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
+.xpmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  padding:8px 14px;border-radius:12px;font-weight:700;font-size:13px;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent}
+.btn.go{background:linear-gradient(135deg,var(--teal),var(--green));color:#fff;border-color:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.medals{display:flex;gap:6px}
+.medal{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--bg2);
+  filter:grayscale(1);opacity:.4;font-size:16px;transition:.4s;border:1px solid var(--line)}
+.medal.on{filter:none;opacity:1;transform:scale(1.08);box-shadow:0 0 0 3px rgba(255,194,51,.25)}
+main{max-width:1380px;margin:0 auto;padding:20px 18px 90px;display:grid;gap:22px;
+  grid-template-columns:minmax(230px,285px) minmax(0,1fr)}
+@media(max-width:980px){main{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(min-width:981px){.side .sticky{position:sticky;top:78px;display:flex;flex-direction:column;gap:16px;
+  max-height:calc(100vh - 96px);overflow:auto}}
+.flow{display:flex;flex-direction:column;gap:20px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card>h3{margin:0;padding:13px 16px;font-size:14px;letter-spacing:.3px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.card .body{padding:15px 17px}
+.stage{scroll-margin-top:78px}
+.stagehead{display:flex;align-items:center;gap:11px;margin:0;padding:14px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.stageno{flex:none;min-width:52px;height:26px;padding:0 8px;border-radius:8px;display:grid;place-items:center;color:#fff;
+  font-size:11.5px;font-weight:800;letter-spacing:.3px;background:linear-gradient(135deg,var(--blue),var(--purple))}
+.stagehead h3{margin:0;font-size:15px;letter-spacing:.2px}
+.stagehead .skill{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 9px;border-radius:99px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+.xpchip{font-size:10px;font-weight:800;letter-spacing:.5px;padding:3px 8px;border-radius:99px;
+  background:rgba(14,159,143,.14);color:var(--teal);border:1px solid rgba(14,159,143,.3)}
+.hint{font-size:12.5px;color:var(--muted)}
+.lead{font-size:13.5px;margin:0 0 12px}
+.sect{display:flex;align-items:center;gap:10px;margin:14px 2px -6px;font-size:12px;font-weight:800;
+  letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.sect::after{content:"";flex:1;height:1px;background:var(--line)}
+.sect:first-child{margin-top:0}
+/* nav */
+.nav a{display:flex;align-items:center;gap:9px;padding:5px 9px;border-radius:10px;text-decoration:none;color:var(--ink);font-size:12.5px;font-weight:600}
+.nav a:hover{background:var(--bg2)}
+.nav a .tick{width:16px;height:16px;flex:none;border-radius:5px;border:1.5px solid var(--muted);display:grid;place-items:center;font-size:9px}
+.nav a.done .tick{background:var(--green);border-color:var(--green);color:#fff}
+.nav a.done{color:var(--muted)}
+.navsect{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);
+  padding:9px 9px 3px;border-top:1px solid var(--line);margin-top:4px}
+.navsect:first-child{border-top:none;margin-top:0}
+ul.tight{margin:6px 0;padding-left:18px;font-size:13px}
+ul.tight li{margin-bottom:4px}
+.callout{border-left:4px solid var(--yellow);background:var(--bg2);padding:9px 12px;border-radius:0 10px 10px 0;font-size:13px;margin:9px 0}
+.callout.info{border-color:var(--blue)}
+.callout.warn{border-color:var(--red)}
+/* theory */
+details.th{border:1px solid var(--line);border-radius:14px;background:var(--bg2);margin-bottom:9px;overflow:hidden}
+details.th>summary{cursor:pointer;padding:10px 13px;font-weight:800;font-size:13.5px;list-style:none;
+  display:flex;align-items:center;gap:9px}
+details.th>summary::-webkit-details-marker{display:none}
+details.th>summary::before{content:"▸";color:var(--purple);font-size:13px;transition:.2s}
+details.th[open]>summary::before{transform:rotate(90deg)}
+details.th .thbody{padding:2px 14px 13px;font-size:13.2px}
+.gtab{width:100%;border-collapse:collapse;font-size:12.6px;margin:6px 0}
+.gtab th,.gtab td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.gtab th{background:var(--card);font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);width:32%}
+.gtab td i,.gtab td em{color:var(--purple);font-style:italic}
+.ex{color:var(--purple);font-style:italic}
+.wrong{color:var(--no)} .wrong s{opacity:.8}
+/* generic q */
+.q{border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:var(--bg2)}
+.q p{margin:0 0 8px;font-size:13.5px;font-weight:600}
+.q .num{color:var(--muted);font-weight:800;margin-right:6px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.opt.good{background:rgba(22,163,74,.14);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:rgba(225,29,72,.12);border-color:var(--no);color:var(--no);text-decoration:line-through}
+.fb{font-size:12px;margin-top:7px;display:none}
+.fb.on{display:block}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--no)}
+input.txt{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:6px 9px;font-size:13px;width:140px;font-weight:700}
+input.txt.good{border-color:var(--ok);color:var(--ok)} input.txt.bad{border-color:var(--no);color:var(--no)}
+/* inline choice (italics-style) */
+.chline{font-size:13.8px;margin:0 0 9px;padding-left:24px;text-indent:-24px;line-height:2}
+.chline .num{color:var(--muted);font-weight:800;margin-right:7px}
+.chgrp{display:inline-flex;border:1px solid var(--blue);border-radius:9px;overflow:hidden;vertical-align:middle;text-indent:0}
+.chgrp b{padding:2px 9px;font-size:12.6px;font-weight:700;cursor:pointer;background:var(--card);color:var(--blue);
+  border-left:1px solid var(--blue);font-style:italic}
+.chgrp b:first-child{border-left:none}
+.chgrp b.sel{background:var(--blue);color:#fff}
+.chgrp.good{border-color:var(--ok)} .chgrp.good b.sel{background:var(--ok)}
+.chgrp.bad{border-color:var(--no)} .chgrp.bad b.sel{background:var(--no)}
+.chgrp.bad b.key{background:rgba(22,163,74,.2);color:var(--ok)}
+/* cloze */
+.clozetext{font-size:14px;line-height:2.2;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.clozetext h4{margin:0 0 8px;font-size:15px;color:var(--purple);line-height:1.4}
+.gapsel{border:1px solid var(--blue);background:var(--card);color:var(--blue);border-radius:8px;padding:2px 5px;
+  font-size:12.5px;font-weight:700;font-family:inherit;outline:none}
+.gapsel.good{border-color:var(--ok);color:var(--ok);background:rgba(22,163,74,.1)}
+.gapsel.bad{border-color:var(--no);color:var(--no);background:rgba(225,29,72,.1)}
+.gapnum{font-size:10px;font-weight:800;color:var(--muted);vertical-align:super}
+input.gapin{border:none;border-bottom:2px solid var(--blue);background:transparent;color:var(--blue);
+  font-family:inherit;font-size:13.5px;font-weight:800;width:86px;text-align:center;outline:none;padding:0 2px}
+input.gapin.good{border-color:var(--ok);color:var(--ok)} input.gapin.bad{border-color:var(--no);color:var(--no)}
+/* token click */
+.toktext{font-size:14px;line-height:2.1;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.tok{cursor:pointer;padding:1px 3px;border-radius:5px}
+.tok:hover{background:rgba(29,78,216,.14)}
+.tok.sel{background:rgba(29,78,216,.26);outline:1px solid var(--blue)}
+.checked .tok.key{background:rgba(22,163,74,.25);outline:1px solid var(--ok)}
+.checked .tok.sel:not(.key){background:rgba(225,29,72,.22);outline:1px solid var(--no)}
+.checked .tok{cursor:default}
+.fixlist{display:none;font-size:12.5px;margin-top:10px}
+.fixlist.on{display:block}
+.fixlist span{display:inline-block;background:var(--card);border:1px solid var(--ok);color:var(--ok);
+  border-radius:99px;padding:2px 10px;margin:3px 4px 0 0;font-weight:700}
+/* invitation card */
+.invite{background:#f7f3e6;border:1px solid #d9cfae;border-radius:12px;padding:20px 24px;
+  font-family:"Segoe Script","Bradley Hand","Comic Sans MS",cursive;color:#2b2417;font-size:15px;line-height:2.3}
+html[data-theme="dark"] .invite{background:#231f16;border-color:#4a4126;color:#efe6cf}
+.invite .rule{height:0;border-top:1px solid #b9ac86;margin:6px 0 14px}
+.invite .tok:hover{background:rgba(29,78,216,.18)}
+/* dialogue */
+.dial{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13.8px;line-height:2}
+.dial .row{display:flex;gap:10px;margin-bottom:2px}
+.dial .who{flex:none;width:56px;font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  color:var(--muted);padding-top:6px}
+.dial .said{flex:1}
+.dial .row.done .said{opacity:.75}
+/* email mock */
+.email{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.email .bar{background:linear-gradient(180deg,#dfe8f7,#cfdcf1);color:#26364f;font-size:11.5px;font-weight:700;
+  padding:6px 10px;display:flex;gap:8px;align-items:center}
+html[data-theme="dark"] .email .bar{background:#1d2b44;color:#cfe0ff}
+.email .bar input{border:1px solid #9db4d6;border-radius:4px;padding:1px 6px;font-size:11.5px;background:#fff;color:#26364f;width:200px}
+.email .msg{padding:12px 14px;font-size:13.8px;line-height:2.1;background:#f2f7ff}
+html[data-theme="dark"] .email .msg{background:#131c2c}
+/* container items */
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.item{border:1px solid var(--line);border-radius:14px;background:var(--bg2);padding:10px;text-align:center}
+.item img{height:96px;width:auto;max-width:100%;object-fit:contain;mix-blend-mode:multiply}
+html[data-theme="dark"] .item img{mix-blend-mode:normal;background:#fff;border-radius:8px;padding:3px}
+.item .cap{margin-top:7px;font-size:13px;font-weight:700;display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
+.item .n{color:var(--muted);font-weight:800}
+/* notices */
+.noticeimg{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:6px}
+.rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px;margin-top:11px}
+.mrow{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;padding:7px 10px;
+  background:var(--bg2);font-size:13.3px}
+.mrow .n{width:20px;flex:none;color:var(--muted);font-weight:800;text-align:center}
+.mrow .lb{flex:1}
+.mrow select{max-width:190px}
+select.pick{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;
+  padding:5px 7px;font-size:12.5px;font-weight:700;font-family:inherit;outline:none;max-width:100%}
+select.pick.good{border-color:var(--ok);color:var(--ok)} select.pick.bad{border-color:var(--no);color:var(--no)}
+/* buckets */
+.pool{display:flex;gap:6px;flex-wrap:wrap;min-height:24px;margin-bottom:11px}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:9px}
+.bucket{border:1.5px dashed var(--line);border-radius:14px;padding:9px;min-height:92px;background:var(--bg2)}
+.bucket h4{margin:0 0 7px;font-size:11px;letter-spacing:.4px;color:var(--muted);text-align:center}
+.bucket h4 b{font-size:14px;color:var(--ink);display:block}
+.bucket.sel{border-color:var(--blue);background:rgba(29,78,216,.07)}
+.bucket .drop{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.wchip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:4px 11px;cursor:pointer;font-size:12.5px;font-weight:700;transition:.12s}
+.wchip:hover{transform:translateY(-2px)}
+.wchip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.wchip.good{border-color:var(--ok);background:rgba(22,163,74,.14);color:var(--ok)}
+.wchip.bad{border-color:var(--no);background:rgba(225,29,72,.12);color:var(--no)}
+/* pairs A/B */
+.pairbox{border:1px solid var(--line);border-radius:14px;background:var(--bg2);padding:10px 12px;margin-bottom:9px}
+.pairbox .prow{display:flex;align-items:center;gap:9px;font-size:13.4px;margin-bottom:5px;flex-wrap:wrap}
+.pairbox .prow .st{flex:1;min-width:180px;font-weight:600}
+.abtn{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:4px 10px;cursor:pointer;
+  font-size:12px;font-weight:800}
+.abtn:hover{border-color:var(--blue)}
+.abtn.sel{background:var(--blue);color:#fff;border-color:transparent}
+.abtn.good{background:rgba(22,163,74,.18);border-color:var(--ok);color:var(--ok)}
+.abtn.bad{background:rgba(225,29,72,.15);border-color:var(--no);color:var(--no)}
+.pairbox .key{font-size:12px;color:var(--muted);margin-top:4px}
+/* writing */
+textarea.write{width:100%;min-height:130px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  background:var(--card);color:var(--ink);font-family:inherit;font-size:13.5px;resize:vertical;outline:none}
+textarea.write:focus{border-color:var(--blue)}
+.wcbar{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:6px;gap:10px;flex-wrap:wrap}
+.points{display:flex;flex-direction:column;gap:6px;margin:9px 0}
+.pt{display:flex;align-items:center;gap:8px;font-size:12.5px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:7px 10px;cursor:pointer}
+.pt::before{content:"";width:15px;height:15px;border-radius:5px;border:1.5px solid var(--muted);flex:none}
+.pt.on::before{content:"✓";background:var(--green);border-color:var(--green);color:#fff;font-size:10px;display:grid;place-items:center;line-height:1}
+/* dashboard */
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
+.dcell{border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--bg2)}
+.dcell .lbl{font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.dcell .val{font-size:24px;font-weight:800;margin:2px 0 5px}
+.dbar{height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.dbar i{display:block;height:100%;width:0;border-radius:99px;transition:width .8s cubic-bezier(.2,.9,.2,1)}
+.band{text-align:center;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(29,78,216,.13),rgba(109,74,255,.12));border:1px solid var(--line)}
+.band .b{font-size:22px;font-weight:800}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;width:9px;height:14px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:400;background:var(--ink);color:var(--bg);
+  padding:11px 20px;border-radius:99px;font-weight:800;font-size:13.5px;transition:transform .4s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 30px}
+#printroot{display:none}
+@media print{
+  body>header,body>main,body>footer,.toast,.confetti{display:none!important}
+  #printroot{display:block!important;font-family:"Segoe UI",sans-serif;color:#000}
+  #printroot h2{font-size:18px;margin:0 0 4px}
+  #printroot table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+  #printroot th,#printroot td{border:1px solid #999;padding:5px 7px;text-align:left}
+  @page{margin:14mm}
+}
+
+/* ===== arcade game ===== */
+.arc{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,rgba(109,74,255,.13),rgba(14,159,143,.11));padding:16px 14px;text-align:center}
+.archead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12.5px;font-weight:800;color:var(--muted)}
+.arcclock{font-variant-numeric:tabular-nums;font-size:20px;font-weight:900;color:var(--orange)}
+.arcclock.warn{color:var(--no);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.35}}
+.lives{letter-spacing:2px;font-size:15px}
+.combo{color:var(--purple)}
+.arcphrase{font-size:26px;font-weight:900;margin:16px 0 6px;min-height:42px;line-height:1.25}
+.arcphrase u{text-decoration:none;border-bottom:3px dashed var(--purple);padding:0 4px}
+.arcsub{font-size:12.5px;color:var(--muted);min-height:34px}
+.gates{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.gate{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:13px 6px;cursor:pointer;
+  font-size:17px;font-weight:900;transition:.12s}
+.gate:hover{transform:translateY(-3px);border-color:var(--purple)}
+.gate.good{background:rgba(22,163,74,.18);border-color:var(--ok);color:var(--ok)}
+.gate.bad{background:rgba(225,29,72,.15);border-color:var(--no);color:var(--no)}
+.gate small{display:block;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.3px}
+.arcbar{height:8px;border-radius:99px;background:var(--bg2);border:1px solid var(--line);overflow:hidden;margin:10px 0 2px}
+.arcbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--teal),var(--orange));transition:width .3s linear}
+.result{text-align:center;padding:8px 0}
+.result .big{font-size:46px;line-height:1.1}
+.gstats{display:flex;gap:14px;justify-content:center;font-size:12.5px;font-weight:700;color:var(--muted);flex-wrap:wrap}
+.gstats b{color:var(--purple)}
+/* reading */
+.reader{font-size:14.6px;line-height:2.25;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.reader h4{margin:0 0 10px;font-size:18px;color:var(--purple);line-height:1.35}
+.reader p{margin:0 0 12px}
+.reader .kw{border-bottom:2px dotted var(--orange);cursor:help;font-weight:600}
+.tfrow{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line);border-radius:12px;padding:9px 11px;margin-bottom:8px;background:var(--bg2);flex-wrap:wrap}
+.tfrow .st{flex:1;min-width:200px;font-size:13.5px;font-weight:600}
+.tfopts{display:flex;gap:5px;flex:none}
+.tfb{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:5px 9px;cursor:pointer;font-size:11px;font-weight:800}
+.tfb:hover{border-color:var(--blue)}
+.tfb.sel{background:var(--blue);color:#fff;border-color:transparent}
+.tfb.good{background:rgba(22,163,74,.18);border-color:var(--ok);color:var(--ok)}
+.tfb.bad{background:rgba(225,29,72,.15);border-color:var(--no);color:var(--no)}
+/* speaking */
+.cue{background:var(--bg2);border:1px dashed var(--teal);border-radius:14px;padding:13px 15px;margin-bottom:10px}
+.cue b{color:var(--teal)}
+.timerbox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px}
+.tdisp{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;min-width:74px;color:var(--teal)}
+.tdisp.low{color:var(--no)}
+.tally{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.tally button{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);
+  cursor:pointer;font-weight:900;font-size:15px}
+.tally .cnt{font-size:22px;font-weight:900;min-width:34px;text-align:center;color:var(--purple)}
+/* chips pairs */
+.pairwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.pairwrap{grid-template-columns:1fr}}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:5px 12px;cursor:pointer;font-size:12.5px;font-weight:700;transition:.15s}
+.chip:hover{transform:translateY(-2px)}
+.chip.sel{background:var(--blue);color:#fff;border-color:transparent}
+.chip.gone{animation:pop .35s forwards}
+@keyframes pop{to{transform:scale(0);opacity:0;width:0;padding:0;margin:0;border:0}}
+.keylink{display:inline-block;margin-top:6px;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <div class="unitbadge">R</div>
+      <div>NOUNS &amp; ARTICLES · REVIEW<small>Module 1 · revision, extension, reading &amp; speaking</small></div>
+    </div>
+    <div class="xpbox">
+      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+      <div class="xpmeta"><span id="xplabel">0 XP</span><span id="xpright">Level 1 · Warming Up</span></div>
+    </div>
+    <div class="medals" id="medals">
+      <div class="medal" data-need="180" title="180 XP — Arcade Survivor">🕹️</div>
+      <div class="medal" data-need="360" title="360 XP — Countability Pro">🧱</div>
+      <div class="medal" data-need="540" title="540 XP — Sharp Reader">📖</div>
+      <div class="medal" data-need="730" title="730 XP — Article Master">🏆</div>
+    </div>
+    <button class="btn" id="themebtn">🌙 Theme</button>
+    <button class="btn" id="resetbtn">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== SIDE ===================== -->
+<div class="side">
+  <div class="sticky">
+    <div class="card nav">
+      <h3>🗺️ Lesson map</h3>
+      <div class="body" id="nav" style="padding:8px"></div>
+    </div>
+    <div class="card">
+      <h3>📊 Live score</h3>
+      <div class="body" style="padding:12px 14px">
+        <div id="minidash"></div>
+        <p class="hint" style="margin:8px 0 0">The full report is at the end of the lesson.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>⚡ Decision tree</h3>
+      <div class="body">
+        <ul class="tight" style="margin-top:0">
+          <li><b>1.</b> Is it a <b>name</b>? → usually no article (<i>Mount Fuji, Oxford Street, Tesco</i>) —
+            but plural, <i>of</i>, Republic or Kingdom → <b>the</b>.</li>
+          <li><b>2.</b> Does the listener know <b>which one</b>? → <b>the</b>.</li>
+          <li><b>3.</b> Singular and countable, new information? → <b>a/an</b>.</li>
+          <li><b>4.</b> Plural or uncountable, meant <b>in general</b>? → <b>no article</b>.</li>
+        </ul>
+        <div class="callout warn" style="margin-bottom:0"><b>Only one of its kind</b> → <i>the</i>:
+          the sun, the internet, the first time, the best.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FLOW ===================== -->
+<div class="flow">
+
+  <div class="sect">Warm-up game</div>
+
+  <div class="card stage" id="s0">
+    <div class="stagehead"><span class="stageno">GAME</span><h3>Article Arcade — three gates, 90 seconds</h3>
+      <span class="xpchip">+120 XP</span><span class="skill">Revision</span></div>
+    <div class="body">
+      <p class="lead">A phrase appears with one gap. Send it through the right gate: <b>a/an</b>, <b>the</b> or
+        <b>–</b> (no article). Three lives, ninety seconds. Five correct in a row doubles your points.</p>
+      <div class="arc">
+        <div class="archead">
+          <span class="arcclock" id="arcclock">1:30</span>
+          <span class="lives" id="arclives">❤️❤️❤️</span>
+          <span>Score <b id="arcscore" style="color:var(--purple)">0</b></span>
+          <span class="combo">Combo ×<b id="arccombo">1</b></span>
+        </div>
+        <div class="arcbar"><i id="arcbarfill"></i></div>
+        <div class="arcphrase" id="arcphrase">Ready?</div>
+        <div class="arcsub" id="arcsub">Say each phrase out loud before you choose — your ear is faster than your brain.</div>
+        <div class="gates" id="arcgates" style="display:none">
+          <div class="gate" data-v="a/an">a / an<small>one of many</small></div>
+          <div class="gate" data-v="the">the<small>we know which</small></div>
+          <div class="gate" data-v="–">–<small>no article</small></div>
+        </div>
+        <button class="btn go" id="arcstart" style="margin-top:12px">▶ Start the arcade</button>
+      </div>
+      <span class="fb" id="arcfb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Theory · what you know + what is new</div>
+
+  <div class="card">
+    <h3>📘 Review of Units 1–4, plus six new points</h3>
+    <div class="body">
+      <details class="th" open><summary>Recap · the whole module in one table</summary>
+        <div class="thbody">
+          <table class="gtab">
+            <tr><th>a / an</th><td>one of many · first mention · jobs · descriptions with an adjective ·
+              <i>each</i> in measurements:
+              <span class="ex">a dentist · an unusual name · twice a month</span></td></tr>
+            <tr><th>the</th><td>we both know which one · second mention · the only one · superlatives and ordinals ·
+              places in town · parts of a building · times of day · centuries · instruments:
+              <span class="ex">the entrance · the nineteenth century · the best café</span></td></tr>
+            <tr><th>no article</th><td>plurals and uncountables in general · names · countries · cities · streets ·
+              stations · meals · languages · sports · transport · noun + number · <i>at home, in bed, at work</i>:
+              <span class="ex">I prefer films to books · by train · Room 334</span></td></tr>
+          </table>
+          <div class="callout info" style="margin-bottom:0">Countability first, article second. If the noun is
+            uncountable, <i>a/an</i> is impossible whatever else is true.</div>
+        </div>
+      </details>
+      <details class="th"><summary>NEW 1 · Uncountable in English, countable in Russian</summary>
+        <div class="thbody">
+          The classic exam trap. No plural, no <i>a/an</i>, singular verb:
+          <div class="ex">advice · information · news · furniture · luggage · equipment · accommodation ·
+            research · progress · traffic · weather · money · work · homework · knowledge · travel</div>
+          <table class="gtab">
+            <tr><th>wrong</th><th style="width:auto">right</th></tr>
+            <tr><td class="wrong"><s>an advice · advices</s></td><td>a piece of advice · some advice</td></tr>
+            <tr><td class="wrong"><s>informations</s></td><td>information · a piece of information</td></tr>
+            <tr><td class="wrong"><s>The news are bad.</s></td><td>The news <b>is</b> bad.</td></tr>
+            <tr><td class="wrong"><s>I booked an accommodation.</s></td><td>I booked accommodation / a room</td></tr>
+            <tr><td class="wrong"><s>He made a good progress.</s></td><td>He made good progress</td></tr>
+            <tr><td class="wrong"><s>We had a nice weather.</s></td><td>We had nice weather</td></tr>
+            <tr><td class="wrong"><s>a travel</s></td><td>a trip · a journey <span class="hint">(travel itself is uncountable)</span></td></tr>
+          </table>
+        </div>
+      </details>
+      <details class="th"><summary>NEW 2 · One word, two countabilities, two meanings</summary>
+        <div class="thbody">
+          <table class="gtab">
+            <tr><th>countable</th><th style="width:auto">uncountable</th></tr>
+            <tr><td><b>a hair</b> — one single hair on your jacket</td><td><b>hair</b> — all the hair on your head</td></tr>
+            <tr><td><b>a glass</b> — something you drink from</td><td><b>glass</b> — the material</td></tr>
+            <tr><td><b>a room</b> — a room in a house</td><td><b>room</b> — space (<i>Is there room for me?</i>)</td></tr>
+            <tr><td><b>a business</b> — a company</td><td><b>business</b> — trade in general</td></tr>
+            <tr><td><b>an iron</b> — for your shirts</td><td><b>iron</b> — the metal</td></tr>
+            <tr><td><b>a time</b> — an occasion (<i>three times</i>)</td><td><b>time</b> — time in general</td></tr>
+            <tr><td><b>a light</b> — a lamp</td><td><b>light</b> — daylight</td></tr>
+          </table>
+        </div>
+      </details>
+      <details class="th"><summary>NEW 3 · <i>the</i> for the only one, superlatives, species and inventions</summary>
+        <div class="thbody">
+          <ul class="tight" style="margin-top:0">
+            <li>Only one in our world: <span class="ex">the sun · the moon · the sky · the sea · the environment ·
+              the internet · the police · the government</span></li>
+            <li>Superlatives and ordinals: <span class="ex">the best day · the first time · the last bus ·
+              the only problem · the same address</span></li>
+            <li>A species or an invention as a class: <span class="ex">The tiger is in danger. ·
+              The telephone was invented in 1876.</span>
+              <span class="hint">(The plural works too: <i>Tigers are in danger.</i>)</span></li>
+            <li>Groups of people: <span class="ex">the young · the unemployed · the French</span></li>
+          </ul>
+        </div>
+      </details>
+      <details class="th"><summary>NEW 4 · Geography — the map test</summary>
+        <div class="thbody">
+          <table class="gtab">
+            <tr><th>the</th><td>rivers, seas, oceans, deserts, mountain <b>ranges</b>, groups of islands,
+              plural or “political” country names, regions with <i>of</i>:<br>
+              <span class="ex">the Thames · the Baltic Sea · the Sahara · the Alps · the Canaries ·
+              the Netherlands · the United Arab Emirates · the Middle East · the north of Spain</span></td></tr>
+            <tr><th>no article</th><td>continents, most countries, cities, single mountains, lakes, single islands,
+              parks:<br><span class="ex">Europe · Japan · Lisbon · Mount Fuji · Lake Como · Sicily · Central Park</span></td></tr>
+          </table>
+          <div class="callout info" style="margin-bottom:0">Odd ones worth memorising:
+            <b>the</b> Hague · <b>the</b> Vatican · <b>the</b> Gambia — cities and countries that keep <i>the</i>.</div>
+        </div>
+      </details>
+      <details class="th"><summary>NEW 5 · Fixed expressions — learn the whole phrase</summary>
+        <div class="thbody">
+          <table class="gtab">
+            <tr><th>no article</th><td>go to bed · be in bed · at home · at work · at school · in hospital (BrE) ·
+              in prison · at sea · by car / bus / train · on foot · at night · in fact · on holiday</td></tr>
+            <tr><th>the</th><td>in the morning / afternoon / evening · in the end (finally) ·
+              at the end (of the film) · on the whole · in the country · on the left · play the piano</td></tr>
+            <tr><th>a / an</th><td>have a good time · in a hurry · as a rule · take a seat · have a look ·
+              once a week · what a pity</td></tr>
+          </table>
+          <div class="callout warn" style="margin-bottom:0"><b>Two traps.</b>
+            <i>in the end</i> = в конце концов, but <i>at the end of…</i> = в конце чего-то.<br>
+            British <i>She is in hospital</i> (as a patient); American English says <i>in the hospital</i>.</div>
+        </div>
+      </details>
+      <details class="th"><summary>NEW 6 · Articles in a text: how English introduces things</summary>
+        <div class="thbody">
+          Watch how the article changes as a thing becomes known:
+          <div class="ex">I saw <b>a</b> man outside the shop. <b>The</b> man was carrying <b>an</b> old suitcase.
+            <b>The</b> suitcase looked heavy.</div>
+          <ul class="tight">
+            <li>The reader can also “already know” from the situation:
+              <span class="ex">Could you close <b>the</b> door?</span> (this room has one door)</li>
+            <li>…or from what follows: <span class="ex">the man <b>who lives next door</b> ·
+              <b>the</b> centre <b>of</b> Lisbon</span></li>
+            <li>Headlines and notes drop articles to save space:
+              <span class="ex">MAN BITES DOG · Meeting cancelled — see manager</span></li>
+          </ul>
+          <div class="callout" style="margin-bottom:0">This is exactly what the reading task below tests: every gap
+            is decided by what came <i>before</i> it in the text.</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="sect">Part A · Countability</div>
+
+  <div class="card stage" id="s1">
+    <div class="stagehead"><span class="stageno">A1</span><h3>Three columns: countable, uncountable, both</h3>
+      <span class="xpchip">+60 XP</span><span class="skill">Countability</span></div>
+    <div class="body">
+      <p class="lead">Click a word, then the column. <b>Both</b> means the word changes meaning when it becomes
+        countable (<i>a glass</i> vs <i>glass</i>).</p>
+      <div class="pool" id="poolCu"></div>
+      <div class="buckets" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
+        <div class="bucket" data-cat="c"><h4><b>countable</b>a suitcase / two suitcases</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="u"><h4><b>uncountable</b>some luggage</h4><div class="drop"></div></div>
+        <div class="bucket" data-cat="b"><h4><b>both</b>a glass / glass</h4><div class="drop"></div></div>
+      </div>
+      <div style="margin-top:11px"><button class="btn primary" data-check="cu">Check</button>
+        <span class="fb" id="cufb"></span></div>
+    </div>
+  </div>
+
+  <div class="card stage" id="s2">
+    <div class="stagehead"><span class="stageno">A2</span><h3>A piece of what?</h3>
+      <span class="xpchip">+45 XP</span><span class="skill">Countability</span></div>
+    <div class="body">
+      <p class="lead">Click the unit on the left, then the noun it goes with. Eight pairs — these are fixed,
+        you cannot swap them.</p>
+      <div class="pairwrap">
+        <div><div class="hint" style="margin-bottom:6px;font-weight:800">UNIT</div><div class="chips" id="colL"></div></div>
+        <div><div class="hint" style="margin-bottom:6px;font-weight:800">GOES WITH</div><div class="chips" id="colR"></div></div>
+      </div>
+      <span class="fb" id="colfb"></span>
+    </div>
+  </div>
+
+  <div class="card stage" id="s3">
+    <div class="stagehead"><span class="stageno">A3</span><h3>Singular or plural verb?</h3>
+      <span class="xpchip">+50 XP</span><span class="skill">Countability</span></div>
+    <div class="body">
+      <p class="lead">Ten sentences. The noun decides the verb — and half of these nouns look plural but are not.</p>
+      <div id="verb"></div>
+      <button class="btn primary" data-check="verb">Check</button>
+      <span class="fb" id="verbfb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Part B · Articles in use</div>
+
+  <div class="card stage" id="s4">
+    <div class="stagehead"><span class="stageno">B1</span><h3>The map test</h3>
+      <span class="xpchip">+50 XP</span><span class="skill">Articles</span></div>
+    <div class="body">
+      <p class="lead">Geography: <b>the</b> or <b>–</b>? Rivers, ranges and plural countries take <i>the</i>;
+        single mountains, lakes, cities and most countries do not.</p>
+      <div id="geo"></div>
+      <button class="btn primary" data-check="geo">Check</button>
+      <span class="fb" id="geofb"></span>
+    </div>
+  </div>
+
+  <div class="card stage" id="s5">
+    <div class="stagehead"><span class="stageno">B2</span><h3>Fixed expressions</h3>
+      <span class="xpchip">+55 XP</span><span class="skill">Articles</span></div>
+    <div class="body">
+      <p class="lead">Choose the natural phrase. These are learned as whole chunks, not built from rules.</p>
+      <div id="fix"></div>
+      <button class="btn primary" data-check="fix">Check</button>
+      <span class="fb" id="fixfb"></span>
+    </div>
+  </div>
+
+  <div class="card stage" id="s6">
+    <div class="stagehead"><span class="stageno">B3</span><h3>Find the eight mistakes</h3>
+      <span class="xpchip">+60 XP</span><span class="skill">Articles</span></div>
+    <div class="body">
+      <p class="lead">Click every word that is wrong or where an article is missing. There are <b>eight</b>
+        mistakes in the paragraph — all of them from this module.</p>
+      <div class="toktext" id="err"></div>
+      <div class="fixlist" id="errfix"></div>
+      <button class="btn primary" data-check="err" style="margin-top:11px">Check</button>
+      <span class="fb" id="errfb"></span>
+    </div>
+  </div>
+
+  <div class="card stage" id="s7">
+    <div class="stagehead"><span class="stageno">B4</span><h3>Say it again with an article</h3>
+      <span class="xpchip">+50 XP</span><span class="skill">Articles</span></div>
+    <div class="body">
+      <p class="lead">Type the missing word: <b>a</b>, <b>an</b>, <b>the</b> — or a dash <b>–</b> if no article
+        is needed.</p>
+      <div id="type"></div>
+      <button class="btn primary" data-check="type">Check all</button>
+      <span class="fb" id="typefb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Part C · Reading</div>
+
+  <div class="card stage" id="s8">
+    <div class="stagehead"><span class="stageno">C1</span><h3>Reading: “Where London’s lost things live”</h3>
+      <span class="xpchip">+130 XP</span><span class="fmt">gapped text + 3 tasks</span><span class="skill">Reading</span></div>
+    <div class="body">
+      <p class="lead">Read the whole article first — <b>then</b> go back and fill the fourteen article gaps.
+        Every gap is decided by the words around it. Hover a
+        <span class="kw" title="like this: a definition appears">dotted word</span> for its meaning.</p>
+      <div class="reader" id="reader"></div>
+      <button class="btn primary" data-check="gaps" style="margin:12px 0 0">Check the fourteen gaps</button>
+      <span class="fb" id="gapsfb"></span>
+
+      <p class="hint" style="margin:16px 0 6px;font-weight:800">A · True / False / Doesn’t say</p>
+      <p class="hint" style="margin:0 0 8px">Choose <b>Doesn’t say</b> when the text does not give you the
+        information — that is not the same as <i>False</i>.</p>
+      <div id="tf"></div>
+
+      <p class="hint" style="margin:16px 0 6px;font-weight:800">B · What does it mean <i>here</i>?</p>
+      <div id="rv"></div>
+
+      <p class="hint" style="margin:16px 0 6px;font-weight:800">C · Reading between the lines</p>
+      <div id="inf"></div>
+
+      <button class="btn primary" data-check="read">Check the comprehension tasks</button>
+      <span class="fb" id="readfb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Part D · Speaking</div>
+
+  <div class="card stage" id="s9">
+    <div class="stagehead"><span class="stageno">D1</span><h3>The one-minute cards + article hunt</h3>
+      <span class="xpchip">+70 XP</span><span class="skill">Speaking</span></div>
+    <div class="body">
+      <p class="lead">Take a card, think for <b>20 seconds</b>, then speak for <b>one minute</b>.
+        Your partner does not interrupt — they only <b>count article mistakes</b> with the counter below and
+        report them at the end. Then swap.</p>
+      <div class="cue" id="cuecard"></div>
+      <div class="timerbox">
+        <span class="tdisp" id="tdisp">1:00</span>
+        <button class="btn go" id="tstart">▶ Start</button>
+        <button class="btn" id="tcard">🔀 Next card</button>
+        <span class="hint" id="tstatus">Card 1 of 5</span>
+      </div>
+      <div class="tally">
+        <span class="hint" style="font-weight:800">Article mistakes heard:</span>
+        <button id="tminus">−</button><span class="cnt" id="tcount">0</span><button id="tplus">+</button>
+        <button class="btn" id="treset">reset</button>
+      </div>
+      <div class="callout" style="margin-bottom:0">🎯 <b>Target:</b> fewer than three mistakes in a minute.
+        The most common ones are <i>a/an</i> with jobs, <i>the</i> with superlatives, and an article in front of
+        an uncountable noun.</div>
+      <div style="margin-top:11px">
+        <button class="btn primary" data-done="spk1" data-xp="35">✓ I did card 1</button>
+        <button class="btn primary" data-done="spk2" data-xp="35">✓ I did a second card</button>
+      </div>
+      <span class="fb" id="s9fb"></span>
+    </div>
+  </div>
+
+  <div class="card stage" id="s10">
+    <div class="stagehead"><span class="stageno">D2</span><h3>Describe and guess</h3>
+      <span class="xpchip">+40 XP</span><span class="skill">Speaking</span></div>
+    <div class="body">
+      <p class="lead">A quick pair game. Press the button, get a word, and describe it <b>without saying it</b>
+        — but you must start with the right article or with none at all.</p>
+      <div class="arc" style="padding:14px 12px">
+        <div class="arcphrase" id="gword" style="font-size:24px;min-height:34px">press the button</div>
+        <div class="arcsub" id="gsub">Your partner guesses. If your first word is the wrong article, they say
+          “article!” and you start again.</div>
+        <button class="btn go" id="gnext" style="margin-top:10px">🎲 Next word</button>
+      </div>
+      <div style="margin-top:11px">
+        <button class="btn primary" data-done="spk3" data-xp="40">✓ We played five words each</button>
+      </div>
+      <span class="fb" id="spk3fb"></span>
+    </div>
+  </div>
+
+  <div class="sect">Part E · Report</div>
+
+  <div class="card stage" id="s11">
+    <div class="stagehead"><span class="stageno">REPORT</span><h3>Your result</h3>
+      <span class="xpchip">+20 XP</span><span class="skill">Review</span></div>
+    <div class="body">
+      <div class="dash" id="dash"></div>
+      <div class="band" id="band"><div class="b">Finish some tasks first</div>
+        <div class="hint">Your overall result will appear here.</div></div>
+      <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:13px">
+        <input class="txt" id="sname" placeholder="Your name" style="width:180px" autocomplete="name">
+        <button class="btn go" id="buildrep">📄 Build my report</button>
+        <button class="btn" id="printrep">🖨 Print</button>
+        <button class="btn" id="mailrep">✉️ Email it to the teacher</button>
+      </div>
+      <span class="fb" id="s11fb"></span>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>Nouns &amp; Articles · Review — original review lesson for Module 1. All texts and tasks are written for
+this lesson.</footer>
+
+<div class="confetti" id="confetti"></div>
+<div class="toast" id="toast"></div>
+<div id="printroot"></div>
+
+<script>
+/* =========================== state =========================== */
+const TEACHER_MAIL=['kazankodaniel','gmail.com'].join('@');
+const KEY='grammar_m1_review_v1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+S.xp=S.xp||0; S.done=S.done||{}; S.scores=S.scores||{};
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const MAXXP=750;
+const LEVELS=[[0,'Level 1 · Warming Up'],[180,'Level 2 · Arcade Survivor'],[360,'Level 3 · Countability Pro'],
+              [540,'Level 4 · Sharp Reader'],[730,'Level 5 · Article Master 🏆']];
+function renderXP(){
+  $('#xpfill').style.width=Math.min(100,S.xp/MAXXP*100)+'%';
+  $('#xplabel').textContent=S.xp+' XP';
+  let lv=LEVELS[0][1]; LEVELS.forEach(l=>{if(S.xp>=l[0])lv=l[1]});
+  $('#xpright').textContent=lv;
+  $$('#medals .medal').forEach(m=>m.classList.toggle('on',S.xp>=+m.dataset.need));
+}
+function addXP(n,label){if(n<=0)return;S.xp+=n;save();renderXP();renderNav();toast('+'+n+' XP · '+label);if(n>=10)boom()}
+let tt;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2400)}
+function boom(){const c=$('#confetti'),cols=['#1d4ed8','#6d4aff','#0e9f8f','#ffc233','#f4732a'];
+  for(let i=0;i<36;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];
+    s.style.animationDuration=(1.6+Math.random()*1.4)+'s';s.style.animationDelay=(Math.random()*.3)+'s';
+    c.appendChild(s);setTimeout(()=>s.remove(),3400)}}
+document.documentElement.dataset.theme=localStorage.getItem('m1rtheme')||'light';
+$('#themebtn').onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=n;localStorage.setItem('m1rtheme',n)};
+$('#resetbtn').onclick=()=>{if(confirm('Reset the whole lesson and start again?')){localStorage.removeItem(KEY);location.reload()}};
+
+/* ===================== score bookkeeping ===================== */
+const SKILLS={rev:'Warm-up game',count:'Countability',art:'Articles',read:'Reading'};
+function record(id,ok,total,skill){S.scores[id]={ok,total,skill};save();renderDash()}
+function skillPct(sk){let ok=0,tot=0;
+  Object.values(S.scores).forEach(s=>{if(s.skill===sk){ok+=s.ok;tot+=s.total}});
+  return tot?{pct:Math.round(ok/tot*100),ok,tot}:null;}
+function colourFor(p){return p>=80?'var(--ok)':p>=60?'var(--yellow)':'var(--no)'}
+function renderDash(){
+  const mini=$('#minidash'),dash=$('#dash');let html='',dhtml='';
+  Object.entries(SKILLS).forEach(([k,name])=>{
+    const r=skillPct(k),p=r?r.pct:0;
+    html+=`<div style="display:flex;align-items:center;gap:7px;font-size:11.5px;margin-bottom:5px">
+      <span style="flex:1;font-weight:700">${name}</span>
+      <span style="font-weight:800;color:${r?colourFor(p):'var(--muted)'}">${r?p+'%':'—'}</span></div>
+      <div class="dbar" style="margin-bottom:8px"><i style="width:${p}%;background:${colourFor(p)}"></i></div>`;
+    dhtml+=`<div class="dcell"><div class="lbl">${name}</div>
+      <div class="val" style="color:${r?colourFor(p):'var(--muted)'}">${r?p+'%':'—'}</div>
+      <div class="dbar"><i style="width:${p}%;background:${colourFor(p)}"></i></div>
+      <div class="hint" style="margin-top:5px">${r?r.ok+' / '+r.tot+' correct':'not started'}</div></div>`;
+  });
+  if(mini)mini.innerHTML=html;
+  if(dash)dash.innerHTML=dhtml;
+  renderBand();
+}
+function renderBand(){
+  const el=$('#band');if(!el)return;
+  let ok=0,tot=0;Object.values(S.scores).forEach(s=>{ok+=s.ok;tot+=s.total});
+  if(tot<10){el.innerHTML='<div class="b">Keep going…</div><div class="hint">Finish more tasks to see your overall result.</div>';return}
+  const p=Math.round(ok/tot*100);let title,msg;
+  if(p>=85){title='Excellent — Module 1 is finished 🌟';msg='Articles are now a habit, not a rule. Move on.'}
+  else if(p>=70){title='Good — a few leaks left ✅';msg='Take your lowest bar and redo those two tasks.'}
+  else if(p>=50){title='Half way 💪';msg='Reread the six NEW theory blocks — most mistakes come from those.'}
+  else{title='Back to the tables 📚';msg='Work through the theory with your teacher, then redo the practice.'}
+  el.innerHTML=`<div class="b" style="color:${colourFor(p)}">${p}% · ${title}</div><div class="hint">${msg}</div>`;
+}
+
+/* =========================== nav =========================== */
+const NAV=[
+ ['Warm-up',[['s0','Article Arcade','arc']]],
+ ['A · Countability',[['s1','Three columns','cu'],['s2','A piece of what?','col'],['s3','Singular or plural','verb']]],
+ ['B · Articles',[['s4','The map test','geo'],['s5','Fixed expressions','fix'],['s6','Eight mistakes','err'],
+   ['s7','Type the article','type']]],
+ ['C · Reading',[['s8','Lost property','read']]],
+ ['D · Speaking',[['s9','One-minute cards','spk2'],['s10','Describe and guess','spk3']]],
+ ['E · Report',[['s11','Report','rep']]]
+];
+function renderNav(){
+  const nav=$('#nav');if(!nav)return;nav.innerHTML='';
+  NAV.forEach(([sect,items])=>{
+    const h=document.createElement('div');h.className='navsect';h.textContent=sect;nav.appendChild(h);
+    items.forEach(([id,label,dk])=>{
+      const a=document.createElement('a');a.href='#'+id;
+      if(S.done[dk])a.classList.add('done');
+      a.innerHTML=`<span class="tick">${S.done[dk]?'✓':''}</span><span>${label}</span>`;
+      a.onclick=e=>{e.preventDefault();document.getElementById(id).scrollIntoView({behavior:'smooth'})};
+      nav.appendChild(a);
+    });
+  });
+}
+
+/* ========================= engines ========================= */
+const ART=['a','an','the','–'];
+function markInput(inp,keys){
+  const v=inp.value.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.?!,]+$/,'').replace(/^[-—]$/,'–');
+  const ok=keys.some(k=>k.toLowerCase()===v);
+  inp.classList.remove('good','bad');inp.classList.add(ok?'good':'bad');return ok;
+}
+function buildChoice(host,items){
+  const box=$('#'+host);box.innerHTML='';
+  items.forEach((it,i)=>{
+    const p=document.createElement('p');p.className='chline';
+    p.innerHTML=`<span class="num">${i+1}</span>`;
+    const parts=it.q.split('[]');
+    p.insertAdjacentHTML('beforeend',parts[0]);
+    const g=document.createElement('span');g.className='chgrp';
+    it.o.forEach(t=>{const b=document.createElement('b');b.textContent=t;
+      if(t===it.k)b.classList.add('key');
+      b.onclick=()=>{if(g.classList.contains('locked'))return;
+        [...g.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};
+      g.appendChild(b)});
+    p.appendChild(g);
+    if(parts[1])p.insertAdjacentHTML('beforeend',parts[1]);
+    p._g=g;p._k=it.k;box.appendChild(p);
+  });
+  box._rows=[...box.children];
+}
+function gradeChoice(host,xp,label,skill){
+  const rows=$('#'+host)._rows;let ok=0;
+  rows.forEach(p=>{
+    const g=p._g;g.classList.add('locked');
+    const sel=g.querySelector('b.sel');
+    const good=sel&&sel.textContent===p._k;
+    g.classList.add(good?'good':'bad');if(good)ok++;
+  });
+  const f=$('#'+host+'fb');f.className='fb on '+(ok===rows.length?'good':'bad');
+  f.textContent=`${ok} out of ${rows.length} correct`+(ok===rows.length?' 🎉':' — the green option is the right one.');
+  if(!S.done[host]){S.done[host]=1;record(host,ok,rows.length,skill);addXP(Math.round(xp*ok/rows.length),label)}
+}
+function buildRows(host,rows,options,wide){
+  const box=$('#'+host);box.innerHTML='';box.className=wide?'':'rows';
+  rows.forEach((r,i)=>{
+    const d=document.createElement('div');d.className='mrow';
+    d.innerHTML=`<span class="n">${i+1}</span><span class="lb">${r.t}</span>`;
+    const sel=document.createElement('select');sel.className='pick';
+    sel.innerHTML='<option value="">—</option>'+options.map(o=>`<option>${o}</option>`).join('');
+    sel._k=r.k;d.appendChild(sel);box.appendChild(d);
+  });
+  box._sels=[...box.querySelectorAll('select')];
+}
+function gradeRows(host,xp,label,skill,keyline){
+  const sels=$('#'+host)._sels;let ok=0;
+  sels.forEach(s=>{const good=s.value===s._k;s.classList.remove('good','bad');
+    s.classList.add(good?'good':'bad');s.disabled=true;if(good)ok++});
+  const f=$('#'+host+'fb');f.className='fb on '+(ok===sels.length?'good':'bad');
+  f.innerHTML=`${ok} out of ${sels.length} correct`+(ok===sels.length?' 🎉':
+    (keyline?'<br><span class="hint">Answers: '+keyline+'</span>':''));
+  if(!S.done[host]){S.done[host]=1;record(host,ok,sels.length,skill);addXP(Math.round(xp*ok/sels.length),label)}
+}
+function buildMCQ(host,items){
+  const box=$('#'+host);box.innerHTML='';
+  items.forEach((it,i)=>{
+    const q=document.createElement('div');q.className='q';
+    q.innerHTML=`<p><span class="num">${i+1}</span>${it.q}</p>`;
+    const o=document.createElement('div');o.className='opts';
+    it.a.forEach(t=>{const b=document.createElement('div');b.className='opt';b.innerHTML=t;
+      b.onclick=()=>{if(q.classList.contains('locked'))return;
+        [...o.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel')};o.appendChild(b)});
+    q.appendChild(o);
+    if(it.why){const f=document.createElement('div');f.className='fb';f.dataset.why=it.why;q.appendChild(f)}
+    box.appendChild(q);
+  });
+  box._items=items;
+}
+function gradeMCQ(host){
+  const box=$('#'+host),items=box._items;let ok=0;
+  [...box.children].forEach((q,i)=>{
+    const opts=[...q.querySelector('.opts').children];
+    const sel=opts.find(o=>o.classList.contains('sel'));
+    q.classList.add('locked');
+    opts.forEach(o=>{if(o.innerHTML===items[i].k)o.classList.add('good');else if(o===sel)o.classList.add('bad')});
+    const good=sel&&sel.innerHTML===items[i].k;if(good)ok++;
+    const f=q.querySelector('.fb');
+    if(f){f.className='fb on '+(good?'good':'bad');f.innerHTML=(good?'✔ ':'✘ ')+f.dataset.why}
+  });
+  return ok;
+}
+function makeBuckets(poolId,words){
+  let sel=null;const pool=$('#'+poolId),scope=pool.parentElement;
+  function chip(word,cat){
+    const c=document.createElement('span');c.className='wchip';c.textContent=word;c.dataset.cat=cat;
+    c.onclick=()=>{
+      if(scope.classList.contains('locked'))return;
+      if(c.closest('.bucket')){c.classList.remove('sel');pool.appendChild(c);sel=null;
+        scope.querySelectorAll('.bucket').forEach(b=>b.classList.remove('sel'));return}
+      if(sel===c){c.classList.remove('sel');sel=null;
+        scope.querySelectorAll('.bucket').forEach(b=>b.classList.remove('sel'));return}
+      scope.querySelectorAll('.wchip').forEach(x=>x.classList.remove('sel'));
+      c.classList.add('sel');sel=c;scope.querySelectorAll('.bucket').forEach(b=>b.classList.add('sel'));
+    };
+    return c;
+  }
+  words.map(w=>w).sort(()=>Math.random()-.5).forEach(([w,cat])=>pool.appendChild(chip(w,cat)));
+  scope.querySelectorAll('.bucket').forEach(b=>b.onclick=e=>{
+    if(!sel||e.target.classList.contains('wchip'))return;
+    b.querySelector('.drop').appendChild(sel);sel.classList.remove('sel');sel=null;
+    scope.querySelectorAll('.bucket').forEach(x=>x.classList.remove('sel'));
+  });
+}
+function gradeBuckets(poolId,words,host,xp,label,skill,extra){
+  const scope=$('#'+poolId).parentElement;
+  const placed=scope.querySelectorAll('.bucket .wchip').length;
+  const f=$('#'+host+'fb');
+  if(placed<words.length){f.className='fb on bad';
+    f.textContent=`Place all ${words.length} words first (${placed} placed).`;return}
+  let ok=0;scope.classList.add('locked');
+  scope.querySelectorAll('.bucket').forEach(bk=>{
+    bk.querySelectorAll('.wchip').forEach(c=>{
+      const good=c.dataset.cat===bk.dataset.cat;c.classList.add(good?'good':'bad');if(good)ok++})});
+  f.className='fb on '+(ok===words.length?'good':'bad');
+  f.innerHTML=`${ok} out of ${words.length} in the right column`+(ok===words.length?' 🎉':'')+
+    (extra?'<br><span class="hint">'+extra+'</span>':'');
+  if(!S.done[host]){S.done[host]=1;record(host,ok,words.length,skill);addXP(Math.round(xp*ok/words.length),label)}
+}
+</script>
+<script>
+/* ===================== warm-up · Article Arcade ===================== */
+const ARC=[
+ {p:'She works as ___ engineer.',k:'a/an',w:'jobs always take a/an'},
+ {p:'I listen to ___ radio in the car.',k:'the',w:'the radio, the cinema, the theatre'},
+ {p:'We go to work by ___ car.',k:'–',w:'by car / bus / train — no article'},
+ {p:'___ sun rose at six.',k:'the',w:'only one sun'},
+ {p:'Can you give me ___ advice?',k:'–',w:'advice is uncountable: some advice'},
+ {p:'He is in ___ hospital after the crash.',k:'–',w:'purpose, not the building (BrE)'},
+ {p:'Turn left at ___ post office.',k:'the',w:'places in a town take the'},
+ {p:'They live in ___ Netherlands.',k:'the',w:'plural country names take the'},
+ {p:'We climbed ___ Mount Etna.',k:'–',w:'single mountains — no article'},
+ {p:'It was ___ best film of the year.',k:'the',w:'superlatives take the'},
+ {p:'Do you play ___ guitar?',k:'the',w:'instruments take the (BrE)'},
+ {p:'Do you play ___ tennis?',k:'–',w:'sports take no article'},
+ {p:'I had ___ breakfast at eight.',k:'–',w:'meals take no article'},
+ {p:'Your seat is in ___ row 12.',k:'–',w:'noun + number — no article'},
+ {p:'She gave me ___ useful suggestion.',k:'a/an',w:'singular countable, first mention'},
+ {p:'___ traffic was awful this morning.',k:'the',w:'we both know which traffic — this morning’s'},
+ {p:'I bought ___ new luggage.',k:'–',w:'luggage is uncountable — no a/an'},
+ {p:'He spent ___ hour in the queue.',k:'a/an',w:'an hour — silent h, vowel sound'},
+ {p:'We stayed at ___ Ritz.',k:'the',w:'hotels take the'},
+ {p:'She studies at ___ Oxford University.',k:'–',w:'named universities — no article'},
+ {p:'In ___ end, we stayed at home.',k:'the',w:'in the end = finally'},
+ {p:'My brother is ___ university student.',k:'a/an',w:'a job or role: a student'},
+ {p:'___ French make excellent cheese.',k:'the',w:'the + nationality = all of them'},
+ {p:'I love ___ Italian food.',k:'–',w:'food in general — no article'},
+ {p:'Could you close ___ window, please?',k:'the',w:'we both know which window'},
+ {p:'We flew over ___ Alps.',k:'the',w:'mountain ranges take the'},
+ {p:'Look at ___ page 40.',k:'–',w:'noun + number — no article'},
+ {p:'___ police are investigating.',k:'the',w:'the police, always plural verb'},
+ {p:'It happens once ___ week.',k:'a/an',w:'a = each in frequency'},
+ {p:'He went to ___ prison for five years.',k:'–',w:'purpose, not the building'},
+ {p:'I read about it on ___ internet.',k:'the',w:'only one internet'},
+ {p:'There is ___ information on the website.',k:'–',w:'information is uncountable'}
+];
+let arcQ=[],arcI=0,arcScore=0,arcOk=0,arcTot=0,arcCombo=1,arcStreak=0,arcLives=3,arcLeft=90,arcT=null,arcRun=false,arcLock=false;
+const arcFmt=s=>Math.floor(s/60)+':'+String(Math.max(0,s%60)).padStart(2,'0');
+function arcPaint(){
+  $('#arcclock').textContent=arcFmt(arcLeft);
+  $('#arcclock').classList.toggle('warn',arcLeft<=15);
+  $('#arcscore').textContent=arcScore;
+  $('#arccombo').textContent=arcCombo;
+  $('#arclives').textContent='❤️'.repeat(arcLives)+'🖤'.repeat(3-arcLives);
+  $('#arcbarfill').style.width=(arcLeft/90*100)+'%';
+}
+function arcShow(){
+  if(arcI>=arcQ.length){arcQ=ARC.map(x=>x).sort(()=>Math.random()-.5);arcI=0}
+  const it=arcQ[arcI];
+  $('#arcphrase').innerHTML=it.p.replace('___','<u>&nbsp;?&nbsp;</u>');
+  $('#arcsub').textContent='';
+  $$('#arcgates .gate').forEach(g=>g.classList.remove('good','bad'));
+  arcLock=false;
+}
+function arcAnswer(v,gate){
+  if(!arcRun||arcLock)return;
+  arcLock=true;
+  const it=arcQ[arcI],ok=v===it.k;
+  arcTot++;
+  if(ok){
+    arcOk++;arcStreak++;
+    if(arcStreak%5===0&&arcCombo<4)arcCombo++;
+    arcScore+=10*arcCombo;
+    gate.classList.add('good');
+    $('#arcsub').innerHTML='✔ '+it.w;
+  }else{
+    arcStreak=0;arcCombo=1;arcLives--;
+    gate.classList.add('bad');
+    $$('#arcgates .gate').forEach(g=>{if(g.dataset.v===it.k)g.classList.add('good')});
+    $('#arcsub').innerHTML='✘ '+it.k.replace('a/an','a / an')+' — '+it.w;
+  }
+  arcPaint();
+  setTimeout(()=>{
+    if(arcLives<=0){arcEnd('no lives left');return}
+    arcI++;arcShow();
+  },ok?700:1700);
+}
+$$('#arcgates .gate').forEach(g=>g.onclick=()=>arcAnswer(g.dataset.v,g));
+$('#arcstart').onclick=()=>{
+  if(arcRun)return;
+  arcRun=true;arcScore=0;arcOk=0;arcTot=0;arcCombo=1;arcStreak=0;arcLives=3;arcLeft=90;arcI=0;
+  arcQ=ARC.map(x=>x).sort(()=>Math.random()-.5);
+  $('#arcgates').style.display='grid';
+  $('#arcstart').disabled=true;$('#arcstart').textContent='⏱ Playing…';
+  arcPaint();arcShow();
+  arcT=setInterval(()=>{arcLeft--;arcPaint();if(arcLeft<=0)arcEnd('time')},1000);
+};
+function arcEnd(reason){
+  clearInterval(arcT);arcRun=false;
+  $('#arcphrase').textContent=reason==='time'?'Time!':'Out of lives!';
+  $('#arcsub').textContent='';
+  $('#arcgates').style.display='none';
+  $('#arcstart').disabled=false;$('#arcstart').textContent='▶ Play again';
+  const f=$('#arcfb');
+  const acc=arcTot?Math.round(arcOk/arcTot*100):0;
+  f.className='fb on '+(acc>=80&&arcOk>=15?'good':'bad');
+  f.textContent=`${arcScore} points · ${arcOk} correct out of ${arcTot} (${acc}%). `+
+    (arcOk>=22&&acc>=90?'Arcade cleared 🕹️ your articles are automatic.':
+     acc>=80?'Strong. Look at the two or three rules you missed.':
+     'Open the theory blocks below — the gates you missed are all explained there.');
+  if(!S.done.arc){S.done.arc=1;record('arc',arcOk,Math.max(arcTot,1),'rev');
+    addXP(Math.round(120*Math.min(1,arcOk/24)),'Article Arcade')}
+  if(acc>=90)boom();
+}
+
+/* ===================== A1 · countability buckets ===================== */
+const CUW=[['suitcase','c'],['suggestion','c'],['journey','c'],['coin','c'],['laptop','c'],
+ ['luggage','u'],['advice','u'],['information','u'],['equipment','u'],['weather','u'],
+ ['glass','b'],['hair','b'],['room','b'],['time','b'],['paper','b']];
+makeBuckets('poolCu',CUW);
+
+/* ===================== A2 · partitive pairs ===================== */
+const COL=[['a loaf','of bread'],['a sheet','of paper'],['an item','of news'],['a bit','of advice'],
+ ['a slice','of cake'],['a piece','of furniture'],['a bar','of chocolate'],['a jar','of honey']];
+let selC=null,leftC=COL.length,colOk=0;
+function colChip(w,side){
+  const c=document.createElement('div');c.className='chip';c.textContent=w;
+  c.onclick=()=>{
+    if(side==='L'){$$('#colL .chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');selC=c;return}
+    if(!selC){toast('Choose a unit on the left first');return}
+    if(COL.some(p=>p[0]===selC.textContent&&p[1]===c.textContent)){
+      const a=selC,b=c;a.classList.add('gone');b.classList.add('gone');
+      setTimeout(()=>{a.remove();b.remove()},350);selC=null;leftC--;colOk++;addXP(4,'pair');
+      if(!leftC){const f=$('#colfb');f.className='fb on good';f.textContent='🎉 All eight pairs matched!';
+        if(!S.done.col){S.done.col=1;record('col',colOk,COL.length,'count');addXP(13,'Partitives')}}
+    }else{
+      c.animate([{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],220);
+      const f=$('#colfb');f.className='fb on bad';f.textContent='Not the natural unit — try again.';
+      setTimeout(()=>f.classList.remove('on'),1400);
+    }
+  };
+  return c;
+}
+(function(){
+  const L=$('#colL'),R=$('#colR'),sh=a=>a.map(v=>[Math.random(),v]).sort().map(v=>v[1]);
+  sh(COL.map(p=>p[0])).forEach(w=>L.appendChild(colChip(w,'L')));
+  sh(COL.map(p=>p[1])).forEach(w=>R.appendChild(colChip(w,'R')));
+})();
+
+/* ===================== A3 · singular or plural verb ===================== */
+buildChoice('verb',[
+ {q:'The news [] on at ten.',o:['is','are'],k:'is'},
+ {q:'Athletics [] my favourite sport.',o:['is','are'],k:'is'},
+ {q:'The police [] arrested two men.',o:['has','have'],k:'have'},
+ {q:'My jeans [] in the wash.',o:['is','are'],k:'are'},
+ {q:'This information [] out of date.',o:['is','are'],k:'is'},
+ {q:'Where [] the scissors?',o:['is','are'],k:'are'},
+ {q:'Your luggage [] already on the bus.',o:['is','are'],k:'is'},
+ {q:'Economics [] harder than I expected.',o:['is','are'],k:'is'},
+ {q:'A football team [] eleven players.',o:['has','have'],k:'has'},
+ {q:'There [] three people waiting outside.',o:['was','were'],k:'were'}
+]);
+
+/* ===================== B1 · the map test ===================== */
+buildRows('geo',[
+ {t:'……… Thames',k:'the'},{t:'……… Lake Baikal',k:'–'},{t:'……… Netherlands',k:'the'},
+ {t:'……… Mount Kilimanjaro',k:'–'},{t:'……… Sahara',k:'the'},{t:'……… Japan',k:'–'},
+ {t:'……… Alps',k:'the'},{t:'……… Sicily',k:'–'},{t:'……… United States',k:'the'},
+ {t:'……… Central Park',k:'–'},{t:'……… Middle East',k:'the'},{t:'……… Lisbon',k:'–'}
+],['the','–']);
+
+/* ===================== B2 · fixed expressions ===================== */
+buildChoice('fix',[
+ {q:'[] we decided not to go at all.',o:['In the end','At the end'],k:'In the end'},
+ {q:'There is a summary [] of the chapter.',o:['in the end','at the end'],k:'at the end'},
+ {q:'She has been in [] with a broken leg since Friday.',o:['hospital','the hospital'],k:'hospital'},
+ {q:'I usually go to [] before midnight.',o:['bed','the bed'],k:'bed'},
+ {q:'We travelled around Ireland by [].',o:['car','the car'],k:'car'},
+ {q:'He played [] at the school concert.',o:['the piano','piano'],k:'the piano'},
+ {q:'They came [] because the bus never arrived.',o:['on foot','on the foot'],k:'on foot'},
+ {q:'[], it was a very good day.',o:['On the whole','On whole'],k:'On the whole'},
+ {q:'Sorry, I can’t stop — I’m in [].',o:['a hurry','hurry'],k:'a hurry'},
+ {q:'My sister works [] and sleeps during the day.',o:['at night','at the night'],k:'at night'},
+ {q:'We had [] at Marta’s party.',o:['a good time','good time'],k:'a good time'}
+]);
+
+/* ===================== B3 · eight mistakes ===================== */
+const ERRTOK=('Last year I made a big progress in English . I bought some new equipments and I found the '+
+ 'accommodation near the school . My teacher gave me an advice : listen to radio every day . In the end of '+
+ 'the course I passed exam with the good mark . Now I study at Oxford University and everything is easier .').split(' ');
+const ERRKEY={4:'a big progress → big progress (uncountable)',14:'equipments → equipment',
+ 18:'the accommodation → accommodation (uncountable, first mention)',28:'an advice → some advice / a piece of advice',
+ 33:'listen to radio → listen to the radio',37:'In the end of the course → At the end of the course',
+ 45:'passed exam → passed an exam',47:'the good mark → a good mark'};
+(function(){
+  const box=$('#err');box.innerHTML='';
+  ERRTOK.forEach((w,i)=>{
+    const s=document.createElement('span');s.className='tok';s.textContent=w;s.dataset.j=i;
+    if(ERRKEY[i])s.classList.add('key');
+    s.onclick=()=>{if(box.classList.contains('checked'))return;s.classList.toggle('sel')};
+    box.appendChild(s);box.insertAdjacentText('beforeend',' ');
+  });
+})();
+
+/* ===================== B4 · type the article ===================== */
+const TYPE=[
+ {q:'She is ……… honest woman.',k:['an']},
+ {q:'I go to ……… work by bus.',k:['–','-','—']},
+ {q:'We could see ……… Himalayas from the plane.',k:['the']},
+ {q:'He plays ……… football every Sunday.',k:['–','-','—']},
+ {q:'This is ……… only problem we have.',k:['the']},
+ {q:'Have you got ……… umbrella?',k:['an']},
+ {q:'……… money isn’t everything.',k:['–','-','—']},
+ {q:'The programme was about ……… sun.',k:['the']},
+ {q:'She’s ……… best teacher in the school.',k:['the']},
+ {q:'The apples cost two euros ……… kilo.',k:['a']}
+];
+(function(){
+  const box=$('#type');box.innerHTML='';box.className='rows';
+  TYPE.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='mrow';
+    d.innerHTML=`<span class="n">${i+1}</span><span class="lb">${it.q}</span>`;
+    const inp=document.createElement('input');inp.className='txt';inp.style.width='90px';
+    inp.placeholder='a / an / the / –';
+    inp.onkeydown=e=>{if(e.key==='Enter')markInput(inp,it.k)};
+    d.appendChild(inp);box.appendChild(d);
+  });
+  box._inps=[...box.querySelectorAll('input')];
+})();
+
+/* ===================== C · reading ===================== */
+const GLOSS={
+ 'belongings':'the things a person owns and carries',
+ 'unclaimed':'nobody has come to collect them',
+ 'stuffed':'a dead animal preserved to look alive',
+ 'auction':'a sale where the highest offer wins',
+ 'claimed':'collected by the owner'
+};
+const ART_TEXT=[
+ "Every year passengers leave about 300,000 things on {1} buses, trains and taxis in London. Almost all of them "+
+ "end up in {2} same place: {3} Lost Property Office in Baker Street, which has been collecting the city’s "+
+ "forgotten [belongings] since 1933.",
+
+ "{4} office is much bigger than visitors imagine. Behind {5} plain green door there are corridors of shelves, "+
+ "and on those shelves you can find almost anything: umbrellas, laptops, {6} luggage of every size, a pair of "+
+ "skis and, once, {7} [stuffed] gorilla. Staff receive {8} false teeth about twice {9} month.",
+
+ "“People are surprised that we keep {10} everything,” says Marta Nowak, who has worked here for eleven years. "+
+ "“But {11} rule is simple: if an object isn’t dangerous, it stays with us for three months.”",
+
+ "After that, [unclaimed] items are sold at [auction] or given to {12} charity, and {13} money goes back into the "+
+ "transport network. Only about one item in five ever finds its owner again — although the most valuable things, "+
+ "such as passports and laptops, are usually [claimed] within {14} week.",
+
+ "Marta’s favourite object is not the gorilla. “Someone once left a wedding dress on the Piccadilly line,” she "+
+ "says. “The owner never came back for it. I still wonder about that story.”"
+];
+const GAPK=['–','the','the','The','a','–','a','–','a','–','the','–','the','a'];
+(function(){
+  const box=$('#reader');box.innerHTML='<h4>Where London’s lost things live</h4>';
+  const sels=[];
+  ART_TEXT.forEach(par=>{
+    const p=document.createElement('p');
+    let rest=par;
+    while(rest.length){
+      const mg=rest.match(/\{(\d+)\}/), mk=rest.match(/\[([a-z]+)\]/);
+      const ig=mg?rest.indexOf(mg[0]):-1, ik=mk?rest.indexOf(mk[0]):-1;
+      if(ig<0&&ik<0){p.insertAdjacentHTML('beforeend',rest);break}
+      const gapFirst=(ig>=0&&(ik<0||ig<ik));
+      if(gapFirst){
+        p.insertAdjacentHTML('beforeend',rest.slice(0,ig));
+        const n=+mg[1];
+        const sup=document.createElement('span');sup.className='gapnum';sup.textContent=n;
+        const sel=document.createElement('select');sel.className='gapsel';
+        sel.innerHTML='<option value="">—</option>'+['a','an','the','The','–'].map(o=>`<option>${o}</option>`).join('');
+        sel._k=GAPK[n-1];sels.push(sel);
+        p.appendChild(sup);p.appendChild(sel);
+        rest=rest.slice(ig+mg[0].length);
+      }else{
+        p.insertAdjacentHTML('beforeend',rest.slice(0,ik));
+        const sp=document.createElement('span');sp.className='kw';sp.textContent=mk[1];
+        sp.title=GLOSS[mk[1]]||'';p.appendChild(sp);
+        rest=rest.slice(ik+mk[0].length);
+      }
+    }
+    box.appendChild(p);
+  });
+  box._sels=sels;
+})();
+const TF=[
+ ['The Lost Property Office opened in the 1930s.','T','“…since 1933.”'],
+ ['Most lost objects are returned to their owners.','F','“Only about one item in five ever finds its owner again.”'],
+ ['Marta Nowak is in charge of the office.','DS','She has worked there eleven years — her job title is never given.'],
+ ['Objects are kept for three months before they are sold.','T','“it stays with us for three months.”'],
+ ['Valuable things are usually collected quickly.','T','“passports and laptops are usually claimed within a week.”'],
+ ['The wedding dress was returned to its owner.','F','“The owner never came back for it.”']
+];
+(function(){
+  const box=$('#tf');box.innerHTML='';
+  TF.forEach((it,i)=>{
+    const row=document.createElement('div');row.className='tfrow';
+    row.innerHTML=`<span class="hint" style="font-weight:800">${i+1}</span><span class="st">${it[0]}</span>`;
+    const o=document.createElement('div');o.className='tfopts';
+    [['T','True'],['F','False'],['DS','Doesn’t say']].forEach(([v,label])=>{
+      const b=document.createElement('button');b.className='tfb';b.textContent=v;b.title=label;b.dataset.v=v;
+      b.onclick=()=>{if(row.classList.contains('locked'))return;
+        [...o.children].forEach(x=>x.classList.remove('sel'));b.classList.add('sel')};
+      o.appendChild(b);
+    });
+    row.appendChild(o);
+    const f=document.createElement('div');f.className='fb';f.dataset.why=it[2];
+    row.dataset.k=it[1];box.appendChild(row);box.appendChild(f);
+  });
+})();
+buildMCQ('rv',[
+ {q:'“forgotten <b>belongings</b>” — belongings are…',
+  a:['the things people own and carry','the people who lost something','the rules of the office'],
+  k:'the things people own and carry',why:'belongings = personal possessions. Always plural.'},
+ {q:'“they <b>end up</b> in the same place” — end up means…',
+  a:['finally arrive','start their journey','disappear'],k:'finally arrive',
+  why:'end up = arrive somewhere after a process, often unexpectedly.'},
+ {q:'“<b>unclaimed</b> items are sold” — unclaimed means…',
+  a:['nobody has collected them','they are broken','they are very old'],k:'nobody has collected them',
+  why:'claim = to say something is yours and take it. un- reverses it.'},
+ {q:'“sold at <b>auction</b>” — at an auction…',
+  a:['the highest offer wins','everything has a fixed price','things are given away free'],
+  k:'the highest offer wins',why:'an auction: people bid, the biggest bid buys the object.'}
+]);
+buildMCQ('inf',[
+ {q:'Why does the writer mention false teeth and a stuffed gorilla?',
+  a:['to show how strange some lost objects are','to criticise careless passengers',
+     'to explain why the office is so big'],k:'to show how strange some lost objects are',
+  why:'They are extreme examples chosen for surprise — the paragraph is a list of “almost anything”.'},
+ {q:'What does Marta mean by “I still wonder about that story”?',
+  a:['she is curious why nobody collected the dress','she would like to keep the dress',
+     'she thinks the owner made a mistake'],k:'she is curious why nobody collected the dress',
+  why:'wonder about = keep asking yourself questions about something you cannot explain.'}
+]);
+
+/* ===================== D · speaking ===================== */
+const CARDS=[
+ ['A place in your city that everybody knows',
+  ['where exactly it is (on the left, in the centre, near the station)','what the building looks like',
+   'when it was built','why people go there']],
+ ['Something you lost — or found',
+  ['what it was (a … / an …)','where and when you lost it','what happened next (the …)','how the story ended']],
+ ['Your ideal weekend',
+  ['what you do in the morning','whether you stay at home or go out','how you travel (by …, on foot)',
+   'the best part of the day']],
+ ['A famous person you admire',
+  ['who they are and what their job is','the best thing they have done','why they are better than the others',
+   'whether you would like their life']],
+ ['A country you want to visit',
+  ['where it is (the north of…, the coast)','the mountains, rivers or islands you would see',
+   'the food and the weather','how long you would stay']]
+];
+let cardI=0,spkT=null,spkLeft=60;
+function drawCard(){
+  const c=CARDS[cardI];
+  $('#cuecard').innerHTML=`<b>Card ${cardI+1} · ${c[0]}</b><ul class="tight" style="margin-bottom:0">`+
+    c[1].map(x=>`<li>${x}</li>`).join('')+'</ul>';
+  $('#tstatus').textContent=`Card ${cardI+1} of ${CARDS.length}`;
+}
+drawCard();
+$('#tcard').onclick=()=>{cardI=(cardI+1)%CARDS.length;drawCard()};
+$('#tstart').onclick=()=>{
+  if(spkT){clearInterval(spkT);spkT=null;$('#tstart').textContent='▶ Start';$('#tdisp').textContent='1:00';
+    $('#tdisp').classList.remove('low');$('#tstatus').textContent='Stopped';return}
+  spkLeft=60;$('#tstart').textContent='⏹ Stop';$('#tstatus').textContent='Talk!';
+  $('#tdisp').classList.remove('low');
+  spkT=setInterval(()=>{
+    spkLeft--;$('#tdisp').textContent='0:'+String(spkLeft).padStart(2,'0');
+    if(spkLeft<=10)$('#tdisp').classList.add('low');
+    if(spkLeft<=0){clearInterval(spkT);spkT=null;$('#tdisp').textContent='0:00';
+      $('#tstart').textContent='▶ Start';$('#tstatus').textContent='⏰ Time — well done!';boom()}
+  },1000);
+};
+let tally=0;
+const paintTally=()=>{$('#tcount').textContent=tally;
+  $('#tcount').style.color=tally<3?'var(--ok)':tally<6?'var(--yellow)':'var(--no)'};
+$('#tplus').onclick=()=>{tally++;paintTally()};
+$('#tminus').onclick=()=>{tally=Math.max(0,tally-1);paintTally()};
+$('#treset').onclick=()=>{tally=0;paintTally()};
+paintTally();
+const GWORDS=['the sun','a hairdresser','the internet','luggage','an umbrella','the Netherlands','homework',
+ 'a stadium','the Alps','information','a receipt','the ground floor','a jar of honey','the police','advice'];
+let gi=-1;
+$('#gnext').onclick=()=>{
+  gi=(gi+1)%GWORDS.length;
+  if(gi===0)GWORDS.sort(()=>Math.random()-.5);
+  $('#gword').textContent=GWORDS[gi];
+  $('#gsub').textContent='Describe it without saying the word — and start with the article you can see.';
+};
+
+/* ===================== report ===================== */
+$('#sname').value=S.name||'';
+$('#sname').oninput=e=>{S.name=e.target.value;save()};
+const RNAMES={arc:'Article Arcade',cu:'Countable / uncountable / both',col:'Partitives',
+ verb:'Singular or plural verb',geo:'The map test',fix:'Fixed expressions',err:'Eight mistakes',
+ type:'Type the article',gaps:'Reading — 14 article gaps',read:'Reading — comprehension'};
+function reportRows(){
+  return Object.entries(S.scores).map(([k,v])=>[RNAMES[k]||k,SKILLS[v.skill],v.ok,v.total]);
+}
+$('#buildrep').onclick=()=>{
+  const name=($('#sname').value||'').trim();
+  if(!name){toast('Type your name first');$('#sname').focus();return}
+  const rows=reportRows();
+  if(!rows.length){toast('Do a few tasks first 🙂');return}
+  let ok=0,tot=0;rows.forEach(r=>{ok+=r[2];tot+=r[3]});
+  const pct=Math.round(ok/tot*100);
+  $('#printroot').innerHTML=`<h2>Nouns &amp; Articles · Review — ${name}</h2>
+    <div>${new Date().toLocaleDateString('en-GB')} · total ${ok}/${tot} (${pct}%) · ${S.xp} XP</div>
+    <table><tr><th>Task</th><th>Area</th><th>Score</th></tr>`+
+    rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]} / ${r[3]}</td></tr>`).join('')+`</table>`;
+  const f=$('#s11fb');f.className='fb on good';
+  f.textContent=`Report ready: ${ok}/${tot} (${pct}%). Press 🖨 Print to save it as a PDF.`;
+  if(!S.done.rep){S.done.rep=1;addXP(20,'Report')}
+  boom();
+};
+$('#printrep').onclick=()=>{if(!$('#printroot').innerHTML){toast('Build the report first');return}window.print()};
+$('#mailrep').onclick=()=>{
+  const name=($('#sname').value||'').trim();
+  if(!name){toast('Type your name first');$('#sname').focus();return}
+  const rows=reportRows();
+  if(!rows.length){toast('Do a few tasks first 🙂');return}
+  let ok=0,tot=0;rows.forEach(r=>{ok+=r[2];tot+=r[3]});
+  const body=`Nouns & Articles · Review — ${name}\n${new Date().toLocaleDateString('en-GB')}\n\n`+
+    rows.map(r=>`${r[0]} (${r[1]}): ${r[2]}/${r[3]}`).join('\n')+
+    `\n\nTOTAL: ${ok}/${tot} (${Math.round(ok/tot*100)}%) · ${S.xp} XP`;
+  location.href=`mailto:${TEACHER_MAIL}?subject=${encodeURIComponent('Articles review — '+name)}&body=${encodeURIComponent(body)}`;
+};
+
+/* ===================== self-declared ===================== */
+$$('[data-done]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.done,f=$('#'+k+'fb');
+  if(S.done[k]){toast('Already counted 🙂');return}
+  S.done[k]=1;addXP(+b.dataset.xp,'Done');b.disabled=true;b.textContent='✓ Counted';
+  if(f){f.className='fb on good';f.textContent='✔ Counted — nice work.'}
+});
+$$('[data-done]').forEach(b=>{if(S.done[b.dataset.done]){b.disabled=true;b.textContent='✓ Counted'}});
+
+/* ===================== check buttons ===================== */
+$$('[data-check]').forEach(b=>b.onclick=()=>{
+  const h=b.dataset.check;
+  if(h==='verb'){gradeChoice('verb',50,'Verb agreement','count');return}
+  if(h==='fix'){gradeChoice('fix',55,'Fixed expressions','art');return}
+  if(h==='geo'){gradeRows('geo',50,'The map test','art',
+    'the Thames · – Lake Baikal · the Netherlands · – Mount Kilimanjaro · the Sahara · – Japan · the Alps · – Sicily · the United States · – Central Park · the Middle East · – Lisbon');return}
+  if(h==='cu'){gradeBuckets('poolCu',CUW,'cu',60,'Countability','count',
+    'Both: a glass / glass · a hair / hair · a room / room · a time / time · a paper / paper.');return}
+
+  if(h==='err'){
+    const box=$('#err');box.classList.add('checked');
+    const keys=Object.keys(ERRKEY).map(Number);let ok=0;
+    box.querySelectorAll('.tok').forEach(t=>{
+      if(ERRKEY[+t.dataset.j]!==undefined&&t.classList.contains('sel'))ok++});
+    const wrong=[...box.querySelectorAll('.tok.sel')].filter(t=>ERRKEY[+t.dataset.j]===undefined).length;
+    $('#errfix').className='fixlist on';
+    $('#errfix').innerHTML='Corrections: '+keys.map(k=>`<span>${ERRKEY[k]}</span>`).join('');
+    const f=$('#errfb');f.className='fb on '+(ok===keys.length&&!wrong?'good':'bad');
+    f.textContent=`You found ${ok} of ${keys.length} mistakes`+
+      (wrong?`, and marked ${wrong} correct word${wrong>1?'s':''} by mistake.`:'.')+
+      (ok===keys.length&&!wrong?' 🔎 excellent!':'');
+    if(!S.done.err){S.done.err=1;record('err',Math.max(0,ok-wrong),keys.length,'art');
+      addXP(Math.round(60*Math.max(0,ok-wrong)/keys.length),'Error correction')}
+    return;
+  }
+
+  if(h==='type'){
+    const inps=$('#type')._inps;let ok=0;
+    inps.forEach((inp,i)=>{if(markInput(inp,TYPE[i].k))ok++;inp.disabled=true});
+    const f=$('#typefb');f.className='fb on '+(ok===inps.length?'good':'bad');
+    f.innerHTML=`${ok} out of ${inps.length} correct`+(ok===inps.length?' 🎉':
+      '<br><span class="hint">an · – · the · – · the · an · – · the · the · a</span>');
+    if(!S.done.type){S.done.type=1;record('type',ok,inps.length,'art');addXP(Math.round(50*ok/inps.length),'Type the article')}
+    return;
+  }
+
+  if(h==='gaps'){
+    const sels=$('#reader')._sels;let ok=0;
+    sels.forEach(s=>{const good=s.value===s._k;s.classList.remove('good','bad');
+      s.classList.add(good?'good':'bad');s.disabled=true;if(good)ok++});
+    const f=$('#gapsfb');f.className='fb on '+(ok===sels.length?'good':'bad');
+    f.innerHTML=`${ok} out of ${sels.length} gaps correct`+(ok===sels.length?' 🎉':
+      '<br><span class="hint">'+GAPK.join(' · ')+'</span>');
+    if(!S.done.gaps){S.done.gaps=1;record('gaps',ok,sels.length,'read');addXP(Math.round(70*ok/sels.length),'Article gaps')}
+    return;
+  }
+
+  if(h==='read'){
+    let tok=0;const rows=$$('#tf .tfrow');
+    rows.forEach(row=>{
+      row.classList.add('locked');
+      const sel=row.querySelector('.tfb.sel'),key=row.dataset.k;
+      row.querySelectorAll('.tfb').forEach(x=>{if(x.dataset.v===key)x.classList.add('good')});
+      if(sel){if(sel.dataset.v===key)tok++;else sel.classList.add('bad')}
+      const f=row.nextElementSibling;
+      if(f&&f.classList.contains('fb')){f.className='fb on '+(sel&&sel.dataset.v===key?'good':'bad');
+        f.innerHTML=(sel&&sel.dataset.v===key?'✔ ':'✘ ')+f.dataset.why}
+    });
+    const vok=gradeMCQ('rv'),iok=gradeMCQ('inf');
+    const got=tok+vok+iok,tot=rows.length+4+2;
+    const f=$('#readfb');f.className='fb on '+(got===tot?'good':'bad');
+    f.textContent=`${got} out of ${tot} correct — statements ${tok}/${rows.length}, `+
+      `vocabulary ${vok}/4, inference ${iok}/2.`+(got===tot?' 🎉':'');
+    if(!S.done.read){S.done.read=1;record('read',got,tot,'read');addXP(Math.round(60*got/tot),'Comprehension')}
+    return;
+  }
+});
+
+renderXP();renderNav();renderDash();
+</script>
+</body>
+</html>
